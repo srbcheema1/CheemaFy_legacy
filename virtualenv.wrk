@@ -1,0 +1,17 @@
+install pip3
+    sudo apt-get install python3-pip
+
+now install virtualenv
+    pip3 install virtualenv
+
+to create virtualenv run command (-m is for calling it as module)
+    python3 -m virtualenv <path to virtulenv>
+    ex python3 -m virtualenv venv
+
+start it by
+    source <path>/bin/activate
+    ex source venv/bin/activate
+
+stop it by 
+    deactivate
+    
