@@ -15,3 +15,17 @@ start it by
 stop it by 
     deactivate
     
+
+########################################
+another way is to use pyvenv
+install pyvenv
+    sudo apt-get install python3-venv
+
+to create virtual env
+    pyvenv venv
+
+start it by
+    source venv/bin/activate
+
+stop it by 
+    deactivate
