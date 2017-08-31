@@ -1,0 +1,50 @@
+sqlite3 <db name>.db
+    creates a new database
+
+.databases
+    checks databases
+
+.open <db name>
+    open db if not opened
+
+attach database <db name> as <alias name>
+    it si used to use a data base by giving a name
+
+detach database <alias name>
+    detaching a databse
+
+.header on
+.mode column
+    two commands to decorate outputs
+
+
+.tables
+    checks tables
+
+.schema <table name>
+    info about table
+ 
+create table <table name> (<col name> <col type>,[<col name> <col type> ...]);
+    create table
+
+drop table <table name>
+    delete a table
+
+insert into <table name> [(<col name1> , <col name2> , ...)] values (<val1> , <val2> ...);
+    insert data into table
+
+SELECT tbl_name FROM sqlite_master WHERE type = 'table';
+    select table names from database
+    
+SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'COMPANY';
+    select sql form all
+    
+update <table name> set <col name> = <value> [,<col name> = <value> ... ] [where <condition>];
+    update query
+
+delete from <table name> [where <condition>];
+    deletes rows from table that meet condition
+        be carefull while condition
+        if u forgot condition all rows will be deleted
+ 
+
