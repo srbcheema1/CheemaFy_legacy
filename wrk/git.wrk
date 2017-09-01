@@ -1,9 +1,68 @@
 create an alias in ~/.gitconfig file
-copy next two lines into it
+copy next lines into it
+[user]
+	email = srbcheema1@gmail.com
+	name = Sarbjit Singh 
 [alias]
 	showdown = log --decorate --oneline --all --graph
 
-create a new branch 
+start by forking the project 
+clone the project to your pc (from original source not form your fork)
+    {coz this will give it name origin}
+    git clone <link to origin remoe repo>
+now add your own remote repo (my convention to name it myfork)
+    git remote add myfork <link to your forked repo>
+
+you can check your remote repositories by
+    git remote -v
+
+create a new local branch 
     git checkout -b <new branch name>
+        generally work on different branch not on master
+
+to move to other commit or branch 
+    git checkout [-b] <commit/branchname>
+        -b to create new branch
+
+if you wanna push your changes to remote repo 
+    git push [-u] <remote repo> <branch name>
+        -u to create new branch there //not sure
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+to push branch by another name do 
+    git push <remote repo> <localbranch>:<remote branch>
 
 
