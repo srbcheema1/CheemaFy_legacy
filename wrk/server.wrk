@@ -1,0 +1,28 @@
+site folders are in /var/www
+apache configrations are in /etc/apache2/sites-availabe
+
+default conf is 000-default.conf
+make a copy of it say 001-default.conf
+change there /var/www/html to /var/www/html
+
+save the file
+
+run 
+        sudo a2ensite 001.defult.conf
+        sudo service apache2 reload
+        
+
+"enable or disable php errors
+goto /etc/php/7.0/
+open php.ini file
+find display_error and set 0 or 1 accordingly
+    you can also add this line to begining of code
+    ini_set('display_errors',0);
+
+to use post/get from terminal insert this code in begining
+    if (!isset($_SERVER["HTTP_HOST"])) {
+      echo "commandline\n"; 
+      parse_str($argv[1], $_GET);
+      parse_str($argv[1], $_POST);
+    }
+note : type command : php script.php 'username=srb&password=hello'

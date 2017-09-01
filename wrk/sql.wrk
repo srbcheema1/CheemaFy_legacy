@@ -1,0 +1,71 @@
+show databases;
+// to show databases
+create database <db name>
+//to create database
+//database name cn be chnged in phpmyadmin under opertions tab
+use <db name>
+//to use particular database
+describe <table name>;
+//give discription of table
+show tables;
+//show all tables in selected database
+
+
+
+create table login(id int,name varchar(255),password varchar(200));
+// to create a table of given fields with given datatypes
+create table test1backup as select * from test1;
+//copy of a table
+insert into login values(1,"admin","admin123"),(...),(...)....(...);
+//insert values into table
+
+select * from login;
+//to display whole content of table
+select <field name> from marksheet [where <field name> <operator> value] [order by <field name>[<order val desc|asc>]];
+//select a given field fom table 
+
+
+
+alter table marksheet add (percentage varchar(255),sem int,fee int);
+//add new field into table
+alter table marksheet change name stdname varchar(200);
+//change the name of particular field
+alter table marksheet drop percentage;
+//delete a field from the given table
+alter table <table name> rename to <table name>;
+//rename a table
+
+
+
+update <table name> set <field name>=<value> [where <field name> <operator> value];
+update marksheet set percentage="80%" where rollno=2;
+//update value of a field
+
+
+drop table <table name>
+//delete a tble
+delete from <table name> where <field name> <operator> <value>;
+//delete a row or more from table
+
+
+select <col name>[,<col name> ...][,<fxn>...] group by <col name>[,<col name> ... ];
+//select *,sum(usd) from test group by name,village,fname;
+
+
+set @count=0;
+select @count:=@count+1 as count,id,name....
+//
+set @count=0;
+select @rank:=@rank+1 as count,id,name,usd,day,month from log1;
+
+select @rank:=@rank+1 as s_no,id,name,usd,day,month,year from test1 where conflict=0;
+
+select s_no,id,name,fname,village,usd,left(email,20),password,day,month,year,plan,conflict from test1conflict0;
+
+create table test1conflict0 as select @rank:=@rank+1 as s_no,id,name,usd,month,year,email,password from test1 where conflict=0 order by name;
+
+//create user
+mysql> CREATE DATABASE vanilla;
+    mysql> create user 'vanilla_user3'@'localhost' IDENTIFIED BY 'vanilla_password';
+    mysql> GRANT ALL PRIVILEGES ON * . * TO 'vanilla_user3'@'localhost';
+    mysql> FLUSH PRIVILEGES;

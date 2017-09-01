@@ -1,0 +1,117 @@
+TO KILL A RUNNING APP IN UBUNTU
+ 
+ps -ax | grep (program name)
+kill -9 (pid)
+
+----------------------------
+
+TO CHECK AND ADD PROXY BY TERMINAL
+
+	export http_proxy="proxy:port"
+	export https_proxy="proxy:port"
+
+	echo $http_proxy
+	echo $https_proxy
+------------------------------
+
+sudo apt-get install <....> --fix-missings
+
+free -m
+	tells free ram and swap in system
+	-m means tell in mb 
+.......................................
+
+COMMAND TO CHECK INSTALLED PACKAGE IN UBUNTU
+	sudo dpkg --get-selections | sed "s/.*deinstall//" | sed "s/install$//g" > ~/pkglist
+          (It will create a txt file in home folder)
+----------------------------------------------
+
+TO GIVE PERMISSION TO ALL FILES ALL FOLDER 
+	sudo chmod -R 777  [folder name]
+------------------------------------------------
+
+nmcli (use tab to explore).... related to wifi ... try devices
+..........................................
+
+lspci -k | grep -i -A3 vga 
+	graphic drivers
+		lspci == ls pci == list pci utilities
+		-k to view details also
+		-i says to ignore upper lower case
+		-A3 says to print next 3 lines also
+
+lspci -k | grep -i wire
+	wifi adapter drivers 
+.....................................
+virtualenv
+
+	source bin/activate
+	deactivate
+...........................
+
+Multiple Commands 
+	A; B    Run A and then B, regardless of success of A
+	A && B  Run B if A succeeded
+	A || B  Run B if A failed
+	A &     Run A in background.
+.......................................
+
+> [filename]
+	creates file if not there 
+	if there then..it will delete all contents of it
+..........................................
+
+echo "[text you wana enter to file]" >> [filename]
+	copies the text in quotes below the contents of file
+echo "[text you wana enter to file]" > [filename]
+	erase data of file and copies quoted text to file 
+......................................
+
+cat [filename]
+
+	displays the content of file in terminal
+	
+cat > [filename]
+cat >> [filename]
+
+	will be ready to tkke input from you 
+	input may be of multiple lines 
+	to end press CTRL+d
+	in case of > previous data deleted
+	in case of >> previous data is retained nd new one is added below it
+	
+cat [file1] > [file2]
+cat [file1] >> [file2] 
+
+	first one copy file1 content to file2 by deleting file2 content
+	second will copy file1 content below content of file2	
+.......................................
+
+gedit ~/.bash_aliases
+	write and save aliases in this file
+...........................................
+
+mysql -u root -p
+	open mysql
+create database <name >;
+	creates your database
+use <name>;
+	uses a previously made database
+create table <name> (column1 TYPE,name TEXT,age INT);
+	creates table
+............................
+
+
+zenity 
+
+    do a lot of graphical things it can ask password show dialg box etc 
+    plzz do zenity --help
+    zenity --password > pass.txt 2>2
+    
+----------------------------------
+
+getfacl <filename>
+
+also setfacl --help
+
+

@@ -1,0 +1,9 @@
+create an alias in ~/.gitconfig file
+copy next two lines into it
+[alias]
+	showdown = log --decorate --oneline --all --graph
+
+create a new branch 
+    git checkout -b <new branch name>
+
+

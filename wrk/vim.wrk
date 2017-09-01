@@ -1,0 +1,132 @@
+"print file extention
+echo expand('%:e') 
+
+"it can echo and del line
+nnoremap <C-c> :echo 'hello'<CR>dd
+
+"command to save and exit 
+nnoremap <C-f> :wq<CR>
+
+"to toggle something
+function! ToggleSyntax()
+   if exists("g:syntax_on")
+      syntax off
+   else
+      syntax enable
+   endif
+endfunction
+ 
+nmap <silent>  ;s  :call ToggleSyntax()<CR>
+
+
+function! TogglePaste()
+   if &paste
+      	:set nopaste
+   else
+      	:set paste
+   endif
+endfunction
+ 
+nmap <silent>  <C-p>  :call TogglePaste()<CR>
+function! TogglePaste()
+   if &paste
+      	:set nopaste
+   else
+      	:set paste
+   endif
+endfunction
+ 
+nmap <silent>  <C-p>  :call TogglePaste()<CR>
+
+
+
+
+"registers
+there are several registers in vim 
+"+ is for external clipboard
+"" is for deleted lines
+"0 is for yanked lines
+"* is for 
+"1 is also for deleted lines
+
+"% go to matching bracket
+"$ endl of line
+"^ start of line
+"& comment line
+"* search same word in txt
+"gd go to declaration
+
+"to search in document
+"type / followed by search pattern 
+"use n to go to next N to go to last ggn to goto first match
+
+
+"to go to declaration of variable or function 'gd'
+"go back to previous cursor location '<C-o>'
+
+
+"cpp comments
+map <C-c> :s!^!//<CR>
+map <C-u> :s!^//!!<CR>
+"here ^ says begining of line and ! works as another delimiter in place of /
+
+"python comments
+map <C-c> :s/^/#<CR>
+map <C-u> :s/^#//<CR>
+
+"folding code
+" zf#j to fold the code upto # lines where # is numbr
+" mkview to save folds
+" loadview to load view
+
+
+"to enable vim support in terminal ...
+"create file ~/.inputrc
+"paste lines into it
+set editing-mode vi
+set keymap vi-command
+
+
+
+"turn sublime3 into vim
+"install sublime 3
+    "sudo add-apt-repository ppa:webupd8team/sublime-text-3
+    "sudo apt-get update
+    "sudo apt-get insatall sublime-text-installer
+"get keys for sublime on
+    "http://appnee.com/sublime-text-3-universal-license-keys-collection-for-win-mac-linux/
+"first of all install neovim
+ "sudo add-apt-repository ppa:neovim-ppa/stable
+ "sudo apt-get update
+ "sudo apt-get install neovim
+"then clone ActualVim plugin into sublime Prefrences folder
+    "cd ~/.config/sublime-text-3/packages
+    "git clone https://github.com/lunixbochs/ActualVim.git
+
+"to add you complete me
+"install vim Vundle
+    "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+"add the following lines in vimrc
+    "Vundle code
+    set nocompatible              " be iMproved, required
+    filetype off                  " required
+    set rtp+=~/.vim/bundle/Vundle.vim
+    call vundle#begin()
+    Plugin 'VundleVim/Vundle.vim'
+    Plugin 'Valloric/YouCompleteMe'
+    call vundle#end()            " required
+    filetype plugin indent on    " required
+    "end Vundle code
+"open vim and run command :PluginInstall
+"it will take time and show message done
+"install clang
+    "sudo apt-get install clang-4
+"install the files using clang
+    "cd ~/.vim/bundles/YouCompleteMe
+    "./install.py --clang-completer --system-libclang
+"create a folder for build files
+     "cd ~
+     "mkdir ycm_build
+     "cd ycm_build
+     "cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+"enjoy :)
