@@ -18,22 +18,6 @@ alias cpcb='xsel -b <'
 #to run octave interactively
 alias octavei='octave --no-gui'
 
-#to set proxy
-alias proxyfire='
-function _proxyfire(){
-    if [ "$#" -eq 0 ]
-    then
-        proxx='';
-    elif [ "$#" -eq 1 ]
-    then
-        proxx='172.16.20.2:3128';
-    fi
-    export http_proxy=$proxx;
-    export https_proxy=$proxx;
-    export ftp_proxy=$proxx;
-    echo "proxy set to $http_proxy";
-};_proxyfire'
-
 #to set virtual env
 alias venv='
 #venv should be installed using sudo apt-get install python3-venv

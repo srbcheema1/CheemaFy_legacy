@@ -31,6 +31,24 @@ if you wanna push your changes to remote repo
 
 
 
+NOTE:
+using git merge
+    create a new branch .. while standing on master and status is null
+    git checkout -b changes
+    //do work there and commit
+    git add .
+    git commit -m ""
+    //go back to master
+    git checkout master
+    //merge it
+    git merge changes
+    //push to origin master
+    git push origin master
+
+NOTE :
+always call merge from a branch with less commits or back in commits
+for ex we did changes in "changes" branch
+    now go to master and call merge changes
 
 
 
