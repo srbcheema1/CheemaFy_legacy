@@ -15,7 +15,10 @@ while accesing value we use $ sign before variable
 there are some system variables also 
 $0 bash name
 $? return value of last command
-$# number of arguments
+$# number of arguments 
+    ... command <commandname> has 0 arguments
+    ... command <commandname> <param1> has 1 argument 
+        ... $1 contains val of param1
 $@ all arguments
 $$ id of current script
 $USER user name of user running the script

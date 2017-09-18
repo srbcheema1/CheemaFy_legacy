@@ -1,0 +1,2 @@
+to check diff of particular file form particular commit
+git diff <revision> <path>
