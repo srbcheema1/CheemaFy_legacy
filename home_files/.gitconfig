@@ -1,3 +1,5 @@
 [user]
 	email = srbcheema1@gmail.com
 	name = srbcheema1
+[alias]
+    showdown = git log --decorate --graph --oneline
