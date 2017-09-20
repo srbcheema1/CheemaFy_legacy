@@ -14,9 +14,9 @@
 
 % Get the dimension of the matrix A where m = rows and n = columns
     [m,n] = size(A)
-
-% You could also store it this way
     dim_A = size(A)
+    num_cols = size(A,2)
+    num_rows = size(A,1)
 
 % Now let's index into the 2nd row 3rd column of matrix A
     A_23 = A(2,3)
@@ -117,6 +117,8 @@ wklread     %reads .wkl spreadsheet file
 
     % examples 
     eye(10)
+    z = zeros(a) %this will produce a square matrix
+        %similar to zeros(a,a)
     z = zeros(a,b) %a is no of rows and b is nmb of cols
     a1 = randi([0,2],3,4) %creates 3*4 matrix with random values from 0-2
     a = linspace(s,e,n) % s start val ...  e end val ... n num of digits
