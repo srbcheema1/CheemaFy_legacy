@@ -3,10 +3,10 @@ git diff <revision> <path>
 
 NOTE :
 syntax : git diff a b 
-it means it will show diff from a to b 
+it means it will show diff a -> b 
     changes in b will be shown as + or green
 syntax : git diff a
-similar to git diff a HEAD
+similar to git diff a -> HEAD
     changes of HEAD will be shown as green or +
 
 
