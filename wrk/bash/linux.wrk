@@ -1,0 +1,6 @@
+to make something autostart 
+    create its launcher .destop file
+    copy the launcher to ~/.config/autostart/
+
+    OR
+    you may also insert a line of path in /etc/rc.local

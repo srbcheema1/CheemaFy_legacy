@@ -16,3 +16,4 @@ else
     echo "copying vim plugins"
     cp -r ~/programs/myfiles/myPlugins/vim/. ~/.vim/
 fi
+

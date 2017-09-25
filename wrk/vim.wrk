@@ -124,9 +124,16 @@ set keymap vi-command
 "install the files using clang
     "cd ~/.vim/bundles/YouCompleteMe
     "./install.py --clang-completer --system-libclang
+"create a folder for llvm files
+    "cd ~
+    "mkdir ycm_temp
+        "now download and extract llvm here
+            http://releases.llvm.org/download.html
+    "rename extracted folder to llvm_root_dir
 "create a folder for build files
      "cd ~
      "mkdir ycm_build
      "cd ycm_build
      "cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
+     "cmake --build . --target ycm_core --config Release
 "enjoy :)

@@ -2,6 +2,7 @@ TO KILL A RUNNING APP IN UBUNTU
  
 ps -ax | grep (program name)
 kill -9 (pid)
+sudo kill $(pidof <prog name>)
 
 ----------------------------
 
