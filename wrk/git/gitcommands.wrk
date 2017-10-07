@@ -6,9 +6,13 @@ syntax : git diff a b
 it means it will show diff a -> b 
     changes in b will be shown as + or green
 syntax : git diff a
-similar to git diff a -> HEAD
-    changes of HEAD will be shown as green or +
-
+similar to git diff a <working directory>
+    changes of working directory will be shown as green or +
+syntax : git diff
+it will show all the changes not registered till now 
+    changes of working directory will be shown as green or +
+    NOTE : only changes of tracked files will be shown
+           if you have just created files then plz do track them by git add 
 
 merge
 if by mistake u did wrong merge

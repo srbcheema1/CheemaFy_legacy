@@ -1,0 +1,9 @@
+#include<iostream>
+#include<stdio.h>
+
+int main(){
+    int t,i,test;
+    scanf("%d",&t);
+    for(test=1;test<=t;test++){
+    }
+}

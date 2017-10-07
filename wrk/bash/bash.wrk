@@ -28,3 +28,7 @@ $PATH print path value
 
 #delete last line of file
 sed -i '$ d' <filename>
+
+#minimize firefox
+wmctrl -a firefox; xdotool key Ctrl+Alt+KP_Insert
+

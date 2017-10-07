@@ -23,6 +23,7 @@ using namespace std;
 typedef unsigned long long int ulli;
 typedef unsigned int ui;
 typedef pair<int,int> mp;
+typedef vector<vector<int> > matrix;
 
 int debugg = 0;
 
