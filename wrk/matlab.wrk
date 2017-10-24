@@ -161,3 +161,5 @@ wklread     %reads .wkl spreadsheet file
             %use octave --persist script.m
             %OR add pause() after plot() fxn
 
+%remember to add clear all and close all at begining of the code . 
+%it helps
