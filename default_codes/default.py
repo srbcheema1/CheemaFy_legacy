@@ -1,3 +1,3 @@
 t=int(input())
-for _ in t:
+for _ in range(t):
 

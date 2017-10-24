@@ -1,0 +1,20 @@
+to check diff of particular file form particular commit
+git diff <revision> <path>
+
+NOTE :
+syntax : git diff a b 
+it means it will show diff a -> b 
+    changes in b will be shown as + or green
+syntax : git diff a
+similar to git diff a -> HEAD
+    changes of HEAD will be shown as green or +
+
+
+merge
+if by mistake u did wrong merge
+undo it by
+    git merge --abort
+
+commit
+if by mistake u did wrong commit undo it by
+    git reset HEAD~

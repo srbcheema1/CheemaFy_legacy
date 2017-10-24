@@ -1,0 +1,21 @@
+a = {} creates disctionary
+a = [] creates list
+a = set() creates set
+
+###########################################################
+Taking input with spaces
+  A=[int(n) for n in input().split()]
+
+############################################################
+How to declare list
+a=[]
+a.append(num)
+    dont use a[0]=<val> if there is no elem a[0]
+    use append to add elem
+to create a list of range 
+    a=[i for i in range(1,n+1)]
+to create a empty list
+    a=[0 for i in range(n)]
+
+############   SET   #############
+a = set(<list>) cerates set out of list

@@ -1,0 +1,5 @@
+[user]
+	email = srbcheema1@gmail.com
+	name = Sarbjit Singh 
+[alias]
+	showdown = log --decorate --oneline --all --graph

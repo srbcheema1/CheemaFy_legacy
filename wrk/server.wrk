@@ -19,6 +19,8 @@ find display_error and set 0 or 1 accordingly
     you can also add this line to begining of code
     ini_set('display_errors',0);
 
+
+
 to use post/get from terminal insert this code in begining
     if (!isset($_SERVER["HTTP_HOST"])) {
       echo "commandline\n"; 

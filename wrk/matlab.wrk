@@ -1,0 +1,163 @@
+%matrix declaration
+    %denoted by capital letter
+    % The ; denotes we are going back to a new row.
+    A = [1, 2, 3; 4, 5, 6; 7, 8, 9; 10, 11, 12]
+
+%vector
+    %matrix of n*1 or 1*n ..... mostly n*1
+    %denoted by small letter
+    % Initialize a vector 
+    v = [1;2;3] 
+    rv = [1 2 3 4 5 6 7 8 9];
+    sub_rv = rv(3:7)
+    x = -1:0.1:1    %creates a vector from -1 to 1 with diff of 0.1
+
+% Get the dimension of the matrix A where m = rows and n = columns
+    [m,n] = size(A)
+    dim_A = size(A)
+    num_cols = size(A,2)
+    num_rows = size(A,1)
+
+% Now let's index into the 2nd row 3rd column of matrix A
+    A_23 = A(2,3)
+
+%print all variables
+    who
+    whos
+
+%clear variables
+    clear x         % it will delete x, won't display anything
+    clear	        %  it will delete all variables in the workspace
+
+%in matlab not equals is not != it is ~=
+
+
+%input and outputs
+disp 	    % Displays contents of an array or string.
+fscanf 	    % Read formatted data from a file.
+format 	    % Controls screen-display format.
+fprintf 	% Performs formatted writes to screen or file.
+input 	    % Displays prompts and waits for input.
+; 	        % Suppresses screen printing.
+
+%fscanf and fprintf behaves like scanf and printf in c
+%we need to fomat it 
+    %s 	Format as a string.
+    %d 	Format as an integer.
+    %f 	Format as a floating point value.
+    %e 	Format as a floating point value in scientific notation.
+    %g 	Format in the most compact form: %f or %e.
+    \n 	Insert a new line in the output string.
+    \t 	Insert a tab in the output string.
+
+%long assignments
+initial_velocity = 0;
+acceleration = 9.8;
+time = 20;
+final_velocity = initial_velocity + ...     %i have used ... to extend assignment to nxt line
+acceleration * time;
+hell = final_velocity
+
+
+%formats
+%you can set format how to display output
+format long
+format short
+format e
+format rat   %display ratio
+
+%few commands
+clc         %clear the command window
+exist       %check for file or variable
+global      %declare variable to global
+lookfor     %searcheshelp entries for a keyword
+clear       %clear variables
+load        %load a file
+save        %save variables into file
+cd          %change directory
+date        %display date
+path        %displays search path            
+pwd         %current working directory
+type        %type of file
+dir         %list all files in directory
+delete      %delete a file
+what        %list all matlab files in that directory
+wklread     %reads .wkl spreadsheet file
+
+
+%vector matrix and array commands
+    cat 	Concatenates arrays.
+    find 	Finds indices of nonzero elements.
+    length 	Computes number of elements.
+    linspace 	Creates regularly spaced vector.
+    logspace 	Creates logarithmically spaced vector.
+    max 	Returns largest element.
+    min 	Returns smallest element.
+    prod 	Product of each column.
+    reshape 	Changes size.
+    size 	Computes array size.
+    sort 	Sorts each column.
+    sum 	Sums each column.
+*   eye 	Creates an identity matrix.
+*   ones 	Creates an array of ones.
+*   zeros 	Creates an array of zeros.
+    cross 	Computes matrix cross products.
+    dot 	Computes matrix dot products.
+    det 	Computes determinant of an array.
+    inv 	Computes inverse of a matrix.
+    pinv 	Computes pseudoinverse of a matrix.
+    rank 	Computes rank of a matrix.
+    rref 	Computes reduced row echelon form.
+    cell 	Creates cell array.
+    celldisp 	Displays cell array.
+    cellplot 	Displays graphical representation of cell array.
+    num2cell 	Converts numeric array to cell array.
+    deal 	Matches input and output lists.
+    iscell 	Identifies cell array.
+
+    % examples 
+    eye(10)
+    z = zeros(a) %this will produce a square matrix
+        %similar to zeros(a,a)
+    z = zeros(a,b) %a is no of rows and b is nmb of cols
+    a1 = randi([0,2],3,4) %creates 3*4 matrix with random values from 0-2
+    a = linspace(s,e,n) % s start val ...  e end val ... n num of digits
+
+%ploting commands
+    axis 	Sets axis limits.
+    fplot 	Intelligent plotting of functions.
+    grid 	Displays gridlines.
+    plot 	Generates xy plot.
+    print 	Prints plot or saves plot to a file.
+    title 	Puts text at top of plot.
+    xlabel 	Adds text label to x-axis.
+    ylabel 	Adds text label to y-axis.
+    axes 	Creates axes objects.
+    close 	Closes the current plot.
+    close all 	Closes all plots.
+    figure 	Opens a new figure window.
+    gtext 	Enables label placement by mouse.
+    hold 	Freezes current plot.
+    legend 	Legend placement by mouse.
+    refresh 	Redraws current figure window.
+    set 	Specifies properties of objects such as axes.
+    subplot 	Creates plots in subwindows.
+    text 	Places string in figure.
+    bar 	Creates bar chart.
+    loglog 	Creates log-log plot.
+    polar 	Creates polar plot.
+    semilogx 	Creates semilog plot. (logarithmic abscissa).
+    semilogy 	Creates semilog plot. (logarithmic ordinate).
+    stairs 	Creates stairs plot.
+    stem 	Creates stem plot.
+
+    %examples
+    x = linspace(0,6.28,360)
+    y = sin(x)
+    plot(x,y)   %plot y over x
+    plot(x,y,'r--')
+        %there is a problem regarding plot while running script
+        % as octave script.m
+            %use octave --persist script.m
+            %OR add pause() after plot() fxn
+

@@ -1,0 +1,40 @@
+" ! is used to overwrite the function if exists
+
+function! Fun1(var1, var2)
+  let str=a:var1
+  let str2=a:var2
+  echo str2
+endfunction
+
+
+"comments in cpp
+function! CommentSetter()
+    map <C-c> :s!^!//<Enter>
+    map <C-u> :s!^//!!<Enter>
+endfunction
+
+
+
+function! TogglePaste()
+   if &paste
+        :set nopaste
+        :echo 'nopaste mode'
+   else
+      	:set paste
+        :echo 'you can paste'
+   endif
+endfunction
+
+"set comments in vim
+function! SetComment()
+python3 << endpython
+print('hello')
+endpython
+endfunction
+
+nmap  <C-p>  :call TogglePaste()<CR>
+nnoremap /p "+p
+
+"keep cursor away from top and bottom of screen
+"to keep at center set value to 999
+set scrolloff=4

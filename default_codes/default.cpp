@@ -1,24 +1,37 @@
 #include<bits/stdc++.h>
-#define ulli unsigned long long int
-#define lli long long int
-#define ui unsigned int
-#define F0(i,t) for(i=0; i<t; i++)
+
+#define F0(i,t) for(int i=0; i<t; i++)
+#define F1(i,t) for(int i=1; i<=t; i++)
 #define Si(x) scanf("%d",&x)
 #define Si2(x,y) scanf("%d %d",&x,&y)
 #define Sl(x) scanf("%lld",&x)
 #define Sl2(x,y) scanf("%lld %lld",&x,&y)
-#define debugg(x) cout<<#x<<endl
-//a code by srbcheema
+#define dout if(debugg)cout<<" "
+
+   /* * * * * * * * * * * * * * * * * * * * * * * *
+    *                                             *
+    *            _/_/_/            _/             *
+    *         _/        _/  _/_/  _/_/_/          *
+    *          _/_/    _/_/      _/    _/         *
+    *             _/  _/        _/    _/          *
+    *      _/_/_/    _/        _/_/_/             * 
+    *                                             *
+    * * * * * * * * * * * * * * * * * * * * * * * */
 
 using namespace std;
 
-int main()
-{
+typedef unsigned long long int ulli;
+typedef unsigned int ui;
+typedef pair<int,int> mp;
+
+int debugg = 0;
+
+int main(){
 	int t=1;
+    ios_base::sync_with_stdio(0);cin.tie(0);
 	cin>>t;
-	while(t--)
-	{
-	    debugg(here);	
+	while(t--){
+                 
 	}
-	return 0;
 }
+// a code by srbcheema1

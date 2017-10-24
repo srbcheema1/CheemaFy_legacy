@@ -39,5 +39,5 @@ normal zR
 vnoremap <C-y> "+y
 
 "keep script
-:so /home/srb/programs/srbScripts/vimScript
+:so ~/programs/srbScripts/vimScript
 
