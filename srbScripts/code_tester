@@ -1,0 +1,29 @@
+#!/usr/bin/env python 
+import os
+from sys import argv,exit
+
+'''
+script to check codes of cheema and other are identical or not 
+'''
+
+#replace these with your default names
+code1 = "cheema.cpp"
+code2 = "other.cpp"
+tester_script = "testgen.py"
+if(len(argv)>2):
+   code1=argv[1]
+   code2=argv[2]
+   if(len(argv)==4):
+       tester_script = argv[3]
+
+
+os.system("pwd")
+os.system("python3 "+tester_script+" > test1")
+
+os.system("g++ "+code1)
+os.system("./a.out < test1 > outc1")
+
+os.system("g++ "+code2)
+os.system("./a.out < test1 > outo1")
+
+os.system("comp_files outc1 outo1")
