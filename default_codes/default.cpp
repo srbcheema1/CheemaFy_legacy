@@ -6,7 +6,7 @@
 #define Si2(x,y) scanf("%d %d",&x,&y)
 #define Sl(x) scanf("%lld",&x)
 #define Sl2(x,y) scanf("%lld %lld",&x,&y)
-#define dout if(debugg)cout<<" "
+#define dout if(debugg) shift(),cout<<" "
 
    /* * * * * * * * * * * * * * * * * * * * * * * *
     *                                             *
@@ -25,7 +25,16 @@ typedef unsigned int ui;
 typedef pair<int,int> mp;
 typedef vector<vector<int> > matrix;
 
+int dx[] = {0,0,1,-1};
+int dy[] = {1,-1,0,0};
+
 int debugg = 0;
+int ss=0;
+void shift(){
+    if(debugg)
+        for(int i=0;i<ss;i++)
+            cout<<".";
+}
 
 int main(){
 	int t=1;
