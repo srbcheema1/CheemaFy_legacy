@@ -1,0 +1,14 @@
+create table student(
+    roll int,
+    username varchar(50),
+    class varchar(50)
+);
+
+create table guide(
+    guide_no int,
+    student_no int
+);
+
+create index roll_ on student(roll); OR alter table student add key (roll);
+
+alter table guide add foreign key (student_no) references student(roll);

@@ -1,0 +1,18 @@
+CHANGE COLUMN If you have already created your MySQL database, and decide after the fact that one of your columns is named incorrectly, you don't need to remove it and make a replacement, you can simply rename it using change column.
+
+ALTER TABLE MyTable CHANGE COLUMN foo bar VARCHAR(32) NOT NULL FIRST;
+
+MODIFY COLUMN This command does everything CHANGE COLUMN can, but without renaming the column.You can use the modify SQL command if you need to resize a column in MySQL. By doing this you can allow more or less characters than before. You can't rename a column using modify and other
+
+ALTER TABLE MyTable MODIFY COLUMN foo VARCHAR(32) NOT NULL AFTER baz;
+
+
+
+//all of them work
+alter table userid add column class int;
+alter table userid add class int;
+
+alter table userid drop class;
+alter table userid drop column class;
+//we can miss word "column" but we cant miss "table"
+//treat it as complete one term "alter table"

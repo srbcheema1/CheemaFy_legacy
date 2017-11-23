@@ -8,6 +8,7 @@ alias mf='cd ~/programs/myfiles/'
 alias cpmf='function _cpmf(){ cp $1 ~/programs/myfiles/; };_cpmf'
 alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
+alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
 #commands for compiler versions 
 alias g++11='g++ -std=c++11'
@@ -18,6 +19,9 @@ alias cpcb='xsel -b <'
 
 #to run octave interactively
 alias octavei='octave --no-gui'
+
+#whatsapp web
+alias whatsapp='firefox https://web.whatsapp.com/🌐/en'
 
 #to set virtual env
 alias venv='
@@ -51,7 +55,7 @@ alias vim='
 function _vim(){
     if [ -d "$1" ]
     then
-        cd $1;
+        cd "$1";
     else
         vim $1;
     fi
@@ -64,7 +68,7 @@ function _rm(){
     read ans;
     if [ $ans = "y" ]
     then
-        echo "rm $1 $2 $3"
+        echo "rm $1 $2 $3 $4 $5"
         rm $1 $2 $3 $4 $5;
     fi
 };_rm'

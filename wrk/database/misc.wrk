@@ -1,0 +1,16 @@
+The WHERE clause places conditions on the selected columns, whereas the HAVING clause places conditions on groups created by the GROUP BY clause.
+
+select guide_no from guide group by guide_id having count(student_id) > 1;
+
+
+//inner join can be done in 2 ways
+select * from bank,userid where userid.roll = bank.roll;
+select * from bank inner join userid on userid.roll = bank.roll;
+//actually select * from bank,userid is a cartision join 
+//try it out it will give all possibilities;
+select * from userid,bank;
+
+
+// self join is nothing but a cartision join on table to itself;
+select * from userid a , userid b;
+selct * from userid a , userid b where a.roll< b.roll;

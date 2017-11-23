@@ -9,6 +9,8 @@ describe <table name>;
 //give discription of table
 show tables;
 //show all tables in selected database
+show create table guide;
+//show query that can create table;
 
 
 
@@ -23,7 +25,9 @@ select * from login;
 //to display whole content of table
 select <field name> from marksheet [where <field name> <operator> value] [order by <field name>[<order val desc|asc>]];
 //select a given field fom table 
-
+select * from userid t1 where t1.salary > all (select * from userid t2 where t1.roll <> t2.roll);
+//here t1 and t2 are aliases
+select * from userid where username like 'sar%'
 
 
 alter table marksheet add (percentage varchar(255),sem int,fee int);
@@ -35,6 +39,14 @@ alter table marksheet drop percentage;
 alter table <table name> rename to <table name>;
 //rename a table
 
+//change position of column
+alter table userid change roll roll int first;
+//take a column to first position
+
+//modify and change do almost same thing
+//change can do everything modify can do  ... and can also change name of column
+alter table userid change roll roll_no int first;
+alter table userid modify roll after user_name;
 
 
 update <table name> set <field name>=<value> [where <field name> <operator> value];
