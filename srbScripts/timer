@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import time
+
+sec = 0
+mins = 0
+hour = 0
+
+while(True):
+    time.sleep(1)
+    print("\r%s %s %s" %(hour,mins,sec),end='\r')
+    sec +=1;
+    if(sec==60):
+        sec = 0
+        mins += 1
+    if(mins == 60):
+        mins = 0
+        hour += 1

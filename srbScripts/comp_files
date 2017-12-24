@@ -1,4 +1,4 @@
-#!/usr/bin/env python 
+#!/usr/bin/env python3
 #code to compare 2 files 
 #print first line in which there is difference
 from sys import argv,exit
