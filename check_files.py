@@ -17,10 +17,6 @@ folders = [
             ["srbScripts","~/programs/srbScripts","~/programs/myfiles/srbScripts"]
         ]
 
-#shifter
-def shift(n):
-    print(" "*n,end="")
-
 #comp files
 for i in range(len(files)):
     print("\n\ncomparing "+files[i][0])

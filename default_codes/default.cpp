@@ -8,10 +8,11 @@
 #define Sl(x) scanf("%lld",&x)
 #define Sl2(x,y) scanf("%lld %lld",&x,&y)
 
-#define lc ((n)<<1)
-#define rc ((n)<<1|1)
+#define lc(n) ((n)<<1)
+#define rc(n) ((n)<<1|1)
 
 #define dout if(debugg) shift(),cout<<" "
+#define show(x) if(debugg) shift(),cout<<#x<<" := "<<x<<endl;
 
    /* * * * * * * * * * * * * * * * * * * * * * * *
     *                                             *
