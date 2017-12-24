@@ -11,6 +11,8 @@
 #define lc(n) ((n)<<1)
 #define rc(n) ((n)<<1|1)
 
+#define modu(a) (((a%mod)+mod)%mod)
+
 #define dout if(debugg) shift(),cout<<" "
 #define show(x) if(debugg) shift(),cout<<#x<<" := "<<x<<endl;
 
@@ -33,6 +35,7 @@ typedef vector<vector<int> > matrix;
 
 int dx[] = {0,0,1,-1};
 int dy[] = {1,-1,0,0};
+const int mod = 1e9+7;
 
 int debugg = 0;
 

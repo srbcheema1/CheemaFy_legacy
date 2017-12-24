@@ -84,6 +84,5 @@ for i in range(len(folders)):
     items = make_same(items1,items2)
 
     for j in range(len(items)):
-        shift(1)
-        print("comparing "+items[j])
+        print(" comparing "+items[j])
         os.system("comp_files "+folders[i][1]+"/"+items[j]+" "+folders[i][2]+"/"+items[j]);
