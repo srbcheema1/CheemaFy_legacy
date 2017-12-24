@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+#code to expand macros of #define in a code
+
+import os
+from sys import argv,exit
+
+#replace these with your default names
+code1 = "cheema.cpp"
+if(len(argv)>=2):
+   code1=argv[1]
+
+os.system("gcc -E -C " + code1 + " > temp_file")
+
+temp_code = open("temp_file")
+temp_code_len = sum(1 for line in temp_code)
+temp_code.seek(0,0)
+temp_code = temp_code.readlines()
+
+orig_code = open(code1)
+orig_code_len = sum(1 for line in temp_code)
+orig_code.seek(0,0)
+orig_code = orig_code.readlines()
+
+
+line = orig_code_len
+for i in range(orig_code_len):
+    tokens = orig_code[i].split(" ")
+    if(tokens[0]=="int" and tokens[1]=="debugg"):
+        line = i;
+        break;    
+for i in range(line):
+    print(orig_code[i],end='');
+
+
+line = temp_code_len
+for i in range(temp_code_len):
+    tokens = temp_code[i].split(" ")
+    if(tokens[0]=="int" and tokens[1]=="debugg"):
+        line = i;
+        break;    
+for i in range (line,temp_code_len):
+    print(temp_code[i],end='');
+
+os.system("rm temp_file")

@@ -2,10 +2,15 @@
 
 #define F0(i,t) for(int i=0; i<t; i++)
 #define F1(i,t) for(int i=1; i<=t; i++)
+
 #define Si(x) scanf("%d",&x)
 #define Si2(x,y) scanf("%d %d",&x,&y)
 #define Sl(x) scanf("%lld",&x)
 #define Sl2(x,y) scanf("%lld %lld",&x,&y)
+
+#define lc ((n)<<1)
+#define rc ((n)<<1|1)
+
 #define dout if(debugg) shift(),cout<<" "
 
    /* * * * * * * * * * * * * * * * * * * * * * * *
@@ -29,6 +34,7 @@ int dx[] = {0,0,1,-1};
 int dy[] = {1,-1,0,0};
 
 int debugg = 0;
+
 int ss=0;
 void shift(){
     if(debugg)
@@ -37,11 +43,11 @@ void shift(){
 }
 
 int main(){
-	int t=1;
+    int t=1;
     ios_base::sync_with_stdio(0);cin.tie(0);
-	cin>>t;
-	while(t--){
+    cin>>t;
+    while(t--){
                  
-	}
+    }
 }
 // a code by srbcheema1

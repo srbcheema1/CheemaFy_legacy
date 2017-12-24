@@ -22,7 +22,7 @@ l1 = sum(1 for line in f1)
 l2 = sum(1 for line in f2)
 
 if(l1 != l2):
-    print('files differ in size '+str(l1)+' '+str(l2))
+    print('   files differ in size '+str(l1)+' '+str(l2))
 
 l = min(l1,l2)
 
@@ -34,9 +34,9 @@ f2 = f2.readlines()
 
 for i in range(l):
     if(f1[i] != f2[i]):
-        print("diff in line "+str(i+1))
-        print("line in file 1 :\n"+f1[i])
-        print("line in file 2 :\n"+f2[i])
+        print("   diff in line "+str(i+1))
+        print("   line in file 1 :\n"+f1[i])
+        print("   line in file 2 :\n"+f2[i])
         exit()
 
-print("files are identical")
+print("   files are identical")
