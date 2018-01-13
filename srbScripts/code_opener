@@ -4,43 +4,59 @@
 import os
 from sys import argv,exit
 
-#replace these with your default names
-code1 = "cheema.cpp"
-if(len(argv)>=2):
-   code1=argv[1]
+def code_opener(code1):
+    os.system("gcc -E -C " + code1 + " > temp_file")
 
-os.system("gcc -E -C " + code1 + " > temp_file")
+    temp_code = open("temp_file")
+    temp_code.seek(0,0)
+    temp_code = temp_code.readlines()
+    temp_code_len = sum(1 for line in temp_code)
 
-temp_code = open("temp_file")
-temp_code.seek(0,0)
-temp_code = temp_code.readlines()
-temp_code_len = sum(1 for line in temp_code)
-
-orig_code = open(code1)
-orig_code.seek(0,0)
-orig_code = orig_code.readlines()
-orig_code_len = sum(1 for line in orig_code)
+    orig_code = open(code1)
+    orig_code.seek(0,0)
+    orig_code = orig_code.readlines()
+    orig_code_len = sum(1 for line in orig_code)
 
 
-line = orig_code_len
-for i in range(orig_code_len):
-    tokens = orig_code[i].split(" ")
-    if(len(tokens) > 2 and tokens[0]=="using" and tokens[1]=="namespace" ):
-        if(len(tokens[2])>2 and tokens[2][0]=='s' and tokens[2][1]=='t' and tokens[2][2]=='d'):
-            line = i;
-            break;    
-for i in range(line):
-    print(orig_code[i],end='');
+    line = orig_code_len
+    for i in range(orig_code_len):
+        tokens = orig_code[i].split(" ")
+        if(len(tokens) > 2 and tokens[0]=="using" and tokens[1]=="namespace" ):
+            if(len(tokens[2])>2 and tokens[2][0]=='s' and tokens[2][1]=='t' and tokens[2][2]=='d'):
+                line = i;
+                break;    
+    for i in range(line):
+        print(orig_code[i],end='');
 
 
-line = temp_code_len
-for i in range(temp_code_len):
-    tokens = temp_code[i].split(" ")
-    if(len(tokens) > 2 and tokens[0]=="using" and tokens[1]=="namespace" ):
-        if(len(tokens[2])>2 and tokens[2][0]=='s' and tokens[2][1]=='t' and tokens[2][2]=='d'):
-            line = i;
-            break;    
-for i in range (line,temp_code_len):
-    print(temp_code[i],end='');
+    line = temp_code_len
+    for i in range(temp_code_len):
+        tokens = temp_code[i].split(" ")
+        if(len(tokens) > 2 and tokens[0]=="using" and tokens[1]=="namespace" ):
+            if(len(tokens[2])>2 and tokens[2][0]=='s' and tokens[2][1]=='t' and tokens[2][2]=='d'):
+                line = i;
+                break;    
+    for i in range (line,temp_code_len):
+        print(temp_code[i],end='');
 
-os.system("rm temp_file")
+    os.system("rm temp_file")
+
+help1 ="requires 1 argument with name of code file to be opened"
+help2 ="Opens the macros in the code below 'using namespace std' "
+def description():
+    print(help2)
+    print(help1)
+
+if(__name__=="__main__"):
+    #replace it with your own default names
+    code1 = "cheema.cpp"
+    if(len(argv)==2):
+        if(argv[1]=="--help"):
+            description()
+            exit()
+        code1=argv[1]
+    if(len(argv)!=2):
+        print(help1)
+        exit()
+
+    code_opener(code1)

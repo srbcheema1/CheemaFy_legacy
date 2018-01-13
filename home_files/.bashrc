@@ -121,6 +121,8 @@ set PATH="$PATH:$JAVA_HOME/bin"
 export PATH
 
 export PATH=$PATH:"$HOME/programs/srbScripts"
+export PYTHONPATH=$PYTHONPATH:"$HOME/programs/srbScripts"
+export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
 
 #to include a file here use 
 if [ -f ~/programs/srbScripts/bashrc_extended ]; then

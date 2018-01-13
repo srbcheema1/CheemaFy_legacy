@@ -19,3 +19,13 @@ to create a empty list
 
 ############   SET   #############
 a = set(<list>) cerates set out of list
+
+
+#########################################
+#############   dynamic import   ########
+import imp
+foobar = imp.load_source('filename','filepatho')
+''
+    now use it as ur wish like foobar.fun()
+''
+

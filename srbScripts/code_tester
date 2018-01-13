@@ -2,28 +2,107 @@
 import os
 from sys import argv,exit
 
-'''
+describe='''
 script to check codes of cheema and other are identical or not 
+takes 4 arguments:
+
+1 cpp file          --- your code       --- compiled to c<idd>.tester  --- gives output outc<idd>
+2 cpp file          --- other's code    --- compiled to o<idd>.tester  --- gives output outo<idd>
+3 testgen file      --- python          --- generates test<idd>
+4 idd               --- unique id       --- not compulsory          --- default val 0
+5 maxlim            --- max limit       --- not computlsory         --- default val 10000
+
+NOTE    --- 4th nd 5th argument are not necessary 
+        --- but please make sure to give argumensts while running the tester multiple times
+        --- you can give value of maxlim to be -1 to rum infinitely
+
+also you can clean the testing files by 
+code_tester --clean <idd>
+    
 '''
 
-#replace these with your default names
-code1 = "cheema.cpp"
-code2 = "other.cpp"
-tester_script = "testgen.py"
-if(len(argv)>2):
-   code1=argv[1]
-   code2=argv[2]
-   if(len(argv)==4):
-       tester_script = argv[3]
+def check_exception(file1,file2,tester_script):
+    if(not os.path.exists(file1)):
+        print('no file of name '+file1)
+        return False
+    if(not os.path.exists(file2)):
+        print('no file of name '+file2)
+        return False
+    if(not os.path.exists(tester_script)):
+        print('no file of name '+tester_script)
+        return False
+    return True
 
 
-os.system("pwd")
-os.system("python3 "+tester_script+" > test1")
+ret = -1
+def code_tester(code1,code2,tester_script,idd=0,maxlim=10000):
+    #compile both
+    print("hell")
+    if(not check_exception(code1,code1,tester_script)):
+        exit()
 
-os.system("g++ "+code1)
-os.system("./a.out < test1 > outc1")
+    os.system("g++ -std=c++11 "+code1+" -o c"+idd+".tester")
+    os.system("g++ -std=c++11 "+code2+" -o o"+idd+".tester")
 
-os.system("g++ "+code2)
-os.system("./a.out < test1 > outo1")
+    global ret
+    ret = -1
+    times = 0
+    maxlim = int(maxlim)
+    while(ret == -1):
+        if(not check_exception("c"+idd+".tester","o"+idd+".tester",tester_script)):
+            exit()
 
-os.system("comp_files outc1 outo1")
+        if(times%100==0):
+            print("test",times)
+        #os.system("pwd")
+        os.system("python3 "+tester_script+" > test"+idd)
+
+        os.system("./c"+idd+".tester < test"+idd+" > outc"+idd)
+        os.system("./o"+idd+".tester < test"+idd+" > outo"+idd)
+
+        from comp_files import comp_files as comparer
+        ret = comparer('outc'+idd,'outo'+idd)
+        if(ret!=-1):
+            print("diff in line",ret)
+
+        times += 1
+        if(maxlim > 0 and times>maxlim):
+            print("passed "+str(maxlim)+" testcases ")
+            break
+
+
+def clean(idd):
+    idd = str(idd)
+    os.system("rm test"+idd)
+    os.system("rm outc"+idd)
+    os.system("rm outo"+idd)
+    os.system("rm c"+idd+".tester")
+    os.system("rm o"+idd+".tester")
+    exit()
+
+
+if(__name__=="__main__"):
+    #replace these with your default names
+    code1 = "cheema.cpp"
+    code2 = "other.cpp"
+    tester_script = "testgen.py"
+    idd = 0
+    maxlim=10000
+
+    if(len(argv)<3):
+        print(describe)
+        exit()
+
+    if(argv[1]=="--clean"):
+        clean(argv[2])
+
+    code1=argv[1]
+    code2=argv[2]
+    if(len(argv)>=4):
+        tester_script = argv[3]
+        if(len(argv)>=5):
+            idd=str(argv[4])
+            if(len(argv)>=6):
+                maxlim=argv[5]
+    
+    code_tester(code1,code2,tester_script,idd,maxlim)

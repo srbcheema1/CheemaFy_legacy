@@ -32,3 +32,9 @@ sed -i '$ d' <filename>
 #minimize firefox
 wmctrl -a firefox; xdotool key Ctrl+Alt+KP_Insert
 
+
+#use password for sudo in script
+sudo -S -k <command> < ~/<file_password> > /dev/sda5 2&>1
+
+#open terminal shortcut
+https://askubuntu.com/questions/68078/keyboard-shortcut-for-open-a-terminal-here

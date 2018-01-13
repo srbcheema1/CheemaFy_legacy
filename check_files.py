@@ -1,6 +1,8 @@
 #/usr/bin/env python 
 import os
 from sys import argv,exit
+from comp_files import comp_files as comparer
+from abs_path import abs_path
 
 '''
 script to check codes of cheema and other are identical or not 
@@ -17,17 +19,16 @@ folders = [
             ["srbScripts","~/programs/srbScripts","~/programs/myfiles/srbScripts"]
         ]
 
-#comp files
-for i in range(len(files)):
-    print("\n\ncomparing "+files[i][0])
-    os.system("comp_files "+files[i][1]+" "+files[i][2])
+sp_str = '>'
 
 
-
-#comp folders
+#make path absolute
 home_path = os.getenv("HOME")
 def abs_path(path):
-    return home_path + path[1:]
+    if(path[0]=='~'):
+        return home_path + path[1:]
+    return path
+
 
 #reactify the list
 def reactify_list(vec):
@@ -40,7 +41,7 @@ def reactify_list(vec):
     return arr
 
 #check if lists are same
-def make_same(items1,items2):
+def make_same(items1,items2,folder1,folder2,shift):
     i,j = 0,0
     items1 = reactify_list(items1)
     items2 = reactify_list(items2)
@@ -64,25 +65,65 @@ def make_same(items1,items2):
         notin1.append[items2[j]]
 
     if(len(notin1) > 0 or len(notin2)>0):
-        print("files not in pc : ",end=" ")
+        print(sp_str*shift,"files not in pc : ",end=" ")
         for item in notin1:
             print(item,end=" ")
         print()
-        print("files not in myfiles : ",end=" ")
+        print(sp_str*shift,"files not in myfiles : ",end=" ")
         for item in notin2:
             print(item,end=" ")
         print()
         print()
 
-    return inboth
+    folders = []
+    files = []
+    for item in inboth:
+        if(os.path.isdir(abs_path(folder1+"/"+item))):
+            folders.append(item)
+        else:
+            files.append(item)
+
+    return files,folders
+
+#comp file
+def comp_file(file_name,file1,file2,level,shift=0):
+    print(sp_str*shift,"comparing "+file_name)
+    f1 = abs_path(file1)
+    f2 = abs_path(file2)
+    ret = comparer(f1,f2,level,shift+1)
+    if(ret!=-1):
+        if(level==0):
+            print(sp_str*shift,"files differ at ",ret)
 
 
-for i in range(len(folders)):
-    print("\n\ncomparing folder "+folders[i][0])
-    items1 = os.listdir(abs_path(folders[i][1])); 
-    items2 = os.listdir(abs_path(folders[i][2]));
-    items = make_same(items1,items2)
+#comp files
+def comp_files(level):
+    for i in range(len(files)):
+        comp_file(files[i][0],files[i][1],files[i][2],level,0)
 
-    for j in range(len(items)):
-        print(" comparing "+items[j])
-        os.system("comp_files "+folders[i][1]+"/"+items[j]+" "+folders[i][2]+"/"+items[j]);
+#comp folder
+def comp_folder(folder_name,folder1,folder2,level,shift=0):
+    print(sp_str*shift,"comparing folder "+folder_name)
+    items1 = os.listdir(abs_path(folder1)); 
+    items2 = os.listdir(abs_path(folder2));
+    files,folders = make_same(items1,items2,folder1,folder2,shift+2)
+
+    for item in files:#files
+        comp_file(item,folder1+"/"+item,folder2+"/"+item,level,shift+2)
+
+    if(level==4):#yet to be implemented ... still buggy
+        for item in folders:
+            comp_folder(item,folder1+"/"+item,folder2+"/"+item,level,shift+1)
+
+#comp folders
+def comp_folders(level):
+    for i in range(len(folders)):
+        print()
+        comp_folder(folders[i][0],folders[i][1],folders[i][2],level)
+
+if(__name__=='__main__'):
+    level = 1
+    if(len(argv)==2):
+        level = int(argv[1])
+    comp_files(level)
+    comp_folders(level)

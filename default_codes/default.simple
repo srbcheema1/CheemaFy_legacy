@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
+#define dout if(debug) cout<<" "
 
 using namespace std;
+
+int debug = 1;
 
 typedef unsigned long long int ulli;
 typedef unsigned int ui;
@@ -10,10 +13,5 @@ typedef vector<vector<int> > matrix;
 const int mod = 1e9+7;
 
 int main(){
-    int t=1;
     ios_base::sync_with_stdio(0);cin.tie(0);
-    cin>>t;
-    while(t--){
-                 
-    }
 }

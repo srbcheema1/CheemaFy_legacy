@@ -1,0 +1,39 @@
+#!/usr/bin/env python3
+import sys
+
+if(len(sys.argv)==1):
+    print("requires 2 or 3 arguments")
+    exit()
+
+
+if(len(sys.argv)==2):
+    s=int(float(sys.argv[1]))
+    ans=s*4#bytes
+    gb = ans//(1024**3);
+    ans %= (1024**3);
+    mb = ans//(1024**2)
+    ans %= (1024**2)
+    kb = ans//1024;
+    print(gb,"gb ",mb,"mb ",kb,"kb")
+    exit()
+
+if(len(sys.argv)!=3):
+    print("requires 2 or 3 arguments")
+    exit()
+
+if (sys.argv[1]=="-s"):
+    s=int(float(sys.argv[2]))
+    ans=s*4#bytes
+    gb = ans//(1024**3);
+    ans %= (1024**3);
+    mb = ans//(1024**2)
+    ans %= (1024**2)
+    kb = ans//1024;
+    print(gb,"gb ",mb,"mb ",kb,"kb")
+
+if (sys.argv[1]=="-m"):
+    s=int(float((sys.argv[2])))
+    ans = (s*1024*1024)
+    ans//=4
+    print("array size would be ",ans)
+    

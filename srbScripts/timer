@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 import time
+import os
 
 sec = 0
 mins = 0
 hour = 0
 
+os.system("resize -s 10 40")
 while(True):
     time.sleep(1)
     print("\r%s %s %s" %(hour,mins,sec),end='\r')

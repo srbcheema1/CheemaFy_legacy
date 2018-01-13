@@ -2,8 +2,17 @@
 import os
 from sys import argv,exit
 
-items = os.listdir(os.getcwd())
+describe='''
+creates outputs for multiple test cases
+test cases files must be in format t0 t2 t3
+output will be in form o0 o1 o2 
+'''
+def outputgen(items):
+    for item in items:
+        if(len(item)==2 and item[0]=='t'):
+            os.system("./a.out < "+item+" > o"+item[1])
 
-for item in items:
-    if(len(item)==2 and item[0]=='t'):
-        os.system("./a.out < "+item+" > o"+item[1])
+
+if(__name__=="__main__"):
+    items = os.listdir(os.getcwd())
+    outputgen(items)
