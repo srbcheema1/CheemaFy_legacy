@@ -2,12 +2,7 @@
 import os
 from sys import argv
 
-'''
-helper function 
-not to be called directly
-'''
-
-def _reactified(path):
+def reactified(path):
     direc = []
     nodes = path.split("/")
 
@@ -25,10 +20,17 @@ def _reactified(path):
     return path
     
 
+'''
+takes relative path as string argument as a path in linux
+returns absolute path without '/' at end
+means it will write /home/srb instead of /home/srb/
+'''
 def abs_path(path):
     pwd = str(os.getcwd())#always return without / at end;
     home_path = os.getenv("HOME")#always return without / at end
 
+    if(len(path)>1 and path[-1]=='/'):#remove last backslash
+        path=path[:-1]
     if(path[0]=='/'):
         return path
     if(path[0]=='~'):
@@ -37,7 +39,7 @@ def abs_path(path):
         return pwd + '/' + path
 
 
-    return _reactified(pwd +'/'+ path)
+    return reactified(pwd +'/'+ path)
 
 help1 = "require 1 argument as path name to be made absolute"
 if(__name__=="__main__"):

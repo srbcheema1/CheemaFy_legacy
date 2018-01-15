@@ -1,0 +1,34 @@
+#!/usr/bin/env python3
+import os
+import time
+import subprocess
+from sys import argv,exit
+from abs_path import abs_path
+
+def capture_screen(filedir,filename):
+    os.system("gnome-screenshot --file="+filedir+"/"+filename)
+
+if(__name__=="__main__"):
+    filedir=abs_path("~/Pictures/screenshots")
+    if(len(argv)>=2 and argv[1]=="--term"):
+        if(len(argv)==3):
+            filename=argv[2]
+        if(len(argv)==4):
+            filedir=abs_path(argv[2])
+            filename=argv[3]
+        os.system("gnome-screenshot")
+        exit()
+
+    if(len(argv)==2):
+        filename=argv[1]
+    if(len(argv)==3):
+        filedir=abs_path(argv[1])
+        filename=argv[2]
+
+    term_id=subprocess.Popen(["xdotool","getactivewindow"],stdout=subprocess.PIPE).communicate()[0].decode('utf-8')
+    term_id = str(int(term_id))
+    os.system("xdotool windowminimize "+term_id)
+    time.sleep(0.2)
+    capture_screen(filedir,filename)
+    os.system("wmctrl -i -a "+term_id)
+

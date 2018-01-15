@@ -31,6 +31,16 @@ alias octavei='octave --no-gui'
 alias whatsapp='firefox https://web.whatsapp.com/🌐/en & '
 
 
+#image
+alias image='shotwell'
+
+#md reader
+alias grip='python3 -m grip -b'
+alias mdreader='
+function _mdreader(){
+    pandoc $1 | lynx -stdin
+};_mdreader'
+
 #to set virtual env
 help_venv="
 "
@@ -235,13 +245,7 @@ function _trash(){
         read ans;
         if [ $ans = "y" ]
         then
-            now=`pwd`
-            cd ~/.local/share/Trash/files/ 
-            echo "rm *"
-            rm -f *
-            cd ~/.local/share/Trash/info/
-            rm -f * > /dev/null
-            cd $now
+            gvfs-trash --empty
         fi
 
     elif [ "$#" = 0 ] #move to location of trash
@@ -340,14 +344,19 @@ function _search_me(){
         return
     fi
 
+    grep_cmd="grep -i -nr" 
+    # i for ignore casesenstivity
+    # I for ignoring binary files
+    # n for numbering
+    # r for recursive
 
     if [ "$#" -eq 1 ]
     then 
-        grep -i -nr "$1" .
+        grep -i -I -nr "$1" .
 
     elif [ "$#" -eq 2 ] 
     then
-        grep -i -nr "$1" "$2"
+        grep -i -I -nr "$1" "$2"
 
     else
         excludes=""
@@ -362,8 +371,8 @@ function _search_me(){
                 excludes=$excludes" --exclude=${!i}"
             fi
         done
-        echo "grep -i -nr $1 $2 $excludes"
-        grep -i -nr $1 $2 $excludes
+        echo "grep -i -I -nr $1 $2 $excludes"
+        grep -i -I -nr $1 $2 $excludes
     fi
 };_search_me'
 
