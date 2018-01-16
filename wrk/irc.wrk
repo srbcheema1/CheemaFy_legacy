@@ -1,0 +1,28 @@
+irssi
+
+webchat.freenode.net
+	online client server
+
+/connect irc.freenode.net
+	to connect to this server 
+
+/nick srbcheema1
+
+/j
+/join #<channel name>
+	to join a channel
+
+/msg <nickname> <message>
+	to send message personally
+	
+/op <nick name>
+/oper <nick name>
+	to make someone admin(operator) of our channel
+	
+
+	
+/leave 
+	leave a channel
+
+/exit 
+	exit totally
