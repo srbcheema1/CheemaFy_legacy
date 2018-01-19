@@ -17,7 +17,7 @@ stop it by
     
 
 ########################################
-another way is to use pyvenv    ... this one is good one
+another way is to use pyvenv    ... this is not in use these days
 install pyvenv
     sudo apt-get install python3-venv
 
@@ -29,3 +29,15 @@ start it by
 
 stop it by 
     deactivate
+
+#####################333333
+for python2
+
+sudo apt-get install vitrualenv
+
+to create :
+virtualenv venv
+to run 
+source venv/bin/activate
+to close 
+deactivate

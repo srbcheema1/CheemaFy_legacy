@@ -16,6 +16,7 @@ to create a list of range
     a=[i for i in range(1,n+1)]
 to create a empty list
     a=[0 for i in range(n)]
+   
 
 ############   SET   #############
 a = set(<list>) cerates set out of list
@@ -30,4 +31,8 @@ foobar = imp.load_source('filename','filepatho')
 ''
 
 # set python3 as default 
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.5 1
+#i dont recomend to do this coz many things in ubuntu are dependent on python2.7
+sudo update-alternatives --config python
+#here you will get list and you can select required python

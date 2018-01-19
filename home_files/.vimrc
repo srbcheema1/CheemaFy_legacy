@@ -41,3 +41,5 @@ vnoremap <C-y> "+y
 "keep script
 :so ~/programs/srbScripts/vimScript
 
+"to use "+p tp paste external data to editor
+:set clipboard=unnamed

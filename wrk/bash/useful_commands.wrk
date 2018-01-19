@@ -119,3 +119,7 @@ also setfacl --help
 
 mpg123 
     commandline music player
+
+-----------------------------------------
+find a file in directories
+    find <reletive location> -type [f/d] | grep filename 

@@ -43,6 +43,8 @@ function _mdreader(){
 
 #to set virtual env
 help_venv="
+if you specify argument 3 it will create venv3 for python3
+else it will create venv2 for python2
 "
 alias venv='
 #venv should be installed using sudo apt-get install python3-venv
@@ -52,13 +54,23 @@ function _venv(){
         echo "$help_venv"
         return
     fi
-
-    if [ -d "venv" ]
+    if [ "$1" = "3" ]
     then
-        source ./venv/bin/activate;
+        if [ -d "venv3" ]
+        then
+            source ./venv3/bin/activate;
+        else
+            python3 -m virtualenv venv3
+            source ./venv3/bin/activate;
+        fi
     else
-        pyvenv venv;
-        source ./venv/bin/activate;
+        if [ -d "venv2" ]
+        then
+            source ./venv2/bin/activate;
+        else
+            virtualenv venv2
+            source ./venv2/bin/activate;
+        fi
     fi
 };_venv'
 
@@ -332,6 +344,38 @@ function _disk(){
         fi
     fi
 };_disk'
+
+help_search_dir="
+search_dir <file> <relative locaton>...    -- search <dir> in given location 
+"
+alias search_dir='
+function _search_dir(){
+    if [ "$#" -eq 1 ]
+    then
+        find . -type d | grep $1
+    elif [ "$#" -eq 2 ]
+    then
+        find $2 -type d | grep $1
+    else
+        echo "$help_search_dir"
+    fi
+};_search_dir'
+
+help_search_file="
+search_file <file> <relative locaton>...    -- search <file> in given location 
+"
+alias search_file='
+function _search_file(){
+    if [ "$#" -eq 1 ]
+    then
+        find . -type f | grep $1
+    elif [ "$#" -eq 2 ]
+    then
+        find $2 -type f | grep $1
+    else
+        echo "$help_search_file"
+    fi
+};_search_file'
 
 help_search_me="
 search_me <arg1> <arg2> <arg3> <arg4>...    -- search <arg1> in <arg2> excluding <arg3> <arg4>...

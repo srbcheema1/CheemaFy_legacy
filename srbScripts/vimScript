@@ -33,6 +33,9 @@ endpython
 endfunction
 
 nmap  <C-p>  :call TogglePaste()<CR>
+"to avail this feature install vim-gtk   
+"verify it by checking 
+"       vim --version | grep xterm
 nnoremap /p "+p
 
 "keep cursor away from top and bottom of screen

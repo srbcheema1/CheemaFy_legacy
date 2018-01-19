@@ -1,4 +1,4 @@
-irssi
+irssi - terminal irc 
 
 webchat.freenode.net
 	online client server
@@ -26,3 +26,41 @@ webchat.freenode.net
 
 /exit 
 	exit totally
+
+/msg nickserv identify password 
+    to get identified as some username
+    it is not much necessary 
+        still it may help you to enter those channels which donot allow unregisted members
+#sexy
+/msg nickserv ghost <username> <password> 
+    to kill connection == logout from everywhere
+/msg nickserv register <pass> <email address>
+    to get registered to that username so that no one other can use it 
+/msg nickserv sendpass <username>
+    to send a reset password link for that username to registered account
+
+
+-- irsse
+/connect freenode 
+    get connected
+ctrl + n 
+    next window
+ctrl + p 
+    previous window
+/win list
+    list of all windows
+Alt + A 
+    switch to most active window
+/wc 
+    close the current window
+
+
+
+To add more networks:
+/NETWORK ADD ExampleNet
+
+Then add some servers (with -auto to automatically connect):
+/SERVER ADD -auto -network ExampleNet irc.example.net
+
+Automatically join to channels after connected to server:
+/CHANNEL ADD -auto #lounge ExampleNet
