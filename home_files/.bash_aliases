@@ -41,6 +41,22 @@ function _mdreader(){
     pandoc $1 | lynx -stdin
 };_mdreader'
 
+#set proxy
+function proxy(){
+    echo "previous proxy was $http_proxy";
+    if [ "$#" -eq 0 ]
+    then
+        proxx='';
+    elif [ "$#" -eq 1 ]
+    then
+        proxx='172.16.20.2:3128';
+    fi
+    export http_proxy=$proxx;
+    export https_proxy=$proxx;
+    export ftp_proxy=$proxx;
+    echo "proxy set to $http_proxy";
+}
+
 #to set virtual env
 help_venv="
 if you specify argument 3 it will create venv3 for python3

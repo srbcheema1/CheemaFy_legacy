@@ -115,6 +115,7 @@ set keymap vi-command
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'Valloric/YouCompleteMe'
     Plugin 'alvan/vim-closetag' "github.com/alvan/vim-closetag "for closing html tags 
+    Plugin 'jiangmiao/auto-pairs' "github.com/jiangmiao/auto-pairs" "for closing brackets and inverted comas
     call vundle#end()            " required
     filetype plugin indent on    " required
     "end Vundle code
@@ -164,5 +165,14 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
-"enjoy :)
+"AUTO CLOSE BRACKETS
+"go to ./.vim/bundle 
+"run the command : git clone https://github.com/jiangmiao/auto-pairs.git
+"go to .vimrc and paste there : Plugin 'jiangmiao/auto-pairs'
+"now paste the following lines below it 
+
+let g:AutoPairsFlyMode = 1
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+enjoy :)
 
