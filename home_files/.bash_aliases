@@ -193,7 +193,7 @@ function _rm(){
         gvfs-trash $2 $3 $4 $5
 
     else
-        gvfs-trash $1 $2 $3 $4 $5;
+        gvfs-trash "$1" $2 $3 $4 $5;
     fi
 };_rm'
 

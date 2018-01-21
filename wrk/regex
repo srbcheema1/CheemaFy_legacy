@@ -1,0 +1,18 @@
+    ^ matches position just before the first character of the string
+    $ matches position just after the last character of the string
+    . matches a single character. Does not matter what character it is, except newline
+    * matches preceding match zero or more times
+    + matches preceding match one or more times
+    ? is for zero or one time ... i.e. optional
+
+So, ^.*$ means - match, from beginning to end, any character that appears zero or more times.
+Basically, that means - match everything from start to end of the string.
+This regex pattern is not very useful.
+
+Let's take a regex pattern that may be a bit useful.
+Let's say I have two strings The bat of Matt Jones and Matthew's last name is Jones.
+The pattern ^Matt.*Jones$ will match Matthew's last name is Jones.
+Why? The pattern says - the string should start with Matt and end with Jones 
+and there can be zero or more characters (any characters) in between them.
+
+

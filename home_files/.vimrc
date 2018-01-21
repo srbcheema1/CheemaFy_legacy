@@ -6,6 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'alvan/vim-closetag'
 call vundle#end()            " required
 filetype plugin indent on    " required
 "end Vundle code
@@ -43,3 +44,14 @@ vnoremap <C-y> "+y
 
 "to use "+p tp paste external data to editor
 :set clipboard=unnamed
+
+
+
+
+
+"HTML TAGS
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'

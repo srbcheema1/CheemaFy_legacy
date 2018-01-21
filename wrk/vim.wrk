@@ -114,6 +114,7 @@ set keymap vi-command
     call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'Valloric/YouCompleteMe'
+    Plugin 'alvan/vim-closetag' "github.com/alvan/vim-closetag "for closing html tags 
     call vundle#end()            " required
     filetype plugin indent on    " required
     "end Vundle code
@@ -136,4 +137,32 @@ set keymap vi-command
      "cd ycm_build
      "cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/ycm_temp/llvm_root_dir . ~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp
      "cmake --build . --target ycm_core --config Release
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"HTML CLOSE TAGS
+"go to ~/.vim/bundle
+"run command : git clone https://github.com/alvan/vim-closetag.git
+"goto .vimrc and paste there : Plugin 'alvan/vim-closetag'
+"now paste the following lines below it 
+
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_emptyTags_caseSensitive = 1
+let g:closetag_shortcut = '>'
+let g:closetag_close_shortcut = '<leader>>'
+
 "enjoy :)
+
