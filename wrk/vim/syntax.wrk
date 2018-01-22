@@ -1,0 +1,8 @@
+to create a syntax for a specific file then 
+create a file with name syntax.vim and move it to ~/.vim/syntax/syntax.vim
+
+also create a dir ~/.vim/ftdetect/syntax.vim
+paste the line into that file
+    au BufRead,BufNewFile *.wrk set filetype=wrk
+
+

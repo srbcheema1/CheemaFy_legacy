@@ -1,3 +1,4 @@
+---------------GITCONFIG
 create an alias in ~/.gitconfig file
 copy next lines into it
 [user]
@@ -6,12 +7,14 @@ copy next lines into it
 [alias]
 	showdown = log --decorate --oneline --all --graph
 
+
+--------------------FORK    
 start by forking the project 
-clone the project to your pc (from original source not form your fork)
+clone the project to your pc (from fork not from original)
     {coz this will give it name origin}
-    git clone <link to origin remoe repo>
-now add your own remote repo (my convention to name it myfork)
-    git remote add myfork <link to your forked repo>
+    git clone <link to your fork repo>
+now add your own remote repo (my convention to name it main)
+    git remote add main <link to main repo>
 
 you can check your remote repositories by
     git remote -v
@@ -29,9 +32,7 @@ if you wanna push your changes to remote repo
         -u to create new branch there //not sure
 
 
-
-
-NOTE:
+-------------------MERGE for SELF PROJECT
 using git merge
     create a new branch .. while standing on master and status is null
     git checkout -b changes
@@ -45,6 +46,32 @@ using git merge
     //push to origin master
     git push origin master
 
+-------------------MERGE for ORG PROJECT
+using git merge
+    create a new branch .. while standing on master and status is null
+    git checkout -b changes
+    //do work there and commit
+    git add <file names>        //dont use "git add ." while working with org
+    //check difference that is going to be commited
+    // ALSO TRY NOT TO ADD .gitignore  FILE
+    git commit -m ""
+
+    //push to your remote repo
+    git push -u origin changes
+    //make a PR
+
+    //when it is accepted
+    //fetch the main code
+    git fetch main master
+    //checkout to master of local
+    git merge main master
+    //push changes to your own remote master
+    git push origin master
+    //delete the branch
+    git branch -d changes
+    git push -d origin changes  //delete branch remotely also
+    OR      git push origin :changes
+
 NOTE :
 always call merge from a branch with less commits or back in commits
 for ex we did changes in "changes" branch
@@ -53,6 +80,14 @@ for ex we did changes in "changes" branch
 
 
 
+-----------REBASE:
+using git rebase
+create a branch changes 
+work on it
+now commit it 
+now run 
+    git rebase master
+after this we can checkout master and merge it to changes if it is our own project
 
 
 
@@ -60,16 +95,11 @@ for ex we did changes in "changes" branch
 
 
 
-
-
-
-
-
-
-
-
-
-
+-----------------TO MAKE YOUR CODE EVEN WITH MAIN CODE:
+    git fetch main master
+    git checkout master
+    git merge main/master
+    //dont use rebase here as they both are same branch
 
 
 
@@ -84,3 +114,8 @@ to push branch by another name do
     git push <remote repo> <localbranch>:<remote branch>
 
 
+-------------yet to be discovered
+git stash ... to save changes in buffer to be used later
+git squash
+shallow depth clone
+git bisect

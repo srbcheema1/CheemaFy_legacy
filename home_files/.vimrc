@@ -60,3 +60,8 @@ let g:closetag_close_shortcut = '<leader>>'
 "Auto close brackets 
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+"CTAGS
+set autochdir
+set tags=tags "actually you have to mention location of tags file here
+

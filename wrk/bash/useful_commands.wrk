@@ -123,3 +123,20 @@ mpg123
 -----------------------------------------
 find a file in directories
     find <reletive location> -type [f/d] | grep filename 
+    
+--------------------------------------
+make usb bootable
+unmount the pendrive
+check name of usb be sudo fdisk -l
+sudo dd bs=4M if=/path/to/your.iso of=/dev/xxx && sync
+/dev/xxx is your pendrive name
+
+try not to open this in nautilus 
+it will not work as bootable anymore
+
+--------------desktop environments
+sudo dpkg-reconfigure lightdm //to make lockscreen default
+there are mainly 3 display managers ... lightdm(ubuntu default) , gdm(genome) , kdm
+
+----------------system problem detected
+sudo rm /var/crash/*

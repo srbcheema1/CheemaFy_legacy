@@ -42,12 +42,12 @@ nmap <silent>  <C-p>  :call TogglePaste()<CR>
 
 
 "registers
-there are several registers in vim 
-"+ is for external clipboard
-"" is for deleted lines
-"0 is for yanked lines
-"* is for 
-"1 is also for deleted lines
+"there are several registers in vim 
+ "+ is for external clipboard
+ "" is for deleted lines
+ "0 is for yanked lines
+ "* is for 
+ "1 is also for deleted lines
 
 "% go to matching bracket
 "$ endl of line
@@ -103,7 +103,13 @@ set keymap vi-command
     "cd ~/.config/sublime-text-3/packages
     "git clone https://github.com/lunixbochs/ActualVim.git
 
-"to add you complete me
+
+
+
+"NOTE : you can install plugins just by typing Plugin 'plugin name' in .vimrc   #sexy
+
+
+to add you complete me
 "install vim Vundle
     "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "add the following lines in vimrc
@@ -173,6 +179,14 @@ let g:closetag_close_shortcut = '<leader>>'
 
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+"Ctags
+"sudo apt-get install exuberant-ctags
+"in vimrc write
+set autochdir
+set tags=tags "actually you will have to specify its location everytime when you use
+"go to root of project and run 'ctags -R *'
+"now open vim and use ctrl+] to go to declaration and use ctrl+O to come back to previous location
 
 enjoy :)
 

@@ -1,0 +1,132 @@
+lex is lexical analyser tool mostly used with yacc parse generator
+it lexically analyses the patterns given as input string or as a file.
+
+in Lex, you can provide your own input code and modify the character stream;
+Flex won't let you do that.
+Flex and Bison are free. (AT&T) Lex and Yacc are not.
+
+
+
+3 parts
+definations 
+%%
+rules 
+%%
+user subroutines
+
+
+The general format of Lex source is:
+                             {definitions}
+                             %%
+                             {rules}
+                             %%
+                             {user subroutines}
+where the definitions and the user subroutines are often omitted.
+The second %% is optional, but the first is required to mark the beginning of the rules.
+The absolute minimum Lex program is thus
+                                     %%
+(no definitions, no rules) which translates into a program which copies the input to the output unchanged. 
+
+
+
+
+yy in 
+    points to an input file which is to be tokenised or scanned . default input is stdin
+    
+yy out 
+    output stream pointer 
+
+yy wrap
+    called by lex when input exhausted or at EOF
+    default return 1
+    default value of yy wrap .. it returns 1 on end of file
+
+yy more 
+    return next token
+
+yy less(k)
+    returns the first k characters in yytext
+
+yy lex 
+    main entry point for lex
+    reads input stream 
+    generates tokens 
+    return 0 at end of input stream
+    invokes the lexer
+
+yy text
+    buffer to hold the input characters that actually match the pattern  
+
+yy lval
+    contains the token value
+
+yy leng
+    the length of lexeme
+    
+yy val 
+    a local variable
+
+
+
+It keeps the matched string in yytext and the length of the matched string in yyleng.
+For each token it generates a token value which is kept in yylval.
+yyleng and yytext will keep on changing on each matching of pattern. 
+
+
+
+
+flex is used for c only can also be used for cpp 
+flex++ for cpp
+
+
+%% kya bolte hain
+    delimiter
+    marks start and end of rules
+    divides into 3 sections ..
+
+
+Flex (fast lexical analyzer generator) is a free and open-source software alternative to lex.
+It is a computer program that generates lexical analyzers (also known as "scanners" or "lexers")It is frequently used as the lex implementation together with Berkeley Yacc parser generator
+
+as flex is lexical analyser generator . yacc is parser generator
+both are generally used together
+yacc is parser generator
+
+flex creates yylex 
+yacc creates yyparse
+
+
+
+Lex can also be used with a parser generator to perform the lexical analysis phase;
+it is particularly easy to interface Lex and Yacc [3].
+Lex programs recognize only regular expressions;
+Yacc writes parsers that accept a large class of context free grammars, but require a lower level analyzer to recognize input tokens.
+Thus, a combination of Lex and Yacc is often appropriate.
+When used as a preprocessor for a later parser generator, Lex is used to partition the input stream, and the parser generator assigns structure to the resulting pieces.
+The flow of control in such a case (which might be the first half of a compiler)
+Additional programs, written by other generators or by hand, can be added easily to programs written by Lex. 
+
+
+
+
+REGULAR EXPRESSIONS
+r* 
+    zero or more r
+r+ 
+    one or more r
+r?
+    zero or one r
+
+a|b 
+    a or b
+ab
+    a concat b
+{abbreviation}
+    write abbrivation of some regular expression defined earlier
+^r
+    matches r at beginning of line
+r$ 
+    matches r at end of line
+.
+    any character except new line
+

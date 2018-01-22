@@ -51,7 +51,8 @@ def comp_files(f1,f2,level=1,shift=0):
     l2 = sum(1 for line in f2)
 
     if(l1 != l2):
-        if(level>=1): print(sp_str*shift+'files differ in size '+str(l1)+' '+str(l2))
+        if(level>=1): 
+            print(sp_str*shift+'files differ in size '+str(l1)+' '+str(l2))
 
     l = min(l1,l2)
 

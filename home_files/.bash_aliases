@@ -5,6 +5,7 @@
 #move to particulat locations
 alias de='cd ~/Desktop'
 alias mf='cd ~/programs/myfiles/'
+alias gsoc='cd ~/Desktop/gsoc'
 
 
 #to create alias with arguments create a alias of function

@@ -1,0 +1,52 @@
+install it using 
+pip install django==1.11.1
+
+create project
+    django-admin startproject mysite
+
+it will create a folder mysite
+
+mysite/
+    manage.py
+    mysite/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+
+this is the directory structure
+in this the outer most mysite folder cant be renamed and has nothing to do
+the inner mysite folder is the main one
+this directory is the main python package for our project
+
+this is a python package and you will use it to import : import mysite.urls
+
+
+--------------- database
+python manage.py makemigrations <appname>
+    start making tables
+python manage.py sqlmigrate <appname> 0001
+    create commands to make tables
+python manage.py migrate
+    actually will create tables
+
+-----------------shell
+python manage.py shell
+    interactively make changes to databse
+in shell ------
+from <app>.models import <model name>
+a = <model name>()
+a.var1 = ""
+a.save()
+
+#to search 
+Album.objects.all()
+Album.objects.fiter(id=2)
+
+#dont forget to mention into admin.py
+admin.site.register(Album)
+
+
+-------------------------------------
+url(r'^(?P<variable name>[0-9]+)$')
+    this will match any pattern of integers and put it into variable mentioned here

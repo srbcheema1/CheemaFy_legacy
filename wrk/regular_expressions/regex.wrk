@@ -1,0 +1,95 @@
+    ^ matches position just before the first character of the string
+    $ matches position just after the last character of the string
+    . matches a single character. Does not matter what character it is, except newline
+    * matches preceding match zero or more times
+    + matches preceding match one or more times
+    ? is for zero or one time ... i.e. optional
+    {} is used to limit number of last characters
+        for ex [A-Z]{3-5} will accept any capital string of len 3 to 5
+
+So, ^.*$ means - match, from beginning to end, any character that appears zero or more times.
+Basically, that means - match everything from start to end of the string.
+This regex pattern is not very useful.
+
+Let's take a regex pattern that may be a bit useful.
+Let's say I have two strings The bat of Matt Jones and Matthew's last name is Jones.
+The pattern ^Matt.*Jones$ will match Matthew's last name is Jones.
+Why? The pattern says - the string should start with Matt and end with Jones 
+and there can be zero or more characters (any characters) in between them.
+
+
+.    	Period matches any single character except a line break.
+[ ] 	Character class. Matches any character contained between the square brackets.
+[^ ] 	Negated character class. Matches any character that is not contained between the square brackets
+*   	Matches 0 or more repetitions of the preceding symbol.
++   	Matches 1 or more repetitions of the preceding symbol.
+?   	Makes the preceding symbol optional.
+{n,m} 	Braces. Matches at least "n" but not more than "m" repetitions of the preceding symbol.
+(xyz) 	Character group. Matches the characters xyz in that exact order.
+|   	Alternation. Matches either the characters before or the characters after the symbol.
+\ 	    Escapes the next character. This allows u to match reserved characters [ ] ( ) { } . * + ? ^ $ \ |
+^ 	    Matches the beginning of the input.
+$ 	    Matches the end of the input.
+
+
+
+
+
+
+
+
+[] character set
+{} quantifiers
+() character group
+| Alteration
+
+. 	Any character except new line
+\w 	Matches alphanumeric characters: [a-zA-Z0-9_]
+\W 	Matches non-alphanumeric characters: [^\w]
+\d 	Matches digit: [0-9]
+\D 	Matches non-digit: [^\d]
+\s 	Matches whitespace character: [\t\n\f\r\p{Z}]
+\S 	Matches non-whitespace character: [^\s]
+
+
+
+
+EXAMPLES:
+".ar" => car par
+"[Tt]he" => The the
+"[^c]ar" => par jar  !car   "!means this word is not there
+"ar[.]" => ar.    			"[.] represents simply . 
+"c.*t" => cat caaat 'caar is tat'
+"[T]?he" => The he
+
+
+
+
+---------MISC:
+we can write regex "reg" as "/reg/"
+we can add flag of i after it to support case insenstivity as "/The/i" it means The and the and THE
+
+----GREEDY VS LAZY MATCHING
+By default regex will do greedy matching , means it will match as long as possible. we can use ? to match in lazy way means as short as possible
+
+"/(.*at)/" => The fat cat sat on the mat. //it scans whole of sentense
+
+"/(.*?at)/" => The fat cat sat on the mat.  //it scans only first two words 'The fat'
+
+
+
+
+----Lookaround
+
+Lookbehind and lookahead (also called lookaround) are specific types of non-capturing groups (Used to match the pattern but not included in matching list). Lookaheads are used when we have the condition that this pattern is preceded or followed by another certain pattern. For example, we want to get all numbers that are preceded by $ character from the following input string $4.44 and $10.88. We will use following regular expression (?<=\$)[0-9\.]* which means: get all the numbers which contain . character and are preceded by $ character. Following are the lookarounds that are used in regular expressions:
+
+Symbol 	Description
+?= 	    Positive Lookahead
+?! 	    Negative Lookahead
+?<= 	Positive Lookbehind
+?<! 	Negative Lookbehind
+
+Positive Lookahead
+The positive lookahead asserts that the first part of the expression must be followed by the lookahead expression. The returned match only contains the text that is matched by the first part of the expression. To define a positive lookahead, parentheses are used. Within those parentheses, a question mark with equal sign is used like this: (?=...). Lookahead expression is written after the equal sign inside parentheses. For example, the regular expression (T|t)he(?=\sfat) means: optionally match lowercase letter t or uppercase letter T, followed by letter h, followed by letter e. In parentheses we define positive lookahead which tells regular expression engine to match The or the which are followed by the word fat.
+
+"(T|t)he(?=\sfat)" => The fat cat sat on the mat. // it matches only The in begining
