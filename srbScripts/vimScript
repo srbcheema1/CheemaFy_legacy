@@ -7,12 +7,39 @@ function! Fun1(var1, var2)
 endfunction
 
 
-"comments in cpp
+"comments in diff files
 function! CommentSetter()
     map <C-c> :s!^!//<Enter>
     map <C-u> :s!^//!!<Enter>
+    let _ext = expand('%:e')
+    if l:_ext == "py"
+        map <C-c> :s!^!#<Enter>
+        map <C-u> :s!^#!!<Enter>
+    endif
+endfunction
+call CommentSetter()
+
+function! Printfile()
+    :echo 'file name : 'expand('%:t')
+    :echo 'file extn : 'expand('%:e')
 endfunction
 
+function! Tabopen(var1)
+    :w
+    execute '!gnome-terminal -e " vim -p ' . expand('%:t') . ' ' . a:var1 . ' " '
+endfunction
+
+nnoremap <Leader>c :call Compile()<cr>
+let res = ""
+function! Compile()
+    let _ext = expand('%:e')
+    if l:_ext == "cpp"
+        :w
+        let _res = system('g++ -std=c++11 ' . expand('%:t') )
+        let g:res=l:_res
+        echo g:res
+    endif
+endfunction
 
 
 function! TogglePaste()

@@ -1,0 +1,101 @@
+"
+" vim settings
+"
+
+set t_Co=256
+set nocompatible
+set laststatus=2
+
+"set ruler
+"set ballooneval
+"set balloondelay=400
+"set balloonexpr=""
+
+
+filetype off
+
+
+"
+" vundle settings and plugins
+"
+
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"Vundle Plugin manager
+Plugin 'gmarik/Vundle.vim' "vundle plugin manager
+
+"Core plugins
+Plugin 'ervandew/supertab' "completition with tab
+Plugin 'scrooloose/syntastic' "error checking
+Plugin 'vim-scripts/OmniCppComplete' "auto complete
+
+"Plugin 'octol/vim-cpp-enhanced-highlight' "syntax highlighting
+Plugin 'vim-scripts/Cpp11-Syntax-Support'
+Plugin 'bling/vim-airline' "statusline and tabline
+
+"Sipet plugins
+Plugin 'MarcWeber/vim-addon-mw-utils' "required by snipmate
+Plugin 'tomtom/tlib_vim' "required by snipmate
+Plugin 'garbas/vim-snipmate' "insert snipets
+Plugin 'honza/vim-snippets' "optional snipets
+
+
+Plugin 'vim-scripts/a.vim' "Switching between source and header file
+Plugin 'chazy/cscope_maps' "Allows searching code
+Plugin 'vim-scripts/argtextobj.vim' "Text-object like motion for arguments
+Plugin 'wincent/Command-T' "Fast file navigation
+Plugin 'vim-scripts/taglist.vim' "Source code browser (requires exuberant-ctags > apt-get install)
+
+
+Plugin 'ddollar/nerdcommenter' "wrangle your code comments, regardless of filetype
+Plugin 'scrooloose/nerdtree' "explore your filesystem and to open files and directories
+Plugin 'tpope/vim-unimpaired' "provides a lot of useful mappings
+Plugin 'majutsushi/tagbar' "browsing the tags of source code files
+Plugin 'chrisbra/NrrwRgn' "focussing on a region and making the rest inaccessible
+Plugin 'vim-scripts/ZoomWin' "zoom into a window and out again
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'jeetsukumaran/vim-buffergator' "listing,navigating, and selecting buffers for edit
+Plugin 'bronson/vim-trailing-whitespace' "causes all trailing whitespace to be highlighted in red
+
+Plugin 'mileszs/ack.vim' "uses ack to search inside the current directory for a pattern
+Plugin 'myusuf3/numbers.vim' "intelligently toggling line numbers
+Plugin 'Lokaltog/vim-easymotion' "provides a much simpler way to use some motions in vim
+
+call vundle#end()
+filetype plugin indent on
+
+
+"
+" ariline options
+"
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+
+
+"
+" syntastic settings
+"
+
+let g:syntastic_enable_signs = 1
+let g:syntastic_cpp_checkers = ['gcc']
+
+let g:syntastic_auto_jump = 1
+let g:syntastic_enable_balloons = 1
+
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+
+
+let g:syntastic_cpp_check_header = 1
+let g:syntastic_cpp_auto_refresh_includes = 1
+
+
+let g:syntastic_always_populate_loc_list = 1
+
+syntax on
+colorscheme slate

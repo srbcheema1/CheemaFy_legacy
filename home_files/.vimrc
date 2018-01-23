@@ -1,15 +1,18 @@
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Vundle code
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible                    " be iMproved, required
+filetype off                        " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'alvan/vim-closetag'
-Plugin 'jiangmiao/auto-pairs'
-call vundle#end()            " required
-filetype plugin indent on    " required
+Plugin 'VundleVim/Vundle.vim'       "vundle
+Plugin 'Valloric/YouCompleteMe'     "auto complete
+Plugin 'alvan/vim-closetag'         "close html tags
+Plugin 'jiangmiao/auto-pairs'       "auto complete pairs of '' []  {}
+Plugin 'vim-scripts/ZoomWin'        "zoom into a window
+Plugin 'bronson/vim-trailing-whitespace' "causes all trailing whitespace to be highlighted in red
+Plugin 'terryma/vim-multiple-cursors'
+call vundle#end()                   " required
+filetype plugin indent on           " required
 "end Vundle code
 
 set autoindent
@@ -20,8 +23,8 @@ set expandtab
 set tabstop=4
 
 "set cursor line
-hi CursorLine   cterm=NONE ctermbg=darkgrey 
-set cursorline! 
+hi CursorLine   cterm=NONE ctermbg=darkgrey
+set cursorline!
 
 "comments in cpp
 map <C-c> :s/^/\/\//<Enter>
@@ -37,7 +40,7 @@ normal zR
 
 
 "copy commands
-"   '"+' is for external clipboard 
+"   '"+' is for external clipboard
 vnoremap <C-y> "+y
 
 "keep script
@@ -57,7 +60,7 @@ let g:closetag_emptyTags_caseSensitive = 1
 let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
-"Auto close brackets 
+"Auto close brackets
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
@@ -65,3 +68,12 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 set autochdir
 set tags=tags "actually you have to mention location of tags file here
 
+"use mouse in vim
+set mouse=a
+
+"used to make l key to move to next line after end of line
+"used to make h key to move to upper line after begining of line
+"set whichwrap+=h,l
+
+"set color to 256
+set t_Co=256

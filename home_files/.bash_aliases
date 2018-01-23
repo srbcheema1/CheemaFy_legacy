@@ -124,9 +124,10 @@ function _vim(){
     then
         cd "$1";
     else
-        vim $1;
+        vim -p $1 $2 $3 $4;
     fi
 };_vim'
+
 
 
 #my bad habbit to type rm 

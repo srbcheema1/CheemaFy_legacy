@@ -106,10 +106,10 @@ set keymap vi-command
 
 
 
+"------Vundle
 "NOTE : you can install plugins just by typing Plugin 'plugin name' in .vimrc   #sexy
+"Vundle is short form for Vim plugin manager
 
-
-to add you complete me
 "install vim Vundle
     "git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 "add the following lines in vimrc
@@ -127,6 +127,13 @@ to add you complete me
     "end Vundle code
 "open vim and run command :PluginInstall
 "it will take time and show message done
+
+
+
+"----YOU COMPLETE ME
+
+"goto .vimrc and paste there : Plugin 'Valloric/YouCompleteMe'
+"open vim and run  :PluginInstll
 "install clang
     "sudo apt-get install clang-4
 "install the files using clang
@@ -149,17 +156,7 @@ to add you complete me
 
 
 
-
-
-
-
-
-
-
-
-
-
-"HTML CLOSE TAGS
+"------HTML CLOSE TAGS
 "go to ~/.vim/bundle
 "run command : git clone https://github.com/alvan/vim-closetag.git
 "goto .vimrc and paste there : Plugin 'alvan/vim-closetag'
@@ -180,7 +177,10 @@ let g:closetag_close_shortcut = '<leader>>'
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-"Ctags
+
+
+
+"-----Ctags
 "sudo apt-get install exuberant-ctags
 "in vimrc write
 set autochdir

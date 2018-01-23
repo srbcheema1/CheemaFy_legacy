@@ -1,0 +1,14 @@
+g:var - global.
+a:var - function argument.
+l:var - local to function.
+b:var - local to buffer.
+w:var - local to window.
+t:var - local to tab.
+v:var - Predefined by Vim.
+
+
+you may use command to execute command silently
+:silent !command
+sometimes if vim gets messed up ... 
+run
+    :redraw!
