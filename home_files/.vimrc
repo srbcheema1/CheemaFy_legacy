@@ -11,6 +11,7 @@ Plugin 'jiangmiao/auto-pairs'       "auto complete pairs of '' []  {}
 Plugin 'vim-scripts/ZoomWin'        "zoom into a window
 Plugin 'bronson/vim-trailing-whitespace' "causes all trailing whitespace to be highlighted in red
 Plugin 'terryma/vim-multiple-cursors'
+"https://github.com/vim-scripts/Conque-Shell
 call vundle#end()                   " required
 filetype plugin indent on           " required
 "end Vundle code
@@ -26,10 +27,6 @@ set tabstop=4
 hi CursorLine   cterm=NONE ctermbg=darkgrey
 set cursorline!
 
-"comments in cpp
-map <C-c> :s/^/\/\//<Enter>
-map <C-u> :s/^\/\///<Enter>
-
 set nu
 "relative numbering in lines
 set relativenumber
@@ -38,16 +35,21 @@ set relativenumber
 set foldlevel=0
 normal zR
 
+"keep cursor away from top and bottom of screen
+"to keep at center set value to 999
+set scrolloff=4
 
-"copy commands
-"   '"+' is for external clipboard
-vnoremap <C-y> "+y
+"use mouse in vim
+set mouse=a
 
-"keep script
-:so ~/programs/srbScripts/vimScript
+"set color to 256
+set t_Co=256
 
-"to use "+p tp paste external data to editor
-:set clipboard=unnamed
+"used to make l key to move to next line after end of line
+"used to make h key to move to upper line after begining of line
+"set whichwrap+=h,l
+
+
 
 
 
@@ -68,12 +70,13 @@ let g:AutoPairsShortcutBackInsert = '<M-b>'
 set autochdir
 set tags=tags "actually you have to mention location of tags file here
 
-"use mouse in vim
-set mouse=a
 
-"used to make l key to move to next line after end of line
-"used to make h key to move to upper line after begining of line
-"set whichwrap+=h,l
 
-"set color to 256
-set t_Co=256
+
+
+
+
+
+"keep script
+:so ~/programs/srbScripts/scripts.vim
+:so ~/programs/srbScripts/programming.vim

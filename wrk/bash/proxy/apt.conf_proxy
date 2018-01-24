@@ -1,0 +1,4 @@
+Acquire::http::proxy "http://172.16.20.2:3128/";
+Acquire::https::proxy "https://172.16.20.2:3128/";
+Acquire::ftp::proxy "ftp://172.16.20.2:3128/";
+Acquire::socks::proxy "socks://172.16.20.2:3128/";

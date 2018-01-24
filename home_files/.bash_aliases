@@ -15,13 +15,14 @@ alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
 
-#commands for compiler versions 
+#commands for compiler versions
 alias g++11='g++ -std=c++11'
 
 
 #to copy file to clipboard
 #you must have install xsel using sudo apt-get install xsel
 alias cpcb='xsel -b <'
+alias cptf='echo "`xsel -b `" > '
 
 
 #to run octave interactively
@@ -48,9 +49,11 @@ function proxy(){
     if [ "$#" -eq 0 ]
     then
         proxx='';
+        sudo -S -k cp ~/programs/myfiles/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
     elif [ "$#" -eq 1 ]
     then
         proxx='172.16.20.2:3128';
+        sudo -S -k cp ~/programs/myfiles/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
     fi
     export http_proxy=$proxx;
     export https_proxy=$proxx;

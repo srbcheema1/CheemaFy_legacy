@@ -16,12 +16,12 @@ let b:current_syntax = "wrk"
 
 "Keywords
 syn keyword wrkKeyword NOTE sexy
-hi wrkKeyword ctermfg=red
+hi wrkKeyword ctermfg=red cterm=bold
 
 "comment 
-syn match wrkComment "#.*$" contains=wrkKeyword
-syn match wrkComment "//.*$" contains=wrkKeyword
-syn match wrkComment '^"[^"]*$' contains=wrkKeyword
+syn match wrkComment "#.*$" contains=wrkKeyword,h1
+syn match wrkComment "//.*$" contains=wrkKeyword,h1
+syn match wrkComment '^"[^"]*$' contains=wrkKeyword,h1
 
 
 

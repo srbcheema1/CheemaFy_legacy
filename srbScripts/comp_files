@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#code to compare 2 files 
+#code to compare 2 files
 #print first line in which there is difference
 
 from sys import argv,exit
@@ -14,7 +14,7 @@ third parameter is to print or not
     2 will print if files are identical
     3 will also tell whole the differences ... yet incomplete feature
     4 parameter is just to shift the result
-        - shifts the output by shift gaps 
+        - shifts the output by shift gaps
         - actual code is not shifted
         - exceptions are shifted by shift+1
 '''
@@ -22,20 +22,20 @@ third parameter is to print or not
 sp_str = '-'
 def check_exceptions(file1,file2,level=1,shift=0):
     if(not os.path.exists(file1)):
-        if(level>1): 
+        if(level>1):
             print(sp_str*shift+'no file of name '+file1)
         return False
     if(not os.path.exists(file2)):
-        if(level>1): 
+        if(level>1):
             print(sp_str*shift+'no file of name '+file2)
         return False
 
     if(os.path.isdir(file1)):
-        if(level>1): 
+        if(level>1):
             print(sp_str*shift+'required file got folder in file1')
         return False
     if(os.path.isdir(file2)):
-        if(level>1): 
+        if(level>1):
             print(sp_str*shift+'required file got folder in file2')
         return False
     return True
@@ -50,9 +50,11 @@ def comp_files(f1,f2,level=1,shift=0):
     l1 = sum(1 for line in f1)
     l2 = sum(1 for line in f2)
 
+    isIdentical = True
     if(l1 != l2):
-        if(level>=1): 
+        if(level>=1):
             print(sp_str*shift+'files differ in size '+str(l1)+' '+str(l2))
+            isIdentical=False
 
     l = min(l1,l2)
 
@@ -61,8 +63,7 @@ def comp_files(f1,f2,level=1,shift=0):
 
     f1 = f1.readlines()
     f2 = f2.readlines()
-    
-    isIdentical = True
+
     i = 0
     for i in range(l):
         if(f1[i] != f2[i]):

@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+import os
+import re
+import time
+import subprocess
+from sys import argv,exit
+from abs_path import abs_path
+
+if(__name__=="__main__"):
+    this_term=subprocess.Popen(["xdotool","getactivewindow"],stdout=subprocess.PIPE).communicate()[0].decode('utf-8')
+    this_term = int(this_term)
+
+    full_list=subprocess.Popen(["wmctrl","-l"],stdout=subprocess.PIPE).communicate()[0].decode('utf-8')
+    full_list = full_list.split('\n')
+    term_list = []
+    for line in full_list:
+         if re.search("srb@srb-pc", line):
+             term_list.append(line)
+
+    dist = {}
+    for item in term_list:
+        sub = item.split(' ')
+        term_id = int(sub[0],16)
+        if(term_id == this_term):
+            if(sub[-1] in dist):
+                dist[sub[-1]] = [term_id] + dist[sub[-1]]
+            else:
+                dist[sub[-1]]=[term_id]
+        else:
+            if(sub[-1] in dist):
+                dist[sub[-1]].append(term_id)
+            else:
+                dist[sub[-1]]=[term_id]
+
+    for key,val in dist.items():
+        if(len(val) > 1):
+            for i in range(1,len(val)):
+                term_id = str(val[i])
+                os.system("wmctrl -i -c "+term_id)
+                print("wmctrl -i -c ",term_id)
+
