@@ -3,7 +3,7 @@ import os
 from sys import argv,exit
 
 describe='''
-script to check codes of cheema and other are identical or not 
+script to check codes of cheema and other are identical or not
 takes 4 arguments:
 
 1 cpp file          --- your code       --- compiled to c<idd>.tester  --- gives output outc<idd>
@@ -12,13 +12,12 @@ takes 4 arguments:
 4 idd               --- unique id       --- not compulsory          --- default val 0
 5 maxlim            --- max limit       --- not computlsory         --- default val 10000
 
-NOTE    --- 4th nd 5th argument are not necessary 
+NOTE    --- 4th nd 5th argument are not necessary
         --- but please make sure to give argumensts while running the tester multiple times
         --- you can give value of maxlim to be -1 to rum infinitely
 
-also you can clean the testing files by 
+also you can clean the testing files by
 code_tester --clean <idd>
-    
 '''
 
 def check_exception(file1,file2,tester_script):
@@ -104,5 +103,5 @@ if(__name__=="__main__"):
             idd=str(argv[4])
             if(len(argv)>=6):
                 maxlim=argv[5]
-    
+
     code_tester(code1,code2,tester_script,idd,maxlim)

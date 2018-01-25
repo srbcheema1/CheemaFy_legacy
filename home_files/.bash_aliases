@@ -14,16 +14,74 @@ alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
+#you must have install xsel using sudo apt-get install xsel
+#to copy file to clipboard
+alias cpcb='xsel -b <'
+#to copy clipboard to a file
+alias cptf='echo "`xsel -b `" > '
+#you can copy a file from one place to other
+    #you can copy a file by cpcb <file name>
+    #move to the other directory
+    #paste it there by cptf <filename>
+
+alias copy='
+function _copy(){
+    if ! [ -d "$HOME/.srb_clip_board" ]
+    then
+        mkdir ~/.srb_clip_board
+    fi
+
+    if ! [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
+    then
+        rm -f ~/.srb_clip_board/*
+    fi
+
+    for i in `seq 1 $#`
+    do
+        cp ${!i} ~/.srb_clip_board/
+        echo copied ${!i}
+    done
+};_copy'
+
+alias cut='
+function _cut(){
+    if ! [ -d "$HOME/.srb_clip_board" ]
+    then
+        mkdir ~/.srb_clip_board
+    fi
+
+    if ! [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
+    then
+        rm -f ~/.srb_clip_board/*
+    fi
+
+    for i in `seq 1 $#`
+    do
+        mv ${!i} ~/.srb_clip_board/
+        echo cut ${!i}
+    done
+};_cut'
+
+alias paste='
+function _paste(){
+    if ! [ -d "$HOME/.srb_clip_board" ]
+    then
+        mkdir ~/.srb_clip_board
+    fi
+
+    if [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
+    then
+       echo "clipboard empty"
+    fi
+
+    echo "pasting these items : "
+    ls -A ~/.srb_clip_board/
+    mv  ~/.srb_clip_board/* ./
+};_paste'
+
 
 #commands for compiler versions
 alias g++11='g++ -std=c++11'
-
-
-#to copy file to clipboard
-#you must have install xsel using sudo apt-get install xsel
-alias cpcb='xsel -b <'
-alias cptf='echo "`xsel -b `" > '
-
 
 #to run octave interactively
 alias octavei='octave --no-gui'
@@ -110,12 +168,12 @@ function _sshot_loc(){
 
     if [ "$#" -eq 0 ]
     then
-        sshot_a=`pwd`; 
+        sshot_a=`pwd`;
     elif [ "$#" -eq 1 ]
     then
         sshot_a=$(cd $1;pwd); #sexy
     fi
-    gsettings set org.gnome.gnome-screenshot auto-save-directory $sshot_a; 
+    gsettings set org.gnome.gnome-screenshot auto-save-directory $sshot_a;
     echo "default screen shot dir set to "$sshot_a;
 };_sshot_loc'
 
@@ -133,9 +191,9 @@ function _vim(){
 
 
 
-#my bad habbit to type rm 
+#my bad habbit to type rm
 help_rm="
-rm file1 file2                      --- will move them to trash 
+rm file1 file2                      --- will move them to trash
 rm -p file1 file2                   --- will delete them permanemtly and will ask for perission
 rm -f file1 file2                   --- will delete all files without asking permission
                                             --- only for development purpose
@@ -192,7 +250,7 @@ function _rm(){
             done
         fi
 
-    elif [ "$1" = "-f" ] #remove without permission ... 
+    elif [ "$1" = "-f" ] #remove without permission ...
     then
         for i in `seq 2 $#`
         do
@@ -219,7 +277,7 @@ function _rm(){
 };_rm'
 
 
-#trash 
+#trash
 help_trash="
 trash ls                            --- list items in trash
 trash <filename> [<filename> ,]     --- move given files to trash
@@ -233,13 +291,13 @@ function _trash(){
     if  [ "$1" = "--help" ]
     then
         echo "$help_trash"
-        return 
+        return
     fi
 
     if [ "$1" = "ls" ]
     then
-        cd ~/.local/share/Trash/files/ 
-        ls 
+        cd ~/.local/share/Trash/files/
+        ls
         cd - > /dev/null
 
     elif [ "$1" = "-r" ] #restore
@@ -247,7 +305,7 @@ function _trash(){
         now=`pwd`
         for i in `seq 2 $#`
         do
-            cd ~/.local/share/Trash/files/ 
+            cd ~/.local/share/Trash/files/
             mv ${!i} $now
             cd ~/.local/share/Trash/info/
             rm -f ${!i}.trashinfo > /dev/null
@@ -263,7 +321,7 @@ function _trash(){
             now=`pwd`
             for i in `seq 2 $#`
             do
-                cd ~/.local/share/Trash/files/ 
+                cd ~/.local/share/Trash/files/
                 echo "rm ${!i}"
                 rm -f ${!i}
                 cd ~/.local/share/Trash/info/
@@ -283,7 +341,7 @@ function _trash(){
 
     elif [ "$#" = 0 ] #move to location of trash
     then
-        cd ~/.local/share/Trash/files/ 
+        cd ~/.local/share/Trash/files/
 
     else
         gvfs-trash $1 $2 $3 $4 $5
@@ -323,7 +381,7 @@ function _night(){
 };_night'
 
 
-#nautilous 
+#nautilous
 help_disk="
 disk            -- open location in nautilous
 disk desktop    -- open nautilous in desktop
@@ -339,8 +397,8 @@ function _disk(){
 
     if [ "$#" -eq 0 ]
     then
-        loc=`pwd`; 
-        nautilus $loc > /dev/null 2>&1 
+        loc=`pwd`;
+        nautilus $loc > /dev/null 2>&1
     fi
 
     if [ "$#" -eq 1 ]
@@ -350,14 +408,14 @@ function _disk(){
             nautilus ~/Desktop > /dev/null 2>&1;
         elif [ "$1" = "disk" ]
         then
-            hell=`mountpoint disk | grep -o not`  
+            hell=`mountpoint disk | grep -o not`
 			if [ "$hell" = "not" ]
             then
                 echo "disk was not mounted";
                 # -S is used to read from STDIN
-                disk_name = "/dev/sda5" # change it to own disk 
+                disk_name = "/dev/sda5" # change it to own disk
                 sudo -S -k  mount $disk_name /media/srb/disk/ < ~/.pass > /dev/null 2>&1 #sexy
-                nautilus /media/srb/disk > /dev/null 2>&1 
+                nautilus /media/srb/disk > /dev/null 2>&1
             else
                 echo "mounted";
                 nautilus /media/srb/disk > /dev/null 2>&1
@@ -367,7 +425,7 @@ function _disk(){
 };_disk'
 
 help_search_dir="
-search_dir <file> <relative locaton>...    -- search <dir> in given location 
+search_dir <file> <relative locaton>...    -- search <dir> in given location
 "
 alias search_dir='
 function _search_dir(){
@@ -383,7 +441,7 @@ function _search_dir(){
 };_search_dir'
 
 help_search_file="
-search_file <file> <relative locaton>...    -- search <file> in given location 
+search_file <file> <relative locaton>...    -- search <file> in given location
 "
 alias search_file='
 function _search_file(){
@@ -409,17 +467,17 @@ function _search_me(){
         return
     fi
 
-    grep_cmd="grep -i -nr" 
+    grep_cmd="grep -i -nr"
     # i for ignore casesenstivity
     # I for ignoring binary files
     # n for numbering
     # r for recursive
 
     if [ "$#" -eq 1 ]
-    then 
+    then
         grep -i -I -nr "$1" .
 
-    elif [ "$#" -eq 2 ] 
+    elif [ "$#" -eq 2 ]
     then
         grep -i -I -nr "$1" "$2"
 

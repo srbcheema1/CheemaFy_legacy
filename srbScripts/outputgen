@@ -5,7 +5,7 @@ from sys import argv,exit
 describe='''
 creates outputs for multiple test cases
 test cases files must be in format t0 t2 t3
-output will be in form o0 o1 o2 
+output will be in form o0 o1 o2
 '''
 def outputgen(items):
     for item in items:

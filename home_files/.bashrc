@@ -124,7 +124,7 @@ export PATH=$PATH:"$HOME/programs/srbScripts"
 export PYTHONPATH=$PYTHONPATH:"$HOME/programs/srbScripts"
 export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
 
-#to include a file here use 
+#to include a file here use
 if [ -f ~/programs/srbScripts/bashrc_extended ]; then
     . ~/programs/srbScripts/bashrc_extended
 fi

@@ -9,6 +9,6 @@ v:var - Predefined by Vim.
 
 you may use command to execute command silently
 :silent !command
-sometimes if vim gets messed up ... 
+sometimes if vim gets messed up ...
 run
     :redraw!

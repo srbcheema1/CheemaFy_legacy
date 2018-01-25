@@ -36,4 +36,3 @@ if (sys.argv[1]=="-m"):
     ans = (s*1024*1024)
     ans//=4
     print("array size would be ",ans)
-    

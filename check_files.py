@@ -1,11 +1,11 @@
-#/usr/bin/env python 
+#/usr/bin/env python
 import os
 from sys import argv,exit
 from comp_files import comp_files as comparer
 from abs_path import abs_path
 
 '''
-script to check codes of cheema and other are identical or not 
+script to check codes of cheema and other are identical or not
 '''
 
 #replace these with your default names
@@ -16,7 +16,8 @@ files = [
             ["gitconfig","~/.gitconfig","~/programs/myfiles/home_files/.gitconfig"]
         ]
 folders = [
-            ["srbScripts","~/programs/srbScripts","~/programs/myfiles/srbScripts"]
+            ["srbScripts","~/programs/srbScripts","~/programs/myfiles/srbScripts"],
+            ["importlib","~/programs/python/importlib","~/programs/myfiles/importlib"]
         ]
 
 sp_str = '>'
@@ -35,7 +36,9 @@ def reactify_list(vec):
     arr = []
     vec = sorted(vec)
     for item in vec:
-        if(len(item)>3 and item[-3]=='s' and item[-2]=='w' and item[-1]=='p'):
+        if(len(item)>3 and item[-3]=='s' and item[-2]=='w' and item[-1]=='p'): #remove swp files
+            continue
+        if(len(item)>3 and item[-3]=='p' and item[-2]=='y' and item[-1]=='c'):#remove pyc files
             continue
         arr.append(item)
     return arr
@@ -50,19 +53,22 @@ def make_same(items1,items2,folder1,folder2,shift):
     inboth = []
     while(i<len(items1) and j<len(items2)):
         if(items1[i]<items2[j]):
-            notin2.append(items1[i]) 
+            notin2.append(items1[i])
             i+=1
         elif(items1[i]>items2[j]):
             notin1.append(items2[j])
             j+=1
-        elif(items1[i]==items2[j]): 
+        elif(items1[i]==items2[j]):
             inboth.append(items1[i])
             i = i+1;
             j = j+1;
+
     while(i<len(items1)):
-        notin2.append[items1[i]]
+        notin2.append(items1[i])
+        i+=1
     while(j<len(items2)):
-        notin1.append[items2[j]]
+        notin1.append(items2[j])
+        j+=1
 
     if(len(notin1) > 0 or len(notin2)>0):
         print(sp_str*shift,"files not in pc : ",end=" ")
@@ -104,7 +110,7 @@ def comp_files(level):
 #comp folder
 def comp_folder(folder_name,folder1,folder2,level,shift=0):
     print(sp_str*shift,"comparing folder "+folder_name)
-    items1 = os.listdir(abs_path(folder1)); 
+    items1 = os.listdir(abs_path(folder1));
     items2 = os.listdir(abs_path(folder2));
     files,folders = make_same(items1,items2,folder1,folder2,shift+2)
 
