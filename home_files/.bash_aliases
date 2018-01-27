@@ -33,12 +33,19 @@ function _copy(){
 
     if ! [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
     then
-        rm -f ~/.srb_clip_board/*
+        rm -f ~/.srb_clip_board/* > /dev/null 2>&1;
     fi
 
     for i in `seq 1 $#`
     do
-        cp ${!i} ~/.srb_clip_board/
+        if [ -d "${!i}" ] #sexy
+        then
+            cp -r ${!i} ~/.srb_clip_board/
+        fi
+        if [ -f "${!i}" ]
+        then
+            cp ${!i} ~/.srb_clip_board/
+        fi
         echo copied ${!i}
     done
 };_copy'
@@ -52,7 +59,7 @@ function _cut(){
 
     if ! [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
     then
-        rm -f ~/.srb_clip_board/*
+        rm -f ~/.srb_clip_board/* > /dev/null 2>&1;
     fi
 
     for i in `seq 1 $#`
@@ -76,7 +83,7 @@ function _paste(){
 
     echo "pasting these items : "
     ls -A ~/.srb_clip_board/
-    mv  ~/.srb_clip_board/* ./
+    cp -r ~/.srb_clip_board/* ./
 };_paste'
 
 
@@ -506,3 +513,4 @@ alias catp='cat ~/programs/myfiles/default_codes/default.py >>'
 alias catb='cat ~/programs/myfiles/default_codes/default.sh >>'
 alias catr='cat ~/programs/myfiles/default_codes/default.c >>'
 alias cats='cat ~/programs/myfiles/default_codes/default.simple >>'
+alias cattest='cat ~/programs/myfiles/default_codes/default.testcase >>'

@@ -140,3 +140,8 @@ there are mainly 3 display managers ... lightdm(ubuntu default) , gdm(genome) , 
 
 ----------------system problem detected
 sudo rm /var/crash/*
+
+
+-------------Memory Consumption
+/usr/bin/time -f "%M" octave -q --eval "V=rand(5000);function f(A);evalin('caller', 'clear V');A(1)=5;end;f(V);"
+

@@ -1,0 +1,6 @@
+from randy import rand,rand_arr,randomize,norm,norm_arr
+from srbio import printf
+from reader import reader
+
+args = reader()
+
