@@ -128,3 +128,8 @@ export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
 if [ -f ~/programs/srbScripts/bashrc_extended ]; then
     . ~/programs/srbScripts/bashrc_extended
 fi
+
+#gsoc aliases
+if [ -f ~/.gsoc_aliases ]; then
+    . ~/.gsoc_aliases
+fi

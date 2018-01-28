@@ -14,6 +14,13 @@ alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
+alias notify-me='
+function _notify-me(){
+    $1 $2 $3 $4 $5 $6 $7 $8 $9
+    notify-send "completed !" "$1 $2 $3 $4 $5 $6 $7 $8 $9"
+};_notify-me'
+
+
 #you must have install xsel using sudo apt-get install xsel
 #to copy file to clipboard
 alias cpcb='xsel -b <'

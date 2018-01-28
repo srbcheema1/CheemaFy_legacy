@@ -2,7 +2,7 @@ import pickle
 import os
 
 class data_bank:
-    def __init__(self,file_name):
+    def __init__(self,file_name="temp"):
         file_name = "."+file_name+"_bank"
         self.file_name = file_name
         if not os.path.exists(file_name):

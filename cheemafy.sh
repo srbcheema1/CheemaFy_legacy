@@ -25,6 +25,15 @@ then
     mkdir "~/.srb_clip_board"
 fi
 
+#file to hold your password
+if ! [ -f ~/.pass ]
+    stty -echo
+    printf "enter your password : " && read  passwrd
+    stty echo
+    echo ""
+    echo $passwrd > ~/.pass
+fi
+
 if ! [ $place = $prog"/myfiles" ]
 then
     echo "copying it to right place and running from there"
@@ -32,6 +41,10 @@ then
     sh $prog"/myfiles/cheemafy.sh"
     exit
 fi
+
+
+
+
 
 #here begins main cheemafy
 
