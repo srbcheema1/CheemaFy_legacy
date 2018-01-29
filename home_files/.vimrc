@@ -50,6 +50,8 @@ set t_Co=256
 "set whichwrap+=h,l
 
 
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 
 

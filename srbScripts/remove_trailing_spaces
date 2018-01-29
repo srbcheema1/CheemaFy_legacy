@@ -1,0 +1,55 @@
+#! /usr/bin/env python3
+import os
+from sys import exit,argv
+from abs_path import abs_path
+import mimetypes
+
+def remove_trailing(file_name):
+    file_name = abs_path(file_name)
+    fin = open(file_name)
+    lines = []
+    for line in fin:
+        lines.append(line)
+    fin.close()
+
+    fout = open(file_name,"w")
+
+    for line in lines:
+        if(line[0]=='\n'):
+            fout.write('\n')
+            continue;
+        line = line.rstrip()
+        if line:
+            fout.write(line)
+            fout.write('\n')
+    fout.close()
+
+def process_file(file_name,shift):
+    mime = mimetypes.guess_type(file_name)
+    mime_type = str(mime[0]).split('/')[0]
+    if(mime_type=='text'):
+        remove_trailing(file_name)
+
+def expand_folder(folder,shift=0):
+    folder = abs_path(folder)
+    items = os.listdir(folder);
+    for item in items:
+        item = folder+"/"+item
+        item = abs_path(item)
+        if(os.path.isdir(item)):
+            expand_folder(item,shift+1)
+        elif(os.path.exists(item)):
+            process_file(item,shift)
+
+if(__name__=="__main__"):
+    if(len(argv)!=2):
+        print("requires a commandline argument location of file or project")
+        exit()
+
+    root = abs_path(argv[1])
+    if(os.path.isdir(root)):
+        expand_folder(root)
+    elif(os.path.isfile(root)):
+        process_file(root)
+    else:
+        print(root+" location doesn't exitst")
