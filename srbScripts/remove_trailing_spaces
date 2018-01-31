@@ -21,35 +21,47 @@ def remove_trailing(file_name):
         line = line.rstrip()
         if line:
             fout.write(line)
-            fout.write('\n')
+        fout.write('\n')
+
     fout.close()
 
-def process_file(file_name,shift):
+def process_file(file_name,shift,check=True):
     mime = mimetypes.guess_type(file_name)
     mime_type = str(mime[0]).split('/')[0]
-    if(mime_type=='text'):
+    if(mime_type=='text' or check==False):
         remove_trailing(file_name)
 
-def expand_folder(folder,shift=0):
+def expand_folder(folder,shift=0,check=True):
     folder = abs_path(folder)
     items = os.listdir(folder);
     for item in items:
+        #ignore hidden
+        if(item[0]=='.'):
+            continue
         item = folder+"/"+item
         item = abs_path(item)
         if(os.path.isdir(item)):
-            expand_folder(item,shift+1)
+            expand_folder(item,shift+1,check)
         elif(os.path.exists(item)):
-            process_file(item,shift)
+            process_file(item,shift,check)
 
 if(__name__=="__main__"):
-    if(len(argv)!=2):
-        print("requires a commandline argument location of file or project")
+    if(len(argv)<2):
+        print("requires atleast commandline argument location of file or project")
         exit()
+
+    #flag to check filetype
+    #generally keep it true
+    check = True
+
+    if(len(argv)>2):
+        if(argv[2]=="-c"):
+            check = False
 
     root = abs_path(argv[1])
     if(os.path.isdir(root)):
-        expand_folder(root)
+        expand_folder(root,0,check)
     elif(os.path.isfile(root)):
-        process_file(root)
+        process_file(root,1,check)
     else:
         print(root+" location doesn't exitst")

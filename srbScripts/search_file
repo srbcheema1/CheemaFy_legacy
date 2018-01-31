@@ -1,0 +1,74 @@
+#! /usr/bin/env python3
+import os
+from sys import exit,argv
+from collections import deque
+
+from abs_path import abs_path
+from srbColour import Colour
+from srbdir import parent_dir,file_name,relative_path
+
+#return first occurance of substring in string
+def find_str(string, substr):
+    index = 0
+    if substr in string:
+        c = substr[0]
+        for ch in string:
+            if ch == c:
+                if string[index:index+len(substr)] == substr:
+                    return index
+            index += 1
+    return -1
+
+def process_it(name,full_name,isfolder=False):
+    file_name_ = file_name(full_name)
+    if(name in file_name_):
+        occ =  find_str(file_name_,name)
+        if(isfolder):
+            print(Colour.GREEN+relative_path(parent_dir(full_name))+"/"+file_name_[0:occ]+Colour.RED+file_name_[occ:occ+len(name)]+Colour.GREEN+file_name_[occ+len(name):len(file_name_)]+Colour.END)
+        else:
+            print(relative_path(parent_dir(full_name))+"/"+file_name_[0:occ]+Colour.RED+file_name_[occ:occ+len(name)]+Colour.END+file_name_[occ+len(name):len(file_name_)])
+
+
+def expand_folder(name,folder,depth,check=True):
+    q = deque([])
+    folder = abs_path(folder)
+    q.append([folder,0])
+
+    while(len(q)>0):
+        folder,shift = q[0]
+        q.popleft()
+#        print(folder)
+
+        if(shift > depth):
+            continue
+
+        items = os.listdir(folder)
+        for item in items:
+            #ignore hidden
+            if(item[0]=='.'):
+                continue
+
+            item = folder+"/"+item
+            item = abs_path(item)
+            if(os.path.isdir(item)):
+                q.append([item,shift+1])
+                process_it(name,item,isfolder=True)
+            elif(os.path.isfile(item)):
+                process_it(name,item)
+
+
+if(__name__=="__main__"):
+    if(len(argv)<2):
+        print("requires atleast commandline argument name of file or project")
+        exit()
+
+    #flag to check filetype
+    #generally keep it true
+    check = True
+
+    depth = 20
+    if(len(argv)>2):
+        depth = int(argv[2])
+
+    name = str(argv[1])
+    expand_folder(name,".",depth,check)

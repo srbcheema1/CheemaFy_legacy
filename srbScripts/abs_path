@@ -32,11 +32,11 @@ def abs_path(path):
     if(len(path)>1 and path[-1]=='/'):#remove last backslash
         path=path[:-1]
     if(path[0]=='/'):
-        return path
+        return reactified(path)
     if(path[0]=='~'):
-        return home_path + path[1:]
+        return reactified(home_path + path[1:])
     if(path[0]!='.'):
-        return pwd + '/' + path
+        return reactified(pwd + '/' + path)
 
 
     return reactified(pwd +'/'+ path)

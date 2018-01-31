@@ -16,8 +16,16 @@ alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
 alias notify-me='
 function _notify-me(){
+    if [ $1 = "-m" ]
+    then
+        $2 $3 $4 $5 $6 $7 $8 $9
+        notify-send "completed !" "$2 $3 $4 $5 $6 $7 $8 $9"
+        mail_me "work is done $2 $3 $4 $5 $6 $7 $8 $9"
+        return
+    fi
     $1 $2 $3 $4 $5 $6 $7 $8 $9
     notify-send "completed !" "$1 $2 $3 $4 $5 $6 $7 $8 $9"
+    mail_me "work is done"
 };_notify-me'
 
 
@@ -441,8 +449,8 @@ function _disk(){
 help_search_dir="
 search_dir <file> <relative locaton>...    -- search <dir> in given location
 "
-alias search_dir='
-function _search_dir(){
+alias _search_dir='
+function __search_dir(){
     if [ "$#" -eq 1 ]
     then
         find . -type d | grep $1
@@ -452,13 +460,13 @@ function _search_dir(){
     else
         echo "$help_search_dir"
     fi
-};_search_dir'
+};__search_dir'
 
 help_search_file="
 search_file <file> <relative locaton>...    -- search <file> in given location
 "
-alias search_file='
-function _search_file(){
+alias _search_file='
+function __search_file(){
     if [ "$#" -eq 1 ]
     then
         find . -type f | grep $1
@@ -468,7 +476,7 @@ function _search_file(){
     else
         echo "$help_search_file"
     fi
-};_search_file'
+};__search_file'
 
 help_search_me="
 search_me <arg1> <arg2> <arg3> <arg4>...    -- search <arg1> in <arg2> excluding <arg3> <arg4>...

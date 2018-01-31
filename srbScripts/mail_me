@@ -9,7 +9,7 @@ body = "message"
 if(len(argv)>1):
     body = argv[1]
 
-from srb_var import srb_pass
+from srbVar import srb_pass
 
 fromaddr = "virk2656@gmail.com"
 toaddr = "srbcheema2@gmail.com"

@@ -1,13 +1,6 @@
 import os
+from srbdir import parent_dir
 import sys
-
-
-def parent_dir(level=1):
-    here = str(os.path.abspath(__file__))
-    while(level>0):
-        here = os.path.abspath(os.path.join(here, os.pardir))
-        level -= 1
-    return here
 
 
 print("in test_script :: \n")
@@ -16,7 +9,7 @@ print("-"*3,os.getcwd())
 print()
 
 
-sys.path.append(parent_dir(2))
+sys.path.append(parent_dir(__file__,2))
 from test_hello import hello_world as hello_world
 
 hello_world()
