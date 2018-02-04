@@ -46,9 +46,26 @@ fi
 
 
 
-
-
 #here begins main cheemafy
+
+#customise terminal
+UUID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
+#gsettings list-keys  org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    use-transparent-background true
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    cursor-shape ibeam
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    background-color 'rgb(14,1,1)'
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    default-size-columns 110
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    default-size-rows 33
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    background-transparency-percent 31
+gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
+    foreground-color 'rgb(231,238,232)'
+
 
 #copy home_files to its position
 cp -r ~/programs/myfiles/home_files/. ~/
@@ -59,8 +76,18 @@ cp -r ~/programs/myfiles/srbScripts ~/programs/
 #copy importlib
 cp -r ~/programs/myfiles/importlib ~/programs/python/
 
+#install xsel
+if ! type vim > /dev/null 2>&1;
+then
+    sudo apt-get install xsel
+fi
+
 #install vim
-sudo apt-get install vim
+if ! type vim > /dev/null 2>&1;
+then
+    sudo apt-get install vim
+fi
+
 #install Vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
