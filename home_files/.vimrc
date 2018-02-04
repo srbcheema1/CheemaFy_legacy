@@ -13,6 +13,7 @@ Plugin 'bronson/vim-trailing-whitespace' "causes all trailing whitespace to be h
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'Vimjas/vim-python-pep8-indent'      "python pep8 plugin
 "https://github.com/vim-scripts/Conque-Shell
+
 call vundle#end()                   " required
 filetype plugin indent on           " required
 "end Vundle code

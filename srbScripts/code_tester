@@ -36,7 +36,6 @@ def check_exception(file1,file2,tester_script):
 ret = -1
 def code_tester(code1,code2,tester_script,idd=0,maxlim=10000):
     #compile both
-    print("hell")
     if(not check_exception(code1,code1,tester_script)):
         exit()
 
@@ -51,7 +50,7 @@ def code_tester(code1,code2,tester_script,idd=0,maxlim=10000):
         if(not check_exception("c"+idd+".tester","o"+idd+".tester",tester_script)):
             exit()
 
-        if(times%100==0):
+        if(times%5==0):
             print("test",times)
         #os.system("pwd")
         os.system("python3 "+tester_script+" > test"+idd)
@@ -92,7 +91,7 @@ if(__name__=="__main__"):
         print(describe)
         exit()
 
-    if(argv[1]=="--clean"):
+    if(argv[1]=="--clean" or argv[1]=='-c'):
         clean(argv[2])
 
     code1=argv[1]

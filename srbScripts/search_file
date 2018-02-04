@@ -5,7 +5,7 @@ from collections import deque
 
 from abs_path import abs_path
 from srbColour import Colour
-from srbdir import parent_dir,file_name,relative_path
+from srbFiles import parent_dir,file_name,relative_path
 
 #return first occurance of substring in string
 def find_str(string, substr):

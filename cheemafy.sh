@@ -20,13 +20,14 @@ then
     mkdir $prog"/python/importlib"
 fi
 
-if ! [ -d "~/.srb_clip_board" ]
+if ! [ -d $HOME"/.srb_clip_board" ]
 then
-    mkdir "~/.srb_clip_board"
+    mkdir $HOME"/.srb_clip_board"
 fi
 
 #file to hold your password
 if ! [ -f ~/.pass ]
+then
     stty -echo
     printf "enter your password : " && read  passwrd
     stty echo
@@ -37,7 +38,8 @@ fi
 if ! [ $place = $prog"/myfiles" ]
 then
     echo "copying it to right place and running from there"
-    cp ../myfiles $prog
+    cp -r ../myfiles $prog
+    cd $prog"/myfiles/"
     sh $prog"/myfiles/cheemafy.sh"
     exit
 fi
@@ -56,6 +58,11 @@ cp -r ~/programs/myfiles/srbScripts ~/programs/
 
 #copy importlib
 cp -r ~/programs/myfiles/importlib ~/programs/python/
+
+#install vim
+sudo apt-get install vim
+#install Vundle
+git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 #plugins
 plugin_path=$HOME/.vim/bundle
