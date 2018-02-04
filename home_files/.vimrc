@@ -26,7 +26,7 @@ set expandtab
 set tabstop=4
 
 "set cursor line
-hi CursorLine   cterm=NONE ctermbg=darkgrey
+hi CursorLine   cterm=bold ctermbg=darkgrey
 set cursorline!
 
 set nu

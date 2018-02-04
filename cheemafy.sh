@@ -101,3 +101,5 @@ else
     cp -r ~/programs/myfiles/myPlugins/vim/. ~/.vim/
 fi
 
+#let the changes begin
+gnome-terminal & disown & exit

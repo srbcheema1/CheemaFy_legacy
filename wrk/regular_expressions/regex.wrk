@@ -14,7 +14,7 @@ This regex pattern is not very useful.
 Let's take a regex pattern that may be a bit useful.
 Let's say I have two strings The bat of Matt Jones and Matthew's last name is Jones.
 The pattern ^Matt.*Jones$ will match Matthew's last name is Jones.
-Why? The pattern says - the string should start with Matt and end with Jones 
+Why? The pattern says - the string should start with Matt and end with Jones
 and there can be zero or more characters (any characters) in between them.
 
 
@@ -58,7 +58,7 @@ EXAMPLES:
 ".ar" => car par
 "[Tt]he" => The the
 "[^c]ar" => par jar  !car   "!means this word is not there
-"ar[.]" => ar.    			"[.] represents simply . 
+"ar[.]" => ar.    			"[.] represents simply .
 "c.*t" => cat caaat 'caar is tat'
 "[T]?he" => The he
 

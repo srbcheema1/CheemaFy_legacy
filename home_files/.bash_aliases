@@ -14,6 +14,16 @@ alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
+alias orig='
+function _orig(){
+    if [ $1 = "--help" ]
+    then
+        echo "helps to execute orig commands without alias effect"
+        return
+    fi
+    $1 $2 $3 $4 $5 $6 $7 $8 $9
+};_orig'
+
 alias notify-me='
 function _notify-me(){
     if [ $1 = "-m" ]
@@ -25,7 +35,6 @@ function _notify-me(){
     fi
     $1 $2 $3 $4 $5 $6 $7 $8 $9
     notify-send "completed !" "$1 $2 $3 $4 $5 $6 $7 $8 $9"
-    mail_me "work is done"
 };_notify-me'
 
 
@@ -293,7 +302,8 @@ function _rm(){
     then
         gvfs-trash $2 $3 $4 $5
 
-    else
+    elif [ "$#" -gt 0 ]
+    then
         gvfs-trash "$1" $2 $3 $4 $5;
     fi
 };_rm'

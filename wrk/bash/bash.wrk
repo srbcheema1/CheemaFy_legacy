@@ -38,3 +38,11 @@ sudo -S -k <command> < ~/<file_password> > /dev/sda5 2&>1
 
 #open terminal shortcut
 https://askubuntu.com/questions/68078/keyboard-shortcut-for-open-a-terminal-here
+
+
+#mkdir
+it will create hell if not there
+    mkdir -p hell/good
+crete folders from sa1 to sa50
+    mkdir sa{1..50}
+

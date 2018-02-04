@@ -40,6 +40,8 @@ def reactify_list(vec):
             continue
         if(len(item)>3 and item[-3]=='p' and item[-2]=='y' and item[-1]=='c'):#remove pyc files
             continue
+        if(len(item)>3 and item[-3]=='e' and item[-2]=='_' and item[-1]=='_'):#remove pyc files
+            continue
         arr.append(item)
     return arr
 
