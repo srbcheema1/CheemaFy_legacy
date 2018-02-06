@@ -17,7 +17,9 @@ files = [
         ]
 folders = [
             ["srbScripts","~/programs/srbScripts","~/programs/myfiles/srbScripts"],
-            ["importlib","~/programs/python/importlib","~/programs/myfiles/importlib"]
+            ["importlib","~/programs/python/importlib","~/programs/myfiles/importlib"],
+            ["vim_ftdetect","~/.vim/ftdetect","~/programs/myfiles/myPlugins/vim/ftdetect"],
+            ["vim_syntax","~/.vim/syntax","~/programs/myfiles/myPlugins/vim/syntax"]
         ]
 
 sp_str = '>'

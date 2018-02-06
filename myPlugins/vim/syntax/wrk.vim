@@ -18,7 +18,7 @@ let b:current_syntax = "wrk"
 syn keyword wrkKeyword NOTE sexy
 hi wrkKeyword ctermfg=red cterm=bold
 
-"comment 
+"comment
 syn match wrkComment "#.*$" contains=wrkKeyword,h1
 syn match wrkComment "//.*$" contains=wrkKeyword,h1
 syn match wrkComment '^"[^"]*$' contains=wrkKeyword,h1
@@ -29,7 +29,7 @@ syn match wrkComment '^"[^"]*$' contains=wrkKeyword,h1
 syn match wrkNumber '\d\+'
 syn match wrkNumber '[-+]\d\+'
 
-" Floating point number with decimal no E or e 
+" Floating point number with decimal no E or e
 syn match wrkNumber '[-+]\d\+\.\d*'
 
 " Floating point like number with E and no decimal point (+,-)
@@ -42,7 +42,7 @@ syn match wrkNumber '\d[[:digit:]]*\.\d*[eE][\-+]\=\d\+'
 
 
 
-"transparent allows vim to color inside this reason also 
+"transparent allows vim to color inside this reason also
 "fold tells vim to treat it as a fold
 syn region wrkDescBlock start="{" end="}" fold transparent contains=wrkNumber,wrkComment
 
