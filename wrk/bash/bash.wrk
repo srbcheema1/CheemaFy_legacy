@@ -46,3 +46,5 @@ it will create hell if not there
 crete folders from sa1 to sa50
     mkdir sa{1..50}
 
+#execute command in new terminal
+gnome-terminal -e "bash -c \"echo hell; exec bash\""

@@ -1,0 +1,60 @@
+var cheema ={
+    fav_food = 'pizza';
+    name = "sarbjit"
+};
+
+var srb = cheema;//copied reference
+srb.fav_food = "cheese_pizza";
+console.log(cheema.fav_food);//cheese_pizza
+
+if(19=='19')// true
+if(19==='19')//false
+== compares value only ...
+=== compares value and type
+
+----------------------------------------------------------
+
+var hell = {
+    print_firstname: function(){
+        console.log(this);
+    }
+};
+hell.print_firstname();//hell
+
+function do_something(){
+    console.log(this);//default calling context is global
+}
+do_something();//global
+
+----------------------------------------------------------
+
+function User(){
+    this.name = ""
+    this.life = 100;
+    this.givelife = function givelife(target_player){
+        if(this.life>0){
+            target_player.life += 1;
+            this.life -=1;
+        }
+    }
+}
+var Srb = new User();
+var Cheema = new User();
+Srb.name = "Crb";
+Cheema.name = "Cheema"
+
+Srb.givelife(Cheema);
+
+console.log(Srb.life+" , "+Cheema.life);
+
+//prototype
+User.prototype.uppercut = function uppercut(target_player){//it is used to add a function to all Objects
+    if(target_player.life > 0){
+        target_player.life -= 1;
+    }
+}
+
+Srb.uppercut(Cheema);
+
+User.prototype.points = 100;
+console.log(Srb.points);

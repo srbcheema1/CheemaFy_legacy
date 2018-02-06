@@ -56,13 +56,13 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     cursor-shape ibeam
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
-    background-color 'rgb(14,1,1)'
+    background-color 'rgb(0,0,0)'
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     default-size-columns 110
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     default-size-rows 33
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
-    background-transparency-percent 31
+    background-transparency-percent 23
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     foreground-color 'rgb(231,238,232)'
 
@@ -77,7 +77,7 @@ cp -r ~/programs/myfiles/srbScripts ~/programs/
 cp -r ~/programs/myfiles/importlib ~/programs/python/
 
 #install xsel
-if ! type vim > /dev/null 2>&1;
+if ! type xsel > /dev/null 2>&1;
 then
     sudo apt-get install xsel
 fi
@@ -87,19 +87,13 @@ if ! type vim > /dev/null 2>&1;
 then
     sudo apt-get install vim
 fi
+sudo apt-get install vim-gnome
 
 #install Vundle
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
-#plugins
-plugin_path=$HOME/.vim/bundle
-if [ -d $plugin_path ]
-then
-    echo "vim plugins already there"
-else
-    echo "copying vim plugins"
-    cp -r ~/programs/myfiles/myPlugins/vim/. ~/.vim/
-fi
+#install plugins
+vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
 
 #let the changes begin
-gnome-terminal & disown & exit
+gnome-terminal -e "bash -c \"echo 'now execute sh myPlugins/term.sh' ; exec bash\"" & disown & exit
