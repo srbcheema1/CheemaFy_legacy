@@ -37,12 +37,12 @@ then
 #    echo $passwrd > ~/.pass
 fi
 
-if ! [ $place = $prog"/myfiles" ]
+if ! [ $place = $prog"/cheemafy" ]
 then
-    echo creating myfiles
-    cp -r ../myfiles $prog
-    cd $prog"/myfiles/"
-    sh $prog"/myfiles/cheemafy.sh"
+    echo creating cheemafy
+    cp -r ../cheemafy $prog
+    cd $prog"/cheemafy/"
+    sh $prog"/cheemafy/cheemafy.sh"
     exit
 fi
 
@@ -74,13 +74,13 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 #they can only add new files to system cannot delete older ones with diff names
 
 #copy home_files to its position
-cp -r ~/programs/myfiles/home_files/. ~/
+cp -r ~/programs/cheemafy/home_files/. ~/
 
 #copy folder srbScripts to  ~/programs/srbScript
-cp -r ~/programs/myfiles/srbScripts ~/programs
+cp -r ~/programs/cheemafy/srbScripts ~/programs
 
 #copy importlib
-cp -r ~/programs/myfiles/importlib ~/programs/python
+cp -r ~/programs/cheemafy/importlib ~/programs/python
 
 
 ## safe commands
@@ -107,12 +107,12 @@ then
     echo installing vim bundle
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     echo installing YouCompleteMe
-    cp ~/programs/myfiles/myPlugins/vim/bundle/YouCompleteMe ~/.vim/bundle/
+    cp ~/programs/cheemafy/myPlugins/vim/bundle/YouCompleteMe ~/.vim/bundle/
 fi
 
 echo instaling vimSyntax
-cp -r ~/programs/myfiles/myPlugins/vim/syntax   ~/.vim/
-cp -r ~/programs/myfiles/myPlugins/vim/ftdetect ~/.vim/
+cp -r ~/programs/cheemafy/myPlugins/vim/syntax   ~/.vim/
+cp -r ~/programs/cheemafy/myPlugins/vim/ftdetect ~/.vim/
 
 #install plugins
 vim hell -c ":PluginInstall" -c ":q!" -c ":q!"

@@ -4,12 +4,12 @@
 
 #move to particulat locations
 alias de='cd ~/Desktop'
-alias mf='cd ~/programs/myfiles/'
+alias cf='cd ~/programs/cheemafy/'
 alias gsoc='cd ~/Desktop/gsoc'
 
 
 #to create alias with arguments create a alias of function
-alias cpmf='function _cpmf(){ cp $1 ~/programs/myfiles/; };_cpmf'
+alias cpcf='function _cpmf(){ cp $1 ~/programs/cheemafy/; };_cpmf'
 alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
@@ -138,11 +138,11 @@ function proxy(){
     if [ "$#" -eq 0 ]
     then
         proxx='';
-        sudo -S -k cp ~/programs/myfiles/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
+        sudo -S -k cp ~/programs/cheemafy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
     elif [ "$#" -eq 1 ]
     then
         proxx='172.16.20.2:3128';
-        sudo -S -k cp ~/programs/myfiles/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
+        sudo -S -k cp ~/programs/cheemafy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
     fi
     export http_proxy=$proxx;
     export https_proxy=$proxx;
@@ -532,10 +532,10 @@ function _search_me(){
 };_search_me'
 
 #default programs
-alias catc='cat ~/programs/myfiles/default_codes/default.cpp >>'
-alias catj='cat ~/programs/myfiles/default_codes/default.java >>'
-alias catp='cat ~/programs/myfiles/default_codes/default.py >>'
-alias catb='cat ~/programs/myfiles/default_codes/default.sh >>'
-alias catr='cat ~/programs/myfiles/default_codes/default.c >>'
-alias cats='cat ~/programs/myfiles/default_codes/default.simple >>'
-alias cattest='cat ~/programs/myfiles/default_codes/default.testcase >>'
+alias catc='cat ~/programs/cheemafy/default_codes/default.cpp >>'
+alias catj='cat ~/programs/cheemafy/default_codes/default.java >>'
+alias catp='cat ~/programs/cheemafy/default_codes/default.py >>'
+alias catb='cat ~/programs/cheemafy/default_codes/default.sh >>'
+alias catr='cat ~/programs/cheemafy/default_codes/default.c >>'
+alias cats='cat ~/programs/cheemafy/default_codes/default.simple >>'
+alias cattest='cat ~/programs/cheemafy/default_codes/default.testcase >>'
