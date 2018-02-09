@@ -129,11 +129,11 @@ function proxy(){
     if [ "$#" -eq 0 ]
     then
         proxx='';
-        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
+        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.CheemaFy/.pass > /dev/null 2>&1;
     elif [ "$#" -eq 1 ]
     then
         proxx='172.16.20.2:3128';
-        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
+        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.CheemaFy/.pass > /dev/null 2>&1;
     fi
     export http_proxy=$proxx;
     export https_proxy=$proxx;
@@ -437,7 +437,7 @@ function _disk(){
                 echo "disk was not mounted";
                 # -S is used to read from STDIN
                 disk_name="/dev/sda5" # change it to own disk
-                sudo -S -k  mount $disk_name /media/srb/disk/ < ~/.pass > /dev/null 2>&1 #sexy
+                sudo -S -k  mount $disk_name /media/srb/disk/ < ~/.CheemaFy/.pass > /dev/null 2>&1 #sexy
                 nautilus /media/srb/disk > /dev/null 2>&1
             else
                 echo "mounted";

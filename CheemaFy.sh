@@ -15,7 +15,7 @@ mkdir -p $prog"/python/importlib"
 mkdir -p $HOME"/.CheemaFy/srb_clip_board"
 
 #file to hold your password
-if ! [ -f ~/.pass ]
+if ! [ -f ~/.CheemaFy/.pass ]
 then
     i=1
     while [ $i -ne 0 ]
@@ -23,8 +23,8 @@ then
         stty -echo
         printf "[sudo] password for $USER:" && read passwrd
         stty echo
-        echo "" && echo $passwrd > ~/.pass
-        sudo -k -S ls < ~/.pass > /dev/null 2>&1
+        echo "" && echo $passwrd > ~/.CheemaFy/.pass
+        sudo -k -S ls < ~/.CheemaFy/.pass > /dev/null 2>&1
         i=$?
         if [ $i -ne 0 ]
         then
@@ -40,7 +40,7 @@ then
 #    printf "enter your password : " && read  passwrd
 #    stty echo
 #    echo ""
-#    echo $passwrd > ~/.pass
+#    echo $passwrd > ~/.CheemaFy/.pass
 fi
 
 if ! [ $place = $prog"/CheemaFy" ]
@@ -88,21 +88,21 @@ cp -r ~/programs/CheemaFy/srbScripts ~/programs
 #copy importlib
 cp -r ~/programs/CheemaFy/importlib ~/programs/python
 
-sudo -S -k apt-get update -y < ~/.pass
+sudo -S -k apt-get update -y < ~/.CheemaFy/.pass
 
 ## safe commands
 #install xsel
 if ! type xsel > /dev/null 2>&1;
 then
     echo installing xsel
-    sudo -S -k apt-get install xsel -y < ~/.pass
+    sudo -S -k apt-get install xsel -y < ~/.CheemaFy/.pass
 fi
 
 #install vim
 if ! type vim > /dev/null 2>&1;
 then
     echo installing vim
-    sudo -S -k apt-get install vim -y < ~/.pass
+    sudo -S -k apt-get install vim -y < ~/.CheemaFy/.pass
 fi
 
 
@@ -121,14 +121,14 @@ cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 
 #install other useful things
-sudo -S -k apt-get install xdotool -y < ~/.pass
-sudo -S -k apt-get install wmctrl -y < ~/.pass
+sudo -S -k apt-get install xdotool -y < ~/.CheemaFy/.pass
+sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
 
 #install vim plugins
 vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
-sudo -S -k apt-get install vim-gnome -y < ~/.pass
-sudo -S -k apt-get install clang-format-5.0 -y < ~/.pass
-sudo -S -k apt-get install clang-4.0 -y < ~/.pass
+sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
+sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
+sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
 
 #let the changes begin
