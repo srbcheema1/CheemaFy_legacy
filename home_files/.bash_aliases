@@ -4,12 +4,12 @@
 
 #move to particulat locations
 alias de='cd ~/Desktop'
-alias cf='cd ~/programs/cheemafy/'
+alias cf='cd ~/programs/CheemaFy/'
 alias gsoc='cd ~/Desktop/gsoc'
 
 
 #to create alias with arguments create a alias of function
-alias cpcf='function _cpmf(){ cp $1 ~/programs/cheemafy/; };_cpmf'
+alias cpcf='function _cpmf(){ cp $1 ~/programs/CheemaFy/; };_cpmf'
 alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
@@ -50,25 +50,22 @@ alias cptf='echo "`xsel -b `" > '
 
 alias copy='
 function _copy(){
-    if ! [ -d "$HOME/.srb_clip_board" ]
-    then
-        mkdir ~/.srb_clip_board
-    fi
+    mkdir -p ~/.CheemaFy/srb_clip_board
 
-    if ! [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
+    if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
-        rm -f ~/.srb_clip_board/* > /dev/null 2>&1;
+        rm -f ~/.CheemaFy/srb_clip_board/* > /dev/null 2>&1;
     fi
 
     for i in `seq 1 $#`
     do
         if [ -d "${!i}" ] #sexy
         then
-            cp -r ${!i} ~/.srb_clip_board/
+            cp -r ${!i} ~/.CheemaFy/srb_clip_board/
         fi
         if [ -f "${!i}" ]
         then
-            cp ${!i} ~/.srb_clip_board/
+            cp ${!i} ~/.CheemaFy/srb_clip_board/
         fi
         echo copied ${!i}
     done
@@ -76,38 +73,32 @@ function _copy(){
 
 alias cut='
 function _cut(){
-    if ! [ -d "$HOME/.srb_clip_board" ]
-    then
-        mkdir ~/.srb_clip_board
-    fi
+    mkdir -p ~/.CheemaFy/srb_clip_board
 
-    if ! [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
+    if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
-        rm -f ~/.srb_clip_board/* > /dev/null 2>&1;
+        rm -f ~/.CheemaFy/srb_clip_board/* > /dev/null 2>&1;
     fi
 
     for i in `seq 1 $#`
     do
-        mv ${!i} ~/.srb_clip_board/
+        mv ${!i} ~/.CheemaFy/srb_clip_board/
         echo cut ${!i}
     done
 };_cut'
 
 alias paste='
 function _paste(){
-    if ! [ -d "$HOME/.srb_clip_board" ]
-    then
-        mkdir ~/.srb_clip_board
-    fi
+    mkdir -p ~/.CheemaFy/srb_clip_board
 
-    if [ -z "$(ls -A $HOME/.srb_clip_board/)" ]
+    if [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
        echo "clipboard empty"
     fi
 
     echo "pasting these items : "
-    ls -A ~/.srb_clip_board/
-    cp -r ~/.srb_clip_board/* ./
+    ls -A ~/.CheemaFy/srb_clip_board/
+    cp -r ~/.CheemaFy/srb_clip_board/* ./
 };_paste'
 
 
@@ -138,11 +129,11 @@ function proxy(){
     if [ "$#" -eq 0 ]
     then
         proxx='';
-        sudo -S -k cp ~/programs/cheemafy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
+        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
     elif [ "$#" -eq 1 ]
     then
         proxx='172.16.20.2:3128';
-        sudo -S -k cp ~/programs/cheemafy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
+        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.pass > /dev/null 2>&1;
     fi
     export http_proxy=$proxx;
     export https_proxy=$proxx;
@@ -532,10 +523,10 @@ function _search_me(){
 };_search_me'
 
 #default programs
-alias catc='cat ~/programs/cheemafy/default_codes/default.cpp >>'
-alias catj='cat ~/programs/cheemafy/default_codes/default.java >>'
-alias catp='cat ~/programs/cheemafy/default_codes/default.py >>'
-alias catb='cat ~/programs/cheemafy/default_codes/default.sh >>'
-alias catr='cat ~/programs/cheemafy/default_codes/default.c >>'
-alias cats='cat ~/programs/cheemafy/default_codes/default.simple >>'
-alias cattest='cat ~/programs/cheemafy/default_codes/default.testcase >>'
+alias catc='cat ~/programs/CheemaFy/default_codes/default.cpp >>'
+alias catj='cat ~/programs/CheemaFy/default_codes/default.java >>'
+alias catp='cat ~/programs/CheemaFy/default_codes/default.py >>'
+alias catb='cat ~/programs/CheemaFy/default_codes/default.sh >>'
+alias catr='cat ~/programs/CheemaFy/default_codes/default.c >>'
+alias cats='cat ~/programs/CheemaFy/default_codes/default.simple >>'
+alias cattest='cat ~/programs/CheemaFy/default_codes/default.testcase >>'

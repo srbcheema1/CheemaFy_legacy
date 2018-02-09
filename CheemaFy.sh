@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 if [ "$1" = "--remove" ]
 then
-    echo "removing cheemafy"
-    sh ~/programs/cheemafy/myPlugins/restore_old_config.sh
+    echo "removing CheemaFy"
+    sh ~/programs/CheemaFy/myPlugins/restore_old_config.sh
     exit
 fi
 
@@ -12,7 +12,7 @@ prog=$HOME"/programs"
 #these commands are safe to execute they create folder only when
 #the folders are missing, they dont harm old content
 mkdir -p $prog"/python/importlib"
-mkdir -p $HOME"/.srb_clip_board"
+mkdir -p $HOME"/.CheemaFy/srb_clip_board"
 
 #file to hold your password
 if ! [ -f ~/.pass ]
@@ -43,19 +43,18 @@ then
 #    echo $passwrd > ~/.pass
 fi
 
-if ! [ $place = $prog"/cheemafy" ]
+if ! [ $place = $prog"/CheemaFy" ]
 then
-    echo creating cheemafy
-    cp -r ../cheemafy $prog
-    cd $prog"/cheemafy/"
-    sh $prog"/cheemafy/myPlugins/save_old_config.sh"
-    sh $prog"/cheemafy/cheemafy.sh"
+    echo creating CheemaFy
+    cp -r ../CheemaFy $prog
+    cd $prog"/CheemaFy/"
+    sh $prog"/CheemaFy/myPlugins/save_old_config.sh"
+    sh $prog"/CheemaFy/CheemaFy.sh"
     exit
 fi
 
 
-
-#here begins main cheemafy
+#here begins main CheemaFy
 
 #customise terminal
 UUID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
@@ -81,13 +80,13 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 #they can only add new files to system cannot delete older ones with diff names
 
 #copy home_files to its position
-cp -r ~/programs/cheemafy/home_files/. ~/
+cp -r ~/programs/CheemaFy/home_files/. ~/
 
 #copy folder srbScripts to  ~/programs/srbScript
-cp -r ~/programs/cheemafy/srbScripts ~/programs
+cp -r ~/programs/CheemaFy/srbScripts ~/programs
 
 #copy importlib
-cp -r ~/programs/cheemafy/importlib ~/programs/python
+cp -r ~/programs/CheemaFy/importlib ~/programs/python
 
 sudo -S -k apt-get update -y < ~/.pass
 
@@ -114,12 +113,12 @@ then
     echo installing vim bundle
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     echo installing YouCompleteMe
-    cp ~/programs/cheemafy/myPlugins/vim/bundle/YouCompleteMe ~/.vim/bundle/
+    cp ~/programs/CheemaFy/myPlugins/vim/bundle/YouCompleteMe ~/.vim/bundle/
 fi
 
 echo instaling vimSyntax
-cp -r ~/programs/cheemafy/myPlugins/vim/syntax   ~/.vim/
-cp -r ~/programs/cheemafy/myPlugins/vim/ftdetect ~/.vim/
+cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
+cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 
 #install other useful things
 sudo -S -k apt-get install xdotool -y < ~/.pass
@@ -133,5 +132,5 @@ sudo -S -k apt-get install clang-4.0 -y < ~/.pass
 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
 
 #let the changes begin
-gnome-terminal -e "bash -c \"echo 'Thanks for using cheemafy' ; exec bash\"" & disown
+gnome-terminal -e "bash -c \"echo 'Thanks for using CheemaFy' ; exec bash\"" & disown
 wmctrl -i -c `xdotool getactivewindow` &

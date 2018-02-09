@@ -1,4 +1,4 @@
 [alias]
 	showdown = log --decorate --oneline --all --graph
 [include]
-    path = /home/srb/programs/cheemafy/myPlugins/git_config
+    path = /home/srb/programs/CheemaFy/myPlugins/git_config

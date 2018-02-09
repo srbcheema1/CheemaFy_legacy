@@ -12,16 +12,16 @@ script to check codes of cheema and other are identical or not
 
 # replace these with your default names
 files = [
-            ["bashrc", "~/.bashrc", "~/programs/cheemafy/home_files/.bashrc"],
-            ["vimrc", "~/.vimrc", "~/programs/cheemafy/home_files/.vimrc"],
-            ["bash_aliases", "~/.bash_aliases", "~/programs/cheemafy/home_files/.bash_aliases"],
-            ["gitconfig", "~/.gitconfig", "~/programs/cheemafy/home_files/.gitconfig"]
+            ["bashrc", "~/.bashrc", "~/programs/CheemaFy/home_files/.bashrc"],
+            ["vimrc", "~/.vimrc", "~/programs/CheemaFy/home_files/.vimrc"],
+            ["bash_aliases", "~/.bash_aliases", "~/programs/CheemaFy/home_files/.bash_aliases"],
+            ["gitconfig", "~/.gitconfig", "~/programs/CheemaFy/home_files/.gitconfig"]
         ]
 folders = [
-            ["srbScripts", "~/programs/srbScripts", "~/programs/cheemafy/srbScripts"],
-            ["importlib", "~/programs/python/importlib", "~/programs/cheemafy/importlib"],
-            ["vim_ftdetect", "~/.vim/ftdetect", "~/programs/cheemafy/myPlugins/vim/ftdetect"],
-            ["vim_syntax", "~/.vim/syntax", "~/programs/cheemafy/myPlugins/vim/syntax"]
+            ["srbScripts", "~/programs/srbScripts", "~/programs/CheemaFy/srbScripts"],
+            ["importlib", "~/programs/python/importlib", "~/programs/CheemaFy/importlib"],
+            ["vim_ftdetect", "~/.vim/ftdetect", "~/programs/CheemaFy/myPlugins/vim/ftdetect"],
+            ["vim_syntax", "~/.vim/syntax", "~/programs/CheemaFy/myPlugins/vim/syntax"]
         ]
 
 sp_str = '>'
@@ -73,7 +73,7 @@ def make_same(items1,items2,folder1,folder2,shift):
         for item in notin1:
             print(item,end=" ")
         print()
-        print(sp_str*shift,"files not in cheemafy : ",end=" ")
+        print(sp_str*shift,"files not in CheemaFy : ",end=" ")
         for item in notin2:
             print(item,end=" ")
         print()
