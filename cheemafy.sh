@@ -2,8 +2,8 @@
 if [ "$1" = "--remove" ]
 then
     echo "removing cheemafy"
-    mkdir -p ~/programs/cheemafy/save_old_config
     sh ~/programs/cheemafy/myPlugins/restore_old_config.sh
+    exit
 fi
 
 place=`pwd`
@@ -89,6 +89,7 @@ cp -r ~/programs/cheemafy/srbScripts ~/programs
 #copy importlib
 cp -r ~/programs/cheemafy/importlib ~/programs/python
 
+sudo -S -k apt-get update -y < ~/.pass
 
 ## safe commands
 #install xsel
@@ -105,7 +106,6 @@ then
     sudo -S -k apt-get install vim -y < ~/.pass
 fi
 
-sudo -S -k apt-get install vim-gnome -y < ~/.pass
 
 #install Vundle
 if ! [ -d "$HOME"/.vim/bundle/ ]
@@ -121,9 +121,17 @@ echo instaling vimSyntax
 cp -r ~/programs/cheemafy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/cheemafy/myPlugins/vim/ftdetect ~/.vim/
 
-#install plugins
-vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
+#install other useful things
+sudo -S -k apt-get install xdotool -y < ~/.pass
+sudo -S -k apt-get install wmctrl -y < ~/.pass
 
-echo "Thanks for using cheemafy .. your PC is configured "
+#install vim plugins
+vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
+sudo -S -k apt-get install vim-gnome -y < ~/.pass
+sudo -S -k apt-get install clang-format-5.0 -y < ~/.pass
+sudo -S -k apt-get install clang-4.0 -y < ~/.pass
+~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
+
 #let the changes begin
-#gnome-terminal -e "bash -c \"echo 'now execute sh myPlugins/term.sh' ; exec bash\"" & disown & exit
+gnome-terminal -e "bash -c \"echo 'Thanks for using cheemafy' ; exec bash\"" & disown
+wmctrl -i -c `xdotool getactivewindow` &
