@@ -1,36 +1,30 @@
-#/usr/bin/env python
+#! /usr/bin/env python
 import os
-from sys import argv,exit
+from sys import argv
 from comp_files import comp_files as comparer
 from abs_path import abs_path
+from srbColour import Colour
+
 
 '''
 script to check codes of cheema and other are identical or not
 '''
 
-#replace these with your default names
+# replace these with your default names
 files = [
-            ["bashrc","~/.bashrc","~/programs/cheemafy/home_files/.bashrc"],
-            ["vimrc","~/.vimrc","~/programs/cheemafy/home_files/.vimrc"],
-            ["bash_aliases","~/.bash_aliases","~/programs/cheemafy/home_files/.bash_aliases"],
-            ["gitconfig","~/.gitconfig","~/programs/cheemafy/home_files/.gitconfig"]
+            ["bashrc", "~/.bashrc", "~/programs/cheemafy/home_files/.bashrc"],
+            ["vimrc", "~/.vimrc", "~/programs/cheemafy/home_files/.vimrc"],
+            ["bash_aliases", "~/.bash_aliases", "~/programs/cheemafy/home_files/.bash_aliases"],
+            ["gitconfig", "~/.gitconfig", "~/programs/cheemafy/home_files/.gitconfig"]
         ]
 folders = [
-            ["srbScripts","~/programs/srbScripts","~/programs/cheemafy/srbScripts"],
-            ["importlib","~/programs/python/importlib","~/programs/cheemafy/importlib"],
-            ["vim_ftdetect","~/.vim/ftdetect","~/programs/cheemafy/myPlugins/vim/ftdetect"],
-            ["vim_syntax","~/.vim/syntax","~/programs/cheemafy/myPlugins/vim/syntax"]
+            ["srbScripts", "~/programs/srbScripts", "~/programs/cheemafy/srbScripts"],
+            ["importlib", "~/programs/python/importlib", "~/programs/cheemafy/importlib"],
+            ["vim_ftdetect", "~/.vim/ftdetect", "~/programs/cheemafy/myPlugins/vim/ftdetect"],
+            ["vim_syntax", "~/.vim/syntax", "~/programs/cheemafy/myPlugins/vim/syntax"]
         ]
 
 sp_str = '>'
-
-
-#make path absolute
-home_path = os.getenv("HOME")
-def abs_path(path):
-    if(path[0]=='~'):
-        return home_path + path[1:]
-    return path
 
 
 #reactify the list
@@ -113,7 +107,7 @@ def comp_files(level):
 
 #comp folder
 def comp_folder(folder_name,folder1,folder2,level,shift=0):
-    print(sp_str*shift,"comparing folder "+folder_name)
+    print(Colour.GREEN + sp_str*shift,"comparing folder "+folder_name + Colour.END)
     items1 = os.listdir(abs_path(folder1));
     items2 = os.listdir(abs_path(folder2));
     files,folders = make_same(items1,items2,folder1,folder2,shift+2)

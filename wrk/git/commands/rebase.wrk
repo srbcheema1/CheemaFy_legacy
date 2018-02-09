@@ -1,0 +1,30 @@
+rebase is used to rewrite the history
+
+
+we can rebase a change to another point
+
+
+# Fetch latest commits from `upstream` (the original fork)
+    git fetch upstream
+
+# Checkout our feature branch
+    git checkout feature
+
+# Reapply it onto upstream's master
+    git rebase upstream/master
+
+# Fix conflicts, then `git rebase --continue`, repeat until done
+# Push to our fork
+    git push --force origin feature
+
+
+
+
+you can use git rebase -i to rebase interactively
+
+it will by default pick all the commits
+you can pick required commits
+and leave the remaining commits
+
+please read this article:
+https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history

@@ -1,20 +1,20 @@
-VERY important 
+VERY important
 commit~N   ==> meand N commits below given commit
     try
         git checkout HEAD~2
-        git checkout <commit>~2 
+        git checkout <commit>~2
 ALSO:
     HEAD~ ==> HEAD~1
     commit~ ==> commit~1
 
-    HEAD != HEAD~ 
-    HEAD ==> HEAD~0  //note that these two are bit different ... it is like mentioning commit name 
-    ex 
+    HEAD != HEAD~
+    HEAD ==> HEAD~0  //note that these two are bit different ... it is like mentioning commit name
+    ex
         git checkout HEAD and git checkout HEAD~0 will give different results
 
 -- in git commands means everything after this is a filename
     Anything following the -- is treated as a filename (not as a program argument)
-for example 
+for example
     git checkout master //switch to master
     git checkout -- master //discards the uncommited changes in file named master
     git checkout -p README //discards changes in README interactively
@@ -24,8 +24,8 @@ for example
 to check diff of particular file form particular commit
 git diff <revision> <path>
 
-syntax : git diff a b 
-it means it will show diff a -> b 
+syntax : git diff a b
+it means it will show diff a -> b
     changes in b will be shown as + or green
 
 syntax : git diff a
@@ -35,9 +35,9 @@ similar to git diff a <working directory>
 syntax : git diff
 it will show all the changes not registered till now i.e. not added to index area yet
     changes of working directory will be shown as green or +
-    NOTE : only changes of tracked files will be shown .... 
+    NOTE : only changes of tracked files will be shown ....
            i.e. if you havent tracked any file yet it will not be shown here
-           if you have just created files then plz do track them by git add 
+           if you have just created files then plz do track them by git add
 
 
 ------------------MORE about DIFF:
@@ -52,6 +52,9 @@ git diff HEAD
     changes from last commit
 NOTE: none of the command can show changes in untracked files
 
+git diff --check
+    github utility to check if there are trailing spaces or not
+
 
 -----------------------REBASE
 to pick up changes from one branch and reapply them on top of another
@@ -59,10 +62,10 @@ to pick up changes from one branch and reapply them on top of another
     git rebase master
 after this  you can also do merging of master if it is our self project
 
-    
+
 
 ------------------INDEX or STAGING or CACHED area:
-add something to INDEX 
+add something to INDEX
     git add <file name>
 remove somthing from there
     git rm <file name> --cached
@@ -76,9 +79,11 @@ to make all files same as last commit
 --------- MORE ABOUT RESET
 git reset --soft <commit>
     reset upto that commit ... delete commits till that commit and adds those to staging area
+    alone git reset --soft is useless //does nothing
 git reset --mixed <commt>   //by default option #sexy
     same as soft ... delete commits till that commit and adds those to working directory
-git reset --hard <commit> 
+    alone git reset --mixed will unstage the changes
+git reset --hard <commit>
     totally delete all the changes .. also delete all the uncommited changes
     only use it when you have no uncommited change ..
     NOTE: always use git status to check if you have some uncommited data
@@ -98,18 +103,18 @@ if by mistake u did wrong commit undo it by ... changes will be send to unstaged
 if you want to delete top few commits but want to keep the changes in staging area...
     git reset --soft HEAD~1 //replace 1 by number of top commits you wanna delete but keep changes
         changes will be sent to staging area
-if you did a silly mistake and just one or more line you want to change in that commit 
-    git commit --amend      //this will reflect the changes into last commit .. 
+if you did a silly mistake and just one or more line you want to change in that commit
+    git commit --amend      //this will reflect the changes into last commit ..
                             //equivalent to deleting last commit and remaking it
 
 ADD
-if by misake u did wrong add 
+if by misake u did wrong add
     git reset HEAD <filename>  //this is actual UNDO of git add
 to totally untrach a file
     git rm <file name> --cached //this will totally untrack the file as deleted .. WITHOUT ACTUALLY DELETING
 
-FILE 
-if by mistakae you did changes to a file and want to undo them 
+FILE
+if by mistakae you did changes to a file and want to undo them
     git checkout -- filename        //-- is for everything after this is a file name
     git checkout filename           // you could simply ignore -- if filename is unique or not like a command
 
@@ -119,8 +124,8 @@ if by mistakae you did changes to a file and want to undo them
 VS
     git reset HEAD -- asd
     git commit -m "the file asd remains in the repository"
- 
- SIMILARLY : this one seems to be more accurate ... 
+
+ SIMILARLY : this one seems to be more accurate ...
         moreover git documentation says that git reset is opposite of git add ... #sexy
     git reset <filename>  //the file remains in repository but removed from staging area
 

@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+if [ "$1" = "--remove" ]
+then
+    echo "removing cheemafy"
+    mkdir -p ~/programs/cheemafy/save_old_config
+    sh ~/programs/cheemafy/myPlugins/restore_old_config.sh
+fi
 
 place=`pwd`
 prog=$HOME"/programs"
@@ -42,6 +48,7 @@ then
     echo creating cheemafy
     cp -r ../cheemafy $prog
     cd $prog"/cheemafy/"
+    sh $prog"/cheemafy/myPlugins/save_old_config.sh"
     sh $prog"/cheemafy/cheemafy.sh"
     exit
 fi
@@ -88,17 +95,17 @@ cp -r ~/programs/cheemafy/importlib ~/programs/python
 if ! type xsel > /dev/null 2>&1;
 then
     echo installing xsel
-    sudo -S -k apt-get install xsel < ~/.pass
+    sudo -S -k apt-get install xsel -y < ~/.pass
 fi
 
 #install vim
 if ! type vim > /dev/null 2>&1;
 then
     echo installing vim
-    sudo -S -k apt-get install vim < ~/.pass
+    sudo -S -k apt-get install vim -y < ~/.pass
 fi
 
-sudo -S -k apt-get install vim-gnome < ~/.pass
+sudo -S -k apt-get install vim-gnome -y < ~/.pass
 
 #install Vundle
 if ! [ -d "$HOME"/.vim/bundle/ ]

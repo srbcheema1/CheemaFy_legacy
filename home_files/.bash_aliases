@@ -440,12 +440,12 @@ function _disk(){
             nautilus ~/Desktop > /dev/null 2>&1;
         elif [ "$1" = "disk" ]
         then
-            hell=`mountpoint disk | grep -o not`
-			if [ "$hell" = "not" ]
+            hell=`mountpoint /media/$USER/disk | grep -o not`
+		    if [ "$hell" = "not" ]
             then
                 echo "disk was not mounted";
                 # -S is used to read from STDIN
-                disk_name = "/dev/sda5" # change it to own disk
+                disk_name="/dev/sda5" # change it to own disk
                 sudo -S -k  mount $disk_name /media/srb/disk/ < ~/.pass > /dev/null 2>&1 #sexy
                 nautilus /media/srb/disk > /dev/null 2>&1
             else

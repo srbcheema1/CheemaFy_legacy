@@ -1,0 +1,5 @@
+git tag -a V1.0 -m "Version 1.0"
+
+-a means annotation
+this is used to specify some important commits
+

@@ -1,0 +1,5 @@
+git merge <branch>
+
+it merges <branch> into our head
+
+generally merge should be called from branch with fewer commits

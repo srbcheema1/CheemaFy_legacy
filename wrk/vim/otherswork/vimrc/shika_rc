@@ -1,0 +1,59 @@
+set nocompatible
+filetype off
+
+call plug#begin('~/.vim/plugged')
+Plug 'Raimondi/delimitMate'
+Plug 'mattn/emmet-vim', { 'for': 'html' }
+Plug 'jiangmiao/auto-pairs'
+Plug 'ervandew/supertab'
+Plug 'easymotion/vim-easymotion'
+Plug 'flazz/vim-colorschemes'
+Plug 'dracula/vim'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'fatih/vim-go', { 'for': 'go' }
+call plug#end()
+
+let base16colorspace=256 
+
+filetype plugin indent on    " required
+syntax enable
+set background=dark
+hi Normal ctermbg=none
+filetype indent on
+
+map <F7> :!g++ % && ./a.out <CR>
+
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 
+set smarttab
+set expandtab
+set title
+set autoindent
+set smartindent
+set backspace=indent,eol,start
+set hlsearch
+set ruler
+set incsearch
+set encoding=utf8
+set number
+set cursorline
+highlight CursorLine cterm=bold ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+set nobackup
+set nowb
+
+:command WQ wq
+:command Wq wq
+:command W w
+:command Q q
+
+nnoremap <CR> :noh<CR><CR>
+
+map <C-n> :NERDTreeToggle<CR>
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_fail_silently = 1
+let g:go_play_open_browser = 0

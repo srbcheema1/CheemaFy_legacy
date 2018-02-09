@@ -1,0 +1,11 @@
+git log -n 10
+display top 10 logs
+
+git log --oneline
+display log in one line
+
+git log --decorate
+show branch name
+
+git log --graph
+show graph

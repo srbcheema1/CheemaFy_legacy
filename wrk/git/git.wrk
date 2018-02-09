@@ -3,13 +3,13 @@ create an alias in ~/.gitconfig file
 copy next lines into it
 [user]
 	email = srbcheema1@gmail.com
-	name = Sarbjit Singh 
+	name = Sarbjit Singh
 [alias]
 	showdown = log --decorate --oneline --all --graph
 
 
---------------------FORK    
-start by forking the project 
+--------------------FORK
+start by forking the project
 clone the project to your pc (from fork not from original)
     {coz this will give it name origin}
     git clone <link to your fork repo>
@@ -19,15 +19,15 @@ now add your own remote repo (my convention to name it main)
 you can check your remote repositories by
     git remote -v
 
-create a new local branch 
+create a new local branch
     git checkout -b <new branch name>
         generally work on different branch not on master
 
-to move to other commit or branch 
+to move to other commit or branch
     git checkout [-b] <commit/branchname>
         -b to create new branch
 
-if you wanna push your changes to remote repo 
+if you wanna push your changes to remote repo
     git push [-u] <remote repo> <branch name>
         -u to create new branch there //not sure
 
@@ -82,11 +82,11 @@ for ex we did changes in "changes" branch
 
 -----------REBASE:
 using git rebase
-create a branch changes 
+create a branch changes
 work on it
-now commit it 
-now run 
-    git rebase master
+now commit it
+now run
+    git rebase master //before it master should be properly in sinc
 after this we can checkout master and merge it to changes if it is our own project
 
 
@@ -110,7 +110,7 @@ after this we can checkout master and merge it to changes if it is our own proje
 
 
 
-to push branch by another name do 
+to push branch by another name do
     git push <remote repo> <localbranch>:<remote branch>
 
 
