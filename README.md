@@ -1,2 +1,2 @@
 # CheemaFY
-this repository is to hold my files that i use often .
+==this repository is specifically made to avoid writing long codes==
