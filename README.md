@@ -1,7 +1,7 @@
 # CheemaFY
 ## Various features :
 * Set and unset proxy quickly
-* Adds showdown command to git which
+* Adds `$ git showdown` which is equivalent to `$ git log --oneline --decorate --all --graph`.
 * A lot of aliases to avoid typing long commands.
 
 ## How to get CheemaFy
