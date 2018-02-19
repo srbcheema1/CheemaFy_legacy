@@ -1,10 +1,10 @@
 "print file extention
-echo expand('%:e') 
+echo expand('%:e')
 
 "it can echo and del line
 nnoremap <C-c> :echo 'hello'<CR>dd
 
-"command to save and exit 
+"command to save and exit
 nnoremap <C-f> :wq<CR>
 
 "to toggle something
@@ -15,7 +15,7 @@ function! ToggleSyntax()
       syntax enable
    endif
 endfunction
- 
+
 nmap <silent>  ;s  :call ToggleSyntax()<CR>
 
 
@@ -26,7 +26,7 @@ function! TogglePaste()
       	:set paste
    endif
 endfunction
- 
+
 nmap <silent>  <C-p>  :call TogglePaste()<CR>
 function! TogglePaste()
    if &paste
@@ -35,18 +35,18 @@ function! TogglePaste()
       	:set paste
    endif
 endfunction
- 
+
 nmap <silent>  <C-p>  :call TogglePaste()<CR>
 
 
 
 
 "registers
-"there are several registers in vim 
+"there are several registers in vim
  "+ is for external clipboard
  "" is for deleted lines
  "0 is for yanked lines
- "* is for 
+ "* is for
  "1 is also for deleted lines
 
 "% go to matching bracket
@@ -57,7 +57,7 @@ nmap <silent>  <C-p>  :call TogglePaste()<CR>
 "gd go to declaration
 
 "to search in document
-"type / followed by search pattern 
+"type / followed by search pattern
 "use n to go to next N to go to last ggn to goto first match
 
 
@@ -78,6 +78,17 @@ map <C-u> :s/^#//<CR>
 " zf#j to fold the code upto # lines where # is numbr
 " mkview to save folds
 " loadview to load view
+
+    "for html file
+        :set foldmethod=manual
+        "now you can fold using
+            zfat
+        unfold using
+            za
+        fold all using
+            zM
+        unfold all using
+            zR
 
 
 "to enable vim support in terminal ...
@@ -120,7 +131,7 @@ set keymap vi-command
     call vundle#begin()
     Plugin 'VundleVim/Vundle.vim'
     Plugin 'Valloric/YouCompleteMe'
-    Plugin 'alvan/vim-closetag' "github.com/alvan/vim-closetag "for closing html tags 
+    Plugin 'alvan/vim-closetag' "github.com/alvan/vim-closetag "for closing html tags
     Plugin 'jiangmiao/auto-pairs' "github.com/jiangmiao/auto-pairs" "for closing brackets and inverted comas
     call vundle#end()            " required
     filetype plugin indent on    " required
@@ -160,7 +171,7 @@ set keymap vi-command
 "go to ~/.vim/bundle
 "run command : git clone https://github.com/alvan/vim-closetag.git
 "goto .vimrc and paste there : Plugin 'alvan/vim-closetag'
-"now paste the following lines below it 
+"now paste the following lines below it
 
 let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
@@ -169,10 +180,10 @@ let g:closetag_shortcut = '>'
 let g:closetag_close_shortcut = '<leader>>'
 
 "AUTO CLOSE BRACKETS
-"go to ./.vim/bundle 
+"go to ./.vim/bundle
 "run the command : git clone https://github.com/jiangmiao/auto-pairs.git
 "go to .vimrc and paste there : Plugin 'jiangmiao/auto-pairs'
-"now paste the following lines below it 
+"now paste the following lines below it
 
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<M-b>'

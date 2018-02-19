@@ -119,3 +119,8 @@ git stash ... to save changes in buffer to be used later
 git squash
 shallow depth clone
 git bisect
+
+
+-----------------
+git commit --allow-empty -m "Trigger"
+just to trigger the travis

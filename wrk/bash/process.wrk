@@ -1,0 +1,14 @@
+pstree
+
+vmstat
+
+kill -<num>
+    check it as kill -l
+    it will list all signals you can pass to a process
+
+
+#free memory
+sudo sysctl -w vm.drop_caches=3
+sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches
+
+tee is a very useful command to write a output on screen as well as to a file #SEXY
