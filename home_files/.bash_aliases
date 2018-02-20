@@ -5,7 +5,6 @@
 #move to particulat locations
 alias de='cd ~/Desktop'
 alias cf='cd ~/programs/CheemaFy/'
-alias gsoc='cd ~/Desktop/gsoc'
 
 
 #to create alias with arguments create a alias of function
@@ -174,6 +173,30 @@ function _venv(){
     fi
 };_venv'
 
+#to set default screenshot saving location
+help_js_beautify="
+js-beautify <file1>           --- beautifies the given file
+js-beautify <file1> <file2>   --- beautifies the given file1 into file2
+"
+alias js-beautify='
+function _js-beautify(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_js_beautify"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        echo "requires 1 or 2 arguments";
+    elif [ "$#" -eq 1 ]
+    then
+        js-beautify -f "$1" -o "$1"
+    elif [ "$#" -eq 2 ]
+    then
+        js-beautify -f "$1" -o "$2"
+    fi
+};_js-beautify'
 
 #to set default screenshot saving location
 help_sshot_loc="
@@ -372,7 +395,6 @@ function _trash(){
 };_trash'
 
 #terminal
-alias term='gnome-terminal & disown'
 alias term='
 function _term(){
     if [ "$#" -eq 0 ]

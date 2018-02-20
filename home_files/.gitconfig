@@ -3,6 +3,8 @@
 	history = log --decorate --oneline --all --graph
     work = log --decorate --pretty=format:\"%C(yellow)%h %Cgreen%d %Creset %s , %Cblue%cn , %Cred %ad\" --graph --all --date=short
 	unstage = reset HEAD --
+	undo = checkout --
+    verify = diff --cached
 [include]
     path = /home/srb/programs/CheemaFy/myPlugins/git_config
 [core]

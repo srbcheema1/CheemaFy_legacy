@@ -8,24 +8,24 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'       		"vundle
 Plugin 'Valloric/YouCompleteMe'     		"auto complete
-"sexy plugin for cpp
-Plugin 'rhysd/vim-clang-format'            "Clanguage formatter ...working
-
-Plugin 'alvan/vim-closetag'         		"close html tags
-Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
 Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
+Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
 Plugin 'dracula/vim'                		"awesome dark theme
-
 Plugin 'scrooloose/nerdtree' 				"file explorer
 
-Plugin 'Vimjas/vim-python-pep8-indent'      "python pep8 plugin
+"sexy plugin for cpp
+Plugin 'rhysd/vim-clang-format'             "Clanguage formatter ...working
+
+"html plugin
+Plugin 'alvan/vim-closetag'         		"close html tags
+
+"python plugins
 Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'                    "f7 to check python files
+"Plugin 'Vimjas/vim-python-pep8-indent'     "python pep8 plugin
 
-"Plugin 'terryma/vim-multiple-cursors'
-
+"Plugin 'terryma/vim-multiple-cursors'      "multiple cursor plugin
 "Plugin 'vim-scripts/ZoomWin'        		"zoom into a window
-"
 "Plugin 'google/vim-codefmt'                "Clanguage not working
 "
 "working

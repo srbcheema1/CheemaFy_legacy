@@ -26,6 +26,12 @@ function! Compile()
 endfunction
 nnoremap <Leader>c :call Compile()<cr>
 
+let res = ""
+function! NewTerm()
+        :let g:res = system('gnome-terminal & disown')
+endfunction
+nnoremap <Leader>term :call NewTerm()<cr>
+
 
 function! Play()
     let _ext = expand('%:e')

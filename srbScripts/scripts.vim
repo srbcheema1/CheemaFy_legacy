@@ -47,8 +47,9 @@ map <Leader>s :call WinBufSwap()<CR>
 
 
 
-nnoremap <Leader>r :call Redraw_it()<cr>
+nnoremap <Leader>r :execute '/zzz'<cr>:call Redraw_it()<cr>
 function! Redraw_it()
+    :execute '\/zzz'
     :redraw!
 endfunction
 
