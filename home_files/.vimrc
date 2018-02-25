@@ -2,7 +2,7 @@
 
 "Vundle code
 set nocompatible                    		"be iMproved, required
-filetype off                        		"required
+filetype on                        		"required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
@@ -10,6 +10,7 @@ Plugin 'VundleVim/Vundle.vim'       		"vundle
 Plugin 'Valloric/YouCompleteMe'     		"auto complete
 Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
 Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
+Plugin 'scrooloose/nerdcommenter'           "commentin
 Plugin 'dracula/vim'                		"awesome dark theme
 Plugin 'scrooloose/nerdtree' 				"file explorer
 
@@ -34,7 +35,13 @@ Plugin 'nvie/vim-flake8'                    "f7 to check python files
 
 "https://github.com/vim-scripts/Conque-Shell
 "
+"http://www.drchip.org/astronaut/vim/#SWAPSTRINGS
+"
 "to remove a plugin comment it and run :PluginClean
+"
+"https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL "html
+"autocomplete
+"
 call vundle#end()                   		"required
 
 filetype plugin indent on           		"required
@@ -58,6 +65,7 @@ set tabstop=4
 
 "fold code
     set foldlevel=0
+    set foldmethod=syntax
     normal zR
 
 "keep cursor away from top and bottom of screen
@@ -73,6 +81,7 @@ set tabstop=4
 
 "set color to 256
     set t_Co=256
+
 
 "wrapping around lines
     "used to make l key to move to next line after end of line
@@ -110,7 +119,7 @@ set tabstop=4
 
 
 "Nerd tree
-    map <leader>nerd :NERDTreeToggle<CR>
+    map <F4> :NERDTreeToggle<CR>
 
 "google-plugin
     "augroup autoformat_settings
@@ -157,3 +166,7 @@ set tabstop=4
 "keep script
     :so ~/programs/srbScripts/scripts.vim
     :so ~/programs/srbScripts/programming.vim
+
+
+au FileType * :call File_type()
+

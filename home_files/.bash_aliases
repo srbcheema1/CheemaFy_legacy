@@ -112,6 +112,35 @@ alias octavei='octave --no-gui'
 alias whatsapp='firefox https://web.whatsapp.com/🌐/en & '
 
 
+#open
+help_open="
+open <file>     --opens a file in required software
+"
+alias open='
+function _open(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_open"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        echo "no argument specified"
+        echo "$help_open"
+    fi
+
+    if [ "$#" -eq 1 ]
+    then
+        gvfs-open "$1"
+        #hell=`file --mime-type "$1" | grep -o pdf$`
+        #if [ "$hell" = "pdf" ]
+        #then
+            #gvfs-open "$1"
+        #fi
+    fi
+};_open'
+
 #image
 alias image='shotwell'
 
@@ -230,7 +259,7 @@ function _vim(){
     then
         cd "$1";
     else
-        vim -p $1 $2 $3 $4;
+        vim -p $1 $2 $3 $4 -c ":normal zR" -c ":loadview";
     fi
 };_vim'
 
@@ -406,6 +435,10 @@ function _term(){
     fi
 };_term'
 
+alias tilda='
+tilda & > /dev/null 2>&1; sleep 2;
+'
+
 #screenlight
 help_night="
 "
@@ -443,7 +476,7 @@ function _disk(){
     if [ "$#" -eq 0 ]
     then
         loc=`pwd`;
-        nautilus $loc > /dev/null 2>&1
+        nautilus "$loc" > /dev/null 2>&1
     fi
 
     if [ "$#" -eq 1 ]
@@ -551,4 +584,5 @@ alias catp='cat ~/programs/CheemaFy/default_codes/default.py >>'
 alias catb='cat ~/programs/CheemaFy/default_codes/default.sh >>'
 alias catr='cat ~/programs/CheemaFy/default_codes/default.c >>'
 alias cats='cat ~/programs/CheemaFy/default_codes/default.simple >>'
+alias cath='cat ~/programs/CheemaFy/default_codes/default.html >>'
 alias cattest='cat ~/programs/CheemaFy/default_codes/default.testcase >>'

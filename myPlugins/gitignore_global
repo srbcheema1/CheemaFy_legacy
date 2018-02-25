@@ -1,3 +1,7 @@
 srb_test
 tags
 *.srb
+*.swp
+venv2
+venv3
+venv

@@ -5,6 +5,8 @@
 	unstage = reset HEAD --
 	undo = checkout --
     verify = diff --cached
+    info = show --stat
+
 [include]
     path = /home/srb/programs/CheemaFy/myPlugins/git_config
 [core]

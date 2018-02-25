@@ -90,6 +90,7 @@ map <C-u> :s/^#//<CR>
         unfold all using
             zR
 
+"za is used to toggle folding
 
 "to enable vim support in terminal ...
 "create file ~/.inputrc
@@ -113,6 +114,8 @@ set keymap vi-command
 "then clone ActualVim plugin into sublime Prefrences folder
     "cd ~/.config/sublime-text-3/packages
     "git clone https://github.com/lunixbochs/ActualVim.git
+
+in sublime enable and disable plugins usign Ctrl+Shift+P
 
 
 

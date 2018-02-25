@@ -123,6 +123,7 @@ cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 #install other useful things
 sudo -S -k apt-get install xdotool -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
+sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
 
 #install vim plugins
 vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
