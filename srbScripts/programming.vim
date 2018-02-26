@@ -43,3 +43,21 @@ function! Play()
 endfunction
 command! Run :call Play()
 nnoremap <Leader>p :call Play()<cr>
+
+function! CodeBeauty()
+    :%s/\s\+$//e
+    let _ext = expand('%:e')
+    if l:_ext == "cpp"
+        :%s/\/\/\s\@!/\0\1 /gce
+    elseif l:_ext == "py"
+        :%s/\#\s\@!/\0 /gce
+    elseif l:_ext == "sh"
+        :%s/\#\s\@!/\0 /gce
+    elseif l:_ext == "wrk"
+        :%s/\#\s\@!/\0 /gce
+    endif
+endfunction
+"Remove all trailing whitespace by pressing F5
+"nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:call CodeBeauty()
+nnoremap <F5> :call CodeBeauty()<cr>
+

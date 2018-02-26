@@ -2,12 +2,38 @@
 	showdown = log --decorate --oneline --all --graph -8
 	history = log --decorate --oneline --all --graph
     work = log --decorate --pretty=format:\"%C(yellow)%h %Cgreen%d %Creset %s , %Cblue%cn , %Cred %ad\" --graph --all --date=short
+    # unstage the file if added
 	unstage = reset HEAD --
+    # untrach a file
+    untrack = rm --cached -r --
+    # undo the changes to a file
 	undo = checkout --
     verify = diff --cached
+    # information about a commit
     info = show --stat
+    scommit = commit --signoff
+    wordcount = grep --count --ignore-case
+    # great way of diff
+    wdiff = diff --word-diff
 
 [include]
     path = /home/srb/programs/CheemaFy/myPlugins/git_config
 [core]
     excludesfile = /home/srb/programs/CheemaFy/myPlugins/gitignore_global
+[commit]
+    signoff = true
+[grep]
+    linenumber = true
+
+[color]
+    ui = true
+[color "diff"]
+    meta = bold cyan
+[color "grep"]
+    filename = magenta
+    match = bold red
+    linenumber = green
+
+# we cannot create alias of original command
+# signing every commit is useless - torvalds
+# https://stackoverflow.com/questions/10161198/is-there-a-way-to-autosign-commits-in-git-with-a-gpg-key

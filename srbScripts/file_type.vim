@@ -18,7 +18,7 @@ endfunction
 function! File_cpp()
     map <C-c> :s!^!//<Enter>
     map <C-u> :s!^//!!<Enter>
-    set foldmethod=manual
+    set foldmethod=syntax
     let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`'}
 endfunction
 

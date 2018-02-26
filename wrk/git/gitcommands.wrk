@@ -20,6 +20,10 @@ for example
     git checkout -p README //discards changes in README interactively
     git checkout -- -p README // discards changes from README and -p file
 
+
+------grep:
+    use git wordcount <word> to check frequency of words # command made by me
+    use git grep <word> -- <path> to search word #path may also be a folder name
 --------DIFF:
 to check diff of particular file form particular commit
 git diff <revision> <path>
@@ -74,7 +78,7 @@ remove somthing from there
 to make a file same as last commit
     git checkout -- filename
 to make all files same as last commit
-    git reset --hard   //it wont affect untracekd files
+    git reset --hard   //it wont affect untracked files
 
 --------- MORE ABOUT RESET
 git reset --soft <commit>
@@ -110,7 +114,7 @@ if you did a silly mistake and just one or more line you want to change in that 
 ADD
 if by misake u did wrong add
     git reset HEAD <filename>  //this is actual UNDO of git add
-to totally untrach a file
+to totally untrack a file
     git rm <file name> --cached //this will totally untrack the file as deleted .. WITHOUT ACTUALLY DELETING
 
 FILE
@@ -120,12 +124,13 @@ if by mistakae you did changes to a file and want to undo them
 
 -------------NOTE
     git rm --cached asd  //untrack a file
-    git commit -m "the file asd is gone from the repository"
+    git commit -m "the file asd is gone from the repository but in folder i.e untracked"
 VS
-    git reset HEAD -- asd
-    git commit -m "the file asd remains in the repository"
+    git reset HEAD -- asd//opposite of git add
+    git commit -m "the file asd remains in the repository and folder yet unstaged"
 
  SIMILARLY : this one seems to be more accurate ...
         moreover git documentation says that git reset is opposite of git add ... #sexy
     git reset <filename>  //the file remains in repository but removed from staging area
+
 
