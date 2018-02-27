@@ -1,0 +1,58 @@
+<srbcheema1> @m0viefreak i am still doubtful why it worked for branch "good" and why not for branch "bad"
+<m0viefreak> because you got lucky
+<m0viefreak> might as well not have
+* ioc_ (~ioc__@151.75.72.36) has joined
+<srbcheema1> I am in doubt why is it behaving differently. whats difference in both
+<m0viefreak> probably the hunk context used by the merge strategy to do a "simple" merge
+* mario_ (~mario@160.120.148.235) has joined
+<m0viefreak> using a merge-tool you could probably resolve the remaining conflicts more or less automatically
+<srbcheema1> have you checked the difference in two branches "good" and "bad"
+* mario_ (~mario@160.120.148.235) has left
+* hussam (uid193284@gateway/web/irccloud.com/x-arehmmxhckkfuqqz) has joined
+* albel727 (~albel727@unaffiliated/albel727) has joined
+<m0viefreak> no
+<m0viefreak> not in detail
+<srbcheema1> using merge tool is not issue . issue is the doubt on why git did so .. according to me it should have done same in both the branches. my point is I am not getting logical explanation on it
+* YuGiOhJCJ has quit (Remote host closed the connection)
+* weijin (~weijin@116.24.66.215) has joined
+<m0viefreak> ive looked at it briefly
+<m0viefreak> seems obvious
+<srbcheema1> @m0viefreak I have displayed content of file after every change. there are only 5 commits , main is master commit , from there two branches emerge both the braches have 2 commits each. both the branchs are identical in content except the top commit is bit different
+<m0viefreak> in the bad case you introduced new context before the line yuu the modify in a follow-up commit
+<m0viefreak> removing that 1st commit then causes the context to be completely different
+<m0viefreak> as you can clearly see by the conflict markers
+* Darcidride has quit (Quit: Bye.)
+* YuGiOhJCJ (~YuGiOhJCJ@gateway/tor-sasl/yugiohjcj) has joined
+* prsn (~prsn@144.121.22.178) has joined
+<srbcheema1> ohkay so git does work be remembering the upper content .. i thought top commit should know is that it has to change the `int main(){` line to `int main(){//main func` 
+<m0viefreak> what if that line was there more than once?
+* pp5mgt has quit (Quit: WeeChat 2.0.1)
+<m0viefreak> which one should it change?
+<srbcheema1> I means with some position also and some more data
+<m0viefreak> there you have it
+<srbcheema1> that could identify that
+<m0viefreak> *more data*
+<srbcheema1> some more data that could uniquely identify that line uniquely in the file
+<m0viefreak> and *that* data is different when applying commit2 on commit1 than when applying comming2 on commit0
+<m0viefreak> so you got a conflic
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

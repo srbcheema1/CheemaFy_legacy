@@ -1,0 +1,94 @@
+stash is used to put the changes into a stash bin
+then you can pop from there
+
+generally what happens is that we can change from a branch to other only then we can easily carry untracked changes with us
+
+now somethimes the untrach changes cause conflict
+so git refuse to checkout to other branch
+
+so its time to do stashing
+we should stash the changes
+    git stash
+then checkout to branch
+    git stash pop
+this will create merge conflicts .. resolve them .. (files will be in staging area)
+    git status
+
+    On branch feature2
+    Unmerged paths:
+      (use "git reset HEAD <file>..." to unstage)
+      (use "git add <file>..." to mark resolution)
+
+        both modified:   babbu1.cpp
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+
+now tell git you have resolved the conflicts using
+    git add filename
+clear the stash now
+    git stash clear
+finally you can unstage all the files and the work is like you were working on this branch
+
+
+
+if during stash pop some merge conflicts occur then message is like
+
+    On branch feature2
+    Unmerged paths:
+      (use "git reset HEAD <file>..." to unstage)
+      (use "git add <file>..." to mark resolution)
+
+        both modified:   babbu1.cpp
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+
+NOTE the files are shown in red yet they are in staging area #sexy
+git adds a conflict-resolution markers to files that have conflicts.
+we can run
+    git add
+to mark those files resolved
+
+----------Discarding merge conflicting files
+so if you want to reset them ... i.e
+you cant do simply 
+    git undo filename
+you will have to unstage them only then you can undo the
+    git unstage filename
+now use git status it will show you 
+    On branch feature2
+    Changes not staged for commit:
+      (use "git add <file>..." to update what will be committed)
+        (use "git checkout -- <file>..." to discard changes in working directory)
+
+            modified:   babbu1.cpp
+
+            no changes added to commit (use "git add" and/or "git commit -a")
+
+now we can check that files are unstaged .. now easily run git undo filename
+it will make files normal as they were before stash pop
+
+----------------accepting merge conflicting files
+to accept the merge conflicting file you will have to resolve the conflict
+now tell git to mark them resolved i.e. to mark resolution
+    git add
+now you will check git status
+
+
+----------------Misc
+you can notice that git stash makes a commit for itself
+
+
+*   b5a6f0e WIP on feature1: 7353d5b feature1.1
+|\  
+| * cdb7214 index on feature1: 7353d5b feature1.1
+|/  
+* 7353d5b (feature1) feature1.1
+| * e700286 (feature2) added print_hello in babbu
+| * c8c9c80 feature2.1
+|/  
+* df81f39 (master) testing git
+
+
+in this top commit i.e. WIP is made by stash
+

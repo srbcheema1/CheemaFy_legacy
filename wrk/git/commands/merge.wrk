@@ -2,4 +2,16 @@ git merge <branch>
 
 it merges <branch> into our head
 
-generally merge should be called from branch with fewer commits
+generally merge should be called from branch with fewer commits (generally master)
+
+3 cases are possible:
+    1. fast forwarding - master is parent of branch which is being merged
+                        -no new merge commit is made
+    2. smooth merging - when two branches are merged has no conflict.
+                       - a new merge commit is made
+                       - this is called three way merge
+    3. conflicts        - not everytime smooth merging happens
+                        - message shows that
+it doesn't everytime ends up in well condidtion
+in case of conflicts:
+

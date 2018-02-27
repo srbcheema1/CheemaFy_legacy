@@ -1,0 +1,288 @@
+suppose you have a branches like
+
+    * e700286 (feature2) added print_hello in babbu
+    * c8c9c80 feature2.1
+    | * 7353d5b (HEAD -> feature1) feature1.1
+    |/  
+    * df81f39 (master) testing git
+
+You were doing some wrok on feature1 branch
+you did changed a file named commands.wrk
+now you got a call to work on babbu1.cpp which work should be done in feature2
+now by mistake you did it in feature1
+
+now you are to move the changes in file `babbu1.cpp` to feature2 branch
+while keeping the `commands.wrk` file in the same branch
+
+to do so follow these steps:
+1. git add commands.wrk
+2. git commit -m "--just a temp save"
+3. git stash
+4. git checkout feature2
+5. git stash pop
+6. if conflicts-
+-      6.1 resolve conflicts
+-      6.2 git add resolved files
+-      6.3 if you wanna reset a file_bad
+-           6.3.1 git unstage file_bad
+-           6.3.2 git undo file_bad
+
+Hurrey changes are in you working directory
+you can now commit them after completing work
+or you can make a temp commit here also
+7. git commit -m "--jsut a temp save"
+8. git checkout feature1
+9. git reset HEAD~1 to bring the saved changes back to work and move branch down
+10. complete work of feature1
+
+
+
+---------------NAIVE APPROACH
+--------this is basically approach working behind that STASH
+--------read it carefully it is very important in git
+
+suppose your tree was like you were working on branch `compression`
+suddenly your mentor call you and says to work on a new issue on some already existing branch `add_test`
+and gives you hints to where to work be telling you to mark line numbers
+while listening on mobile you started creating comments in files where to make changes
+
+after hanging up the phone you realise that you forgot to change branch to `add_test`
+now it is a bad situatioin.
+suppose you made comments in file test1.cpp
+the file differs in both branches.
+now to send those comments to `add_test` branch follow these steps
+
+1. git checkout -b postman
+2. git add test1.cpp ... file containing tests to be posted
+3. git commit -m "--parcel of changes"
+5. git rebase -i master ...(or point of diversion of two branches)
+6. delete all the commits except last commit
+7. now postman is just one commit above the diversion commit
+8. git rebase add_test
+-           now you will notice that "parcel" commit is just above the last commit of add_test branch
+9. git checkout add_test
+10. git rebase postman ... here fast forwarding will take place our HEAD is parent of branch to be rebased on
+11. git branch -d postman
+12. git reset HEAD~1
+13. you will get the comments in `add_test` branch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---------------this file in wrong branch
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void print_hello(){
+    cout<<"hello"<<endl;
+}
+
+int square(int t){
+    return t*t;
+}
+
+int main() {
+    int t=1;
+    string s;
+    while (t--) {
+        int a[4];
+        a[0]=1;
+        int master=1;
+        cin>>master;
+        cout << master*2;
+    }
+}
+-----------------------this is file in my needed branch where new comment has to come
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int t=1;
+    string s;
+    while (t--) {
+        int a[4];
+        int new_thing_featue;
+        a[0]=1;
+        int master=1;//someone dictated me on phone to work here i commented it by standing in wrong branch
+        cin>>master;
+        cout << master*2;
+    }
+}
+--------------------------I made change in wrong branch
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void print_hello(){
+    cout<<"hello"<<endl;
+}
+
+int square(int t){
+    return t*t;
+}
+
+int main() {//hello
+    int t=1;
+    string s;
+    while (t--) {
+        int a[4];
+        a[0]=1;
+        int master=1;
+        cin>>master;
+        cout << master*2;
+    }
+-------------------------on poping stash in needed branch there are conflicts
+#include <bits/stdc++.h>
+
+using namespace std;
+
+<<<<<<< Updated upstream
+int main() {
+=======
+void print_hello(){
+    cout<<"hello"<<endl;
+}
+
+int square(int t){
+    return t*t;
+}
+
+int main() {//hello
+>>>>>>> Stashed changes
+    int t=1;
+    string s;
+    while (t--) {
+        int a[4];
+        int new_thing_featue;
+        a[0]=1;
+        int master=1;//someone dictated me on phone to work here i commented it by standing in wrong branch
+        cin>>master;
+        cout << master*2;
+    }
+}
+------------------------instead if i would have changed something else it would have worked with stash
+-------example 1
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void print_hello(){
+    cout<<"hello"<<endl;
+}
+
+int square(int t){
+    return t*t;
+}
+
+int main() {
+    int t=1;
+    string s;//reverse it
+    while (t--) {
+        int a[4];
+        a[0]=1;
+        int master=1;
+        cin>>master;
+        cout << master*2;
+    }
+}
+----------example 2
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void print_hello(){
+    cout<<"hello"<<endl;
+}
+
+int square(int t){
+    return t*t;
+}
+
+int main() {
+    int t=1;
+    string s;
+    while (t--) {
+        int a[4];
+        a[0]=1;
+        int master=1;
+        cin>>master;
+        cout << master*2;
+    }
+}//end main
+-----------these are few examples that are not conflicting
+
+
+---------lets not talk about non conflicting ... lets check soln for conflicting one
+---------lets jump to a universal solution
+i have checked till now that even naive approach fails here
+so till this moment i dont have any soln
+
+
+after doing git rebase -i master (or some diversion commit)
+it gives this
+    Last command done (1 command done):
+       pick 4c2c4eb --parcel
+    No commands remaining.
+    You are currently rebasing branch 'postman' on 'df81f39'.
+      (fix conflicts and then run "git rebase --continue")
+      (use "git rebase --skip" to skip this patch)
+      (use "git rebase --abort" to check out the original branch)
+
+    Unmerged paths:
+      (use "git reset HEAD <file>..." to unstage)
+      (use "git add <file>..." to mark resolution)
+
+        both modified:   babbu1.cpp
+
+    no changes added to commit (use "git add" and/or "git commit -a")
+------------------
+content of babbu1.cpp is same as conflict during stash pop
+#include <bits/stdc++.h>
+
+using namespace std;
+
+<<<<<<< HEAD
+int main() {
+=======
+void print_hello(){
+    cout<<"hello"<<endl;
+}
+
+int square(int t){
+    return t*t;
+}
+
+int main() {//hello
+>>>>>>> 4c2c4eb... --parcel
+    int t=1;
+    string s;
+    while (t--) {
+        int a[4];
+        a[0]=1;
+        int master=1;
+        cin>>master;
+        cout << master*2;
+    }
+}
+-----------------------
+so if i get an answer in future i will surely share
+:)

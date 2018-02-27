@@ -1,0 +1,77 @@
+<srbcheema1> @m0viefreak one more help if you can . like we can see commits in all branches using git log --oneline --decorate --graph --all  can we also see those commits that are not in any branch
+<srbcheema1> basically I want to see a commit that i made in a branch and then i removed that branch
+<jast> look for it in 'git log -g'
+<nHeck> jast: but if i delete master there'll be nothing on it after right?
+<srbcheema1> @jast i have used it --graph and it only show all the commits in all the branches
+* alezandro (~ab@2601:601:9680:72f:f151:5cca:9b73:18c7) has joined
+<jast> nHeck: you can, in theory, delete the remote branch, fix your local branch and then push it... but typically deleting the remote branch will be denied in the first place
+* dsdeiz_ (~dsdeiz@49.151.94.212) has joined
+<jast> srbcheema1: -g is not --graph
+<srbcheema1> ohkay lemme give it a try
+<jast> it shows you the reflog (in this case the reflog of HEAD, since the reflog of your deleted branch is gone)
+* cdg (~cdg@2600:1700:3120:40e0:fcd8:8110:707e:1f8a) has joined
+<oxymoron93> it is useful to read man git log before trying
+<gitinfo> the git-log manpage is available at https://gitirc.eu/git-log.html
+<jast> !reflog
+<gitinfo> The git reflog (`git log -g`) records the SHAs of your HEADs for 2+ weeks. `git checkout -b myrestore OLDSHA` and `git reset --hard OLDSHA` will relink to that state via a new and current branch respectively, see http://sethrobertson.github.com/GitFixUm/ for full details.  WARNING: reset --hard will trash any uncommitted changes!  Visualize with: gitk --all --date-order `git log -g --pretty=%H`
+<oxymoron93> wow didn't know
+* southernirc (~southrenm@66.241.33.145) has joined
+<srbcheema1> didn't know what ? -g ? actually I thought they might be same --graph and -g
+* weijin has quit (Ping timeout: 240 seconds)
+<jast> yeah, it's slightly confusing, but that's just the way it is
+* dsdeiz_ has quit (Read error: Connection reset by peer)
+* cqi has quit (Ping timeout: 248 seconds)
+* pfleck has quit (Remote host closed the connection)
+* pfleck (~Thunderbi@79.108.33.125.dyn.user.ono.com) has joined
+<jast> I think --graph was added later than -g so it was too late to use that :)
+* alezandro has quit (Ping timeout: 245 seconds)
+<oxymoron93> didn't know git log -g is another reflog
+<jast> I prefer it because it sorts newest first
+<nHeck> jast: worked with git rebase then edit instead of pick then ammend! ty
+* chachasmooth has quit (Ping timeout: 245 seconds)
+* cdg has quit (Ping timeout: 240 seconds)
+* chachasmooth (~chachasmo@unaffiliated/chachasmooth) has joined
+* WakiMiko has quit (Max SendQ exceeded)
+<srbcheema1> i am confused in converstion .. are we all oxymoron93 jast nHeck talking on same issue or I m just getting confused as you are discussing some other issue . actually sorry for this i am newbie
+* WakiMiko (~WakiMiko@unaffiliated/wakimiko) has joined
+<osse> git reflog = git log -g --abbrev-commit --pretty=oneline
+<jast> srbcheema1: nHeck is talking about a different topic, the rest of recent conversation was all about you :)
+<jast> osse: also it shows the first entry first, and the newest last
+* YuGiOhJCJ has quit (Quit: YuGiOhJCJ)
+<osse> not here :O
+<osse> the outputs are identical
+<oxymoron93> for me too
+* tcorneli (~tom@138.68-246-81.adsl-static.isp.belgacom.be) has joined
+<srbcheema1> ohh reflog is really the thing that i needed .. it keeps track of all the deleted comits
+<jast> it tracks every operation that changes a ref
+<jast> each branch (that still exists) has its own reflog, too
+* yn has quit (Ping timeout: 265 seconds)
+* anjen (~anjen@99-101-27-208.lightspeed.bcvloh.sbcglobal.net) has joined
+* southernirc has quit (Ping timeout: 248 seconds)
+* kurkale61 has quit (Ping timeout: 268 seconds)
+<srbcheema1> one thing more if a branch is deleted all the commits of that branch are gone. so if we know the top commit SHA of that branch can we restore it in future anytime ?
+* xfbs has quit ()
+* math-alpha (~m--alpha@41.202.219.252) has joined
+<osse> srbcheema1: yes
+<osse> srbcheema1: for at minimum 14 days
+<srbcheema1> after 14 days is the commit totally washed away if it is not in any branch
+<jast> not exactly
+<osse> it can be. depends on when git decides something needs to be deleted
+* Anticom (~Anticom@2001:67c:2184:410:18c8:2beb:2a3b:3842) has joined
+<osse> in practice it's often more than that
+<jast> git doesn't clear away old data on its own
+<srbcheema1> ohkay to experiment it i will have to wait 14 days .. can i recover it or not using SHA or not
+* kurkale61 (~kurkale6k@84.45.99.125) has joined
+<jast> when you run 'git gc', it cleans up, and there are grace periods for unreferenced objects and reflog entries
+<jast> and once objects are cleaned away, you can't reference them at all, they're completely gone
+<nHeck> no way to delete commits from a remote's history if --force isn't allowed?
+<osse> jast: won't gc --auto delete such objects?
+* cfoch_ (uid270777@gateway/web/irccloud.com/x-lpiffhvldvwlecdm) has joined
+<jast> I believe, from a quick read of the code, that --auto only packs loose objects
+<srbcheema1> so it means that we if we run gc then we cant recover that commit even if we have SHA and time is less than 14 days
+<osse> no
+<jast> oh, it does a repack
+<osse> only if you run gc and it's been MORE than 14 days
+* metts has quit (Ping timeout: 256 seconds)
+* rajat has quit (Ping timeout: 268 seconds)
+<srbcheema1> ohkay thanks for all the information

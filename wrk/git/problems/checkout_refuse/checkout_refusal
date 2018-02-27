@@ -1,0 +1,9 @@
+generally git refuses to checkout when it gets confused
+
+1. i have untracked a file in one branch
+    now i wanted to switch to another branch
+    now git saw that that file is already in this branch
+    it will refuse to checkout there as it wanted to create a file there but it is still there
+
+2. generally git checkout carries unstaged/staged/untracked changes along with itself
+    but while moving if it find another version of that file there then it will face difficulty

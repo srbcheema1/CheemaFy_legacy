@@ -1,0 +1,20 @@
+#sexy tutorial
+https://blog.andrewray.me/a-better-git-blame/
+
+
+
+
+
+
+
+
+
+What's Wrong with git blame?
+
+git blame only shows the last person to modify a line. This is rarely what you want. More often what you want is the original author of a line. Here's a list of things which changes who git blame shows as the author of a line:
+
+    Changing line formatting or indenting
+    Moving a block of code around in the file
+    Renaming a file
+    Any trivial change to the line
+    Moving a file 

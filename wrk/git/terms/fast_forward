@@ -1,0 +1,12 @@
+fast forwarding means when one commit is just a child of other commit.
+when we are going from parent commit to child commit it is called fast forwarding.
+
+lemme explain parent and child
+
+suppose A-B-C-D-E(master)-F-G(feature2)
+            \
+            H-I-J(feature1)
+
+this time if you stand on E(master and say to merge it will be fast forwarding as G is direct child of E)
+    git checkout master
+    git merge feature2

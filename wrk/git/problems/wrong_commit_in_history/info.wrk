@@ -1,0 +1,198 @@
+you made a wrong commit in history
+
+for example
+----------------commit 1
+#include<bits/stdc++.h>
+
+using namespace std;
+int main(){//test
+    int t;
+    cin>>t;
+    while(t--){
+        cout << t*t <<endl;
+    }
+}
+---------------------
+
+now you did a change added a function
+---------------------commit 2
+#include<bits/stdc++.h>
+
+int sqr(int t){
+    return t*t;
+}
+
+using namespace std;
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        cout << sqr(t) <<endl;
+    }
+}
+--------------------------
+
+then your boss said to write a comment on int main() line
+
+---------------------------commit 3
+#include<bits/stdc++.h>
+
+int sqr(int t){
+    return t*t;
+}
+
+using namespace std;
+int main(){//main function
+    int t;
+    cin>>t;
+    while(t--){
+        cout << sqr(t) <<endl;
+    }
+}
+----------------
+
+now your boss comes in fire over head ... "y have you made function when you are not using it please use it"
+now you have got a task to work over it ... you have to change commit 2
+
+
+
+
+
+
+
+
+
+------------SOLN
+1. git rebase -i HEAD~2
+now in the window use edit before commit to be eddited
+
+-----------------
+pick 8c5e9c4 fun added
+pick 5b0346f comment
+----change it to
+edit 8c5e9c4 fun added
+pick 5b0346f comment
+---------------------
+
+2. now on closing the window you will see
+---------------------
+    Stopped at 8c5e9c415de40f3cc421f3700a66f64e4c60a6f7... fun added
+    You can amend the commit now, with
+
+        git commit --amend
+
+    Once you are satisfied with your changes, run
+
+        git rebase --continue
+---------------
+it is saying that we are stopped on the commit which you wanna edit ...
+if you do git status you will see
+-------------------
+Last command done (1 command done):
+   e 8c5e9c4 fun added
+Next command to do (1 remaining command):
+   pick 5b0346f comment
+  (use "git rebase --edit-todo" to view and edit)
+You are currently editing a commit while rebasing branch 'test' on '60a6b50'.
+  (use "git commit --amend" to amend the current commit)
+  (use "git rebase --continue" once you are satisfied with your changes)
+
+nothing to commit, working directory clean
+--------------
+means that one command is done ..... edit <commit>
+next commad to be done is <comit>
+	once you do git rebase --continue this will be done
+we have option to edit this commit
+we can add changes to this comit
+
+3. Edit it
+edit it using git commit --amend
+
+4. git rebase --continue to continue the process
+-----------------
+once it says successful it means you are done
+
+
+
+
+
+
+------------
+-------------
+-----------
+-------------
+
+now you boss comes and says you why are you making lot of commits
+just remove squash the commit of making func (commit 2) and commit 1
+
+1. git rebase -i <commit before commit1>
+2. in the file write s before commit to be squashed
+3. done
+
+
+----------
+----------
+-----------
+
+but now your boss comes and says to remove that function .. it means delete that second commit but you have already squashed it
+here situation is dangerous
+so i always recommend to make backup branches
+if you havent made just go up the terminal and check for sha id of the commit of branch before squashing
+-------tree before sqush
+* 227fd20 (HEAD -> test) comment
+* 63e3647 fun added
+* 60a6b50 (master) test file
+* 76816a5 changed .gitignore
+* b4b9310 --to be taken to new branch from master
+* e917297 new features of new thing
+* 5452827 new thing features
+-----------------------tree after squashing
+* 8dc124e (HEAD -> test) comment
+* 1376541 test file also merged fun added into it
+| * 60a6b50 (master) test file
+|/  
+* 76816a5 changed .gitignore
+* b4b9310 --to be taken to new branch from master
+* e917297 new features of new thing
+* 5452827 new thing features
+-------------------------all you need is that number 227fd20
+
+
+1. git checkout -b backup <commit number>
+	here it is 227fd20
+2. git showdown
+--------------- git tree
+* 8dc124e (test) comment
+* 1376541 test file also merged fun added into it
+| * 227fd20 (HEAD -> deltest) comment
+| * 63e3647 fun added
+| * 60a6b50 (master) test file
+|/  
+* 76816a5 changed .gitignore
+* b4b9310 --to be taken to new branch from master
+* e917297 new features of new thing
+--------------------
+now you reached that previous state
+now you need to remove HEAD~1 commit
+
+3. git rebase -i master
+change the pick option to drop
+
+4. save file it is done
+-----------tree now
+(HEAD -> deltest) comment
+* 60a6b50 (master) test file
+| * 8dc124e (test) comment
+| * 1376541 test file also merged fun added into it
+|/  
+* 76816a5 changed .gitignore
+* b4b9310 --to be taken to new branch from master
+* e917297 new features of new thing
+* 5452827 new thing features
+---------------
+5. delete the previous branch if you want or keep it as a backup as you dont know when your boss gets out of mind
+
+
+
+
+--------------ENJOY

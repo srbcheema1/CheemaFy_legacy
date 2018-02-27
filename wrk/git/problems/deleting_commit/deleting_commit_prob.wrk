@@ -1,0 +1,160 @@
+user-pc:~$ git log 
+* 2baec37 (HEAD -> good, master, bad) test file
+* 76816a5 changed .gitignore
+user-pc:~$ cat test.cpp 
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        cout << t*t <<endl;
+    }
+}
+user-pc:~$ vim test.cpp 
+user-pc:~$ git add .
+user-pc:~$ git diff --cached
+ #include<bits/stdc++.h>
+ using namespace std;
+ 
++int sqr(int t){
++    return t*t;
++}
++
+ int main(){
+     int t;
+     cin>>t;
+     while(t--){
+-        cout << t*t <<endl;
++        cout << sqr(t) <<endl;
+     }
+ }
+user-pc:~$ git commit -m "added sqr function"
+user-pc:~$ vim test.cpp 
+user-pc:~$ git add .
+user-pc:~$ git diff --cached
+ int main(){
+     int t;
+-    cin>>t;
++    cin>>t;//input
+     while(t--){
+         cout << sqr(t) <<endl;
+     }
+user-pc:~$ git commit -m "added comment"
+user-pc:~$ git log 
+* 6885e9f (HEAD -> good) added comment
+* cb119d2 added sqr function
+* 2baec37 (master, bad) test file
+user-pc:~$ git rebase -i master
+Successfully rebased and updated refs/heads/good.
+user-pc:~$ git log 
+* 3ca597b (HEAD -> good) added comment
+* 2baec37 (master, bad) test file
+user-pc:~$ cat test.cpp 
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;//input
+    while(t--){
+        cout << t*t <<endl;
+    }
+}
+user-pc:~$ It worked :)
+user-pc:~$ 
+user-pc:~$ 
+user-pc:~$ 
+user-pc:~$ git checkout bad
+user-pc:~$ git log 
+* 3ca597b (good) added comment
+* 2baec37 (HEAD -> bad, master) test file
+user-pc:~$ cat test.cpp 
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    while(t--){
+        cout << t*t <<endl;
+    }
+}
+user-pc:~$ vim test.cpp 
+user-pc:~$ git add .
+user-pc:~$ git diff --cached
+ #include<bits/stdc++.h>
+ using namespace std;
+ 
++int sqr(int t){
++    return t*t;
++}
++
+ int main(){
+     int t;
+     cin>>t;
+     while(t--){
+-        cout << t*t <<endl;
++        cout << sqr(t) <<endl;
+     }
+ }
+user-pc:~$ git commit -m "sqr func added"
+user-pc:~$ vim test.cpp 
+user-pc:~$ git add .
+user-pc:~$ git diff --cached
+     return t*t;
+ }
+ 
+-int main(){
++int main(){//main fun
+     int t;
+     cin>>t;
+     while(t--){
+user-pc:~$ git commit -m "comment added"
+user-pc:~$ git log 
+* 5595440 (HEAD -> bad) comment added
+* 77caf57 sqr func added
+| * 3ca597b (good) added comment
+|/  
+* 2baec37 (master) test file
+user-pc:~$ git rebase -i master
+error: could not apply 5595440... comment added
+
+When you have resolved this problem, run "git rebase --continue".
+If you prefer to skip this patch, run "git rebase --skip" instead.
+To check out the original branch and stop rebasing, run "git rebase --abort".
+Could not apply 55954408ccb50252bcb22d01f4506fe6696642a6... comment added
+user-pc:~$ cat test.cpp 
+#include<bits/stdc++.h>
+using namespace std;
+
+<<<<<<< HEAD
+int main(){
+=======
+int sqr(int t){
+    return t*t;
+}
+
+int main(){//main fun
+>>>>>>> 5595440... comment added
+    int t;
+    cin>>t;
+    while(t--){
+        cout << t*t <<endl;
+    }
+}
+user-pc:~$ Why is it not deleting content of commit "sqr func added" 
+user-pc:~$ I wanted it to be like this :
+user-pc:~$ cat test.cpp 
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){//main fun
+    int t;
+    cin>>t;
+    while(t--){
+        cout << t*t <<endl;
+    }
+}
+user-pc:~$ tell me why it worked for good branch but not for bad branch

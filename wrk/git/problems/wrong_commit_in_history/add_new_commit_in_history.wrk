@@ -1,0 +1,58 @@
+--------------------tree before
+$ git showdown 
+* 33b23ac (HEAD -> master) head stops on input comment while exec good
+* b9d5bd5 input comment
+* ef63ec2 comment
+| * f3b5560 (test2) changed fun good to fun
+| * 20a51de good
+|/  
+* 60a6b50 test file
+* 76816a5 changed .gitignore
+* b4b9310 --to be taken to new branch from master
+
+-------------------command
+$ git rebase -i 76816a5
+Stopped at 60a6b507032ad03fa1249fd0f043a9e5286dcf22... test file
+You can amend the commit now, with
+
+	git commit --amend 
+
+Once you are satisfied with your changes, run
+
+	git rebase --continue
+
+-------------------tree now
+srb@srb-pc:~/Desktop/maan$ git showdown 
+* 33b23ac (master) head stops on input comment while exec good
+* b9d5bd5 input comment
+* ef63ec2 comment
+| * f3b5560 (test2) changed fun good to fun
+| * 20a51de good
+|/  
+* 60a6b50 (HEAD) test file
+* 76816a5 changed .gitignore
+* b4b9310 --to be taken to new branch from master
+
+
+----------------change the file
+srb@srb-pc:~/Desktop/maan$ vim test.cpp 
+srb@srb-pc:~/Desktop/maan$ git add .
+gsrb@srb-pc:~/Desktop/maan$ git commit -m "added define of mod"
+[detached HEAD e96d6d2] added define of mod
+ 2 files changed, 33 insertions(+)
+ create mode 100644 76816a5
+srb@srb-pc:~/Desktop/maan$ git rebase --continue
+Successfully rebased and updated refs/heads/master.
+srb@srb-pc:~/Desktop/maan$ git showdown 
+* 51ec9cc (HEAD -> master) head stops on input comment while exec good
+* 51c4e54 input comment
+* b70d7ae comment
+* e96d6d2 added define of mod
+| * f3b5560 (test2) changed fun good to fun
+| * 20a51de good
+|/  
+* 60a6b50 test file
+* 76816a5 changed .gitignore
+
+---------------verify that changes of that new commit are visible on top or not
+srb@srb-pc:~/Desktop/maan$ vim test.cpp 

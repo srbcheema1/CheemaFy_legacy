@@ -1,0 +1,43 @@
+:Gread
+    git checkout <this file>
+:Gwrite
+    git add <current file>
+:Gblame
+    git blame <current file>
+
+:Gstatus
+    git status
+        it will also be helpul in adding files directly .. just move to file and press '-'
+
+:Gdiff #sexy most sexy command i ever met in life
+:Cdiff my modified version of it
+    use do to obitain changes from other file
+    use dp to push changes
+    I recommend you to use dp while traversing in main file to push changes to index area
+    this is the best way we can do
+        git add -p
+        using fugitive moreover it is better than that
+    -
+    :Gdiff branchname:%
+        to check diff between branches
+
+
+
+:Gread and :Gwrite in :Gdiff
+while running :Gdiff
+    we can use :Gwrite from index file to reset the file .. make it identical to last file in Indexed area
+    we can use :Gwrite from working-file to add those chages to index area
+    running :Gwrite from index is same as running :Gread
+
+
+
+
+:Git add % 	:Gwrite
+    Stage the current file to the index
+:Git checkout % 	:Gread
+    Revert current file to last checked in version
+:Git rm % 	:Gremove
+    Delete the current file and the corresponding Vim buffer
+:Git mv % 	:Gmove
+    Rename the current file and the corresponding Vim buffer
+

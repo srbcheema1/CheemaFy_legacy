@@ -1,0 +1,37 @@
+Hello
+
+For those of you out there that have a GitHub account for an open source project, and another for hosting like Heroku, and have been faced with the fact that the traditional .gitignore in the root directory acts like an all or nothing for all your branches, and the manually adding each and every file that is need for the different branches and removing the ones that aren’t is annoying, and like every good programmer you are thinking, “there has to be a simpler automatic way of doing this.” Well there is!
+
+start at $PROJECT_ROOT – this is where you did your git init
+
+$ git branch public_viewing
+$ cd .git/
+$ touch info/exclude_public_viewing
+$ echo "path/to/secret/file" > info/exclude_from_public_viewing
+
+Now open the config file in your favourite editor (it’s in the .git/ folder) and add these lines under first heading [core]
+
+excludesfile = +info/exclude
+
+This line says that global ignore file is now in theinfo directory named exclude, so this where you put in all your log/* , *~ , etc..
+
+Next go down to the end of the file (unless this branch already exists here) and add this:
+
+** Fixed Error ** [local “public_viewing”] should read [branch “public_viewing”] or if you are only committing [remote “public_viewing”]
+
+[branch "public_viewing"]
+excludesfile = +info/exclude_from_public_viewing
+
+
+and save.
+Now all the gitignore stuff for that branch is all in the info directory named exclude_from_public_viewing
+
+vola!
+
+Now, when you do your commit and push to the remote public repo nothing that shouldn’t be seen (ie passwords) isn’t; but when you deploy with git all those needed passwords are there.
+
+I hope this helps
+
+
+# thanks to this tutorial
+# http://cogniton-mind.tumblr.com/post/1423976659/howto-gitignore-for-different-branches

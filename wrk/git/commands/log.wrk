@@ -9,3 +9,14 @@ show branch name
 
 git log --graph
 show graph
+
+#sexy command
+git log -p -M --follow --stat -- path/to/your/file
+can be used as git blame
+
+--follow
+I'm not sure why this isn't turned on by default.
+If you specify a single file for git log (as we do here), and that file is renamed,
+this will keep following changes through the old file.
+Without this flag, git log would end where the file was renamed.
+You won't be able to see the original author of a line, because it will be in old file name
