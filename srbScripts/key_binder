@@ -1,0 +1,124 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+
+from srbColour import Colour
+
+def execute(command="null"):
+    if(command=="null"):
+        return ""
+
+    get = lambda cmd: subprocess.check_output(["/bin/bash", "-c", cmd]).decode("utf-8")
+    ans = eval(get(command))
+    return ans
+
+def current_keys():
+    # get the current list of custom shortcuts
+    key = "org.gnome.settings-daemon.plugins.media-keys custom-keybindings"
+    current = execute("gsettings get "+key)
+    return current
+
+def create_new():
+    current = current_keys()
+    # make sure the additional keybinding mention is no duplicate
+    n = 1
+    new = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom"+str(n)+"/"
+    while True:
+        new = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom"+str(n)+"/"
+        if new in current:
+            n = n+1
+        else:
+            break
+    return new
+
+
+def show_custom_keys():
+    current = current_keys()
+
+    schema = "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:"
+    attribs = [" name"," command"," binding"]
+    for key in current:
+        print(Colour.PURPLE+key,Colour.END)
+        command = "gsettings get "+schema+key
+        for attrib in attribs:
+            cmd = command+attrib
+            value = execute(cmd)
+            print(Colour.GREEN,attrib,":",Colour.END,value)
+        print()
+
+
+def remove_key():
+    show_custom_keys()
+    num = input('enter key number:')
+
+    current = current_keys()
+    rem = "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom"+str(num)+"/"
+    if(rem in current):
+        current.remove(rem)
+        print("key removed successfully")
+        cmd = 'gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "'+str(current)+'"'
+        subprocess.call(["/bin/bash", "-c", cmd])
+    else:
+        print("key not found")
+
+def key_binder(args):
+    # defining keys & strings to be used
+    key = "org.gnome.settings-daemon.plugins.media-keys custom-keybindings"
+    subkey1 = key.replace(" ", ".")[:-1]+":"
+    item_s = "/"+key.replace(" ", "/").replace(".", "/")+"/custom"
+
+    # add the new keybinding to the list
+    current = current_keys()
+    new = create_new()
+    current.append(new)
+
+    # create the shortcut, set the name, command and shortcut key
+    cmd0 = 'gsettings set '+key+' "'+str(current)+'"'
+    cmd1 = 'gsettings set '+subkey1+new+" name '"+args[0]+"'"
+    cmd2 = 'gsettings set '+subkey1+new+" command '"+args[1]+"'"
+    cmd3 = 'gsettings set '+subkey1+new+" binding '"+args[2]+"'"
+
+    for cmd in [cmd0, cmd1, cmd2, cmd3]:
+        subprocess.call(["/bin/bash", "-c", cmd])
+
+
+def srb_keys():
+    mykeys = [['show Desktop','wmctrl -k on','']]
+    for key in mykeys:
+        key_binder(key)
+
+
+help_1="""
+require 3 arguments keyname command and keys
+python3 key_binder 'open gedit' 'gedit' '<Alt>7'
+"""
+if(__name__=="__main__"):
+    if(len(sys.argv)<2):
+        print(help_1)
+        sys.exit()
+    if(sys.argv[1]=="--help"):
+        print(help_1)
+        sys.exit()
+    if(sys.argv[1]=="--show"):
+        show_custom_keys()
+        sys.exit()
+    if(sys.argv[1]=="--default"):
+        srb_keys()
+        sys.exit()
+    if(sys.argv[1]=="--remove"):
+        remove_key()
+        sys.exit()
+
+
+    if(len(sys.argv)<4):
+        print(help_1)
+        sys.exit()
+    key_binder(sys.argv[1:])
+
+
+
+# https://askubuntu.com/a/597414
+
+# gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name
+# gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command
+# gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding

@@ -13,6 +13,17 @@ alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
 alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
 alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
 
+alias window='
+function _window(){
+    if [ $1 == "--help" ]
+    then
+        echo ""
+        return
+    fi
+    wmctrl -k on
+};_window'
+
+
 alias orig='
 function _orig(){
     if [ $1 = "--help" ]
@@ -436,7 +447,7 @@ function _term(){
 };_term'
 
 alias tilda='
-tilda & > /dev/null 2>&1; sleep 2;
+tilda & &> /dev/null 2>&1; sleep 2;
 '
 
 #screenlight
