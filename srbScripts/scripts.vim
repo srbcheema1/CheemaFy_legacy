@@ -12,6 +12,7 @@ function! Tabopen(var1)
     execute '!gnome-terminal -e " vim -p ' . expand('%:t') . ' ' . a:var1 . ' " '
 endfunction
 
+
 "swap two split screens
 function! WinBufSwap()
   let thiswin = winnr()
@@ -27,6 +28,10 @@ endfunction
 command! Swap :call WinBufSwap()
 map <Leader>s :call WinBufSwap()<CR>
 
+"change split from vertical to horizontal
+nnoremap <Leader>vert <C-w>t<C-w>H
+nnoremap <Leader>hor <C-w>t<C-w>K
+
 
 
 nnoremap <Leader>r :execute '/zzz'<cr>:call Redraw_it()<cr>
@@ -35,7 +40,10 @@ function! Redraw_it()
     :redraw!
 endfunction
 
-
+"if has('persistent_undo')      "check if your vim version supports it
+  "set undofile                 "turn on the feature
+  "set undodir=$HOME/.vim/undo  "directory where the undo files will be stored
+  "endif
 
 
 function! TogglePaste()
@@ -80,6 +88,8 @@ function! EditVimrc()
         :70vsplit ~/programs/srbScripts/tabb.vim
     elseif l:n == 5
         :70vsplit ~/programs/srbScripts/file_type.vim
+    "not working feature to press enter
+    "call feedkeys("\<cr>")
     endif
 endfunction
 nnoremap <F3> :call EditVimrc()<cr>
@@ -101,6 +111,12 @@ function! Chartest()
     let l:n = getchar()
     echo l:n
 endfunction
+
+nnoremap <Leader>small :vertical resize -15<cr>
+nnoremap <Leader>big   :vertical resize +20<cr>
+
+nnoremap <Leader>blame   :Gblame<cr>:vertical resize -15<cr>
+
 
 "to avail this feature install vim-gtk
 "verify it by checking
@@ -134,4 +150,30 @@ endfunction
 nmap U u
 nmap Q! q!
 nmap WQ wq
+
+command! Ctop :!wmctrl -r :ACTIVE: -b toggle,above
+
+
+"will be moved to new file special for git
+"create command of Gblame
+command! Cblame :Gblame <bar> vertical resize -15
+
+function! Cdiff_()
+    :Gdiff
+    call feedkeys("\<C-w>t\<C-w>H")
+    :vertical resize -25
+    call feedkeys("\<C-w>\<C-w>")
+endfunction
+command! Cdiff  :call Cdiff_()
+"cancel added changes
+command! Cdiffc :call feedkeys("\<C-w>\<C-w>:q!\<cr>")
+"save added changes
+command! Cdiffs :call feedkeys("\<C-w>\<C-w>:wq\<cr>")
+
+function! Cstatus_()
+    Gstatus
+    :resize -99
+    :resize +5
+endfunction
+command! Cstatus :call Cstatus_()
 

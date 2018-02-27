@@ -1,3 +1,5 @@
+map <F7> :!g++ % && ./a.out <CR>
+
 function! CreateIn()
     :let temp = system('echo "`xsel -b`" > in')
     :echo 'made in'
@@ -61,3 +63,6 @@ endfunction
 "nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:call CodeBeauty()
 nnoremap <F5> :call CodeBeauty()<cr>
 
+
+"to compile python and show results
+"map <F9> :!python3 % 2>&1 \| tee /tmp/results<cr>:vsplit /tmp/results<cr>

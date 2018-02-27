@@ -1,0 +1,8 @@
+you can use / to move top to down search
+similarly you can use ? for bottomup search
+
+this is very useful in git log outputs
+you can goto end with G and then use
+    ?word
+to search word upwards.
+use n to propagate

@@ -11,8 +11,10 @@ Plugin 'Valloric/YouCompleteMe'     		"auto complete
 Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
 Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
 Plugin 'scrooloose/nerdcommenter'           "commentin
-Plugin 'dracula/vim'                		"awesome dark theme
 Plugin 'scrooloose/nerdtree' 				"file explorer
+
+"themes
+Plugin 'dracula/vim'                		"awesome dark theme
 
 "sexy plugin for cpp
 Plugin 'rhysd/vim-clang-format'             "Clanguage formatter ...working
@@ -24,6 +26,9 @@ Plugin 'alvan/vim-closetag'         		"close html tags
 Plugin 'davidhalter/jedi-vim'
 Plugin 'nvie/vim-flake8'                    "f7 to check python files
 "Plugin 'Vimjas/vim-python-pep8-indent'     "python pep8 plugin
+"
+"Git
+Plugin 'tpope/vim-fugitive'
 
 "Plugin 'terryma/vim-multiple-cursors'      "multiple cursor plugin
 "Plugin 'vim-scripts/ZoomWin'        		"zoom into a window
@@ -74,10 +79,15 @@ set tabstop=4
 
 "use mouse in vim
     set mouse=a
+    "this also helps in resizing the split window
+    "some say to use
+    "set mouse=n
+    "set ttymouse=xterm2
 
 "searching
     set hlsearch "highlight search
     set incsearch "highlight as we type in search
+    nnoremap <CR> :noh<CR><CR>
 
 "set color to 256
     set t_Co=256
