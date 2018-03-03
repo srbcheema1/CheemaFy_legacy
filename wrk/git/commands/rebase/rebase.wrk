@@ -1,0 +1,130 @@
+rebase is used to rewrite the history
+
+---------------------- rebase command by not changing brnaches
+Assume the following history exists and the current branch is "topic":
+
+          A---B---C topic
+         /
+    D---E---F---G master
+
+From this point, the result of either of the following commands:
+
+git rebase master
+git rebase master topic
+
+would be:
+
+                  A'--B'--C' topic
+                 /
+    D---E---F---G master
+
+NOTE: The latter form is just a short-hand of git checkout topic followed by git rebase master. When rebase exits topic will remain the checked-out branch.
+
+---------------------------------------
+-----------
+----------
+---------
+----------
+
+---------------------------- git rebase --onto
+First let’s assume your topic is based on branch next. For example, a feature developed in topic depends on some functionality which is found in next.
+
+    o---o---o---o---o  master
+         \
+          o---o---o---o---o  next
+                           \
+                            o---o---o  topic
+
+We want to make topic forked from branch master; for example, because the functionality on which topic depends was merged into the more stable master branch. We want our tree to look like this:
+
+    o---o---o---o---o  master
+        |            \
+        |             o'--o'--o'  topic
+         \
+          o---o---o---o---o  next
+
+We can get this using the following command:
+
+git rebase --onto master next topic
+
+Another example of --onto option is to rebase part of a branch. If we have the following situation:
+
+                            H---I---J topicB
+                           /
+                  E---F---G  topicA
+                 /
+    A---B---C---D  master
+
+then the command
+
+git rebase --onto master topicA topicB
+
+would result in:
+
+                 H'--I'--J'  topicB
+                /
+                | E---F---G  topicA
+                |/
+    A---B---C---D  master
+
+This is useful when topicB does not depend on topicA.
+
+A range of commits could also be removed with rebase. If we have the following situation:
+
+    E---F---G---H---I---J  topicA
+
+then the command
+
+git rebase --onto topicA~5 topicA~3 topicA
+
+would result in the removal of commits F and G:
+
+    E---H'---I'---J'  topicA
+
+NOTE: we can do all works of rebase --onto using rebase -i
+--------------------------------------
+-----------
+----------
+-------------
+
+we can rebase a change to another point
+
+
+# Fetch latest commits from `upstream` (the original fork)
+    git fetch upstream
+
+# Checkout our feature branch
+    git checkout feature
+
+# Reapply it onto upstream's master
+    git rebase upstream/master
+
+# Fix conflicts, then `git rebase --continue`, repeat until done
+# Push to our fork
+    git push --force origin feature
+
+
+
+
+you can use git rebase -i to rebase interactively
+
+it will by default pick all the commits
+you can pick required commits
+and leave the remaining commits
+
+please read this article:
+https://robots.thoughtbot.com/git-interactive-rebase-squash-amend-rewriting-history
+
+
+
+
+
+
+
+
+
+
+
+----------------- very important to read
+https://git-scm.com/docs/git-rebase
+---------------------------
