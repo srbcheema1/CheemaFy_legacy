@@ -121,6 +121,8 @@ cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 
 #install other useful things
+sudo -S -k apt-get install build-essential -y < ~/.CheemaFy/.pass
+sudo -S -k apt-get install cmake -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install xdotool -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
@@ -131,6 +133,7 @@ vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
 sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
+sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
 
 #let the changes begin
