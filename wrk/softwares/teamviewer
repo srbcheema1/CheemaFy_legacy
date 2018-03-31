@@ -1,0 +1,20 @@
+Install:
+    sudo apt-get install teamviewer
+
+configure proxy in teamviewer > Extras > options > General > proxy
+
+you can use lan setting to use teamviewer in local network
+
+also configure proxy in
+    sudo gedit /etc/teamviewer/global.conf
+
+there should be lines
+    [strng] Proxy_IP = "172.16.20.2:3128"
+    [int32] Proxy_Type = 2
+
+run these commands
+    sudo teamviewer --daemon stop
+    sudo teamviewer --daemon start
+    teamviewer
+
+you can use mobile app `teamviewer remote`

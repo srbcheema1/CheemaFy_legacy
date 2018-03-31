@@ -1,0 +1,8 @@
+
+good reply i have tested it
+https://askubuntu.com/a/131621
+sudo apt-get clean
+sudo mv /var/lib/apt/lists /tmp
+sudo mkdir -p /var/lib/apt/lists/partial
+sudo apt-get clean
+sudo apt-get update

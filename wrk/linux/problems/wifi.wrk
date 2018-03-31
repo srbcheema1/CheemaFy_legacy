@@ -1,0 +1,27 @@
+
+
+Wireless issue solved in Linux Hewlett-Packard Company RTL8723BE PCIe Wireless Network Adapter [103c:81c1]
+
+First of all remove the settings you made. by following command
+sudo rm /etc/modprobe.d/rtl8723be.conf
+
+
+If you do not have this file, nothing is wrong
+Then install a good driver
+sudo add-apt-repository ppa:hanipouspilot/rtlwifi
+
+
+sudo apt-get update
+
+
+sudo apt-get install rtlwifi-new-dkms
+
+
+reboot and enjoy
+if you still have problems, you may need to add an option :
+
+echo "options rtl8723be ant_sel=2" | sudo tee /etc/modprobe.d/rtl8723be.conf
+
+
+
+then reboot again .
