@@ -1,0 +1,43 @@
+to make something autostart
+    create its launcher .destop file
+    copy the launcher to ~/.config/autostart/
+
+    OR
+    you may also insert a line of path in /etc/rc.local
+
+mkdir
+you cannot make a new directory such that path directories are missing
+    use mkdir -p /sdfkj/skfjsl/skfj
+    it will create a new directory only if there is not a directory
+    else it will not //it is safe as it dont distroy old directory
+
+cp
+copy a file to a valid location
+to copy a folder you have to use cp -r <path to folder>  <path to destination parent>
+            NOTE: dont write folder name in second argument
+            if there is folder already of same name it will be replaced
+if destination is folder it will be copied inside into the folder
+
+to copy all contents of folder do ...
+    cp -r <path to folder>/. <location>
+    OR
+    cp -r <path to folder>/* <location>
+        it will update the contents ... i.e introduce new ones while not effecting older ones
+
+
+
+mv
+do not need recursive -r flag
+if a name conflict of directory occurs .. it will check if directory is empty or not ...
+    if empty it will move ... else it will show error cannot mv
+
+NAME CONFLICTS
+mv check if directoy si empty or not
+cp copies inside the directory
+
+mv dont need -r flag
+cp needs -r flag
+
+
+
+
