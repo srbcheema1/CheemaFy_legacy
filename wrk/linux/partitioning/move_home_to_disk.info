@@ -1,0 +1,29 @@
+first of all format the disk with efi
+
+mkfs.ext4 /dev/sda6
+
+now make a new folder home2 near home
+mount /dev/sda6 /home2
+
+sudo mv home/* home2/
+
+umount /home2
+
+now add blkid of /dev/sda6 to /etc/fstab like this
+
+UUID=03ec5dd3-45c0-4f95-a363-61ff321a09ff /home ext4 defaults  0      2
+
+now reboot
+you will find home missing and now you will have to rename home2 to home in tty
+reboot again
+
+hurray it works
+
+
+similarly you can move from disk to root-disk
+
+
+DONT forget to change permissions and ownership of the folder
+using
+    sudo chown -R srb:srb ~/Documents
+    sudo chmod +x ~/Documents

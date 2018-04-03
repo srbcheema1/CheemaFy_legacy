@@ -1,0 +1,12 @@
+lsblk
+
+blkid
+    to get block id to write in ubuntu /etc/fstab
+    UUID=03ec5dd3-45c0-4f95-a363-61ff321a09ff /home/srb/Documents ext4 defaults  0      2
+
+df -h
+
+nice video
+    https://www.youtube.com/watch?v=1ZoErMFcFp8
+
+https://askubuntu.com/questions/45607/how-to-mount-partition-permanently

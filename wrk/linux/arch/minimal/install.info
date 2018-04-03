@@ -1,24 +1,12 @@
 first of all the best way is to create the partitions using gparted
-we can also create partitions using fdisk, gdisk, cfdisk
-
-create a partition in ext4
 we can use same swap partition for both both ubuntu and arch
 
 https://www.youtube.com/watch?v=METZCp_JCec&t=312s
 we can follow this link it is a good video tutorial
 
 1. first this is to connect to internet
-try
-    ping google.com
-
-if(!ping.success()) {
     // connect a usb and turn on tethering
     dhclient
-    while(!ping.success()) {
-        // try something else
-        // like wifi-menu
-    }
-}
 
 2. now you can check lists using command `fdisk -l /dev/sda`
 
@@ -26,23 +14,11 @@ if(!ping.success()) {
     mkfs.ext4 /dev/sda5
     mount /dev/sda5 /mnt
 
-    mkswap /dev/sda6
-    swapon /dev/sda6
-
-    mkdir -p /mnt/boot/efi
-    #change type to efi in cfdisk
-    mount /dev/sda7 /mnt/boot/efi
-
 4. install the arch
     pacstrap /mnt base
-    # we could also use
-        $pacstrap /mnt base-devel
-        # it will install basic packages.. but it will consume more data .. moreover you will get less to learn
 
 5. Generate fstab file
     genfstab -p /mnt >> /mnt/etc/fstab
-    # confirm it using
-        cat /mnt/etc/fstab
 
 6. Chroot into arch installation
     arch-chroot /mnt
@@ -56,25 +32,11 @@ if(!ping.success()) {
 9. generate initial disk
     mkinitcpio -p linux
 
-10. Install grub (optional - you may use grub of other os if there)
-    pacman -Syu grub os-prober
-    pacman -Syu efibootmgr
-    grub-mkconfig -o /boot/grub/grub.cfg
-    grub-install /dev/sda7
-    # after reboot update grub ...
-        sudo os-prober
-        sudo grub-mkconfig -o /boot/grub/grub.cfg
-
 11. set locale
     vi /etc/locale.gen
     # uncomment the language of your prefernc
     locale-gen
     echo LANG=en_US.UTF-8 > /etc/locale.conf
-    export LANG=en_US UTF-8
-
-11. update it
-    pacman -Syy
-    pacman -Syu
 
 12. install some required softwares
     a. dhclient
@@ -82,6 +44,8 @@ if(!ping.success()) {
     b. sudo
     c. xterm - simple terminal
     d. vim - cool editor
+    e. bash-completion
+    f. gparted
 
 13. add a user and set passwd
     useradd -G wheel -s /bin/bash -m -c "name" name
@@ -91,24 +55,14 @@ if(!ping.success()) {
     visudo -f /etc/sudoers
     # go to end of file
     name ALL=(ALL) ALL
-    # for more info visit :
-        https://www.garron.me/en/linux/visudo-command-sudoers-file-sudo-default-editor.html
 
 13. install desktop environment
     A. Gnome
      # desktop environment and display-manager for gnome
-         pacman -Syu gnome-desktop gdm
-     # you may install other facilities of gnome (optional)
+        pacman -Syu gnome-desktop gdm
         pacman -Syu gnome gnome-extra
      # enable gdm
         systemctl enable gdm (on reboot it will be started)
-     # you may also need to install nvidia drivers in it, if it supports nvidia graphics (Atleast I do)
-
-    B. Plasma kde
-     # install plasma and display manager
-        pacman -S plasma sddm
-    NOTE:
-     # you may require to install nvidia and xorg if DE not working
 
 14. exit it and reboot
     exit
@@ -118,16 +72,7 @@ if(!ping.success()) {
 15. enjoy :)
 
 
-################## After Reboot
 
-1. First thing to do is enable Ctrl+Shift+T shortcut
-2. Enable tap to click
-
-
-Enable desktop icons in gnome, I dont recommend to enable them
+Enable desktop icons in gnome
 https://www.youtube.com/watch?v=UxxCsULjkAU
-
-
 use gnome-tweaks for rightclick enabling
-    goto mouse-click-emulation
-    select area

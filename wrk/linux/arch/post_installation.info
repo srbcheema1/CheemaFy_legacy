@@ -1,0 +1,69 @@
+to list all intalled packages
+    pacman -Qe
+
+to list all installed packages in size order
+    expac -H M '%m\t%n' | sort -h
+
+good to read
+    https://wiki.archlinux.org/index.php/Pacman/Tips_and_tricks
+
+
+########################### SOME REQUIRED SOFTWARES
+wpa_supplicant, wireless_tools, networkmanager, network-manager-applet
+base-devel
+python
+python3
+gcc
+firefox
+bash-completion
+
+
+
+
+ntfs-3g
+    to enable write to external drives
+
+xorg-xinit
+
+
+################################ Wifi in arch #### confirmed
+pacman -Syu wifi-menu dialog wpa_suppliant wireless_tools networkmanager network-manager-applet
+
+systemctl enable NetworkManager.service
+systemctl enable wpa_supplicant.service
+systemctl start NetworkManager.service
+
+
+###################################### Yaourt
+
+$ sudo vim /etc/pacman.conf
+    Add the following repository at the bottom:
+
+[archlinuxfr]
+SigLevel = Never
+Server = http://repo.archlinux.fr/$arch
+
+$ sudo pacman -Syu yaourt
+
+read more at
+    https://www.ostechnix.com/install-yaourt-arch-linux/
+
+######################################## Desktop Icons
+Gnome has removed desktop icons support
+we can get those by
+
+yaourt -Syu gnome-shell-extension-desktop-icons
+
+then go to
+gnome-shell-extension-pref
+and activate
+but it caused problem on my pc
+I think so .. it raised the processor work as it stuck in recursion
+
+############################## Downgrader
+very useful tool to downgrade packages
+
+yaourt -Syu downgrade
+
+example:
+    downgrade gnome-terminal
