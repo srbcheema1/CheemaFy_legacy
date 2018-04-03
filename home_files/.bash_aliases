@@ -2,7 +2,10 @@
 #you can print all aliases with command alias and tab
 
 
-#move to particulat locations
+# shorten the prompt
+PROMPT_DIRTRIM=5
+
+#move to particular locations
 alias de='cd ~/Desktop'
 alias cf='cd ~/programs/CheemaFy/'
 
@@ -34,6 +37,7 @@ function _orig(){
     $1 $2 $3 $4 $5 $6 $7 $8 $9
 };_orig'
 
+
 alias notify-me='
 function _notify-me(){
     if [ $1 = "-m" ]
@@ -58,6 +62,7 @@ alias cptf='echo "`xsel -b `" > '
     #move to the other directory
     #paste it there by cptf <filename>
 
+
 alias copy='
 function _copy(){
     mkdir -p ~/.CheemaFy/srb_clip_board
@@ -81,6 +86,7 @@ function _copy(){
     done
 };_copy'
 
+
 alias cut='
 function _cut(){
     mkdir -p ~/.CheemaFy/srb_clip_board
@@ -96,6 +102,7 @@ function _cut(){
         echo cut ${!i}
     done
 };_cut'
+
 
 alias paste='
 function _paste(){
@@ -114,6 +121,7 @@ function _paste(){
 
 #commands for compiler versions
 alias g++11='g++ -std=c++11'
+
 
 #to run octave interactively
 alias octavei='octave --no-gui'
@@ -199,19 +207,56 @@ function _venv(){
         then
             source ./venv3/bin/activate;
         else
-            python3 -m virtualenv venv3
-            source ./venv3/bin/activate;
+            pwd_=`pwd`
+            while [ 1 ]
+            do
+                cd ..
+                where_=`pwd`
+                if [ "$where_" = "$HOME" ]
+                then
+                    cd $pwd_
+                    virtualenv venv3
+                    source ./venv3/bin/activate;
+                    break
+                fi
+                if [ -d "venv3" ]
+                then
+                    echo "found venv at "$where_
+                    source ./venv3/bin/activate;
+                    break
+                fi
+            done
+            cd $pwd_
         fi
     else
         if [ -d "venv2" ]
         then
             source ./venv2/bin/activate;
         else
-            virtualenv venv2
-            source ./venv2/bin/activate;
+            pwd_=`pwd`
+            while [ 1 ]
+            do
+                cd ..
+                where_=`pwd`
+                if [ "$where_" = "$HOME" ]
+                then
+                    cd $pwd_
+                    virtualenv venv2
+                    source ./venv2/bin/activate;
+                    break
+                fi
+                if [ -d "venv2" ]
+                then
+                    echo "found venv at "$where_
+                    source ./venv2/bin/activate;
+                    break
+                fi
+            done
+            cd $pwd_
         fi
     fi
 };_venv'
+
 
 #to set default screenshot saving location
 help_js_beautify="
@@ -237,6 +282,7 @@ function _js-beautify(){
         js-beautify -f "$1" -o "$2"
     fi
 };_js-beautify'
+
 
 #to set default screenshot saving location
 help_sshot_loc="

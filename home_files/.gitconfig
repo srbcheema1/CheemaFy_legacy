@@ -1,6 +1,7 @@
 [alias]
-	showdown = log --decorate --oneline --all --graph -8
+	showdown = log --decorate --oneline --graph -8
 	history = log --decorate --oneline --all --graph
+	wrk = log --decorate --oneline --all --graph -14
     work = log --decorate --pretty=format:\"%C(yellow)%h %Cgreen%d %Creset %s , %Cblue%cn , %Cred %ad\" --graph --all --date=short
     # unstage the file if added
 	unstage = reset HEAD --
@@ -15,6 +16,12 @@
     wordcount = grep --count --ignore-case
     # great way of diff
     wdiff = diff --word-diff
+
+    # a better way of blame read blame.wrk
+    logblame = log -p -M --follow --stat --
+
+    # a beautiful command reflog .... it keeps trach of all the activities in last week
+    reflog =  log -g --abbrev-commit --pretty=oneline
 
 [include]
     path = /home/srb/programs/CheemaFy/myPlugins/git_config
@@ -33,6 +40,8 @@
     filename = magenta
     match = bold red
     linenumber = green
+[diff]
+	tool = vimdiff
 
 # we cannot create alias of original command
 # signing every commit is useless - torvalds

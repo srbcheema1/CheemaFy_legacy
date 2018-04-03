@@ -130,6 +130,6 @@ if [ -f ~/programs/srbScripts/bashrc_extended ]; then
 fi
 
 #gsoc aliases
-if [ -f ~/.gsoc_aliases ]; then
-    . ~/.gsoc_aliases
+if [ -f /home/srb/programs/CheemaFy/myPlugins/gsoc_aliases ]; then
+    . /home/srb/programs/CheemaFy/myPlugins/gsoc_aliases
 fi

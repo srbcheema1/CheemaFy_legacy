@@ -3,3 +3,16 @@ this can be solved in this way
 https://askubuntu.com/questions/624966/cant-login-after-nvidia-driver-install-v-14-04
 
 
+sudo apt-get purge nvidia*
+sudo add-apt-repository ppa:graphics-drivers/ppa
+
+check recomended drivers using
+sudo ubuntu-drivers devices
+
+sudo ubuntu-drivers autoinstall
+OR
+sudo apt-get insatll nvidia-XXX
+
+You may also open Software & updates > goto Additional Drivers tab > select nvidia
+
+for me it is nvidia-384

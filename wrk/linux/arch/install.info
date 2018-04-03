@@ -103,6 +103,7 @@ if(!ping.success()) {
      # enable gdm
         systemctl enable gdm (on reboot it will be started)
      # you may also need to install nvidia drivers in it, if it supports nvidia graphics (Atleast I do)
+        pacman -S nvidia
 
     B. Plasma kde
      # install plasma and display manager

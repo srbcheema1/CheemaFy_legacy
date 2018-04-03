@@ -1,0 +1,132 @@
+_vcf_loc=$HOME'/Desktop/gsoc/ebi/vcf-validator'
+
+
+alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
+alias vcf_valid_test=' $_vcf_loc/srb_test/build/bin/vcf_validator'
+alias g+++='g++ -std=c++11 -lboost_iostreams'
+alias sofa='/home/srb/Desktop/gsoc/sofa/stable/sofa/build/v17.06/bin/runSofa'
+
+
+
+
+############################## BUILD
+# it is docker build
+# use it as
+# srb-pc~$ time build_it vcf
+
+build_it(){
+    if [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/
+        sudo time -S -k docker run -v ${PWD}:/tmp ebivariation/vcf-validator < ~/.CheemaFy/.pass
+        cd -
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+}
+
+
+# it is non docker build
+# use it as
+# srb-pc~$ time build_it_test vcf
+
+function build_it_test(){
+    start_=`date +%s`
+    if [ "$1" = "vcf" ]
+    then
+        if [ "$2" = "-r" ]
+        then
+            echo "Compiling ragel files"
+            for i in 1 2 3 ; do
+                ragel -G2 -o $_vcf_loc/inc/vcf/validator_detail_v4${i}.hpp $_vcf_loc/src/vcf/vcf_v4${i}.ragel ;
+            done
+        fi
+
+        cd $_vcf_loc/srb_test/build
+        NPROCS=`grep processor </proc/cpuinfo | wc -l`
+        cmake -DBUILD_STATIC=1 ../../
+        time make -j${NPROCS}
+        cd -
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+    end_=`date +%s`
+    echo "time is" $((end_-start_))
+}
+
+
+
+
+
+
+
+
+
+
+###################    TEST IT
+
+alias test_it='
+function _test_it(){
+    if [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+    fi
+};_test_it'
+
+
+###################### CLEAN
+
+alias clean_it='
+function _clean_it(){
+    if [ "$1" = "vcf" ]
+    then
+        rm *err*
+    fi
+};_clean_it'
+
+
+############################ premanent
+alias gsoc='
+function _gsoc(){
+    if [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/
+    elif [ "$1" = "test" ]
+    then
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+    elif [ "$1" = "sofa" ]
+    then
+        cd ~/Desktop/gsoc/sofa/main
+    else
+        cd ~/Desktop/gsoc
+    fi
+};_gsoc'
+
+
+# split_pwd() {
+#         # Only show ellipses for directory trees -gt 3
+#         # Otherwise use the default pwd as the current \w replacement
+#         if [ $(pwd | grep -o '/' | wc -l) -gt 3 ]; then
+#                 pwd | cut -d'/' -f1-3 | xargs -I{} echo {}"/../${PWD##*/}"
+#         else
+#                 pwd
+#         fi
+# }
+# 
+# 
+# export PS1="\$(split_pwd) > "
+# export PROMPT_COMMAND='PS1="$(python ~/short.pwd.py)"'
+
+
+
+alias cv='cd ~/programs/interviews/cv/my_docs'
+
+
+alias show_trailing_spaces='grep -I -r -n "\s$" . '
+
+function bookmark(){
+    python3 ~/programs/srbScripts/bookmark.py | tee ~/.CheemaFy/.open_path
+    cmd=`sed -n '$p' ~/.CheemaFy/.open_path `
+    cd $cmd
+}
+

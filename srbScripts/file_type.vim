@@ -15,6 +15,13 @@ function! File_html()
     let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`','%':'%'}
 endfunction
 
+function! File_js()
+    set shiftwidth=2
+    set tabstop=2
+    set foldmethod=syntax
+    let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`','%':'%'}
+endfunction
+
 function! File_cpp()
     map <C-c> :s!^!//<Enter>
     map <C-u> :s!^//!!<Enter>
@@ -63,6 +70,8 @@ function! File_type()
         :call File_vim()
     elseif l:_ext == "sh"
         :call File_sh()
+    elseif l:_ext == "js"
+        :call File_js()
     endif
     "nerd Commenter
     map <C-c> <Leader>cc

@@ -1,0 +1,14 @@
+# direct mounting
+# Documents will be here on /dev/sda9
+UUID=a5f56ad9-c50b-481a-899c-99d3f652ab82 /home/akshat/Documents ext4 defaults 0 2
+
+
+# these lower options are creating problem in ownership and also in arch
+# I am using ntfs for common ones
+# it is a good way to mount whole disk on some mount place and then mount/link the inner folders instead of making multiple disks
+# disk will be mounted here
+UUID="06F262DA2C4503AE" /mnt/disk ntfs defaults 0 2
+
+# we will create link to Downloads and mount bind the Pictures
+# link is made using ln -s /mnt/disk/Downloads ~/Downloads
+/mnt/disk/Pictures /home/akshat/Pictures bind noatime,rw,bind 0 0

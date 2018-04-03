@@ -10,3 +10,9 @@ nice video
     https://www.youtube.com/watch?v=1ZoErMFcFp8
 
 https://askubuntu.com/questions/45607/how-to-mount-partition-permanently
+
+
+while editing fstab ...
+    dump is always 0
+    fsck is 1 for root and 2 for disks you wanna check and 0 for no check.
+    so keep it 0 for others to boot fast

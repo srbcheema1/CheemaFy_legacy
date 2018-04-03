@@ -69,9 +69,11 @@ def bookmark_read():
     # we cant change directory of shell from within a program
     # https://stackoverflow.com/a/35832594/6799074
 
+def add_new():
+    print('feature yet to be implemented')
+
 
 help1 = 'require 3 or 4 arguments \n 1 for files1 \n 2 for file 2 \n 3 for level'
-
 
 def describe():
     print(help1)
@@ -81,8 +83,13 @@ def describe():
 code begins here
 '''
 if(__name__ == '__main__'):
-    if(len(argv)==2 and argv[1]=='--help'):
-        describe();
-        exit();
+    if(len(argv)==2):
+        if(argv[1]=='--help'):
+            describe();
+            exit();
+        if(argv[1]=='--add'):
+            add_new();
+            exit();
+
     bookmark_read()
 

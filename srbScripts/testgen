@@ -16,7 +16,7 @@ test desctiption file includes :
 """
 if(len(argv)!=4):
     print(description)
-    exit
+    exit()
 
 script,code,testc,testd = argv
 
@@ -43,11 +43,11 @@ for i in range(1,T+1):
         args[-1] = args[-1][:-1]
     args = ' '.join(args)
     args = str(args)
-    command = "python3 "+testc+" "+args+" > t"+str(i)
+    command = "python3 "+testc+" "+args+" > in0"+str(i)+".txt"
 
     print(command)
     os.system(command)
-    os.system("./a.out < t"+str(i)+" > o"+str(i))
-    os.system("mv t"+str(i)+" ./cases")
-    os.system("mv o"+str(i)+" ./cases")
+    os.system("./a.out < in0"+str(i)+".txt > out0"+str(i)+".txt")
+    os.system("mv in0"+str(i)+".txt ./cases")
+    os.system("mv out0"+str(i)+".txt ./cases")
 
