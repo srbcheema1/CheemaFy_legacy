@@ -14,7 +14,10 @@ Plugin 'scrooloose/nerdcommenter'           "commentin
 Plugin 'scrooloose/nerdtree' 				"file explorer
 
 "themes
-Plugin 'dracula/vim'                		"awesome dark theme
+"Plugin 'dracula/vim'                		"awesome dark theme
+"this worked earlier but nowdays it is creating problems.
+"I will update it as
+"it works
 
 "sexy plugin for cpp
 Plugin 'rhysd/vim-clang-format'             "Clanguage formatter ...working
@@ -101,7 +104,7 @@ set tabstop=4
 
 "dracula
     syntax on
-    color dracula
+    "color dracula
 
 
 
