@@ -13,6 +13,7 @@ UUID=6cf4d227-d79e-4607-a04f-285a22da151e /mnt/data ext4 defaults 0 0
 /mnt/data/Downloads /home/srb/Downloads bind noatime,rw,bind 0 0
 /mnt/data/Desktop /home/srb/Desktop bind noatime,rw,bind 0 0
 /mnt/data/Documents /home/srb/Documents bind noatime,rw,bind 0 0
+/mnt/data/programs /home/srb/programs bind noatime,rw,bind 0 0
 
 # Media Disk
 UUID=37F9BED733C03589 /mnt/media ntfs defaults 0 0

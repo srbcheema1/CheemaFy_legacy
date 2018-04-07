@@ -1,0 +1,28 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+
+# Root on /dev/sdb6
+UUID=19f3edca-607a-46ad-829e-93c2615a3505  /  ext4  rw,relatime,data=ordered 0 1
+
+# Boot Loaders on /dev/sda5
+UUID=45DA-AF9D /boot/efi vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+
+# Swap on /dev/sdb3
+UUID=737f7595-2333-4ad4-a415-dfbf26a67f20  none swap defaults,pri=-2 0 0
+
+
+# Data Disk
+UUID=6cf4d227-d79e-4607-a04f-285a22da151e /mnt/data ext4 defaults 0 0
+/mnt/data/Downloads /home/srb/Downloads bind noatime,rw,bind 0 0
+/mnt/data/Desktop /home/srb/Desktop bind noatime,rw,bind 0 0
+/mnt/data/Documents /home/srb/Documents bind noatime,rw,bind 0 0
+/mnt/data/programs /home/srb/programs bind noatime,rw,bind 0 0
+
+
+# Media Disk
+UUID=37F9BED733C03589 /mnt/media ntfs defaults 0 0
+/mnt/media/Videos /home/srb/Videos bind noatime,rw,bind 0 0
+/mnt/media/Music /home/srb/Music bind noatime,rw,bind 0 0
+/mnt/media/Pictures /home/srb/Pictures bind noatime,rw,bind 0 0
