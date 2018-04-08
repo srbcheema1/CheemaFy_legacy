@@ -1,6 +1,5 @@
 _vcf_loc=$HOME'/Desktop/gsoc/ebi/vcf-validator'
 
-
 alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
 alias vcf_valid_test=' $_vcf_loc/srb_test/build/bin/vcf_validator'
 alias g+++='g++ -std=c++11 -lboost_iostreams'
@@ -18,7 +17,7 @@ build_it(){
     if [ "$1" = "vcf" ]
     then
         cd $_vcf_loc/
-        sudo time -S -k docker run -v ${PWD}:/tmp ebivariation/vcf-validator < ~/.CheemaFy/.pass
+        time sudo -S -k docker run -v ${PWD}:/tmp ebivariation/vcf-validator < ~/.CheemaFy/.pass
         cd -
         cd $_vcf_loc/test/input_files/v4.3/srb_test
         cd -

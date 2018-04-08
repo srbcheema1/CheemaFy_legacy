@@ -11,10 +11,8 @@ prog=$HOME"/programs"
 
 #these commands are safe to execute they create folder only when
 #the folders are missing, they dont harm old content
-
 mkdir -p $prog"/python/importlib"
 mkdir -p $HOME"/.CheemaFy/srb_clip_board"
-
 
 #file to hold your password
 if ! [ -f ~/.CheemaFy/.pass ]
@@ -44,9 +42,6 @@ then
 #    echo ""
 #    echo $passwrd > ~/.CheemaFy/.pass
 fi
-
-printf "Do you want to add vim plugins y/n : "
-read ans
 
 if ! [ $place = $prog"/CheemaFy" ]
 then
@@ -108,22 +103,8 @@ cp -r ~/programs/CheemaFy/srbScripts ~/programs
 #copy importlib
 cp -r ~/programs/CheemaFy/importlib ~/programs/python
 
-sudo -S -k apt-get update -y < ~/.CheemaFy/.pass
-
-## safe commands
-#install xsel
-if ! type xsel > /dev/null 2>&1;
-then
-    echo installing xsel
-    sudo -S -k apt-get install xsel -y < ~/.CheemaFy/.pass
-fi
-
-#install vim
-if ! type vim > /dev/null 2>&1;
-then
-    echo installing vim
-    sudo -S -k apt-get install vim -y < ~/.CheemaFy/.pass
-fi
+sudo pacman -Syu
+sudo pacman -S xsel vim cmake xdotool wmctrl tilda tree clang boost boost-libs
 
 
 #install Vundle
@@ -140,30 +121,9 @@ echo instaling vimSyntax
 cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 
-#install other useful things
-sudo -S -k apt-get install build-essential -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install cmake -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install xdotool -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install tree -y < ~/.CheemaFy/.pass
 
 #install vim plugins
-if [ $ans = "y" ]
-then
-    vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
-fi
-sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
+vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
+~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
 
-if [ $ans = "y" ]
-then
-    ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
-fi
-
-#let the changes begin
-#gnome-terminal -e "bash -c \"echo 'Thanks for using CheemaFy' ; exec bash\"" & disown
-#wmctrl -i -c `xdotool getactivewindow` &
 echo 'Thanks for using CheemaFy'
