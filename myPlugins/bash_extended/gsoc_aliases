@@ -112,8 +112,8 @@ function _gsoc(){
 #                 pwd
 #         fi
 # }
-# 
-# 
+#
+#
 # export PS1="\$(split_pwd) > "
 # export PROMPT_COMMAND='PS1="$(python ~/short.pwd.py)"'
 

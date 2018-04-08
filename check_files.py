@@ -14,7 +14,6 @@ script to check codes of cheema and other are identical or not
 files = [
             ["bashrc", "~/.bashrc", "~/programs/CheemaFy/home_files/.bashrc"],
             ["vimrc", "~/.vimrc", "~/programs/CheemaFy/home_files/.vimrc"],
-            ["bash_aliases", "~/.bash_aliases", "~/programs/CheemaFy/home_files/.bash_aliases"],
             ["gitconfig", "~/.gitconfig", "~/programs/CheemaFy/home_files/.gitconfig"]
         ]
 folders = [

@@ -101,9 +101,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -116,20 +113,14 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export JAVA_HOME=/usr/lib/java/jdk1.8.0_74
-set PATH="$PATH:$JAVA_HOME/bin"
-export PATH
-
-export PATH=$PATH:"$HOME/programs/srbScripts"
-export PYTHONPATH=$PYTHONPATH:"$HOME/programs/srbScripts"
-export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
-
-#to include a file here use
-if [ -f ~/programs/srbScripts/bashrc_extended ]; then
-    . ~/programs/srbScripts/bashrc_extended
+# java
+if [ -f "/usr/lib/java/jdk1.8.0_74" ]; then
+    export JAVA_HOME=/usr/lib/java/jdk1.8.0_74
+    set PATH="$PATH:$JAVA_HOME/bin"
+    export PATH
 fi
 
-#gsoc aliases
-if [ -f /home/srb/programs/CheemaFy/myPlugins/gsoc_aliases ]; then
-    . /home/srb/programs/CheemaFy/myPlugins/gsoc_aliases
+# bash aliases
+if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
+    . ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended
 fi

@@ -1,0 +1,22 @@
+# shorten the prompt
+PROMPT_DIRTRIM=5
+
+#gsoc aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/util_aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/terminal_aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/language_aliases
+
+if [ -f /home/srb/programs/CheemaFy/myPlugins/bash_extended/gsoc_aliases ]; then
+    . /home/srb/programs/CheemaFy/myPlugins/bash_extended/gsoc_aliases
+fi
+
+
+# scripts
+if [ -d "$HOME/programs/srbScripts" ]; then
+    export PATH=$PATH:"$HOME/programs/srbScripts"
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/srbScripts"
+fi
+if [ -d "$HOME/programs/python/importlib" ]; then
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
+fi
+

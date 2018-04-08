@@ -14,6 +14,8 @@ prog=$HOME"/programs"
 mkdir -p $prog"/python/importlib"
 mkdir -p $HOME"/.CheemaFy/srb_clip_board"
 
+
+
 #file to hold your password
 if ! [ -f ~/.CheemaFy/.pass ]
 then
@@ -42,6 +44,9 @@ then
 #    echo ""
 #    echo $passwrd > ~/.CheemaFy/.pass
 fi
+
+printf "Do you want to add vim plugins y/n : "
+read ans
 
 if ! [ $place = $prog"/CheemaFy" ]
 then
@@ -129,13 +134,21 @@ sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install tree -y < ~/.CheemaFy/.pass
 
 #install vim plugins
-vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
+if [ $ans = "y" ]
+then
+    vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
+fi
 sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
 sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
-~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
+
+if [ $ans = "y" ]
+then
+    ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
+fi
 
 #let the changes begin
-gnome-terminal -e "bash -c \"echo 'Thanks for using CheemaFy' ; exec bash\"" & disown
-wmctrl -i -c `xdotool getactivewindow` &
+#gnome-terminal -e "bash -c \"echo 'Thanks for using CheemaFy' ; exec bash\"" & disown
+#wmctrl -i -c `xdotool getactivewindow` &
+echo "Thanks for using CheemaFy"

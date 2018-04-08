@@ -1,0 +1,170 @@
+# Show Desktop
+alias window='
+function _window(){
+    if [ $1 = "--help" ]
+    then
+        echo "Minimize all windows to show desktop"
+        return
+    fi
+    wmctrl -k on
+};_window'
+
+
+
+# COPY FILES UTILITY
+#you must have install xsel using sudo apt-get install xsel
+# to copy file to clipboard
+alias cpcb='xsel -b <'
+#to copy clipboard to a file
+alias cptf='echo "`xsel -b `" >> '
+#you can copy a file from one place to other
+    #you can copy a file by cpcb <file name>
+    #move to the other directory
+    #paste it there by cptf <filename>
+
+
+
+alias copy='
+function _copy(){
+    mkdir -p ~/.CheemaFy/srb_clip_board
+
+    if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
+    then
+        rm -f ~/.CheemaFy/srb_clip_board/* > /dev/null 2>&1;
+    fi
+
+    for i in `seq 1 $#`
+    do
+        if [ -d "${!i}" ] #sexy
+        then
+            cp -r ${!i} ~/.CheemaFy/srb_clip_board/
+        fi
+        if [ -f "${!i}" ]
+        then
+            cp ${!i} ~/.CheemaFy/srb_clip_board/
+        fi
+        echo copied ${!i}
+    done
+};_copy'
+
+
+alias cut='
+function _cut(){
+    mkdir -p ~/.CheemaFy/srb_clip_board
+
+    if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
+    then
+        rm -f ~/.CheemaFy/srb_clip_board/* > /dev/null 2>&1;
+    fi
+
+    for i in `seq 1 $#`
+    do
+        mv ${!i} ~/.CheemaFy/srb_clip_board/
+        echo cut ${!i}
+    done
+};_cut'
+
+
+alias paste='
+function _paste(){
+    mkdir -p ~/.CheemaFy/srb_clip_board
+
+    if [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
+    then
+       echo "clipboard empty"
+    fi
+
+    echo "pasting these items : "
+    ls -A ~/.CheemaFy/srb_clip_board/
+    cp -r ~/.CheemaFy/srb_clip_board/* ./
+};_paste'
+
+
+#my bad habbit to type rm
+help_rm="
+rm file1 file2                      --- will move them to trash
+rm -p file1 file2                   --- will delete them permanemtly and will ask for perission
+rm -f file1 file2                   --- will delete all files without asking permission
+                                            --- only for development purpose
+                                            --- not for daily use
+
+-------------------------------------------------------------------------------------------------
+
+rm -r folder1 folder2                       --- move folder to trash
+                                            --- even it works if you dont mention -r
+rm -p -r folder1 folder2                    --- remove folder permanently and will ask you permission
+rm -f -r folder1 folder2                    --- removes folder permenently .. wont ask for permission
+                                            --- only for development purpose
+                                            --- not for daily use
+
+---------------------------------------------------------------------------------------------------
+
+rm <file/folder> <folder/file>      --- move to trash whatever it is
+
+NOTE : this commandline utility doesn;t require \"-r\" flag for removing directory
+       it is quite smart to detect
+"
+alias rm='
+function _rm(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_rm"
+        return
+    fi
+
+    if [ "$1" = "-p" ] #deleting them permanently
+    then
+        if [ "$1" = "-r" ]
+        then
+            shift #sexy
+        fi
+
+        echo "do you want to delete permanently : $2 $3 $4 $5 ";
+        read ans;
+        if [ $ans = "y" ]
+        then
+            for i in `seq 2 $#`
+            do
+                if [ -d "${!i}" ]
+                then
+                    echo "rm -r ${!i}"
+                    rm -r ${!i}
+                elif [ -f "${!i}" ]
+                then
+                    echo "rm ${!i}"
+                    rm ${!i}
+                else
+                    echo "no such file or directory ${!i}"
+                fi
+            done
+        fi
+
+    elif [ "$1" = "-f" ] #remove without permission ...
+    then
+        for i in `seq 2 $#`
+        do
+            if [ -d "${!i}" ]
+            then
+                echo "rm -r ${!i}"
+                rm -r ${!i}
+            elif [ -f "${!i}" ]
+            then
+                echo "rm ${!i}"
+                rm ${!i}
+            else
+                echo "no such file or directory ${!i}"
+            fi
+        done
+
+    elif [ "$1" = "-r" ] #if someone gonna delete folder using rm -r
+    then
+        shift
+        gvfs-trash $@
+
+    elif [ "$#" -gt 0 ]
+    then
+        gvfs-trash $@
+    fi
+};_rm'
+
+

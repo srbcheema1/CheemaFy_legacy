@@ -4,7 +4,6 @@
 
 #cp homefiles
 cp ~/.bashrc       ~/programs/CheemaFy/home_files/
-cp ~/.bash_aliases ~/programs/CheemaFy/home_files/
 cp ~/.vimrc        ~/programs/CheemaFy/home_files/
 cp ~/.gitconfig    ~/programs/CheemaFy/home_files/
 
