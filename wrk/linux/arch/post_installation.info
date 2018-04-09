@@ -16,6 +16,9 @@ python3
 gcc
 firefox
 bash-completion
+lsb_release
+gvim
+    # it is usseful for accessing system clipboard
 
 
 

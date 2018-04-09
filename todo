@@ -1,0 +1,8 @@
+paste is not applied on hideen files
+    use rm -rf {,.[!.],..?}*
+    it deletes everything except . and ..
+
+also make trash good
+make rm good
+
+

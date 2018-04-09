@@ -30,7 +30,9 @@ function _copy(){
 
     if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
-        rm -f ~/.CheemaFy/srb_clip_board/* > /dev/null 2>&1;
+        cd ~/.CheemaFy/srb_clip_board
+        rm -f {,.[!.],..?}* > /dev/null
+        cd -
     fi
 
     for i in `seq 1 $#`
@@ -48,13 +50,15 @@ function _copy(){
 };_copy'
 
 
-alias cut='
+alias cutt='
 function _cut(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
     if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
-        rm -f ~/.CheemaFy/srb_clip_board/* > /dev/null 2>&1;
+        cd ~/.CheemaFy/srb_clip_board
+        rm -f {,.[!.],..?}* > /dev/null
+        cd -
     fi
 
     for i in `seq 1 $#`
@@ -76,7 +80,7 @@ function _paste(){
 
     echo "pasting these items : "
     ls -A ~/.CheemaFy/srb_clip_board/
-    cp -r ~/.CheemaFy/srb_clip_board/* ./
+    cp -r ~/.CheemaFy/srb_clip_board/. ./
 };_paste'
 
 
@@ -168,3 +172,105 @@ function _rm(){
 };_rm'
 
 
+#trash
+help_trash="
+trash ls                            --- list items in trash
+trash <filename> [<filename> ,]     --- move given files to trash
+trash -r <file/folder>              --- recover the file or folder
+trash                               --- cd ~/.local/share/Trash/files
+trash -d <filename>                 --- delete file permanemtly from trash
+trash -empty                        --- clear all the trash
+"
+alias trash='
+function _trash(){
+
+    # find a mount of given target
+    # findmnt -n -o SOURCE --target <path to file>
+
+    if  [ "$1" = "--help" ]
+    then
+        echo "$help_trash"
+        return
+    fi
+
+    #change it accordingly if needed
+    # it automatically detects the disk allocated
+    _disk_mounted="no_mount"
+    if [ -d "/mnt/disk" ]
+    then
+        cd /mnt/disk
+        _disk_mounted=`findmnt -n -o SOURCE --target .`
+        cd - > /dev/null
+    fi
+    _mount_point=`findmnt -n -o SOURCE --target .`
+
+
+    if [ "$_mount_point" = "$_disk_mounted" ]
+    then
+        _trash_loc="/mnt/disk/.Trash-$UID/files"
+        _trash_info_loc="/mnt/disk/.Trash-$UID/info"
+    else
+        _trash_loc="$HOME/.local/share/Trash/files/"
+        _trash_info_loc="$HOME/.local/share/Trash/info/"
+    fi
+    echo "location of trash is $_trash_loc"
+
+    if [ "$1" = "ls" ]
+    then
+        cd $_trash_loc
+        ls -A
+        cd - > /dev/null
+
+    elif [ "$1" = "-r" ] #restore
+    then
+        now=`pwd`
+        for i in `seq 2 $#`
+        do
+            cd $_trash_loc
+            mv ${!i} $now
+            cd $_trash_info_loc
+            rm -f ${!i}.trashinfo > /dev/null
+        done
+        cd $now
+
+    elif [ "$1" = "-d" ]
+    then
+        echo "do you want to delete permanently : $2 $3 $4 $5 ";
+        read ans;
+        if [ $ans = "y" ]
+        then
+            now=`pwd`
+            for i in `seq 2 $#`
+            do
+                cd $_trash_loc
+                echo "rm ${!i}"
+                rm -f ${!i}
+                cd $_trash_info_loc
+                rm -f ${!i}.trashinfo > /dev/null
+            done
+            cd $now
+        fi
+
+    elif [ "$1" = "--empty" ]
+    then
+        echo "do you want to delete trash permanently ";
+        read ans;
+        if [ $ans = "y" ]
+        then
+            now=`pwd`
+            cd $_trash_loc
+            rm -f *
+            cd $_trash_info_loc
+            rm -f ${!i}.trashinfo > /dev/null
+            cd $now
+            # gvfs-trash --empty
+        fi
+
+    elif [ "$#" = 0 ] #move to location of trash
+    then
+        cd $_trash_loc
+
+    else
+        mv $@ $_trash_loc
+    fi
+};_trash'

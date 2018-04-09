@@ -9,9 +9,15 @@ fi
 place=`pwd`
 prog=$HOME"/programs"
 
+# get linux name
+__linux=`lsb_release -i`
+IFS=':'
+read -a _linux <<< "$__linux"
+__linux=${_linux[1]}
+
+
 #these commands are safe to execute they create folder only when
 #the folders are missing, they dont harm old content
-
 mkdir -p $prog"/python/importlib"
 mkdir -p $HOME"/.CheemaFy/srb_clip_board"
 
@@ -38,15 +44,12 @@ then
             echo "[sudo], try again."
         fi
     done
-#    stty -echo
-#    printf "enter your password : " && read  passwrd
-#    stty echo
-#    echo ""
-#    echo $passwrd > ~/.CheemaFy/.pass
 fi
+
 
 printf "Do you want to add vim plugins y/n : "
 read ans
+
 
 if ! [ $place = $prog"/CheemaFy" ]
 then
@@ -58,8 +61,6 @@ then
     exit
 fi
 
-
-#here begins main CheemaFy
 
 #customise terminal
 UUID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
@@ -75,17 +76,14 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     foreground-color 'rgb(231,238,232)'
 
-# I removed these settings as they are not  in new gnome, so they cause problem in arch.
-# they work only in ubuntu
-# not in arch as it has updated gnome.
-# I will soon figure something out as I love transparent terminal
-__linux=`lsb_release -i`
-IFS=':'
-read -ra _linux <<< "$__linux"
-__linux=${_linux[1]}
+_comment="
+ I removed these settings as they are not  in new gnome, so they cause problem in arch.
+ they work only in ubuntu
+ not in arch as it has updated gnome.
+ I will soon figure something out as I love transparent terminal
+"
 if [ "$__linux" = "	Ubuntu" ]
 then
-    echo "in ubuntu"
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
         use-transparent-background true
     gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
@@ -94,76 +92,52 @@ fi
 
 
 
-
-
-#these commands are safe to execute .. updates the files ..
-#they can only add new files to system cannot delete older ones with diff names
-
 #copy home_files to its position
 cp -r ~/programs/CheemaFy/home_files/. ~/
-
-#copy folder srbScripts to  ~/programs/srbScript
 cp -r ~/programs/CheemaFy/srbScripts ~/programs
-
-#copy importlib
 cp -r ~/programs/CheemaFy/importlib ~/programs/python
 
-sudo -S -k apt-get update -y < ~/.CheemaFy/.pass
 
-## safe commands
-#install xsel
-if ! type xsel > /dev/null 2>&1;
+#install other useful things
+if [ "$__linux" = "	Ubuntu" ]
 then
-    echo installing xsel
-    sudo -S -k apt-get install xsel -y < ~/.CheemaFy/.pass
-fi
-
-#install vim
-if ! type vim > /dev/null 2>&1;
-then
-    echo installing vim
+    sudo -S -k apt-get update -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install vim -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install xsel -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install build-essential -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install cmake -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install xdotool -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install tree -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
+elif [ "$__linux" = "	Arch" ]
+then
+    echo "in arch"
 fi
+
 
 
 #install Vundle
 if ! [ -d "$HOME"/.vim/bundle/ ]
 then
-    #can create folder on its own
     echo installing vim bundle
     git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    echo installing YouCompleteMe
-    cp ~/programs/CheemaFy/myPlugins/vim/bundle/YouCompleteMe ~/.vim/bundle/
 fi
 
 echo instaling vimSyntax
 cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 
-#install other useful things
-sudo -S -k apt-get install build-essential -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install cmake -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install xdotool -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install tree -y < ~/.CheemaFy/.pass
-
-#install vim plugins
 if [ $ans = "y" ]
 then
     vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
-fi
-sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
-sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
-
-if [ $ans = "y" ]
-then
     ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
 fi
 
-#let the changes begin
 #gnome-terminal -e "bash -c \"echo 'Thanks for using CheemaFy' ; exec bash\"" & disown
 #wmctrl -i -c `xdotool getactivewindow` &
 echo 'Thanks for using CheemaFy'

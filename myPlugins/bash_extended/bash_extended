@@ -22,3 +22,4 @@ if [ -d "$HOME/programs/python/importlib" ]; then
     export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
 fi
 
+alias refresh='source ~/.bashrc'

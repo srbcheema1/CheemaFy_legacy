@@ -1,11 +1,4 @@
 #!/usr/bin/env bash
-if [ "$1" = "--remove" ]
-then
-    echo "removing CheemaFy"
-    sh ~/programs/CheemaFy/myPlugins/restore_old_config.sh
-    exit
-fi
-
 place=`pwd`
 prog=$HOME"/programs"
 
@@ -36,11 +29,6 @@ then
             echo "[sudo], try again."
         fi
     done
-#    stty -echo
-#    printf "enter your password : " && read  passwrd
-#    stty echo
-#    echo ""
-#    echo $passwrd > ~/.CheemaFy/.pass
 fi
 
 if ! [ $place = $prog"/CheemaFy" ]
@@ -70,10 +58,12 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     foreground-color 'rgb(231,238,232)'
 
-# I removed these settings as they are not  in new gnome, so they cause problem in arch.
-# they work only in ubuntu
-# not in arch as it has updated gnome.
-# I will soon figure something out as I love transparent terminal
+"
+ I removed these settings as they are not  in new gnome, so they cause problem in arch.
+ they work only in ubuntu
+ not in arch as it has updated gnome.
+ I will soon figure something out as I love transparent terminal
+"
 __linux=`lsb_release -i`
 IFS=':'
 read -ra _linux <<< "$__linux"
@@ -89,22 +79,13 @@ fi
 
 
 
-
-
-#these commands are safe to execute .. updates the files ..
-#they can only add new files to system cannot delete older ones with diff names
-
-#copy home_files to its position
+#copy files to their position
 cp -r ~/programs/CheemaFy/home_files/. ~/
-
-#copy folder srbScripts to  ~/programs/srbScript
 cp -r ~/programs/CheemaFy/srbScripts ~/programs
-
-#copy importlib
 cp -r ~/programs/CheemaFy/importlib ~/programs/python
 
 sudo pacman -Syu
-sudo pacman -S xsel vim cmake xdotool wmctrl tilda tree clang boost boost-libs
+sudo pacman -S xsel gvim cmake xdotool wmctrl tilda tree clang boost boost-libs
 
 
 #install Vundle
@@ -122,8 +103,11 @@ cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
 
 
-#install vim plugins
-vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
-~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
+# install vim plugins
+if [ $ans = "y" ]
+then
+    vim hell -c ":PluginInstall" -c ":q!" -c ":q!"
+    ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
+fi
 
 echo 'Thanks for using CheemaFy'

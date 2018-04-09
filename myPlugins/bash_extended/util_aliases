@@ -41,12 +41,14 @@ function _notify-me(){
     then
         shift
         $@
-        notify-send "completed !" "$@"
-        mail_me "work is done $@"
+        _hell="$@"
+        notify-send "completed !" "$_hell"
+        mail_me "work is done $_hell"
         return
     fi
     $@
-    notify-send "completed !" "$@"
+    _hell="$@"
+    notify-send "completed " "$_hell"
 };_notify-me'
 
 
@@ -145,7 +147,9 @@ function _term(){
         gnome-terminal & disown
     elif [ "$#" -eq 1 ]
     then
-        gnome-terminal & disown & exit #sexy
+        gnome-terminal & disown
+        sleep 1
+        exit #sexy
     fi
 };_term'
 
