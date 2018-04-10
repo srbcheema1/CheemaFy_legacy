@@ -107,6 +107,8 @@ rm <file/folder> <folder/file>      --- move to trash whatever it is
 
 NOTE : this commandline utility doesn;t require \"-r\" flag for removing directory
        it is quite smart to detect
+
+       After removing an item you can locate it in trash find position of trash using trash loc
 "
 alias rm='
 function _rm(){
@@ -118,56 +120,38 @@ function _rm(){
 
     if [ "$1" = "-p" ] #deleting them permanently
     then
+        shift #sexy
         if [ "$1" = "-r" ]
         then
             shift #sexy
         fi
 
-        echo "do you want to delete permanently : $2 $3 $4 $5 ";
+        echo "do you want to delete permanently : $@";
         read ans;
         if [ $ans = "y" ]
         then
-            for i in `seq 2 $#`
-            do
-                if [ -d "${!i}" ]
-                then
-                    echo "rm -r ${!i}"
-                    rm -r ${!i}
-                elif [ -f "${!i}" ]
-                then
-                    echo "rm ${!i}"
-                    rm ${!i}
-                else
-                    echo "no such file or directory ${!i}"
-                fi
-            done
+            rm -r $@
         fi
 
-    elif [ "$1" = "-f" ] #remove without permission ...
+    elif [ "$1" = "-f" ] #remove permanently without permission ...
     then
-        for i in `seq 2 $#`
-        do
-            if [ -d "${!i}" ]
-            then
-                echo "rm -r ${!i}"
-                rm -r ${!i}
-            elif [ -f "${!i}" ]
-            then
-                echo "rm ${!i}"
-                rm ${!i}
-            else
-                echo "no such file or directory ${!i}"
-            fi
-        done
+        shift
+        rm -r $@
 
     elif [ "$1" = "-r" ] #if someone gonna delete folder using rm -r
     then
         shift
-        gvfs-trash $@
+        trash $@
+
+    elif [ "$1" = "-rf" ] #if someone gonna delete folder using rm -rf
+    then
+        shift
+        trash $@
+
 
     elif [ "$#" -gt 0 ]
     then
-        gvfs-trash $@
+        trash $@
     fi
 };_rm'
 
@@ -177,13 +161,13 @@ help_trash="
 trash ls                            --- list items in trash
 trash <filename> [<filename> ,]     --- move given files to trash
 trash -r <file/folder>              --- recover the file or folder
-trash                               --- cd ~/.local/share/Trash/files
+trash                               --- cd to trash location
 trash -d <filename>                 --- delete file permanemtly from trash
 trash -empty                        --- clear all the trash
+trash -loc                          --- print location of trash
 "
 alias trash='
 function _trash(){
-
     # find a mount of given target
     # findmnt -n -o SOURCE --target <path to file>
 
@@ -195,25 +179,48 @@ function _trash(){
 
     #change it accordingly if needed
     # it automatically detects the disk allocated
-    _disk_mounted="no_mount"
-    if [ -d "/mnt/disk" ]
+    _data_disk_mounted="no_mount"
+    _media_disk_mounted="no_mount"
+    if [ -d "/mnt/data" ]
     then
-        cd /mnt/disk
-        _disk_mounted=`findmnt -n -o SOURCE --target .`
+        cd /mnt/data
+        _data_disk_mounted=`findmnt -n -o SOURCE --target .`
         cd - > /dev/null
     fi
-    _mount_point=`findmnt -n -o SOURCE --target .`
-
-
-    if [ "$_mount_point" = "$_disk_mounted" ]
+    if [ -d "/mnt/media" ]
     then
-        _trash_loc="/mnt/disk/.Trash-$UID/files"
-        _trash_info_loc="/mnt/disk/.Trash-$UID/info"
+        cd /mnt/media
+        _media_disk_mounted=`findmnt -n -o SOURCE --target .`
+        cd - > /dev/null
+    fi
+
+
+    _mount_point=`findmnt -n -o SOURCE --target .`
+    IFS='['
+    read -a __mount_point <<< "$_mount_point"
+    _mount_point=${__mount_point[0]}
+
+
+
+    if [ "$_mount_point" = "$_data_disk_mounted" ]
+    then
+        _trash_loc="/mnt/data/.Trash-$UID/files"
+        _trash_info_loc="/mnt/data/.Trash-$UID/info"
+    elif [ "$_mount_point" = "$_media_disk_mounted" ]
+    then
+        _trash_loc="/mnt/media/.Trash-$UID/files"
+        _trash_info_loc="/mnt/media/.Trash-$UID/info"
     else
         _trash_loc="$HOME/.local/share/Trash/files/"
         _trash_info_loc="$HOME/.local/share/Trash/info/"
     fi
-    echo "location of trash is $_trash_loc"
+
+    if [ "$1" = "loc" ]
+    then
+        echo "location of trash is $_trash_loc"
+        return
+    fi
+
 
     if [ "$1" = "ls" ]
     then
@@ -229,18 +236,31 @@ function _trash(){
             cd $_trash_loc
             mv ${!i} $now
             cd $_trash_info_loc
-            rm -f ${!i}.trashinfo > /dev/null
+            if [ -f "${!i}.trashinfo" ]
+            then
+                rm -f ${!i}.trashinfo > /dev/null
+            fi
+        done
+        cd $now
+
+    elif [ "$1" = "-i" ] #interactive restore needs to be modified
+    then
+        now=`pwd`
+        cd $_trash_loc
+        _trash_items=`ls -A`
+        echo $_trash_items
         done
         cd $now
 
     elif [ "$1" = "-d" ]
     then
-        echo "do you want to delete permanently : $2 $3 $4 $5 ";
+        shift
+        echo "do you want to delete permanently : $@ ";
         read ans;
         if [ $ans = "y" ]
         then
             now=`pwd`
-            for i in `seq 2 $#`
+            for i in `seq 1 $#`
             do
                 cd $_trash_loc
                 echo "rm ${!i}"
@@ -259,9 +279,9 @@ function _trash(){
         then
             now=`pwd`
             cd $_trash_loc
-            rm -f *
+            rm -f {,.[!.],..?}* > /dev/null
             cd $_trash_info_loc
-            rm -f ${!i}.trashinfo > /dev/null
+            rm -f {,.[!.],..?}* > /dev/null
             cd $now
             # gvfs-trash --empty
         fi
