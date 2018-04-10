@@ -31,22 +31,13 @@ function _copy(){
     if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
         cd ~/.CheemaFy/srb_clip_board
-        rm -f {,.[!.],..?}* > /dev/null
+        ls -A | xargs -d"\n" rm -r
+        #rm -f {,.[!.],..?}* > /dev/null
         cd -
     fi
 
-    for i in `seq 1 $#`
-    do
-        if [ -d "${!i}" ] #sexy
-        then
-            cp -r ${!i} ~/.CheemaFy/srb_clip_board/
-        fi
-        if [ -f "${!i}" ]
-        then
-            cp ${!i} ~/.CheemaFy/srb_clip_board/
-        fi
-        echo copied ${!i}
-    done
+    cp -r $@ ~/.CheemaFy/srb_clip_board/
+    echo copied $@
 };_copy'
 
 
@@ -57,15 +48,13 @@ function _cut(){
     if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
         cd ~/.CheemaFy/srb_clip_board
-        rm -f {,.[!.],..?}* > /dev/null
+        ls -A | xargs -d"\n" rm -r
+        # rm -f {,.[!.],..?}* > /dev/null #not working properly
         cd -
     fi
 
-    for i in `seq 1 $#`
-    do
-        mv ${!i} ~/.CheemaFy/srb_clip_board/
-        echo cut ${!i}
-    done
+    mv $@ ~/.CheemaFy/srb_clip_board/
+    echo moved $@
 };_cut'
 
 
@@ -245,12 +234,7 @@ function _trash(){
 
     elif [ "$1" = "-i" ] #interactive restore needs to be modified
     then
-        now=`pwd`
-        cd $_trash_loc
-        _trash_items=`ls -A`
-        echo $_trash_items
-        done
-        cd $now
+        my_trash $_trash_loc
 
     elif [ "$1" = "-d" ]
     then
@@ -279,11 +263,10 @@ function _trash(){
         then
             now=`pwd`
             cd $_trash_loc
-            rm -f {,.[!.],..?}* > /dev/null
+            ls -A | xargs -d"\n" rm -r
             cd $_trash_info_loc
-            rm -f {,.[!.],..?}* > /dev/null
+            ls -A | xargs -d"\n" rm -r
             cd $now
-            # gvfs-trash --empty
         fi
 
     elif [ "$#" = 0 ] #move to location of trash

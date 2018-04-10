@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 import os
 from sys import argv
 from comp_files import comp_files as comparer

@@ -33,8 +33,10 @@ testd = testd.readlines()
 T,C = testd[0].split(' ')
 T=int(T)
 
-if(not os.path.isdir("cases")):
-    os.system("mkdir cases")
+if(os.path.isdir("cases")):
+    os.system("rm -r cases")
+
+os.system("mkdir cases")
 
 os.system("g++ -std=c++11 "+code)
 for i in range(1,T+1):
@@ -51,3 +53,5 @@ for i in range(1,T+1):
     os.system("mv in0"+str(i)+".txt ./cases")
     os.system("mv out0"+str(i)+".txt ./cases")
 
+os.chdir("cases")
+os.system("zip -r cases.zip *")

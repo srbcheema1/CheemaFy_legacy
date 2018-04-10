@@ -6,12 +6,10 @@
 mkdir -p ~/programs/CheemaFy/.save_old_config/home_files
 
 touch ~/.bashrc
-touch ~/.bash_aliases
 touch ~/.vimrc
 touch ~/.gitconfig
 
 cp ~/.bashrc       ~/programs/CheemaFy/.save_old_config/home_files/
-cp ~/.bash_aliases ~/programs/CheemaFy/.save_old_config/home_files/
 cp ~/.vimrc        ~/programs/CheemaFy/.save_old_config/home_files/
 cp ~/.gitconfig    ~/programs/CheemaFy/.save_old_config/home_files/
 

@@ -1,0 +1,129 @@
+#! /usr/bin/env python3
+import os
+from sys import argv,exit
+from comp_files import comp_files as comparer
+from abs_path import abs_path
+from srbColour import Colour
+
+
+'''
+script to interactively use trash
+'''
+
+sp_str = '>'
+
+def print_trash(trash_loc):
+    os.system("cd "+trash_loc)
+    items = os.listdir(trash_loc)
+
+    if(len(items) == 0):
+        print("trash is empty")
+        exit()
+
+    i = 0
+    item_set = {}
+    for item in items:
+        i+=1
+        print(Colour.CYAN+str(i)+Colour.END,":",Colour.YELLOW+item+Colour.END)
+        item_set[i]=item
+    return item_set
+
+
+def trash_restore_interactive(trash_loc):
+    pwd=os.getcwd()
+    item_set = print_trash(trash_loc)
+    print("enter number of item you want to restore\n0 to exit\n-1 to refresh")
+    inp = 1
+    while(inp != 0):
+        item_nos = [ int(x) for x in input().split() ]
+        for item_no in item_nos:
+            if(item_no == 0):
+                inp = 0
+                break
+            if(item_no == -1):
+                item_set = print_trash(trash_loc)
+                break
+            if (item_no <= 0 or item_no > len(item_set)):
+                print(Colour.RED+"invalid number "+Colour.YELLOW+str(item_no)+Colour.END)
+                break
+
+            file_1 = trash_loc+"/"+item_set[item_no]
+            file_2 = pwd+"/"+item_set[item_no]
+            if(os.path.exists(file_1)):
+                print("mv "+file_1+" "+file_2)
+                os.system("mv "+file_1+" "+file_2)
+                # os.rename(file_1,file_2)
+            else:
+                print(item_set[item_no]+Colour.RED+" doesn't exists"+Colour.END)
+    return False
+
+def trash_backup_interactive(trash_loc):
+    pwd=os.getcwd()
+    item_set = print_trash(trash_loc)
+    print("enter number of item you want to create backup_version\n0 to exit\n-1 to refresh")
+    inp = 1
+    while(inp != 0):
+        item_nos = [ int(x) for x in input().split() ]
+        for item_no in item_nos:
+            if(item_no == 0):
+                inp = 0
+                break
+            if(item_no == -1):
+                item_set = print_trash(trash_loc)
+                break
+            if (item_no <= 0 or item_no > len(item_set)):
+                print(Colour.RED+"invalid number "+Colour.YELLOW+str(item_no)+Colour.END)
+                break
+
+            file_1 = trash_loc+"/"+item_set[item_no]
+            file_2 = file_1 + "_bkup"
+            if(os.path.exists(file_1)):
+                print("mv "+file_1+" "+file_2)
+                os.system("mv "+file_1+" "+file_2)
+                # os.rename(file_1,file_2)
+            else:
+                print(item_set[item_no]+Colour.RED+" doesn't exists"+Colour.END)
+    return False
+
+def trash_delete_interactive(trash_loc):
+    pwd=os.getcwd()
+    item_set = print_trash(trash_loc)
+    print("enter number of item you want to delete\n0 to exit\n-1 to refresh")
+    inp = 1
+    while(inp != 0):
+        item_nos = [ int(x) for x in input().split() ]
+        for item_no in item_nos:
+            if(item_no == 0):
+                inp = 0
+                break
+            if(item_no == -1):
+                item_set = print_trash(trash_loc)
+                break
+            if (item_no <= 0 or item_no > len(item_set)):
+                print(Colour.RED+"invalid number "+Colour.YELLOW+str(item_no)+Colour.END)
+                break
+
+            file_1 = trash_loc+"/"+item_set[item_no]
+            file_2 = pwd+"/"+item_set[item_no]
+            if(os.path.exists(file_1)):
+                print("rm -r "+file_1)
+                os.system("rm -r "+file_1)
+            else:
+                print(item_set[item_no]+Colour.RED+" doesn't exists"+Colour.END)
+    return False
+
+if(__name__=='__main__'):
+    if(len(argv)==2):
+        trash_loc = argv[1]
+        trash_loc = abs_path(trash_loc)
+    else:
+        exit()
+
+    print("Do you want to delete, backup or restore d/b/r : ",end='')
+    inp = input()
+    if(inp == 'd'):
+        ret = trash_delete_interactive(trash_loc)
+    elif(inp == 'b'):
+        ret = trash_backup_interactive(trash_loc)
+    else:
+        ret = trash_restore_interactive(trash_loc)
