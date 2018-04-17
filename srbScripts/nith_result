@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /bin/python3
 from os import environ
 import requests
 from bs4 import BeautifulSoup
@@ -57,67 +57,98 @@ class Student:
             self.name = '-'
             self.sgpa = self.points = self.cgpa = '0'
 
-    def display_result(self):
+    def get_result(self):
         out = self.rollno +"\n\t" + self.name + "\n\t" + self.sgpa + "\n\t" +self.points+ "\n\t" + self.cgpa
         return out
 
-flag = 0
-if(len(argv)==2):
-    roll=argv[1]
-    flag = 1
-else:
-    print("enter ur roll : ",end='')
-    roll = str(input())
-
-std = Student(roll)
-
-print(std.display_result())
 
 def sort_sgpa(std):
     return float(std.sgpa)
 def sort_cgpa(std):
     return float(std.cgpa)
 
-if(flag==1):
-    ans='y'
-else:
-    print("do you want relult of whole class y or n : ",end='')
-    ans = input()
-data=[]
-if(ans!='y'):
-    exit()
 
-temp = roll[:-2]
-a,b = 1,90
-if(roll[0]=='i'):
-    b=40
-if(roll[2]=='m'):
-    b=65
+def full_class(roll):
+    data=[]
+    temp = roll[:-2]
+    a,b = 1,90
+    if(roll[0]=='i'):
+        b=40
+    if(roll[2]=='m'):
+        b=65
 
-if(ans=='y'):
-    for i in range(a,b):
-        roll = temp
-        roll += "%02d"%(i)
-        std = Student(roll)
-        if(std.name!='0'):
-            data.append(std)
-            print(std.display_result())
+    if(ans=='y'):
+        for i in range(a,b):
+            roll = temp
+            roll += "%02d"%(i)
+            std = Student(roll)
+            if(std.name!='0'):
+                data.append(std)
+                print(std.get_result())
+                print()
+        data.sort(key=sort_sgpa,reverse=True)
+        print("sorting by sgpi....\n\n\n")
+        rank = 1
+        for item in data:
+            print(rank,end=" ")
+            print(item.get_result())
             print()
-    data.sort(key=sort_sgpa,reverse=True)
-    print("sorting by sgpi....\n\n\n")
-    rank = 1
-    for item in data:
-        print(rank,end=" ")
-        print(item.display_result())
-        print()
-        rank +=1
+            rank +=1
+
+        data.sort(key=sort_cgpa,reverse=True)
+        print("sorting by cgpi....\n\n\n")
+        rank = 1
+        for item in data:
+            print(rank,end=" ")
+            print(item.get_result())
+            print()
+            rank +=1
+
+
+def full_year(roll):
+    classes = ['15101','15201','15301','15401','15501','15601','15701','15mi501','15mi401','iiitu15101']
+    data=[]
+    for roll in classes:
+        temp = roll[:-2]
+        a,b = 1,90
+        if(roll[0]=='i'):
+            b=40
+        if(roll[2]=='m'):
+            b=65
+
+        for i in range(a,b):
+            roll = temp
+            roll += "%02d"%(i)
+            std = Student(roll)
+            if(std.name!='0'):
+                data.append(std)
 
     data.sort(key=sort_cgpa,reverse=True)
-    print("sorting by cgpi....\n\n\n")
     rank = 1
     for item in data:
         print(rank,end=" ")
-        print(item.display_result())
+        print(item.get_result())
         print()
         rank +=1
 
+
+
+if(__name__=="__main__"):
+    ans = 'n'
+    if(len(argv)==2):
+        roll=argv[1]
+        ans = 'y'
+    else:
+        print("enter ur roll : ",end='')
+        roll = str(input())
+        print("do you want relult of whole class y or n : ",end='')
+        ans = input()
+
+    std = Student(roll)
+    print(std.get_result())
+
+    if(ans!='y'):
+        exit()
+
+    full_class(roll)
+    full_year(roll)
