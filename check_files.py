@@ -17,8 +17,6 @@ files = [
             ["gitconfig", "~/.gitconfig", "~/programs/CheemaFy/home_files/.gitconfig"]
         ]
 folders = [
-            ["srbScripts", "~/programs/srbScripts", "~/programs/CheemaFy/srbScripts"],
-            ["importlib", "~/programs/python/importlib", "~/programs/CheemaFy/importlib"],
             ["vim_ftdetect", "~/.vim/ftdetect", "~/programs/CheemaFy/myPlugins/vim/ftdetect"],
             ["vim_syntax", "~/.vim/syntax", "~/programs/CheemaFy/myPlugins/vim/syntax"]
         ]

@@ -8,19 +8,16 @@ fi
 
 place=`pwd`
 prog=$HOME"/programs"
+#these commands are safe to execute they create folder only when
+#the folders are missing, they dont harm old content
+mkdir -p $prog
+mkdir -p $HOME"/.CheemaFy/srb_clip_board"
 
 # get linux name
 __linux=`lsb_release -i`
 IFS=':'
 read -a _linux <<< "$__linux"
 __linux=${_linux[1]}
-
-
-#these commands are safe to execute they create folder only when
-#the folders are missing, they dont harm old content
-mkdir -p $prog"/python/importlib"
-mkdir -p $HOME"/.CheemaFy/srb_clip_board"
-
 
 #file to hold your password
 if ! [ -f ~/.CheemaFy/.pass ]
@@ -45,10 +42,6 @@ then
         fi
     done
 fi
-
-
-printf "Do you want to add vim plugins y/n : "
-read ans
 
 
 if ! [ $place = $prog"/CheemaFy" ]
@@ -94,8 +87,6 @@ fi
 
 #copy home_files to its position
 cp -r ~/programs/CheemaFy/home_files/. ~/
-cp -r ~/programs/CheemaFy/srbScripts ~/programs
-cp -r ~/programs/CheemaFy/importlib ~/programs/python
 
 
 #install other useful things
@@ -141,6 +132,11 @@ fi
 echo instaling vimSyntax
 cp -r ~/programs/CheemaFy/myPlugins/vim/syntax   ~/.vim/
 cp -r ~/programs/CheemaFy/myPlugins/vim/ftdetect ~/.vim/
+
+
+
+printf "Do you want to add vim plugins y/n : "
+read ans
 
 if [ $ans = "y" ]
 then

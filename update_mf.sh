@@ -7,11 +7,6 @@ cp ~/.bashrc       ~/programs/CheemaFy/home_files/
 cp ~/.vimrc        ~/programs/CheemaFy/home_files/
 cp ~/.gitconfig    ~/programs/CheemaFy/home_files/
 
-#cp srbScripts
-cp -r ~/programs/srbScripts/. ~/programs/CheemaFy/srbScripts/
-
-#cp importlib
-cp -r ~/programs/python/importlib/. ~/programs/CheemaFy/importlib/
 
 #vim files
 cp -r ~/.vim/syntax ~/programs/CheemaFy/myPlugins/vim/
@@ -27,15 +22,15 @@ then
     rm ~/programs/CheemaFy/srbScripts/*.pyc
 fi
 
-extra_files=`ls ~/programs/CheemaFy/importlib/ | grep __* | wc -l`
+extra_files=`ls ~/programs/CheemaFy/srbScripts/srblib/ | grep __* | wc -l`
 if [ "$extra_files" -gt 0 ]
 then
-    rm -r ~/programs/CheemaFy/importlib/__*
+    rm -r ~/programs/CheemaFy/srbScripts/srblib/__*
 fi
 
-extra_files=`ls ~/programs/CheemaFy/importlib/ | grep pyc | wc -l`
+extra_files=`ls ~/programs/CheemaFy/srbScripts/srblib/ | grep pyc | wc -l`
 if [ "$extra_files" -gt 0 ]
 then
-    rm -r ~/programs/CheemaFy/importlib/*.pyc
+    rm -r ~/programs/CheemaFy/srbScripts/srblib/*.pyc
 fi
 
