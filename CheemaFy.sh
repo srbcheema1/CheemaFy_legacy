@@ -101,10 +101,14 @@ then
     sudo -S -k apt-get install wmctrl -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install tilda -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install tree -y < ~/.CheemaFy/.pass
+    sudo -S -k apt-get install locate -y < ~/.CheemaFy/.pass
+
     sudo -S -k apt-get install vim-gnome -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install clang-format-5.0 -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
+
+    sudo updatedb
 elif [ "$__linux" = "	Arch" ]
 then
     echo "in arch"
@@ -113,11 +117,13 @@ then
 
     sudo pacman -S base-devel python python3 gcc firefox bash-completion lsb-release
     sudo pacman -S ntfs-3g
-    sudo pacman -S xsel gvim cmake xdotool wmctrl tilda tree clang boost boost-libs
+    sudo pacman -S xsel gvim cmake xdotool wmctrl tilda tree clang boost boost-libs mlocate
 
     systemctl enable NetworkManager.service
     systemctl enable wpa_supplicant.service
     systemctl start NetworkManager.service
+
+    sudo updatedb
 fi
 
 

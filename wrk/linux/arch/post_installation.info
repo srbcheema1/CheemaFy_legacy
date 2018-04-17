@@ -70,3 +70,22 @@ yaourt -Syu downgrade
 
 example:
     downgrade gnome-terminal
+
+
+############################## locate
+pacman -Ss locate
+pacman -S mlocate
+sudo updatedb
+
+now we can use locate
+locate libbz2
+    this will show both libbz2.so and libbz2.a
+    if you want to see only libbz2.so
+        then use
+            locate libbz2.so
+    also we need to use sudo updatedb before using this command
+
+ld -lbz2 --verbose
+to check whether a library is available or not.
+
+ldd ./a.out to check dynamically linked libraries

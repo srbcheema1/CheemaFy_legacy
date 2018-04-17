@@ -2,7 +2,7 @@ sudo pacman -Syu
 sudo pacman -S wpa_supplicant wireless_tools networkmanager network-manager-applet
 
 sudo pacman -S base-devel python python3 gcc firefox bash-completion lsb-release
-sudo pacman -S ntfs-3g
+sudo pacman -S ntfs-3g gparted
 sudo pacman -S xsel gvim cmake xdotool wmctrl tilda tree clang boost boost-libs
 
 systemctl enable NetworkManager.service
