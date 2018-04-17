@@ -1,0 +1,7 @@
+to build statically use the command
+
+g++ -std=c++11 compressed_vcf_reader.cpp -lboost_iostreams -lbz2 -lz -static -o compressed_reader_static
+
+note: we have to mention all the used libraries that is not in the case of dynamic linking
+you can test whether binary is static or not using
+ldd ./compressed_reader_static

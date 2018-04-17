@@ -1,0 +1,16 @@
+to build dynamically use the command
+
+g++ -std=c++11 compressed_vcf_reader.cpp -lboost_iostreams -lbz2 -lz -o compressed_reader_dynamic
+
+OR
+
+g++ -std=c++11 compressed_vcf_reader.cpp -lboost_iostreams -o compressed_reader_dynamic
+
+
+note: we may or maynot mention all the libraries in case of dynamic linking
+they will be included dynamically as required
+to set path of dynamic libraries we can use
+export LD_LIBRARIES_PATH=""
+
+you can test whether binary is dynamic or not using
+ldd ./compressed_reader_dynamic

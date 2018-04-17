@@ -1,0 +1,11 @@
+ar rcs libclass.a class1.o class2.o class3.o
+we can force compiler to use static linking by using flag "-static"
+
+
+
+to link some files dynamically and others non-dynamically we can use
+https://stackoverflow.com/a/938947/9212547
+
+we can use command ldd to check dynamically linked libraries and also we can check if it is static
+
+

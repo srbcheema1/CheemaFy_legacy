@@ -14,12 +14,12 @@ fi
 
 
 # scripts
-if [ -d "$HOME/programs/srbScripts" ]; then
-    export PATH=$PATH:"$HOME/programs/srbScripts"
-    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/srbScripts"
+if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
+    export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
 fi
-if [ -d "$HOME/programs/python/importlib" ]; then
-    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/python/importlib"
+if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srblib"
 fi
 
 alias refresh='source ~/.bashrc'

@@ -22,7 +22,7 @@ script,code,testc,testd = argv
 
 if(not os.path.exists(testd)):
     print(testd," file not found")
-    exit
+    exit()
 
 testd = open(testd)
 l = sum(1 for line in testd)
