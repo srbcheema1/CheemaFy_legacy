@@ -19,7 +19,8 @@ if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
     export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
 fi
 if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
-    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srblib"
+    export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
 fi
 
 alias refresh='source ~/.bashrc'
