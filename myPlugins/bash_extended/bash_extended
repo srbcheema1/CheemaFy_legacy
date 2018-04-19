@@ -16,10 +16,11 @@ fi
 # scripts
 if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
     export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
-    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
+    #export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
 fi
+
 if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
-    export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
+    #export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
     export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
 fi
 

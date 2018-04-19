@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+import os,sys,time
+
+from reader import reader
+from srbColour import Colour
+
+args = reader()
+if(len(args)==0):
+    print("no arguments given")
+    sys.exit()
+
+command = ' '.join(args)
+start_time = time.time()
+os.system(command)
+print(Colour.GREEN + "time taken : " + Colour.YELLOW + str(time.time() - start_time) + Colour.END)

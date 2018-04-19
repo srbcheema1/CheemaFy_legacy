@@ -124,7 +124,7 @@ alias cv='cd ~/programs/interviews/cv/my_docs'
 alias show_trailing_spaces='grep -I -r -n "\s$" . '
 
 function bookmark(){
-    python3 ~/programs/srbScripts/bookmark.py | tee ~/.CheemaFy/.open_path
+    python3 ~/programs/CheemaFy/srbScripts/bookmark.py | tee ~/.CheemaFy/.open_path
     cmd=`sed -n '$p' ~/.CheemaFy/.open_path `
     cd $cmd
 }

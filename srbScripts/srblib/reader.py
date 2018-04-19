@@ -19,8 +19,6 @@ def readerd():
 def reader():
     dist,simple = readerd()
     if(len(dist)==0):
-        if(len(simple)==1):
-            return simple[0]
         return simple
     else:
         return dist,simple

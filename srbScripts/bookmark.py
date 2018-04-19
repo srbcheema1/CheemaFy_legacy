@@ -13,13 +13,13 @@ help2 = '''
 '''
 
 def create_file(fille):
-    template =                                      \
-    {                                               \
-        "paths":{                                   \
-            "srbScripts":{                          \
-                "path":"~/programs/srbScripts"      \
-            }                                       \
-        }                                           \
+    template =                                             \
+    {                                                      \
+        "paths":{                                          \
+            "srbScripts":{                                 \
+                "path":"~/programs/CheemaFy/srbScripts"    \
+            }                                              \
+        }                                                  \
     }
     jfile = open(fille, 'w')
     json.dump(template,jfile,indent = 4,ensure_ascii = False)

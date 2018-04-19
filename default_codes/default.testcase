@@ -3,7 +3,10 @@ from srbIo import printf
 from reader import reader
 
 args = reader()
-t_ = int(args[0])
+if(len(args)==0):
+    t_ = 1
+else:
+    t_ = int(args[0])
 
 
 t = rand(t_)
