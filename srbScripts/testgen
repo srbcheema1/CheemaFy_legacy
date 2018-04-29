@@ -1,6 +1,8 @@
 #! /usr/bin/env python3
-from sys import argv,exit
-import os
+from sys import exit
+from reader import reader
+from srbColour import Colour
+import os,time
 
 description="""
 requires 3 command line argunemts
@@ -9,49 +11,110 @@ testcase generator      python3 file
 testdesctiption         simple file
 
 test desctiption file includes :
-    first line contains 2 integers T A
+    first line contains single integer T
         T => no of test files to be generated
-        C => no of command line argv
-    then next T lines contains C commandline arguments for testcasegen
+    then next T lines contains commandline arguments for testcasegen
 """
-if(len(argv)!=4):
-    print(description)
-    exit()
 
-script,code,testc,testd = argv
+def verify_file(file_name):
+    if(not os.path.exists(file_name)):
+        print(Colour.RED+file_name,"not found"+Colour.END)
+        exit()
 
-if(not os.path.exists(testd)):
-    print(testd," file not found")
-    exit()
 
-testd = open(testd)
-l = sum(1 for line in testd)
+def gen_in_name(num):
+    if(num<10):
+        return "in0"+str(num)+".txt"
+    return "in"+str(num)+".txt"
 
-testd.seek(0,0)
-testd = testd.readlines()
 
-T,C = testd[0].split(' ')
-T=int(T)
+def gen_out_name(num):
+    if(num<10):
+        return "out0"+str(num)+".txt"
+    return "out"+str(num)+".txt"
 
-if(os.path.isdir("cases")):
-    os.system("rm -r cases")
+def get_type(file_name):
+    arr = file_name.split('.')
+    return arr[-1]
 
-os.system("mkdir cases")
+def get_file_name(file_name):
+    arr = file_name.split('.')
+    return arr[0]
 
-os.system("g++ -std=c++11 "+code)
-for i in range(1,T+1):
-    args = testd[i].split(' ')
-    if(args[-1][-1]=='\n'):
-        args[-1] = args[-1][:-1]
+def get_exec(file_name):
+    file_type = get_type(file_name)
+    if(file_type=="cpp"):
+        exec_file = "./_"+get_file_name(file_name)+".out"
+        os.system("g++ -std=c++11 "+file_name+" -o "+exec_file)
+    elif(file_type=="py"):
+        exec_file = "python3 "+file_name
+    return exec_file
+
+
+testd_index = 0
+def read_next_line(testd):
+    global testd_index
+    i = testd_index
+
+    testd_len = sum(1 for line in testd)
+    args = []
+    while(len(args)==0):
+        if(i>=testd_len):
+            return ["eof"]
+        args = testd[i].strip()
+        args = args.split(' ')
+        if(len(args)==1 and args[0]==''):
+            args = []
+        i += 1
+    testd_index = i
+
     args = ' '.join(args)
-    args = str(args)
-    command = "python3 "+testc+" "+args+" > in0"+str(i)+".txt"
+    return str(args)
 
-    print(command)
-    os.system(command)
-    os.system("./a.out < in0"+str(i)+".txt > out0"+str(i)+".txt")
-    os.system("mv in0"+str(i)+".txt ./cases")
-    os.system("mv out0"+str(i)+".txt ./cases")
 
-os.chdir("cases")
-os.system("zip -r cases.zip *")
+def testgen(args):
+    for file_name in args:
+        verify_file(file_name)
+    code,testc,testd = args
+
+    code_exec = get_exec(code)
+    testc_exec = get_exec(testc)
+
+    testd = open(testd)
+    testd.seek(0,0)
+    testd = testd.readlines()
+
+    if(os.path.isdir("cases")):
+        os.system("rm -r cases")
+    os.system("mkdir cases")
+
+
+    i = 1
+    while(True):
+        args = read_next_line(testd)
+        if(args[0]=="eof"):
+            break
+
+        command = testc_exec + " " + args + " > " + gen_in_name(i)
+        print(Colour.CYAN+str(i)+" : "+Colour.END+command)
+        os.system(command)
+
+        start_time = time.time()
+        os.system(code_exec+" < " + gen_in_name(i) + " > "+gen_out_name(i))
+        print(Colour.GREEN + "     time : " + Colour.YELLOW + str(time.time()-start_time) + Colour.END)
+
+        os.system("mv " + gen_in_name(i) + " ./cases")
+        os.system("mv " + gen_out_name(i) + " ./cases")
+        i += 1
+
+    os.chdir("cases")
+    os.system("zip -r cases.zip *")
+
+
+if(__name__=="__main__"):
+    args = reader()
+    if(len(args)!=3):
+        print(description)
+        exit()
+
+    testgen(args)
