@@ -79,15 +79,15 @@ function! EditVimrc()
                 \"
     let l:n = getchar() - 48
     if l:n == 1
-        :70vsplit ~/.vimrc
+        :70vsplit ~/programs/CheemaFy/srbScripts/vim_scripts/vimrc.vim
     elseif l:n == 2
-        :70vsplit ~/programs/srbScripts/scripts.vim
+        :70vsplit ~/programs/CheemaFy/srbScripts/vim_scripts/scripts.vim
     elseif l:n == 3
-        :70vsplit ~/programs/srbScripts/programming.vim
+        :70vsplit ~/programs/CheemaFy/srbScripts/vim_scripts/programming.vim
     elseif l:n == 4
-        :70vsplit ~/programs/srbScripts/tabb.vim
+        :70vsplit ~/programs/CheemaFy/srbScripts/vim_scripts/tabb.vim
     elseif l:n == 5
-        :70vsplit ~/programs/srbScripts/file_type.vim
+        :70vsplit ~/programs/CheemaFy/srbScripts/vim_scripts/file_type.vim
     "not working feature to press enter
     "call feedkeys("\<cr>")
     endif
@@ -95,15 +95,16 @@ endfunction
 nnoremap <F3> :call EditVimrc()<cr>
 
 nnoremap <F2> :source ~/.vimrc<cr>
-            \ :source ~/programs/srbScripts/scripts.vim<cr>
-            \ :source ~/programs/srbScripts/programming.vim<cr>
-            \ :source ~/programs/srbScripts/tabb.vim<cr>
-            \ :source ~/programs/srbScripts/file_type.vim<cr>
+            \ :source ~/programs/CheemaFy/srbScripts/vim_scripts/vimrc.vim<cr>
+            \ :source ~/programs/CheemaFy/srbScripts/vim_scripts/scripts.vim<cr>
+            \ :source ~/programs/CheemaFy/srbScripts/vim_scripts/programming.vim<cr>
+            \ :source ~/programs/CheemaFy/srbScripts/vim_scripts/tabb.vim<cr>
+            \ :source ~/programs/CheemaFy/srbScripts/vim_scripts/file_type.vim<cr>
 
 function! RefreshSource_()
-    :source ~/programs/srbScripts/programming.vim
-    :source ~/programs/srbScripts/tabb.vim
-    :source ~/programs/srbScripts/file_type.vim
+    :source ~/programs/CheemaFy/srbScripts/vim_scripts/programming.vim
+    :source ~/programs/CheemaFy/srbScripts/vim_scripts/tabb.vim
+    :source ~/programs/CheemaFy/srbScripts/vim_scripts/file_type.vim
 endfunction
 :call RefreshSource_()
 

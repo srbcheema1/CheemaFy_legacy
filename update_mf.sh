@@ -22,7 +22,8 @@ then
     rm ~/programs/CheemaFy/srbScripts/*.pyc
 fi
 
-extra_files=`ls ~/programs/CheemaFy/srbScripts/srblib/ | grep __* | wc -l`
+# dont konw but it should be ___* to detect those __files .. --* will also detect _files
+extra_files=`ls ~/programs/CheemaFy/srbScripts/srblib/ | grep ___* | wc -l`
 if [ "$extra_files" -gt 0 ]
 then
     rm -r ~/programs/CheemaFy/srbScripts/srblib/__*
