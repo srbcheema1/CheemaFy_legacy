@@ -316,12 +316,12 @@ alias whatsapp='firefox https://web.whatsapp.com/🌐/en & '
 
 
 #default programs
-alias catc='cat ~/programs/CheemaFy/default_codes/default.cpp >>'
-alias catj='cat ~/programs/CheemaFy/default_codes/default.java >>'
-alias catp='cat ~/programs/CheemaFy/default_codes/default.py >>'
-alias catb='cat ~/programs/CheemaFy/default_codes/default.sh >>'
-alias catr='cat ~/programs/CheemaFy/default_codes/default.c >>'
-alias cats='cat ~/programs/CheemaFy/default_codes/default.simple >>'
-alias cath='cat ~/programs/CheemaFy/default_codes/default.html >>'
-alias cattest='cat ~/programs/CheemaFy/default_codes/default.testcase >>'
+alias catc='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cpp >>'
+alias catj='cat ~/programs/CheemaFy/myPlugins/default_codes/default.java >>'
+alias catp='cat ~/programs/CheemaFy/myPlugins/default_codes/default.py >>'
+alias catb='cat ~/programs/CheemaFy/myPlugins/default_codes/default.sh >>'
+alias catr='cat ~/programs/CheemaFy/myPlugins/default_codes/default.c >>'
+alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >>'
+alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
+alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase >>'
 

@@ -5,13 +5,13 @@ UUID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     cursor-shape ibeam
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
-    background-color 'rgb(0,0,0)'
+    background-color 'rgb(44,44,44)' #333333
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     default-size-columns 110
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     default-size-rows 33
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
-    foreground-color 'rgb(231,238,232)'
+    foreground-color 'rgb(222,222,222)'
 
 
 

@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+if [ "$1" = "--remove" ]
+then
+    echo "removing CheemaFy"
+    sh ~/programs/CheemaFy/srbScripts/restore_old_config.sh
+    rm ~/.CheemaFy/installed
+    exit
+fi
+
 place=`pwd`
 prog=$HOME"/programs"
 #these commands are safe to execute they create folder only when
@@ -36,18 +44,49 @@ then
     echo creating CheemaFy
     cp -r ../CheemaFy $prog
     cd $prog"/CheemaFy/"
-    sh $prog"/CheemaFy/myPlugins/save_old_config.sh"
-    sh $prog"/CheemaFy/CheemaFy.sh"
+    sh $prog"/CheemaFy/srbScripts/save_old_config.sh"
+    bash $prog"/CheemaFy/CheemaFy.sh"
     exit
 fi
 
-#copy home_files to its position
-cp -r ~/programs/CheemaFy/home_files/. ~/
-touch ~/.bash_profile
+
+
+# CONFIGURING hOME FILES
+printf "Do you want to configure home_files y/n : "
+read ans
+
 lines_in_bash_profile="if [ -r ~/.bashrc ]; then
    source ~/.bashrc
 fi"
-echo "$lines_in_bash_profile" > ~/.bash_profile
+
+bashrc_content="# CheemaFy bash
+if [ -f ~/.CheemaFy/installed ]; then
+    if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
+        . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
+    fi
+fi"
+gitconfig_content="[include]
+    path = ~/.CheemaFy/installed"
+vimrc_content=":so ~/programs/CheemaFy/srbScripts/vim_scripts/setup.vim"
+installed_content="[include]
+    path = ~/programs/CheemaFy/myPlugins/git_extended/gitconfig"
+
+
+echo "$installed_content" >> ~/.CheemaFy/installed
+if [ $ans = "y" ]
+then
+    echo "$vimrc_content" >> ~/.vimrc
+    echo "$bashrc_content" >> ~/.bashrc
+    echo "$gitconfig_content" >> ~/.gitconfig
+    echo "$lines_in_bash_profile" >> ~/.bash_profile
+fi
+if [ $ans = "Y" ]
+then
+    echo "$vimrc_content" > ~/.vimrc
+    echo "$bashrc_content" > ~/.bashrc
+    echo "$gitconfig_content" > ~/.gitconfig
+    echo "$lines_in_bash_profile" > ~/.bash_profile
+fi
 
 
 

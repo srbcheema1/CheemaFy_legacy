@@ -12,9 +12,7 @@ script to check codes of cheema and other are identical or not
 
 # replace these with your default names
 files = [
-            ["bashrc", "~/.bashrc", "~/programs/CheemaFy/home_files/.bashrc"],
-            ["vimrc", "~/.vimrc", "~/programs/CheemaFy/home_files/.vimrc"],
-            ["gitconfig", "~/.gitconfig", "~/programs/CheemaFy/home_files/.gitconfig"]
+            ["bashrc", "~/.bashrc", "~/programs/CheemaFy/myPlugins/bash_extended/bashrc"],
         ]
 folders = [
             ["vim_ftdetect", "~/.vim/ftdetect", "~/programs/CheemaFy/myPlugins/vim/ftdetect"],

@@ -2,7 +2,8 @@
 if [ "$1" = "--remove" ]
 then
     echo "removing CheemaFy"
-    sh ~/programs/CheemaFy/myPlugins/restore_old_config.sh
+    sh ~/programs/CheemaFy/srbScripts/restore_old_config.sh
+    mv ~/.CheemaFy/installed ~/.CheemaFy/not_installed
     exit
 fi
 
@@ -49,8 +50,8 @@ then
     echo creating CheemaFy
     cp -r ../CheemaFy $prog
     cd $prog"/CheemaFy/"
-    sh $prog"/CheemaFy/myPlugins/save_old_config.sh"
-    sh $prog"/CheemaFy/CheemaFy.sh"
+    sh $prog"/CheemaFy/srbScripts/save_old_config.sh"
+    bash $prog"/CheemaFy/CheemaFy.sh"
     exit
 fi
 
@@ -61,13 +62,13 @@ UUID=$(gsettings get org.gnome.Terminal.ProfilesList default | tr -d \')
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     cursor-shape ibeam
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
-    background-color 'rgb(0,0,0)'
+    background-color 'rgb(11,11,11)'
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     default-size-columns 126
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
     default-size-rows 33
 gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${UUID}/ \
-    foreground-color 'rgb(231,238,232)'
+    foreground-color 'rgb(222,222,222)'
 
 _comment="
  I removed these settings as they are not  in new gnome, so they cause problem in arch.
@@ -85,8 +86,36 @@ fi
 
 
 
-#copy home_files to its position
-cp -r ~/programs/CheemaFy/home_files/. ~/
+# CONFIGURING HOME FILES
+printf "Do you want to configure home_files yes/no : "
+read ans
+
+bashrc_content="# CheemaFy bash
+if [ -f ~/.CheemaFy/installed ]; then
+    if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
+        . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
+    fi
+fi"
+gitconfig_content="[include]
+    path = ~/.CheemaFy/installed"
+vimrc_content=":so ~/programs/CheemaFy/srbScripts/vim_scripts/setup.vim"
+installed_content="[include]
+    path = ~/programs/CheemaFy/myPlugins/git_extended/gitconfig"
+
+echo "$installed_content" >> ~/.CheemaFy/installed
+if [ $ans = "yes" ]
+then
+    echo "$vimrc_content" >> ~/.vimrc
+    echo "$bashrc_content" >> ~/.bashrc
+    echo "$gitconfig_content" >> ~/.gitconfig
+    sudo updatedb
+fi
+if [ $ans = "Y" ]
+then
+    echo "$vimrc_content" > ~/.vimrc
+    echo "$bashrc_content" > ~/.bashrc
+    echo "$gitconfig_content" > ~/.gitconfig
+fi
 
 
 #install other useful things
@@ -108,7 +137,6 @@ then
     sudo -S -k apt-get install clang-4.0 -y < ~/.CheemaFy/.pass
     sudo -S -k apt-get install libboost-all-dev -y < ~/.CheemaFy/.pass
 
-    sudo updatedb
 elif [ "$__linux" = "	Arch" ]
 then
     echo "in arch"
@@ -122,8 +150,6 @@ then
     systemctl enable NetworkManager.service
     systemctl enable wpa_supplicant.service
     systemctl start NetworkManager.service
-
-    sudo updatedb
 fi
 
 

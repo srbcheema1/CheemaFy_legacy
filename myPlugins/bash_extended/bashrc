@@ -113,13 +113,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# java
-if [ -f "/usr/lib/java/jdk1.8.0_74" ]; then
-    export JAVA_HOME=/usr/lib/java/jdk1.8.0_74
-    set PATH="$PATH:$JAVA_HOME/bin"
-    export PATH
-fi
-
 # bash aliases
 if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
     . ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended

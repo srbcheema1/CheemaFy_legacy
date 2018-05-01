@@ -4,70 +4,74 @@ filetype on                        		"required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'       		"vundle
-Plugin 'Valloric/YouCompleteMe'     		"auto complete
-Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
-Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
-Plugin 'scrooloose/nerdcommenter'           "commentin
-Plugin 'scrooloose/nerdtree' 				"file explorer
+    Plugin 'VundleVim/Vundle.vim'       		"vundle
+    Plugin 'Valloric/YouCompleteMe'     		"auto complete
+    Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
+    Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
+    Plugin 'scrooloose/nerdcommenter'           "commentin
+    Plugin 'scrooloose/nerdtree' 				"file explorer
 
 
-"sexy plugin for cpp
-Plugin 'rhysd/vim-clang-format'             "Clanguage formatter ...working
+    "sexy plugin for cpp
+    Plugin 'rhysd/vim-clang-format'             "Clanguage formatter ...working
 
-"html plugin
-Plugin 'alvan/vim-closetag'         		"close html tags
+    "html plugin
+    Plugin 'alvan/vim-closetag'         		"close html tags
 
-"python plugins
-Plugin 'davidhalter/jedi-vim'
-Plugin 'nvie/vim-flake8'                    "f7 to check python files
-"Plugin 'Vimjas/vim-python-pep8-indent'     "python pep8 plugin
-"
-"Git
-Plugin 'tpope/vim-fugitive'
+    "python plugins
+    Plugin 'davidhalter/jedi-vim'
+    Plugin 'nvie/vim-flake8'                    "f7 to check python files
+    "Plugin 'Vimjas/vim-python-pep8-indent'     "python pep8 plugin
+    "
+    "Git
+    Plugin 'tpope/vim-fugitive'
 
-"Some extra
-"Plugin 'terryma/vim-multiple-cursors'      "multiple cursor plugin
-"Plugin 'vim-scripts/ZoomWin'        		"zoom into a window
-"Plugin 'google/vim-codefmt'                "Clanguage not working
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "HTML code better"
 
-"working
-"only helps to complete the words in file
-"Plugin 'ervandew/supertab'          		"similar to you completeme
+    "Themes
+    "Plugin 'dracula/vim'                		"awesome dark theme
+    "this worked earlier but nowdays it is creating problems. I will update it as it works. instead of it use flazz/vim-colorschemes
+    "we can use it by simply :colorscheme dracula by installing vim-colorschemes
+    "I have tested both both will work either use this plugin or copy dracula.vim file into the .vim/colors
+    Plugin 'flazz/vim-colorschemes'
 
-"https://github.com/vim-scripts/Conque-Shell
-"http://www.drchip.org/astronaut/vim/#SWAPSTRINGS
-"to remove a plugin comment it and run :PluginClean
-"https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL "html
-"autocomplete
 
-"themes
-"Plugin 'dracula/vim'                		"awesome dark theme
-"this worked earlier but nowdays it is creating problems.
-"I will update it as it works
-Plugin 'flazz/vim-colorschemes'
-Plugin 'liuchengxu/space-vim-dark'
+    "Some extra
+    "Plugin 'terryma/vim-multiple-cursors'      "multiple cursor plugin
+    "Plugin 'vim-scripts/ZoomWin'        		"zoom into a window
+    "Plugin 'google/vim-codefmt'                "Clanguage not working
+    "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "HTML code better"
+
+    "working
+    "only helps to complete the words in file
+    "Plugin 'ervandew/supertab'          		"similar to you completeme
+
+
+    "https://github.com/vim-scripts/Conque-Shell
+    "http://www.drchip.org/astronaut/vim/#SWAPSTRINGS
+    "to remove a plugin comment it and run :PluginClean
+    "https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL "html
+    "autocomplete
+
 
 call vundle#end()                   		"required
 filetype plugin indent on           		"required
 "end Vundle code
 
+
 "COLOR THEMES
-syntax on
-colorscheme dracula                        "not working .. you may copy color file and use it
-"colorscheme space-vim-dark                  "dark and soft
-"colorscheme apprentice                     "too soft
-"colorscheme molokai                        "sharp colors
+    syntax on
+    colorscheme dracula                        "you may copy color file and use it or install vim-colorschemes
+    "colorscheme space-vim-dark                "dark and soft
+    "colorscheme apprentice                    "too soft
 
 
+"NORMAL CONFIG
+    set autoindent
+    set smartindent
 
-set autoindent
-set smartindent
-
-set shiftwidth=4
-set expandtab
-set tabstop=4
+    set shiftwidth=4
+    set expandtab
+    set tabstop=4
 
 "set cursor line
     hi CursorLine   cterm=bold ctermbg=darkgrey
