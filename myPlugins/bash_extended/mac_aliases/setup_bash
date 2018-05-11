@@ -9,8 +9,4 @@ if [ -f ~/.CheemaFy/installed_mac ]; then
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi
-
-    #https://geoff.greer.fm/lscolors/ #it is bit wrong .. try random
-    export LSCOLORS="EafxcxdxBxegecabagacad"
-    alias ls='ls -G' #for colorized output
 fi

@@ -1,0 +1,327 @@
+#move to particular locations
+alias de='cd ~/Desktop'
+alias cf='cd ~/programs/CheemaFy/'
+
+
+#to create alias with arguments create a alias of function
+alias cpcf='function _cpmf(){ cp $1 ~/programs/CheemaFy/; };_cpmf'
+alias mvfd='function _mvfd(){ mv ~/Desktop/$1 ./; };_mvfd'
+alias cpfd='function _cpfd(){ cp ~/Desktop/$1 ./; };_cpfd'
+alias cptd='function _cptd(){ cp ./$1 ~/Desktop/; };_cptd'
+
+# to run original command
+alias orig='
+function _orig(){
+    if [ $1 = "--help" ]
+    then
+        echo "helps to execute orig commands without alias effect"
+        return
+    fi
+    echo "$@"
+    $@
+};_orig'
+
+
+# Nofifies you when work is completed
+help_open="
+notifies you when work is completed
+Usage:
+notify-me <command>         it will notify with a desktop notification
+notify-me -m <comand>       it will notify with a desktop notification with an email
+"
+# todo configure mail in notify-send
+alias notify-me='
+function _notify-me(){
+    if [ $1 = "--help" ]
+    then
+        echo "notify you as the work is completed"
+        return
+    fi
+    if [ $1 = "-m" ]
+    then
+        shift
+        $@
+        _hell="$@"
+        notify-send "completed !" "$_hell"
+        mail_me "work is done $_hell"
+        return
+    fi
+    $@
+    _hell="$@"
+    notify-send "completed " "$_hell"
+};_notify-me'
+
+
+
+#open
+help_open="
+open <file>     --opens a file in required software
+"
+alias open='
+function _open(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_open"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        echo "no argument specified"
+        echo "$help_open"
+    fi
+
+    if [ "$#" -eq 1 ]
+    then
+        gvfs-open "$1"
+        #hell=`file --mime-type "$1" | grep -o pdf$`
+        #if [ "$hell" = "pdf" ]
+        #then
+            #gvfs-open "$1"
+        #fi
+    fi
+};_open'
+
+
+#to set default screenshot saving location
+help_sshot_loc="
+sshot_loc           --- set pwd as your screenshot storing directory
+sshot_loc <loc>     --- set given location as location for storing screenshot
+"
+alias sshot_loc='
+function _sshot_loc(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_sshot_loc"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        sshot_a=`pwd`;
+    elif [ "$#" -eq 1 ]
+    then
+        sshot_a=$(cd $1;pwd); #sexy
+    fi
+    gsettings set org.gnome.gnome-screenshot auto-save-directory $sshot_a;
+    echo "default screen shot dir set to "$sshot_a;
+};_sshot_loc'
+
+
+#my bad habbit to type vim again and again
+alias vim='
+function _vim(){
+    if [ -d "$1" ]
+    then
+        cd "$1";
+    else
+        vim -p $@ -c ":normal zR" -c ":loadview";
+    fi
+};_vim'
+
+
+#set proxy
+function proxy(){
+    echo "previous proxy was $http_proxy";
+    if [ "$#" -eq 0 ]
+    then
+        proxx='';
+        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.CheemaFy/.pass > /dev/null 2>&1;
+    elif [ "$#" -eq 1 ]
+    then
+        proxx='172.16.20.2:3128';
+        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.CheemaFy/.pass > /dev/null 2>&1;
+    fi
+    export http_proxy=$proxx;
+    export https_proxy=$proxx;
+    export ftp_proxy=$proxx;
+    echo "proxy set to $http_proxy";
+}
+
+
+#terminal
+alias term='
+function _term(){
+    if [ "$#" -eq 0 ]
+    then
+        gnome-terminal & disown
+    elif [ "$#" -eq 1 ]
+    then
+        gnome-terminal & disown
+        sleep 1
+        exit #sexy
+    fi
+};_term'
+
+alias tilda='
+tilda & &> /dev/null 2>&1; sleep 2;
+'
+
+#screenlight
+help_night="
+"
+alias night='
+function _night(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_night"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        xbacklight -set 1
+    else
+        xbacklight -set $1;
+    fi
+};_night'
+
+
+#nautilous
+help_disk="
+disk            -- open location in nautilous
+disk desktop    -- open nautilous in desktop
+disk disk       -- mounts disk(if not) and opens in nautilous
+"
+alias disk='
+function _disk(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_disk"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        loc=`pwd`;
+        nautilus "$loc" > /dev/null 2>&1
+    fi
+
+    if [ "$#" -eq 1 ]
+    then
+        if [ "$1" = "desktop" ]
+        then
+            nautilus ~/Desktop > /dev/null 2>&1;
+        elif [ "$1" = "disk" ]
+        then
+            hell=`mountpoint /media/$USER/disk | grep -o not`
+		    if [ "$hell" = "not" ]
+            then
+                echo "disk was not mounted";
+                # -S is used to read from STDIN
+                disk_name="/dev/sda5" # change it to own disk
+                sudo -S -k  mount $disk_name /media/srb/disk/ < ~/.CheemaFy/.pass > /dev/null 2>&1 #sexy
+                nautilus /media/srb/disk > /dev/null 2>&1
+            else
+                echo "mounted";
+                nautilus /media/srb/disk > /dev/null 2>&1
+            fi
+        fi
+    fi
+};_disk'
+
+
+help_search_dir="
+search_dir <file> <relative locaton>...    -- search <dir> in given location
+"
+alias _search_dir='
+function __search_dir(){
+    if [ "$#" -eq 1 ]
+    then
+        find . -type d | grep $1
+    elif [ "$#" -eq 2 ]
+    then
+        find $2 -type d | grep $1
+    else
+        echo "$help_search_dir"
+    fi
+};__search_dir'
+
+help_search_file="
+search_file <file> <relative locaton>...    -- search <file> in given location
+"
+alias _search_file='
+function __search_file(){
+    if [ "$#" -eq 1 ]
+    then
+        find . -type f | grep $1
+    elif [ "$#" -eq 2 ]
+    then
+        find $2 -type f | grep $1
+    else
+        echo "$help_search_file"
+    fi
+};__search_file'
+
+help_search_me="
+search_me <arg1> <arg2> <arg3> <arg4>...    -- search <arg1> in <arg2> excluding <arg3> <arg4>...
+"
+alias search_me='
+function _search_me(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_search_me"
+        return
+    fi
+
+    grep_cmd="grep -i -nr"
+    # i for ignore casesenstivity
+    # I for ignoring binary files
+    # n for numbering
+    # r for recursive
+
+    if [ "$#" -eq 1 ]
+    then
+        grep -i -I -nr "$1" .
+
+    elif [ "$#" -eq 2 ]
+    then
+        grep -i -I -nr "$1" "$2"
+
+    else
+        excludes=""
+        for i in `seq 3 $#` #sexy
+        do
+            if [ -d "${!i}" ] #sexy
+            then
+                excludes=$excludes" --exclude-dir=${!i}"
+            fi
+            if [ -f "${!i}" ]
+            then
+                excludes=$excludes" --exclude=${!i}"
+            fi
+        done
+        echo "grep -i -I -nr $1 $2 $excludes"
+        grep -i -I -nr $1 $2 $excludes
+    fi
+};_search_me'
+
+
+#md reader
+alias grip='python3 -m grip -b'
+alias mdreader='
+function _mdreader(){
+    pandoc $1 | lynx -stdin
+};_mdreader'
+
+
+#commands for compiler versions
+alias g++11='g++ -std=c++11'
+
+#to run octave interactively
+alias octavei='octave --no-gui'
+
+#whatsapp web
+alias whatsapp='firefox https://web.whatsapp.com/🌐/en & '
+
+
+#default programs
+alias catc='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cpp >>'
+alias catj='cat ~/programs/CheemaFy/myPlugins/default_codes/default.java >>'
+alias catp='cat ~/programs/CheemaFy/myPlugins/default_codes/default.py >>'
+alias catb='cat ~/programs/CheemaFy/myPlugins/default_codes/default.sh >>'
+alias catr='cat ~/programs/CheemaFy/myPlugins/default_codes/default.c >>'
+alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >>'
+alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
+alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase >>'
+

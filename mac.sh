@@ -2,8 +2,7 @@
 if [ "$1" = "--remove" ]
 then
     echo "removing CheemaFy"
-    sh ~/programs/CheemaFy/srbScripts/restore_old_config.sh
-    rm ~/.CheemaFy/installed
+    mv ~/.CheemaFy/installed_mac ~/.CheemaFy/not_installed_mac
     exit
 fi
 
@@ -44,48 +43,39 @@ then
     echo creating CheemaFy
     cp -r ../CheemaFy $prog
     cd $prog"/CheemaFy/"
-    sh $prog"/CheemaFy/srbScripts/save_old_config.sh"
     bash $prog"/CheemaFy/CheemaFy.sh"
     exit
 fi
 
 
 
-# CONFIGURING hOME FILES
+# CONFIGURING HOME FILES
 printf "Do you want to configure home_files y/n : "
 read ans
 
-lines_in_bash_profile="if [ -r ~/.bashrc ]; then
-   source ~/.bashrc
-fi"
-
 bashrc_content="# CheemaFy bash
-if [ -f ~/.CheemaFy/installed ]; then
-    if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
-        . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
-    fi
+if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash ]; then
+    . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
 fi"
 gitconfig_content="[include]
-    path = ~/.CheemaFy/installed"
+    path = ~/.CheemaFy/installed_mac"
 vimrc_content=":so ~/programs/CheemaFy/srbScripts/vim_scripts/setup.vim"
 installed_content="[include]
     path = ~/programs/CheemaFy/myPlugins/git_extended/gitconfig"
 
 
-echo "$installed_content" >> ~/.CheemaFy/installed
+echo "$installed_content" >> ~/.CheemaFy/installed_mac
 if [ $ans = "y" ]
 then
     echo "$vimrc_content" >> ~/.vimrc
-    echo "$bashrc_content" >> ~/.bashrc
+    echo "$bashrc_content" >> ~/.bash_profile
     echo "$gitconfig_content" >> ~/.gitconfig
-    echo "$lines_in_bash_profile" >> ~/.bash_profile
 fi
 if [ $ans = "Y" ]
 then
     echo "$vimrc_content" > ~/.vimrc
-    echo "$bashrc_content" > ~/.bashrc
+    echo "$bashrc_content" > ~/.bash_profile
     echo "$gitconfig_content" > ~/.gitconfig
-    echo "$lines_in_bash_profile" > ~/.bash_profile
 fi
 
 
