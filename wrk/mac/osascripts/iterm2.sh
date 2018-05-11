@@ -41,15 +41,10 @@ function iterm () {
     echo "running osascript . . ."
     osascript &>/dev/null <<EOF
         tell application "iTerm2"
-            activate
-            set term to (make new terminal)
-            tell term
-                launch session "Default Session"
-                tell the last session
-                    delay 1
-                    write text "cd $wd$cmd"
-                end
-            end
+            set newWindow to (create window with default profile)
+            tell current session of newWindow
+                write text ""
+            end tell
         end tell
 EOF
 }

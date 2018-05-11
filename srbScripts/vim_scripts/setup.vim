@@ -11,4 +11,7 @@ if !empty(glob("~/.CheemaFy/installed_mac"))
     set clipboard=unnamed " copy to the system clipboard
     vmap <C-y> y:call system("pbcopy", getreg("\""))<CR>
     " to paste use <Command>v
+
+    "backspace problem
+    set backspace=indent,eol,start
 endif
