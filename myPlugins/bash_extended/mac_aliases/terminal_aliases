@@ -1,30 +1,11 @@
-# Show Desktop
-alias window='
-function _window(){
-    if [ $1 = "--help" ]
-    then
-        echo "Minimize all windows to show desktop"
-        return
-    fi
-    wmctrl -k on
-};_window'
-
-
-
 # COPY FILES UTILITY
 #you must have install xsel using sudo apt-get install xsel
 # to copy file to clipboard
-alias cpcb='xsel -b <'
-#to copy clipboard to a file
-alias cptf='echo "`xsel -b `" >> '
-#you can copy a file from one place to other
-    #you can copy a file by cpcb <file name>
-    #move to the other directory
-    #paste it there by cptf <filename>
+alias cpcb='pbpaste <'
 
 
 
-alias copy='
+alias __copy='
 function _copy(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
@@ -41,7 +22,7 @@ function _copy(){
 };_copy'
 
 
-alias cutt='
+alias __cutt='
 function _cut(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
@@ -58,7 +39,7 @@ function _cut(){
 };_cut'
 
 
-alias paste='
+alias __paste='
 function _paste(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
@@ -99,7 +80,7 @@ NOTE : this commandline utility doesn;t require \"-r\" flag for removing directo
 
        After removing an item you can locate it in trash find position of trash using trash loc
 "
-alias rm='
+alias __rm='
 function _rm(){
     if [ "$1" = "--help" ]
     then
@@ -155,7 +136,7 @@ trash -d <filename>                 --- delete file permanemtly from trash
 trash -empty                        --- clear all the trash
 trash -loc                          --- print location of trash
 "
-alias trash='
+alias __trash='
 function _trash(){
     # find a mount of given target
     # findmnt -n -o SOURCE --target <path to file>

@@ -1,0 +1,5 @@
+rm
+copy
+paste
+
+term
