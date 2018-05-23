@@ -1,5 +1,6 @@
 [include]
-    path = Users/srb/programs/CheemaFy/myPlugins/git_extended/srbconfig
+    path = /home/srb/programs/CheemaFy/myPlugins/git_extended/srbconfig
+    path = /Users/srb/programs/CheemaFy/myPlugins/git_extended/srbconfig
 
 [alias]
 	showdown = log --decorate --oneline --graph -8

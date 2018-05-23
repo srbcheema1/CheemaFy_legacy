@@ -6,12 +6,14 @@ then
     exit
 fi
 
+
 place=`pwd`
 prog=$HOME"/programs"
 #these commands are safe to execute they create folder only when
 #the folders are missing, they dont harm old content
 mkdir -p $prog
 mkdir -p $HOME"/.CheemaFy/srb_clip_board"
+mkdir -p $HOME"/.local/share/Trash/files"
 
 #file to hold your password
 if ! [ -f ~/.CheemaFy/.pass ]
@@ -54,9 +56,8 @@ printf "Do you want to configure home_files y/n : "
 read ans
 
 bashrc_content="# CheemaFy bash
-if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash ]; then
-    . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
-fi"
+    . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/setup_bash
+"
 gitconfig_content="[include]
     path = ~/.CheemaFy/installed_mac"
 vimrc_content=":so ~/programs/CheemaFy/srbScripts/vim_scripts/setup.vim"
