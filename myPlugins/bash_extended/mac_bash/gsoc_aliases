@@ -63,6 +63,12 @@ function _test_it(){
     if [ "$1" = "vcf" ]
     then
         cd $_vcf_loc/test/input_files/v4.3/srb_test
+    elif [ "$1" = "build" ]
+    then
+        cd $_vcf_loc/test/srb_test/build
+    elif [ "$1" = "cmake" ]
+    then
+        cd ~/programs/gsoc/ebi/cmake_testing
     fi
 };_test_it'
 
@@ -83,10 +89,13 @@ function _gsoc(){
     if [ "$1" = "vcf" ]
     then
         cd $_vcf_loc/
+    elif [ "$1" = "ebi" ]
+    then
+        cd ~/programs/gsoc/ebi
     elif [ "$1" = "test" ]
     then
         cd $_vcf_loc/test/input_files/v4.3/srb_test
     else
-        cd ~/Desktop/gsoc
+        cd ~/programs/gsoc
     fi
 };_gsoc'

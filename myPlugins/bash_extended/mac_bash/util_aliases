@@ -23,7 +23,7 @@ function _orig(){
 
 
 # Nofifies you when work is completed
-help_open="
+help_notify_me="
 notifies you when work is completed
 Usage:
 notify-me <command>         it will notify with a desktop notification
@@ -34,7 +34,7 @@ alias notify-me='
 function _notify-me(){
     if [ $1 = "--help" ]
     then
-        echo "notify you as the work is completed"
+        echo "$help_notify_me"
         return
     fi
     if [ $1 = "-m" ]
@@ -51,61 +51,6 @@ function _notify-me(){
     notify-send "completed " "$_hell"
 };_notify-me'
 
-
-
-#open
-help_open="
-open <file>     --opens a file in required software
-"
-alias open='
-function _open(){
-    if [ "$1" = "--help" ]
-    then
-        echo "$help_open"
-        return
-    fi
-
-    if [ "$#" -eq 0 ]
-    then
-        echo "no argument specified"
-        echo "$help_open"
-    fi
-
-    if [ "$#" -eq 1 ]
-    then
-        gvfs-open "$1"
-        #hell=`file --mime-type "$1" | grep -o pdf$`
-        #if [ "$hell" = "pdf" ]
-        #then
-            #gvfs-open "$1"
-        #fi
-    fi
-};_open'
-
-
-#to set default screenshot saving location
-help_sshot_loc="
-sshot_loc           --- set pwd as your screenshot storing directory
-sshot_loc <loc>     --- set given location as location for storing screenshot
-"
-alias sshot_loc='
-function _sshot_loc(){
-    if [ "$1" = "--help" ]
-    then
-        echo "$help_sshot_loc"
-        return
-    fi
-
-    if [ "$#" -eq 0 ]
-    then
-        sshot_a=`pwd`;
-    elif [ "$#" -eq 1 ]
-    then
-        sshot_a=$(cd $1;pwd); #sexy
-    fi
-    gsettings set org.gnome.gnome-screenshot auto-save-directory $sshot_a;
-    echo "default screen shot dir set to "$sshot_a;
-};_sshot_loc'
 
 
 #my bad habbit to type vim again and again
@@ -126,11 +71,9 @@ function proxy(){
     if [ "$#" -eq 0 ]
     then
         proxx='';
-        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf /etc/apt/apt.conf < ~/.CheemaFy/.pass > /dev/null 2>&1;
     elif [ "$#" -eq 1 ]
     then
         proxx='172.16.20.2:3128';
-        sudo -S -k cp ~/programs/CheemaFy/wrk/bash/proxy/apt.conf_proxy /etc/apt/apt.conf < ~/.CheemaFy/.pass > /dev/null 2>&1;
     fi
     export http_proxy=$proxx;
     export https_proxy=$proxx;
@@ -144,10 +87,10 @@ alias term='
 function _term(){
     if [ "$#" -eq 0 ]
     then
-        gnome-terminal & disown
+        iterm
     elif [ "$#" -eq 1 ]
     then
-        gnome-terminal & disown
+        iterm
         sleep 1
         exit #sexy
     fi
@@ -156,69 +99,6 @@ function _term(){
 alias tilda='
 tilda & &> /dev/null 2>&1; sleep 2;
 '
-
-#screenlight
-help_night="
-"
-alias night='
-function _night(){
-    if [ "$1" = "--help" ]
-    then
-        echo "$help_night"
-        return
-    fi
-
-    if [ "$#" -eq 0 ]
-    then
-        xbacklight -set 1
-    else
-        xbacklight -set $1;
-    fi
-};_night'
-
-
-#nautilous
-help_disk="
-disk            -- open location in nautilous
-disk desktop    -- open nautilous in desktop
-disk disk       -- mounts disk(if not) and opens in nautilous
-"
-alias disk='
-function _disk(){
-    if [ "$1" = "--help" ]
-    then
-        echo "$help_disk"
-        return
-    fi
-
-    if [ "$#" -eq 0 ]
-    then
-        loc=`pwd`;
-        nautilus "$loc" > /dev/null 2>&1
-    fi
-
-    if [ "$#" -eq 1 ]
-    then
-        if [ "$1" = "desktop" ]
-        then
-            nautilus ~/Desktop > /dev/null 2>&1;
-        elif [ "$1" = "disk" ]
-        then
-            hell=`mountpoint /media/$USER/disk | grep -o not`
-		    if [ "$hell" = "not" ]
-            then
-                echo "disk was not mounted";
-                # -S is used to read from STDIN
-                disk_name="/dev/sda5" # change it to own disk
-                sudo -S -k  mount $disk_name /media/srb/disk/ < ~/.CheemaFy/.pass > /dev/null 2>&1 #sexy
-                nautilus /media/srb/disk > /dev/null 2>&1
-            else
-                echo "mounted";
-                nautilus /media/srb/disk > /dev/null 2>&1
-            fi
-        fi
-    fi
-};_disk'
 
 
 help_search_dir="
@@ -324,4 +204,3 @@ alias catr='cat ~/programs/CheemaFy/myPlugins/default_codes/default.c >>'
 alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >>'
 alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
 alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase >>'
-

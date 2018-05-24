@@ -80,6 +80,29 @@ then
 fi
 
 
+# install brew and things
+printf "Do you want to install brew y/n : "
+read ans
+if [ $ans = "y" ]
+then
+    if [[ $(command -v brew) == "" ]]; then
+        echo "installing home brew"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        echo "updating home brew"
+        brew update
+    fi
+fi
+
+printf "Do you want to install brew tools y/n : "
+read ans
+if [ $ans = "y" ]
+then
+    brew install bash-completion
+fi
+
+
+
 
 #install Vundle
 if ! [ -d "$HOME"/.vim/bundle/ ]
