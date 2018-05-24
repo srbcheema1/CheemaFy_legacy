@@ -1,0 +1,67 @@
+# Include Directories
+    Sometimes the header files that you write are not in the same directory as the .C file that #include's it.
+    For example you might have a a file "foo.h" that resides in /homes/me/randomplace/include.
+    If you want to include that file in helloworld.C, you could just give the full path name in the #include,
+    OR you can do the following:
+    Add
+    #include <foo.h>
+    to helloworld.C and compile it with the -I option :
+    % g++ -o helloworld -I/homes/me/randomplace/include helloworld.C
+    This basically tells g++ to look for #include's in /homes/me/include
+    in addition to other directories you specify with -I
+
+
+# Compiling multiple files
+    Most likely, you will be compiling separate modules and linking them into a single executable.
+    Here's the basic idea: compile each .C file into a .o file,
+    then link the .o files (along with any libraries) into an executable.
+    Of course, one of these .C files has to define the main() or else the linker will complain.
+    Suppose we have main.C, foo.C and bar.C and want to create an executable fubar,
+    and suppose further that we need the math library:
+
+        % g++ -c -o foo.o foo.C
+        % g++ -c -o main.o main.C
+        % g++ -c -o bar.o bar.C
+        % g++ -o fubar foo.o main.o bar.o -lm
+
+    The first three commands generate foo.o, main.o and bar.o respectively.
+    The last line links them together along with the math library, libm.a.
+
+# Some options
+    -g - turn on debugging (so GDB gives more friendly output)
+    -Wall - turns on most warnings
+    -O or -O2 - turn on optimizations
+    -o <name> - name of the output file
+    -c - output an object file (.o)
+    -I<include path> - specify an include directory
+    -L<library path> - specify a lib directory
+    -l<library> - link with library lib<library>.a
+
+    -Wl, pass arguments to linker
+
+
+
+## flags:
+    -Bdynamic
+    -dy
+    -call_shared
+    Link against dynamic libraries.
+    This is only meaningful on platforms for which shared libraries are supported.
+    This option is normally the default on such platforms.
+    The different variants of this option are for compatibility with various systems.
+    You may use this option multiple times on the command line:
+    it affects library searching for -l options which follow it.
+
+    -Bstatic
+    -dn
+    -non_shared
+    -static
+    Do not link against shared libraries.
+    This is only meaningful on platforms for which shared libraries are supported.
+    The different variants of this option are for compatibility with various systems.
+    You may use this option multiple times on the command line:
+    it affects library searching for -l options which follow it.
+    This option also implies --unresolved-symbols=report-all.
+    This option can be used with -shared.
+    Doing so means that a shared library is being created
+    but that all of the library’s external references must be resolved by pulling in entries from static libraries.

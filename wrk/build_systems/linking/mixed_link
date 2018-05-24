@@ -1,0 +1,33 @@
+srb@srb-pc:~$ g++ -static -L./lib -I./inc/ src/hello.cpp -lstat -ldyn
+srb@srb-pc:~$ ldd a.out
+	not a dynamic executable
+srb@srb-pc:~$ g++ -static -L./lib -I./inc/ src/hello.cpp -lstat -ldyn -Wl,-Bdynamic
+srb@srb-pc:~$ ldd a.out
+	linux-vdso.so.1 =>  (0x00007ffe43fd7000)
+	libstdc++.so.6 => /usr/lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007f91f9102000)
+	libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f91f8d38000)
+	libm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007f91f8a2f000)
+	/lib/ld64.so.1 => /lib64/ld-linux-x86-64.so.2 (0x00007f91f9484000)
+	libgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007f91f8819000)
+
+see system libraries are linked dynamically while the mentioned libraries are linked statically
+NOTE: both versions of libraries were present in the directory ./lib
+.
+├── a.out
+├── build
+│   └── Makefile
+├── inc
+│   ├── dyn.h
+│   └── stat.h
+├── lib
+│   ├── libdyn.a
+│   ├── libdyn.so
+│   ├── libstat.a
+│   └── libstat.so
+└── src
+    ├── hello.cpp
+    └── others
+        ├── dyn.cpp
+        └── stat.cpp
+
+

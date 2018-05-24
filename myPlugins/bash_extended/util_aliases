@@ -324,4 +324,5 @@ alias catr='cat ~/programs/CheemaFy/myPlugins/default_codes/default.c >>'
 alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >>'
 alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
 alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase >>'
+alias catcmake='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cmake >>'
 

@@ -4,7 +4,6 @@ filetype on                        		"required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
-
     Plugin 'srbcheema1/vim-markdown'       		"maarkdown plugin
     Plugin 'VundleVim/Vundle.vim'       		"vundle
     Plugin 'Valloric/YouCompleteMe'     		"auto complete
@@ -82,6 +81,7 @@ filetype plugin indent on           		"required
 "relative numbering in lines
     set nu
     set relativenumber
+
 
 "fold code
     set foldlevel=0
