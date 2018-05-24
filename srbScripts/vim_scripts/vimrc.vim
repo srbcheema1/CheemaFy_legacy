@@ -4,6 +4,8 @@ filetype on                        		"required
 set rtp+=~/.vim/bundle/Vundle.vim
 
 call vundle#begin()
+
+    Plugin 'srbcheema1/vim-markdown'       		"maarkdown plugin
     Plugin 'VundleVim/Vundle.vim'       		"vundle
     Plugin 'Valloric/YouCompleteMe'     		"auto complete
     Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
@@ -39,7 +41,7 @@ call vundle#begin()
     "Plugin 'terryma/vim-multiple-cursors'      "multiple cursor plugin
     "Plugin 'vim-scripts/ZoomWin'        		"zoom into a window
     "Plugin 'google/vim-codefmt'                "Clanguage not working
-    "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "HTML code better"
+    "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} "HTML code better
 
     "working
     "only helps to complete the words in file
