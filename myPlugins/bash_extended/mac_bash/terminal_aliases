@@ -5,14 +5,14 @@ alias cpcb='pbpaste <'
 
 
 
-alias __copy='
+alias copy='
 function _copy(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
     if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
         cd ~/.CheemaFy/srb_clip_board
-        ls -A | xargs -d"\n" rm -r
+        ls -A | xargs rm -r
         #rm -f {,.[!.],..?}* > /dev/null
         cd -
     fi
@@ -22,14 +22,14 @@ function _copy(){
 };_copy'
 
 
-alias __cutt='
+alias cutt='
 function _cut(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
     if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
     then
         cd ~/.CheemaFy/srb_clip_board
-        ls -A | xargs -d"\n" rm -r
+        ls -A | xargs rm -r
         # rm -f {,.[!.],..?}* > /dev/null #not working properly
         cd -
     fi
@@ -39,7 +39,7 @@ function _cut(){
 };_cut'
 
 
-alias __paste='
+alias paste='
 function _paste(){
     mkdir -p ~/.CheemaFy/srb_clip_board
 
@@ -80,7 +80,7 @@ NOTE : this commandline utility doesn;t require \"-r\" flag for removing directo
 
        After removing an item you can locate it in trash find position of trash using trash loc
 "
-alias __rm='
+alias rm='
 function _rm(){
     if [ "$1" = "--help" ]
     then
@@ -136,54 +136,16 @@ trash -d <filename>                 --- delete file permanemtly from trash
 trash -empty                        --- clear all the trash
 trash -loc                          --- print location of trash
 "
-alias __trash='
+alias trash='
 function _trash(){
-    # find a mount of given target
-    # findmnt -n -o SOURCE --target <path to file>
-
     if  [ "$1" = "--help" ]
     then
         echo "$help_trash"
         return
     fi
 
-    #change it accordingly if needed
-    # it automatically detects the disk allocated
-    _data_disk_mounted="no_mount"
-    _media_disk_mounted="no_mount"
-    if [ -d "/mnt/data" ]
-    then
-        cd /mnt/data
-        _data_disk_mounted=`findmnt -n -o SOURCE --target .`
-        cd - > /dev/null
-    fi
-    if [ -d "/mnt/media" ]
-    then
-        cd /mnt/media
-        _media_disk_mounted=`findmnt -n -o SOURCE --target .`
-        cd - > /dev/null
-    fi
-
-
-    _mount_point=`findmnt -n -o SOURCE --target .`
-    IFS='['
-    read -a __mount_point <<< "$_mount_point"
-    _mount_point=${__mount_point[0]}
-
-
-
-    if [ "$_mount_point" = "$_data_disk_mounted" ]
-    then
-        _trash_loc="/mnt/data/.Trash-$UID/files"
-        _trash_info_loc="/mnt/data/.Trash-$UID/info"
-    elif [ "$_mount_point" = "$_media_disk_mounted" ]
-    then
-        _trash_loc="/mnt/media/.Trash-$UID/files"
-        _trash_info_loc="/mnt/media/.Trash-$UID/info"
-    else
-        _trash_loc="$HOME/.local/share/Trash/files/"
-        _trash_info_loc="$HOME/.local/share/Trash/info/"
-    fi
+    _trash_loc="$HOME/.local/share/Trash/files/"
+    _trash_info_loc="$HOME/.local/share/Trash/info/"
 
     if [ "$1" = "loc" ]
     then
@@ -244,9 +206,9 @@ function _trash(){
         then
             now=`pwd`
             cd $_trash_loc
-            ls -A | xargs -d"\n" rm -r
+            ls -A | xargs rm -r
             cd $_trash_info_loc
-            ls -A | xargs -d"\n" rm -r
+            ls -A | xargs rm -r
             cd $now
         fi
 
