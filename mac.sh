@@ -2,10 +2,10 @@
 if [ "$1" = "--remove" ]
 then
     echo "removing CheemaFy"
-    sh ~/programs/CheemaFy/srbScripts/restore_old_config.sh
-    rm ~/.CheemaFy/installed
+    mv ~/.CheemaFy/installed_mac ~/.CheemaFy/not_installed_mac
     exit
 fi
+
 
 place=`pwd`
 prog=$HOME"/programs"
@@ -44,49 +44,62 @@ then
     echo creating CheemaFy
     cp -r ../CheemaFy $prog
     cd $prog"/CheemaFy/"
-    sh $prog"/CheemaFy/srbScripts/save_old_config.sh"
     bash $prog"/CheemaFy/CheemaFy.sh"
     exit
 fi
 
 
 
-# CONFIGURING hOME FILES
+# CONFIGURING HOME FILES
 printf "Do you want to configure home_files y/n : "
 read ans
 
-lines_in_bash_profile="if [ -r ~/.bashrc ]; then
-   source ~/.bashrc
-fi"
-
 bashrc_content="# CheemaFy bash
-if [ -f ~/.CheemaFy/installed ]; then
-    if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
-        . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
-    fi
-fi"
+    . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/setup_bash
+"
 gitconfig_content="[include]
-    path = ~/.CheemaFy/installed"
+    path = ~/.CheemaFy/installed_mac"
 vimrc_content=":so ~/programs/CheemaFy/srbScripts/vim_scripts/setup.vim"
 installed_content="[include]
     path = ~/programs/CheemaFy/myPlugins/git_extended/gitconfig"
 
 
-echo "$installed_content" >> ~/.CheemaFy/installed
+echo "$installed_content" >> ~/.CheemaFy/installed_mac
 if [ $ans = "y" ]
 then
     echo "$vimrc_content" >> ~/.vimrc
-    echo "$bashrc_content" >> ~/.bashrc
+    echo "$bashrc_content" >> ~/.bash_profile
     echo "$gitconfig_content" >> ~/.gitconfig
-    echo "$lines_in_bash_profile" >> ~/.bash_profile
 fi
 if [ $ans = "Y" ]
 then
     echo "$vimrc_content" > ~/.vimrc
-    echo "$bashrc_content" > ~/.bashrc
+    echo "$bashrc_content" > ~/.bash_profile
     echo "$gitconfig_content" > ~/.gitconfig
-    echo "$lines_in_bash_profile" > ~/.bash_profile
 fi
+
+
+# install brew and things
+printf "Do you want to install brew y/n : "
+read ans
+if [ $ans = "y" ]
+then
+    if [[ $(command -v brew) == "" ]]; then
+        echo "installing home brew"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        echo "updating home brew"
+        brew update
+    fi
+fi
+
+printf "Do you want to install brew tools y/n : "
+read ans
+if [ $ans = "y" ]
+then
+    brew install bash-completion
+fi
+
 
 
 

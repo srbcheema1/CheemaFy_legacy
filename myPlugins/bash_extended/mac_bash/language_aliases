@@ -1,0 +1,95 @@
+#to set virtual env
+help_venv="
+if you specify argument 3 it will create venv3 for python3
+else it will create venv2 for python2
+"
+alias venv='
+#venv should be installed using sudo apt-get install python3-venv
+function _venv(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_venv"
+        return
+    fi
+    if [ "$1" = "3" ]
+    then
+        if [ -d "venv3" ]
+        then
+            source ./venv3/bin/activate;
+        else
+            pwd_=`pwd`
+            while [ 1 ]
+            do
+                cd ..
+                where_=`pwd`
+                if [ "$where_" = "$HOME" ]
+                then
+                    cd $pwd_
+                    virtualenv venv3
+                    source ./venv3/bin/activate;
+                    break
+                fi
+                if [ -d "venv3" ]
+                then
+                    echo "found venv at "$where_
+                    source ./venv3/bin/activate;
+                    break
+                fi
+            done
+            cd $pwd_
+        fi
+    else
+        if [ -d "venv2" ]
+        then
+            source ./venv2/bin/activate;
+        else
+            pwd_=`pwd`
+            while [ 1 ]
+            do
+                cd ..
+                where_=`pwd`
+                if [ "$where_" = "$HOME" ]
+                then
+                    cd $pwd_
+                    virtualenv venv2
+                    source ./venv2/bin/activate;
+                    break
+                fi
+                if [ -d "venv2" ]
+                then
+                    echo "found venv at "$where_
+                    source ./venv2/bin/activate;
+                    break
+                fi
+            done
+            cd $pwd_
+        fi
+    fi
+};_venv'
+
+
+#to set default screenshot saving location
+help_js_beautify="
+js-beautify <file1>           --- beautifies the given file
+js-beautify <file1> <file2>   --- beautifies the given file1 into file2
+"
+alias js-beautify='
+function _js-beautify(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_js_beautify"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        echo "requires 1 or 2 arguments";
+    elif [ "$#" -eq 1 ]
+    then
+        js-beautify -f "$1" -o "$1"
+    elif [ "$#" -eq 2 ]
+    then
+        js-beautify -f "$1" -o "$2"
+    fi
+};_js-beautify'
+

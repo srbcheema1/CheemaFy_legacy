@@ -2,4 +2,4 @@
 	email = srbcheema1@gmail.com
     name = Sarbjit Singh
 [core]
-    excludesfile = /home/srb/programs/CheemaFy/myPlugins/git_extended/gitignore_global
+    excludesfile = ~/programs/CheemaFy/myPlugins/git_extended/gitignore_global

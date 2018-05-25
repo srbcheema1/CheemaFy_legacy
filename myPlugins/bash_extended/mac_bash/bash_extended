@@ -1,0 +1,30 @@
+# shorten the prompt
+PROMPT_DIRTRIM=5
+
+# aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/bashrc
+. ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/util_aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/terminal_aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/language_aliases
+
+#gsoc aliases
+if [ -f "$HOME/programs/CheemaFy/myPlugins/bash_extended/mac_bash/gsoc_aliases" ]; then
+    . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/gsoc_aliases
+fi
+
+# scripts
+if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
+    export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
+    #export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
+fi
+
+if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
+    #export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
+fi
+
+alias refresh='source ~/.bash_profile'
+
+#export PATH="/usr/local/Cellar/gcc/8.1.0/bin":$PATH
+#export PATH="/usr/local/Cellar/vim/8.0.1800/bin":$PATH
+#export PATH="/usr/local/Cellar/macvim/8.0.146_1/bin":$PATH
