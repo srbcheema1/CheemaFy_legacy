@@ -13,7 +13,6 @@ prog=$HOME"/programs"
 #the folders are missing, they dont harm old content
 mkdir -p $prog
 mkdir -p $HOME"/.CheemaFy/srb_clip_board"
-mkdir -p $HOME"/.local/share/Trash/files"
 
 #file to hold your password
 if ! [ -f ~/.CheemaFy/.pass ]

@@ -144,8 +144,7 @@ function _trash(){
         return
     fi
 
-    _trash_loc="$HOME/.local/share/Trash/files/"
-    _trash_info_loc="$HOME/.local/share/Trash/info/"
+    _trash_loc="$HOME/.Trash"
 
     if [ "$1" = "loc" ]
     then
@@ -167,11 +166,6 @@ function _trash(){
         do
             cd $_trash_loc
             mv ${!i} $now
-            cd $_trash_info_loc
-            if [ -f "${!i}.trashinfo" ]
-            then
-                rm -f ${!i}.trashinfo > /dev/null
-            fi
         done
         cd $now
 
@@ -192,8 +186,6 @@ function _trash(){
                 cd $_trash_loc
                 echo "rm ${!i}"
                 rm -f ${!i}
-                cd $_trash_info_loc
-                rm -f ${!i}.trashinfo > /dev/null
             done
             cd $now
         fi
@@ -206,8 +198,6 @@ function _trash(){
         then
             now=`pwd`
             cd $_trash_loc
-            ls -A | xargs rm -r
-            cd $_trash_info_loc
             ls -A | xargs rm -r
             cd $now
         fi
