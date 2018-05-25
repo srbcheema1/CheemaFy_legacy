@@ -7,17 +7,25 @@
 	history = log --decorate --oneline --all --graph
 	wrk = log --decorate --oneline --all --graph -14
     work = log --decorate --pretty=format:\"%C(yellow)%h %Cgreen%d %Creset %s , %Cblue%cn , %Cred %ad\" --graph --all --date=short
+
     # unstage the file if added
 	unstage = reset HEAD --
     # untrach a file
     untrack = rm --cached -r --
     # undo the changes to a file
 	undo = checkout --
+
+    # verify before commiting
     verify = diff --cached
+
     # information about a commit
     info = show --stat
+    # use : git info <commit hash>
+
     scommit = commit --signoff
+
     wordcount = grep --count --ignore-case
+
     # great way of diff
     wdiff = diff --word-diff
 
@@ -26,6 +34,11 @@
 
     # a beautiful command reflog .... it keeps trach of all the activities in last week
     reflog =  log -g --abbrev-commit --pretty=oneline
+
+    # see changes in small way
+    # use git changes HEAD~3 HEAD
+    changes = diff --stat
+    changesv = diff --name-status
 
 [commit]
     signoff = true
