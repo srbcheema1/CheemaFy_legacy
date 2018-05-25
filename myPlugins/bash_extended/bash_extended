@@ -7,7 +7,10 @@ PROMPT_DIRTRIM=5
 . ~/programs/CheemaFy/myPlugins/bash_extended/language_aliases
 
 #gsoc aliases
-. ~/programs/CheemaFy/myPlugins/bash_extended/gsoc_aliases
+if [ -f /home/srb/programs/CheemaFy/myPlugins/bash_extended/gsoc_aliases ]
+then
+    . /home/srb/programs/CheemaFy/myPlugins/bash_extended/gsoc_aliases
+fi
 
 
 # scripts
@@ -22,7 +25,3 @@ if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
 fi
 
 alias refresh='source ~/.bashrc'
-
-export PATH="/usr/local/Cellar/gcc/8.1.0/bin":$PATH
-#export PATH="/usr/local/Cellar/vim/8.0.1800/bin":$PATH
-#export PATH="/usr/local/Cellar/macvim/8.0.146_1/bin":$PATH

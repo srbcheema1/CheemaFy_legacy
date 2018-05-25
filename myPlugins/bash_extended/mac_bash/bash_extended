@@ -7,8 +7,9 @@ PROMPT_DIRTRIM=5
 . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/language_aliases
 
 #gsoc aliases
-. ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/gsoc_aliases
-
+if [ -f "$HOME/programs/CheemaFy/myPlugins/bash_extended/mac_bash/gsoc_aliases" ]; then
+    . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/gsoc_aliases
+fi
 
 # scripts
 if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
