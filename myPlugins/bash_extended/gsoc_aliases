@@ -1,28 +1,23 @@
-_vcf_loc=$HOME'/programs/gsoc/ebi/vcf-validator'
-
+_vcf_loc=$HOME'/Desktop/gsoc/ebi/vcf-validator'
 
 alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
 alias vcf_valid_test=' $_vcf_loc/srb_test/build/bin/vcf_validator'
 alias g+++='g++ -std=c++11 -lboost_iostreams'
-alias cmake_static='g++ -std=c++11 -lboost_iostreams'
+alias sofa='/home/srb/Desktop/gsoc/sofa/stable/sofa/build/v17.06/bin/runSofa'
+
+
 
 
 ############################## BUILD
 # it is docker build
+# use it as
+# srb-pc~$ time build_it vcf
+
 build_it(){
     if [ "$1" = "vcf" ]
     then
         cd $_vcf_loc/
-        time docker run -v ${PWD}:/tmp ebivariation/vcf-validator
-        cd -
-        cd $_vcf_loc/test/input_files/v4.3/srb_test
-        cd -
-    fi
-    if [ "$1" = "doc" ]
-    then
-        cd $_vcf_loc/
-        # docker build -t ebivariation/vcf-validator docker/
-        time docker run -v ${PWD}:/tmp ebivariation/vcf-validator
+        time sudo -S -k docker run -v ${PWD}:/tmp ebivariation/vcf-validator < ~/.CheemaFy/.pass
         cd -
         cd $_vcf_loc/test/input_files/v4.3/srb_test
         cd -
@@ -31,6 +26,9 @@ build_it(){
 
 
 # it is non docker build
+# use it as
+# srb-pc~$ time build_it_test vcf
+
 function build_it_test(){
     start_=`date +%s`
     if [ "$1" = "vcf" ]
@@ -57,7 +55,15 @@ function build_it_test(){
 
 
 
+
+
+
+
+
+
+
 ###################    TEST IT
+
 alias test_it='
 function _test_it(){
     if [ "$1" = "vcf" ]
@@ -68,6 +74,7 @@ function _test_it(){
 
 
 ###################### CLEAN
+
 alias clean_it='
 function _clean_it(){
     if [ "$1" = "vcf" ]
@@ -86,7 +93,39 @@ function _gsoc(){
     elif [ "$1" = "test" ]
     then
         cd $_vcf_loc/test/input_files/v4.3/srb_test
+    elif [ "$1" = "sofa" ]
+    then
+        cd ~/Desktop/gsoc/sofa/main
     else
         cd ~/Desktop/gsoc
     fi
 };_gsoc'
+
+
+# split_pwd() {
+#         # Only show ellipses for directory trees -gt 3
+#         # Otherwise use the default pwd as the current \w replacement
+#         if [ $(pwd | grep -o '/' | wc -l) -gt 3 ]; then
+#                 pwd | cut -d'/' -f1-3 | xargs -I{} echo {}"/../${PWD##*/}"
+#         else
+#                 pwd
+#         fi
+# }
+#
+#
+# export PS1="\$(split_pwd) > "
+# export PROMPT_COMMAND='PS1="$(python ~/short.pwd.py)"'
+
+
+
+alias cv='cd ~/programs/interviews/cv/my_docs'
+
+
+alias show_trailing_spaces='grep -I -r -n "\s$" . '
+
+function bookmark(){
+    python3 ~/programs/CheemaFy/srbScripts/bookmark.py | tee ~/.CheemaFy/.open_path
+    cmd=`sed -n '$p' ~/.CheemaFy/.open_path `
+    cd $cmd
+}
+
