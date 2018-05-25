@@ -64,6 +64,27 @@ function _vim(){
     fi
 };_vim'
 
+#nautilous
+help_disk="
+disk            -- open current location in finder
+disk loc        -- open given location in finder
+"
+alias disk='
+function _disk(){
+    if [ "$1" = "--help" ]
+    then
+        echo "$help_disk"
+        return
+    fi
+
+    if [ "$#" -eq 0 ]
+    then
+        open .
+    else
+        open $@
+    fi
+};_disk'
+
 
 #set proxy
 function proxy(){

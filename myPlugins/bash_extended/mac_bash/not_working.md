@@ -1,5 +1,0 @@
-rm
-copy
-paste
-
-term

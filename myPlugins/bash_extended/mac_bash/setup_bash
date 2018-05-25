@@ -5,7 +5,7 @@ fi
 
 
 if [ -f ~/.CheemaFy/installed_mac ]; then
-    . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/bashrc
+    . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/bash_extended
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         . $(brew --prefix)/etc/bash_completion
     fi

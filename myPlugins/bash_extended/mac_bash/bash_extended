@@ -2,6 +2,7 @@
 PROMPT_DIRTRIM=5
 
 # aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/bashrc
 . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/util_aliases
 . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/terminal_aliases
 . ~/programs/CheemaFy/myPlugins/bash_extended/mac_bash/language_aliases
@@ -24,6 +25,6 @@ fi
 
 alias refresh='source ~/.bash_profile'
 
-export PATH="/usr/local/Cellar/gcc/8.1.0/bin":$PATH
+#export PATH="/usr/local/Cellar/gcc/8.1.0/bin":$PATH
 #export PATH="/usr/local/Cellar/vim/8.0.1800/bin":$PATH
 #export PATH="/usr/local/Cellar/macvim/8.0.146_1/bin":$PATH
