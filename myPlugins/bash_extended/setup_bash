@@ -1,16 +1,5 @@
 # bash aliases
 if [ -f ~/.CheemaFy/installed ]; then
-    . ~/programs/CheemaFy/myPlugins/bash_extended/bashrc
-fi
-
-
-if [ -f ~/.CheemaFy/installed_mac ]; then
-    . ~/programs/CheemaFy/myPlugins/bash_extended/bashrc
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
-
-    #https://geoff.greer.fm/lscolors/ #it is bit wrong .. try random
-    export LSCOLORS="EafxcxdxBxegecabagacad"
-    alias ls='ls -G' #for colorized output
+    . ~/programs/CheemaFy/myPlugins/bash_extended/bash_variables
+    . ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended
 fi

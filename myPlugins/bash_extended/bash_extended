@@ -2,6 +2,7 @@
 PROMPT_DIRTRIM=5
 
 # aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/bashrc
 . ~/programs/CheemaFy/myPlugins/bash_extended/util_aliases
 . ~/programs/CheemaFy/myPlugins/bash_extended/terminal_aliases
 . ~/programs/CheemaFy/myPlugins/bash_extended/language_aliases
@@ -12,16 +13,4 @@ then
     . /home/srb/programs/CheemaFy/myPlugins/bash_extended/gsoc_aliases
 fi
 
-
-# scripts
-if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
-    export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
-    #export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
-fi
-
-if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
-    #export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
-    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
-fi
-
-alias refresh='source ~/.bashrc'
+alias refresh='source ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended'

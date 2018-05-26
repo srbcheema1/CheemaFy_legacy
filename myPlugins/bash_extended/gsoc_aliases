@@ -1,4 +1,4 @@
-_ebi_loc=$HOME'/programs/gsoc/ebi'
+_ebi_loc=$HOME'/Desktop/gsoc/ebi'
 _vcf_loc=$_ebi_loc'/vcf-validator'
 _demo_loc=$_ebi_loc'/vcf_demo'
 

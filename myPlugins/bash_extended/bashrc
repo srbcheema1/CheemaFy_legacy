@@ -113,7 +113,3 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# bash aliases
-if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
-    . ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended
-fi
