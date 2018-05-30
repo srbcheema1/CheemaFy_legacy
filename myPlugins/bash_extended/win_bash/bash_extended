@@ -1,0 +1,18 @@
+# shorten the prompt
+PROMPT_DIRTRIM=5
+
+# aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/bashrc
+. ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/util_aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/terminal_aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/language_aliases
+
+
+#special for prompt and title of git-bash
+. ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/git-prompt.sh
+
+
+#gsoc aliases
+. ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/gsoc_aliases
+
+alias refresh='source ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/bash_extended'

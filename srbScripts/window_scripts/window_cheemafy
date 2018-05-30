@@ -1,0 +1,15 @@
+set up alias in cmd 
+https://stackoverflow.com/a/21040825
+
+
+to install boost in windows
+
+    go into folder
+    bootstrap gcc
+    bjam --toolset=gcc "--prefix=<C:\MinGW>" install
+
+
+
+
+
+also set this folder as path and add cmd commands into it

@@ -1,0 +1,4 @@
+if [ -f ~/.CheemaFy/installed_win ]; then
+    . ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/bash_extended
+    . ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/bash_variables
+fi

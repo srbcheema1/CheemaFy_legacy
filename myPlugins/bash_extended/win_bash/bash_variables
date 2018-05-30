@@ -1,0 +1,16 @@
+# scripts
+if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
+    export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
+    #export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
+fi
+
+if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
+    #export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
+    export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
+fi
+
+# Compilers
+#export PATH="/usr/local/Cellar/gcc/8.1.0/bin":$PATH
+
+#export PATH="/usr/local/Cellar/macvim/8.0.146_1/bin":$PATH
+#export PATH="/usr/local/Cellar/vim/8.0.1800/bin":$PATH

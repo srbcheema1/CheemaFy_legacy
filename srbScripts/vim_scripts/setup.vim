@@ -15,3 +15,10 @@ if !empty(glob("~/.CheemaFy/installed_mac"))
     "backspace problem
     set backspace=indent,eol,start
 endif
+
+if !empty(glob("~/.CheemaFy/installed_win"))
+   :so ~/programs/CheemaFy/srbScripts/vim_scripts/vimrc.win
+
+    "backspace problem
+    set backspace=indent,eol,start
+endif

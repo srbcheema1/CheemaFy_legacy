@@ -1,0 +1,117 @@
+_ebi_loc='/d/programs/gsoc/ebi'
+_vcf_loc=$_ebi_loc'/vcf-validator'
+_demo_loc=$_ebi_loc'/vcf_demo'
+
+
+alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
+alias vcf_valid_test=' $_vcf_loc/srb_test/build/bin/vcf_validator'
+alias vcf_valid_demo=' $_demo_loc/srb_test/build/bin/vcf_validator'
+
+
+############################## BUILD
+# it is docker build
+build_it_doc(){
+    if [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/
+        time docker run -v ${PWD}:/tmp ebivariation/vcf-validator
+        cd -
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+}
+
+
+# it is non docker build
+function build_it(){
+    start_=`date +%s`
+    if [ "$1" = "vcf" ]
+    then
+        shift
+        if [ "$2" = "-r" ]
+        then
+            shift
+            echo "Compiling ragel files"
+            for i in 1 2 3 ; do
+                ragel -G2 -o $_vcf_loc/inc/vcf/validator_detail_v4${i}.hpp $_vcf_loc/src/vcf/vcf_v4${i}.ragel ;
+            done
+        fi
+
+        mkdir -p $_vcf_loc/srb_test/build
+        cd $_vcf_loc/srb_test/build
+        cmake -DBUILD_STATIC=1 $@ ../../
+        time make -j3
+        cd -
+        mkdir -p $_vcf_loc/test/input_files/v4.3/srb_test
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+    if [ "$1" = "demo" ]
+    then
+        mkdir -p $_demo_loc/srb_test/build
+        cd $_demo_loc/srb_test/build
+        cmake -DBUILD_STATIC=0 $@ ../../
+        time make
+        cd -
+        mkdir -p $_demo_loc/test/input_files/v4.3/srb_test
+        cd $_demo_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+    end_=`date +%s`
+    echo "time is" $((end_-start_))
+}
+
+
+
+###################    TEST IT
+alias test_it='
+function _test_it(){
+    if [ "$1" = "vcf" ]
+    then
+        mkdir -p $_vcf_loc/test/input_files/v4.3/srb_test
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+    elif [ "$1" = "demo" ]
+    then
+        mkdir -p $_demo_loc/test/input_files/v4.3/srb_test
+        cd $_demo_loc/test/input_files/v4.3/srb_test
+    fi
+};_test_it'
+
+
+###################### CLEAN
+alias clean_it='
+function _clean_it(){
+    if [ "$1" = "vcf" ]
+    then
+        rm *err*
+    else
+        rm -r *
+    fi
+};_clean_it'
+
+
+############################ premanent
+alias gsoc='
+function _gsoc(){
+    if [ "$1" = "ebi" ]
+    then
+        cd $_ebi_loc/
+    elif [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/
+    elif [ "$1" = "demo" ]
+    then
+        cd $_demo_loc
+
+    elif [ "$1" = "test" ]
+    then
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+
+    elif [ "$1" = "build" ]
+    then
+        cd $_vcf_loc/srb_test/build
+
+    else
+        cd /d/programs/gsoc
+    fi
+};_gsoc'
