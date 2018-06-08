@@ -90,6 +90,20 @@ function _clean_it(){
 };_clean_it'
 
 
+####################################### cmake in windows
+
+alias cmake='
+function _cmake_it(){
+    if [ "$1" = "vcf" ]
+    then
+        cmake -DCMAKE_CXX_FLAGS="-I../odb/libodb-2.4.0 -I../odb/libodb-sqlite-2.4.0" -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,../odb/ -L../odb/"  -DEXT_LIB_PATH=$PWD/../odb/ -G "MinGW Makefiles" ../..
+    else
+        cmake -G"MinGW Makefiles" $@
+    fi
+};_cmake_it'
+
+
+
 ############################ premanent
 alias gsoc='
 function _gsoc(){

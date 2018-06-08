@@ -1,15 +1,68 @@
 set up alias in cmd 
 https://stackoverflow.com/a/21040825
 
-
+====================================================================================================
 to install boost in windows
 
     go into folder
     bootstrap gcc
     bjam --toolset=gcc "--prefix=<C:\MinGW>" install
 
+another way:
+b2.exe --with-iostreams -s BZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -s ZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11
+
+b2.exe --toolset=gcc "--prefix=<C:\MinGW>" --with-iostreams -s BZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -s ZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11
+
+bjam --toolset=gcc "--prefix=<C:\MinGW>" --with-iostreams -s BZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -s ZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11
+
+bjam --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 --toolset=gcc "--prefix=<C:\MinGW>" runtime-link=static
+
+
+=====================================================================================================
 
 
 
 
 also set this folder as path and add cmd commands into it
+
+
+
+Set Ctrl+Alt+T for terminal
+create a shortcut of terminal and go into properties and set shortcut key :)
+
+==================================================================================================
+
+to install libodb we need make from mingw/msys
+for all others we need make from Program Files (x86)\GnuWin32\bin
+
+===============================================================================================
+also while cmake many sh.exe become hinderence these are :
+it will say
+
+    For MinGW make to work correctly sh.exe must NOT be in your path.
+    Run cmake from a shell that does not have sh.exe in your PATH.
+
+    git ... sh.exe
+    mingw/msys/bin/sh.exe
+
+rename them to sh_.exe
+
+but you will miss then in git commands and maybe somewhere else too
+
+==================================================================================
+
+
+installing libsqlite3
+download this source code
+https://www.sqlite.org/2018/sqlite-autoconf-3240000.tar.gz
+
+do
+    ./configure
+    make
+    make install
+
+    make install wont work you will have to run the commands manually and then move the files from /usr/local/bin to /mingw/bin or whatever
+
+todo:
+try ./configure --prefix=<C:\MinGW>
+
