@@ -1,4 +1,4 @@
-ststic library
+# static library
 ar rcs libclass.a class1.o class2.o class3.o
 we can force compiler to use static linking by using flag "-static"
 
