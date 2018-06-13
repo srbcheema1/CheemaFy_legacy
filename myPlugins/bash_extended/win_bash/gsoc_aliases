@@ -129,3 +129,46 @@ function _gsoc(){
         cd /d/programs/gsoc
     fi
 };_gsoc'
+
+############################ premanent
+alias toggle_sh='
+function _toggle_sh(){
+    echo "cd /c/Program\ Files/Git/usr/bin"
+    cd "/c/Program Files/Git/usr/bin"
+    if [ -f "sh.exe" ]
+    then
+        echo "sh.exe present"
+        mv sh.exe sh_.exe
+        disk
+    elif [ -f "sh_.exe" ]
+    then
+        echo "sh_.exe present"
+        mv sh_.exe sh.exe
+        disk
+    else
+        echo "sh.exe or sh_.exe not found"
+    fi
+    cd -
+
+    edho "cd /c/MinGW/msys/1.0/bin"
+    cd "/c/MinGW/msys/1.0/bin"
+    if [ -f "sh.exe" ]
+    then
+        echo "sh.exe present"
+        mv sh.exe sh_.exe
+    elif [ -f "sh_.exe" ]
+    then
+        echo "sh_.exe present"
+        mv sh_.exe sh.exe
+    else
+        echo "sh.exe or sh_.exe not found"
+    fi
+    cd -
+};_toggle_sh'
+
+
+alias msvs_env='
+function _msvs_env(){
+    cd "/c/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build"
+    ./vcvarsall.bat amd64
+};_msvs_env'

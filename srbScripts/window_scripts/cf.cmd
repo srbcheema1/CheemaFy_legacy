@@ -1,3 +1,4 @@
 @echo off
-d:
-cd d:\programs\CheemaFy
+
+%homedrive%
+cd "%userprofile%\programs\CheemaFy"

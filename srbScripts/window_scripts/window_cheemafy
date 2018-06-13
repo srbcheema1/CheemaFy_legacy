@@ -1,4 +1,4 @@
-set up alias in cmd 
+set up alias in cmd
 https://stackoverflow.com/a/21040825
 
 ====================================================================================================
@@ -8,16 +8,42 @@ to install boost in windows
     bootstrap gcc
     bjam --toolset=gcc "--prefix=<C:\MinGW>" install
 
-another way:
+for iostreams only:
 b2.exe --with-iostreams -s BZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -s ZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11
 
-b2.exe --toolset=gcc "--prefix=<C:\MinGW>" --with-iostreams -s BZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -s ZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11
+install also:
+b2.exe --toolset=gcc --prefix=C:\MinGW --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 install runtime-link=static
 
-bjam --toolset=gcc "--prefix=<C:\MinGW>" --with-iostreams -s BZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -s ZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11
-
-bjam --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 --toolset=gcc "--prefix=<C:\MinGW>" runtime-link=static
+bjam --toolset=gcc --prefix=C:\MinGW --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 install runtime-link=static
 
 
+for msvc
+
+for only iostreams :
+bjam --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 "--prefix=<C:\srb_test\boost>" runtime-link=static
+
+b2.exe --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 --prefix=C:\srb_test\boost runtime-link=static
+
+install also:
+.\b2 --toolset=msvc --prefix=C:\srb_test\boost --build-dir=C:\srb_test\boost_build --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 install runtime-link=static
+
+
+NOTE:
+install is used to install , I think without install at end --prefix wont work
+else the things will be build at the location only
+
+final commands for building using msvc it is full build:
+
+1. only iostreams
+.\b2 --build-dir=C:\srb_test\boost_build --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 runtime-link=static
+
+2. full
+.\b2 --build-dir=C:\srb_test\boost_build -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 runtime-link=static
+
+
+you need flag /EHsc for mannual compilation with boost - dont know significance of it :/
+NOTE:
+if you wont use runtime-link=static then you may need to add flag /MD to compiler for dynamic,
 =====================================================================================================
 
 
@@ -49,6 +75,9 @@ rename them to sh_.exe
 
 but you will miss then in git commands and maybe somewhere else too
 
+also the make command should be from GNU32 not from msys
+while it is not good while building libodb there the GNU make will cause problem problem of ( in path
+
 ==================================================================================
 
 
@@ -63,6 +92,15 @@ do
 
     make install wont work you will have to run the commands manually and then move the files from /usr/local/bin to /mingw/bin or whatever
 
+note: to do configure you need sh.exe in git path
 todo:
 try ./configure --prefix=<C:\MinGW>
 
+===============================================================================
+Install package manager Chololatey
+run cmd as administrator
+paste and run this command
+
+@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+
+enjoy :)

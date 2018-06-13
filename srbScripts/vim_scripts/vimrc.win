@@ -64,6 +64,7 @@ filetype plugin indent on           		"required
     colorscheme dracula                        "you may copy color file and use it or install vim-colorschemes
     "colorscheme space-vim-dark                "dark and soft
     "colorscheme apprentice                    "too soft
+    "colorscheme 256-grayvim                   "for terminals with no support of 256 colors
 
 
 "NORMAL CONFIG
