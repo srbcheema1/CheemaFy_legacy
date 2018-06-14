@@ -188,4 +188,4 @@ filetype plugin indent on           		"required
 
 
 au FileType * :call File_type()
-
+:set noundofile
