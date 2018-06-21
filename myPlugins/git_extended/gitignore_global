@@ -1,19 +1,34 @@
-srb_test
-
-*.srb
-srb_*
-.srb_test
-
+# vim swap files
 *.swp
 
+# tags files
 tags
 
+# python environments
 venv2
 venv3
 venv
+env
 
+# python files
 *.pyc
 __*
 
 
+# my fav testing location
+srb_test
+
+# my own ignore files
+*.srb
+srb_*
+.srb_test
+
+
+
+================================================
+
+# vim swap files in windows
 *~
+
+# useless file made in mac
+.DS_Store
