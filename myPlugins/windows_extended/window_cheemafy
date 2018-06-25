@@ -44,6 +44,20 @@ final commands for building using msvc it is full build:
 you need flag /EHsc for mannual compilation with boost - dont know significance of it :/
 NOTE:
 if you wont use runtime-link=static then you may need to add flag /MD to compiler for dynamic,
+
+
+Final evaluation
+
+poorman's soln
+.\b2 runtime-link=static --build-type=complete
+
+
+richman's soln final command
+.\b2 --build-dir=C:\srb_test\boost_build --with-atomic --with-chrono --with-date_time --with-filesystem --with-log --with-program_options --with-regex --with-system --with-thread --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 runtime-link=static
+
+.\b2 --build-dir=C:\srb_test\boost_build --with-atomic --with-chrono --with-date_time --with-filesystem --with-log --with-program_options --with-regex --with-system --with-thread --with-iostreams -sBZIP2_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\bzip2-1.0.6 -sZLIB_SOURCE=C:\Users\Srb-Cheema\Downloads\Compressed\zlib-1.2.11 runtime-link=static --build-type=complete
+
+.\b2 --with-atomic --with-chrono --with-date_time --with-filesystem --with-log --with-program_options --with-regex --with-system --with-thread --with-iostreams -sBZIP2_SOURCE=C:\srb_test\bzip2-1.0.6 -sZLIB_SOURCE=C:\srb_test\zlib-1.2.11 runtime-link=static --build-type=complete
 =====================================================================================================
 
 

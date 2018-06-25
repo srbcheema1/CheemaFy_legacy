@@ -18,3 +18,7 @@ if "%1" == "demo" (
     cd d:\programs\gsoc\ebi\vcf_demo\
     exit /b
     )
+if "%1" == "test" (
+    cd  d:\programs\gsoc\ebi\vcf-validator\test\input_files\v4.3\srb_test
+    exit /b
+    )
