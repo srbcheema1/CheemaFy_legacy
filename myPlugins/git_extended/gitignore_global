@@ -1,16 +1,37 @@
+# vim swap files
+*.swp
+
+# tags files
+tags
+
+# python environments
+venv2
+venv3
+venv
+env
+
+# python files
+*.pyc
+__*
+
+# vs files
+.vs
+CMakeSettings.json
+
+# my fav testing location
 srb_test
 
+# my own ignore files
 *.srb
 srb_*
 .srb_test
 
-*.swp
 
-tags
 
-venv2
-venv3
-venv
+================================================
 
-*.pyc
-__*
+# vim swap files in windows
+*~
+
+# useless file made in mac
+.DS_Store

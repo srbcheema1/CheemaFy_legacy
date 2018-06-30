@@ -1,0 +1,174 @@
+_ebi_loc='/d/programs/gsoc/ebi'
+_vcf_loc=$_ebi_loc'/vcf-validator'
+_demo_loc=$_ebi_loc'/vcf_demo'
+
+
+alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
+alias vcf_valid_test=' $_vcf_loc/srb_test/build/bin/vcf_validator'
+alias vcf_valid_demo=' $_demo_loc/srb_test/build/bin/vcf_validator'
+
+
+############################## BUILD
+# it is docker build
+build_it_doc(){
+    if [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/
+        time docker run -v ${PWD}:/tmp ebivariation/vcf-validator
+        cd -
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+}
+
+
+# it is non docker build
+function build_it(){
+    start_=`date +%s`
+    if [ "$1" = "vcf" ]
+    then
+        shift
+        if [ "$2" = "-r" ]
+        then
+            shift
+            echo "Compiling ragel files"
+            for i in 1 2 3 ; do
+                ragel -G2 -o $_vcf_loc/inc/vcf/validator_detail_v4${i}.hpp $_vcf_loc/src/vcf/vcf_v4${i}.ragel ;
+            done
+        fi
+
+        mkdir -p $_vcf_loc/srb_test/build
+        cd $_vcf_loc/srb_test/build
+        cmake -DBUILD_STATIC=1 $@ ../../
+        time make -j3
+        cd -
+        mkdir -p $_vcf_loc/test/input_files/v4.3/srb_test
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+    if [ "$1" = "demo" ]
+    then
+        mkdir -p $_demo_loc/srb_test/build
+        cd $_demo_loc/srb_test/build
+        cmake -DBUILD_STATIC=0 $@ ../../
+        time make
+        cd -
+        mkdir -p $_demo_loc/test/input_files/v4.3/srb_test
+        cd $_demo_loc/test/input_files/v4.3/srb_test
+        cd -
+    fi
+    end_=`date +%s`
+    echo "time is" $((end_-start_))
+}
+
+
+
+###################    TEST IT
+alias test_it='
+function _test_it(){
+    if [ "$1" = "vcf" ]
+    then
+        mkdir -p $_vcf_loc/test/input_files/v4.3/srb_test
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+    elif [ "$1" = "demo" ]
+    then
+        mkdir -p $_demo_loc/test/input_files/v4.3/srb_test
+        cd $_demo_loc/test/input_files/v4.3/srb_test
+    fi
+};_test_it'
+
+
+###################### CLEAN
+alias clean_it='
+function _clean_it(){
+    if [ "$1" = "vcf" ]
+    then
+        rm *err*
+    else
+        rm -r *
+    fi
+};_clean_it'
+
+
+####################################### cmake in windows
+
+alias cmake='
+function _cmake_it(){
+    if [ "$1" = "vcf" ]
+    then
+        cmake -DCMAKE_CXX_FLAGS="-I../odb/libodb-2.4.0 -I../odb/libodb-sqlite-2.4.0" -DCMAKE_EXE_LINKER_FLAGS="-Wl,-rpath,../odb/ -L../odb/"  -DEXT_LIB_PATH=$PWD/../odb/ -G "MinGW Makefiles" ../..
+    else
+        cmake -G"MinGW Makefiles" $@
+    fi
+};_cmake_it'
+
+
+
+############################ premanent
+alias gsoc='
+function _gsoc(){
+    if [ "$1" = "ebi" ]
+    then
+        cd $_ebi_loc/
+    elif [ "$1" = "vcf" ]
+    then
+        cd $_vcf_loc/
+    elif [ "$1" = "demo" ]
+    then
+        cd $_demo_loc
+
+    elif [ "$1" = "test" ]
+    then
+        cd $_vcf_loc/test/input_files/v4.3/srb_test
+
+    elif [ "$1" = "build" ]
+    then
+        cd $_vcf_loc/srb_test/build
+
+    else
+        cd /d/programs/gsoc
+    fi
+};_gsoc'
+
+############################ premanent
+alias toggle_sh='
+function _toggle_sh(){
+    echo "cd /c/Program\ Files/Git/usr/bin"
+    cd "/c/Program Files/Git/usr/bin"
+    if [ -f "sh.exe" ]
+    then
+        echo "sh.exe present"
+        mv sh.exe sh_.exe
+        disk
+    elif [ -f "sh_.exe" ]
+    then
+        echo "sh_.exe present"
+        mv sh_.exe sh.exe
+        disk
+    else
+        echo "sh.exe or sh_.exe not found"
+    fi
+    cd -
+
+    edho "cd /c/MinGW/msys/1.0/bin"
+    cd "/c/MinGW/msys/1.0/bin"
+    if [ -f "sh.exe" ]
+    then
+        echo "sh.exe present"
+        mv sh.exe sh_.exe
+    elif [ -f "sh_.exe" ]
+    then
+        echo "sh_.exe present"
+        mv sh_.exe sh.exe
+    else
+        echo "sh.exe or sh_.exe not found"
+    fi
+    cd -
+};_toggle_sh'
+
+
+alias msvs_env='
+function _msvs_env(){
+    cd "/c/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build"
+    ./vcvarsall.bat amd64
+};_msvs_env'

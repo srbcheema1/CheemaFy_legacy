@@ -40,6 +40,10 @@
     changes = diff --stat
     changesv = diff --name-status
 
+    # ignore a tracked file. for example cmakelists
+    ignorelocally = update-index --assume-unchanged
+    ignoreremove = update-index --no-assume-unchanged
+
 [commit]
     signoff = true
 [grep]

@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
     Plugin 'srbcheema1/vim-markdown'       		"maarkdown plugin
     Plugin 'VundleVim/Vundle.vim'       		"vundle
-    Plugin 'Valloric/YouCompleteMe'     		"auto complete
+    "Plugin 'Valloric/YouCompleteMe'     		"do not work in window
     Plugin 'bronson/vim-trailing-whitespace'	"causes all trailing whitespace to be highlighted in red
     Plugin 'jiangmiao/auto-pairs'       		"auto complete pairs of '' []  {}
     Plugin 'scrooloose/nerdcommenter'           "commentin
@@ -64,6 +64,7 @@ filetype plugin indent on           		"required
     colorscheme dracula                        "you may copy color file and use it or install vim-colorschemes
     "colorscheme space-vim-dark                "dark and soft
     "colorscheme apprentice                    "too soft
+    "colorscheme 256-grayvim                   "for terminals with no support of 256 colors
 
 
 "NORMAL CONFIG
@@ -188,4 +189,4 @@ filetype plugin indent on           		"required
 
 
 au FileType * :call File_type()
-:set noundofile
+
