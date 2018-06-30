@@ -176,9 +176,6 @@ then
     ~/.vim/bundle/YouCompleteMe/install.py --clang-completer --system-libclang
 fi
 
-# git wont ask password every time
-git config credential.helper store
-
 #gnome-terminal -e "bash -c \"echo 'Thanks for using CheemaFy' ; exec bash\"" & disown
 #wmctrl -i -c `xdotool getactivewindow` &
 echo 'Thanks for using CheemaFy'

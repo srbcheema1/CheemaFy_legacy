@@ -44,6 +44,10 @@
     ignorelocally = update-index --assume-unchanged
     ignoreremove = update-index --no-assume-unchanged
 
+    # git wont ask password again for this repo
+    savepassword = config credential.helper store
+
+
 [commit]
     signoff = true
 [grep]

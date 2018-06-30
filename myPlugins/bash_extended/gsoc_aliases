@@ -1,6 +1,6 @@
 _ebi_loc=$HOME'/Desktop/gsoc/ebi'
 _vcf_loc=$_ebi_loc'/vcf-validator'
-_demo_loc=$_ebi_loc'/vcf_demo'
+_demo_loc=$_ebi_loc'/remote-validator'
 
 
 alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
@@ -113,7 +113,7 @@ function _gsoc(){
         cd $_vcf_loc/srb_test/build
 
     else
-        cd ~/programs/gsoc
+        cd $_ebi_loc
     fi
 };_gsoc'
 
