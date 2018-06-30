@@ -186,6 +186,9 @@ filetype plugin indent on           		"required
     :so ~/programs/CheemaFy/srbScripts/vim_scripts/scripts.vim
     :so ~/programs/CheemaFy/srbScripts/vim_scripts/programming.vim
 
+" comments color should not be invisible
+hi Comment ctermfg=blue
+
 
 au FileType * :call File_type()
 :set noundofile
