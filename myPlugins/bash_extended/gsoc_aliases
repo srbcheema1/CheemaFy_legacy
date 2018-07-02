@@ -144,3 +144,6 @@ function bookmark(){
     cmd=`sed -n '$p' ~/.CheemaFy/.open_path `
     cd $cmd
 }
+
+
+alias ssh_aws='ssh -i "$_ebi_loc/wrk/param-singh.pem" ubuntu@ec2-34-219-178-37.us-west-2.compute.amazonaws.com'
