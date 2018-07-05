@@ -25,7 +25,8 @@ function _venv(){
                 if [ "$where_" = "$HOME" ]
                 then
                     cd $pwd_
-                    python3 -m virtualenv venv3
+                    # install sudo apt-get install python3-venv
+                    python3 -m venv venv3
                     source ./venv3/bin/activate;
                     break
                 fi
