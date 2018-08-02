@@ -11,9 +11,7 @@ testcase generator      python3 file
 testdesctiption         simple file
 
 test desctiption file includes :
-    first line contains single integer T
-        T => no of test files to be generated
-    then next T lines contains commandline arguments for testcasegen
+    T lines contains commandline arguments for testcasegen for T number of files
 """
 
 def verify_file(file_name):

@@ -1,6 +1,6 @@
-_ebi_loc=$HOME'/Desktop/gsoc/ebi'
+_ebi_loc=$HOME'/programs/gsoc/ebi'
 _vcf_loc=$_ebi_loc'/vcf-validator'
-_demo_loc=$_ebi_loc'/remote-validator'
+_demo_loc=$_ebi_loc'/fasta-validator'
 
 
 alias vcf_valid=' $_vcf_loc/build/bin/vcf_validator'
@@ -147,3 +147,8 @@ function bookmark(){
 
 
 alias ssh_aws='ssh -i "$_ebi_loc/wrk/param-singh.pem" ubuntu@ec2-34-219-178-37.us-west-2.compute.amazonaws.com'
+
+
+export PATH=$PATH:"$_vcf_loc/build/bin"
+_fasta_test=$_ebi_loc'/vcf-validator/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample'
+alias check_assembly='vcf_assembly_checker -i $_fasta_test/passed_fullsample.vcf -f $_fasta_test/passed_fullsample.fa'
