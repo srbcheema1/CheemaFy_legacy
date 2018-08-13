@@ -15,7 +15,7 @@
    * `git clone https://github.com/srbcheema1/CheemaFy`
    * Now change directory to CheemaFy. `cd CheemaFy`
    * Its good to update your system before starting `sudo apt-get update`
-   * Now install CheemaFy by running the command `bash CheemaFy.sh`
+   * Now install CheemaFy by running the command `./CheemaFy`
    * You will be asked whether to install vim-plugins or not reply 'y'
    * Just wait for the installation to complete.
    * Enjoy CheemaFy.
