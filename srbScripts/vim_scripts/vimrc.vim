@@ -180,7 +180,8 @@ filetype plugin indent on           		"required
     vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 "you complete me
-    let g:ycm_global_ycm_extra_conf = '/home/srb/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+    let g:ycm_global_ycm_extra_conf = '~/programs/CheemaFy/srbScripts/vim_scripts/.ycm_extra_conf.py'
+    let g:ycm_confirm_extra_conf = 0
 
 "keep script
     :so ~/programs/CheemaFy/srbScripts/vim_scripts/scripts.vim
@@ -188,6 +189,8 @@ filetype plugin indent on           		"required
 
 " comments color should not be invisible
 hi Comment ctermfg=blue
+
+
 
 
 au FileType * :call File_type()
