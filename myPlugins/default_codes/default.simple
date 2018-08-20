@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 #define dout if(debug) cout<<" "
-
 using namespace std;
 
 int debug = 1;
@@ -12,6 +11,8 @@ typedef vector<vector<int> > matrix;
 
 const int mod = 1e9+7;
 
+struct Desc{ bool operator() (int a, int b) { return a > b; } }desc; // for descending sort
+
 void solve(){
 
 }
@@ -19,6 +20,7 @@ void solve(){
 signed main(){
     ios_base::sync_with_stdio(0);cin.tie(0);
     int t=1;
-    cin>>t;
+    // freopen("input","r",stdin);
+    // cin>>t;
     while(t--)solve();
 }

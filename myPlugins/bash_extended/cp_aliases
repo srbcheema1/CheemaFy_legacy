@@ -1,0 +1,9 @@
+alias algo='cd ~/programs/algo'
+
+alias catman='cat ~/programs/CheemaFy/myPlugins/default_codes/default.manual >>'
+
+alias cvim='
+function __cvim(){
+    cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >> $1
+    vim $1
+};__cvim'

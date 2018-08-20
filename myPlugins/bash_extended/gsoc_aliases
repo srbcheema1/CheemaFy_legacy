@@ -40,7 +40,7 @@ function build_it(){
 
         mkdir -p $_vcf_loc/srb_test/build
         cd $_vcf_loc/srb_test/build
-        cmake -DBUILD_STATIC=1 $@ ../../
+        cmake $@ ../../
         time make -j3
         cd -
         mkdir -p $_vcf_loc/test/input_files/v4.3/srb_test
@@ -51,8 +51,8 @@ function build_it(){
     then
         mkdir -p $_demo_loc/srb_test/build
         cd $_demo_loc/srb_test/build
-        cmake -DBUILD_STATIC=0 $@ ../../
-        time make
+        cmake $@ ../../
+        time make -j3
         cd -
         mkdir -p $_demo_loc/test/input_files/v4.3/srb_test
         cd $_demo_loc/test/input_files/v4.3/srb_test
@@ -75,6 +75,13 @@ function _test_it(){
     then
         mkdir -p $_demo_loc/test/input_files/v4.3/srb_test
         cd $_demo_loc/test/input_files/v4.3/srb_test
+    elif [ "$1" = "fasta" ]
+    then
+        mkdir -p $_demo_loc/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample
+        cd $_demo_loc/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample
+    else [ "$1" = "" ]
+    then
+        echo "options available are vcf demo fasta"
     fi
 };_test_it'
 
@@ -85,8 +92,12 @@ function _clean_it(){
     if [ "$1" = "vcf" ]
     then
         rm *err*
-    else
-        rm -r *
+    elif [ "$1" = "fasta" ]
+    then
+        rm *err*
+    elif [ "$1" = "" ]
+    then
+        echo "options available are vcf fasta"
     fi
 };_clean_it'
 
@@ -111,31 +122,13 @@ function _gsoc(){
     elif [ "$1" = "build" ]
     then
         cd $_vcf_loc/srb_test/build
-
     else
         cd $_ebi_loc
     fi
 };_gsoc'
 
 
-# split_pwd() {
-#         # Only show ellipses for directory trees -gt 3
-#         # Otherwise use the default pwd as the current \w replacement
-#         if [ $(pwd | grep -o '/' | wc -l) -gt 3 ]; then
-#                 pwd | cut -d'/' -f1-3 | xargs -I{} echo {}"/../${PWD##*/}"
-#         else
-#                 pwd
-#         fi
-# }
-#
-#
-# export PS1="\$(split_pwd) > "
-# export PROMPT_COMMAND='PS1="$(python ~/short.pwd.py)"'
-
-
-
 alias cv='cd ~/programs/interviews/cv/my_docs'
-
 
 alias show_trailing_spaces='grep -I -r -n "\s$" . '
 
@@ -146,9 +139,9 @@ function bookmark(){
 }
 
 
-alias ssh_aws='ssh -i "$_ebi_loc/wrk/param-singh.pem" ubuntu@ec2-34-219-178-37.us-west-2.compute.amazonaws.com'
+export PATH=$PATH:"$_vcf_loc/srb_test/build/bin"
 
-
-export PATH=$PATH:"$_vcf_loc/build/bin"
 _fasta_test=$_ebi_loc'/vcf-validator/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample'
 alias check_assembly='vcf_assembly_checker -i $_fasta_test/passed_fullsample.vcf -f $_fasta_test/passed_fullsample.fa'
+
+# alias ssh_aws='ssh -i "$_ebi_loc/wrk/param-singh.pem" ubuntu@ec2-34-219-178-37.us-west-2.compute.amazonaws.com'

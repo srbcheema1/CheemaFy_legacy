@@ -18,6 +18,11 @@ __*
 .vs
 CMakeSettings.json
 
+
+# compiled files
+.out
+
+=========================================================
 # my fav testing location
 srb_test
 
