@@ -277,3 +277,31 @@ function _trash(){
         mv $@ $_trash_loc
     fi
 };_trash'
+
+
+
+alias git_diff='
+function _git_diff(){
+    mkdir -p ~/.CheemaFy/.gitdiff
+
+    if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
+    then
+        cd ~/.CheemaFy/.gitdiff
+        ls -A | xargs -d"\n" rm -r
+        cd - &> /dev/null
+    fi
+
+    cp "$1" ~/.CheemaFy/.gitdiff/
+    cd ~/.CheemaFy/.gitdiff/
+    git init &> /dev/null
+    git add . &> /dev/null
+    git commit -m "initial commit" &> /dev/null
+    cd - $> /dev/null
+    cp "$2" ~/.CheemaFy/.gitdiff/
+    cd ~/.CheemaFy/.gitdiff/
+    file1=$(basename -- "$1")
+    file2=$(basename -- "$2")
+    mv $file2 $file1
+    git diff
+    cd - $> /dev/null
+};_git_diff'
