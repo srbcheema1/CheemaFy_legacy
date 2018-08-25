@@ -80,7 +80,6 @@ function _test_it(){
         mkdir -p $_demo_loc/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample
         cd $_demo_loc/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample
     else [ "$1" = "" ]
-    then
         echo "options available are vcf demo fasta"
     fi
 };_test_it'
@@ -143,5 +142,5 @@ export PATH=$PATH:"$_vcf_loc/srb_test/build/bin"
 
 _fasta_test=$_ebi_loc'/vcf-validator/test/input_files/v4.3/srb_test/assembly_checker/passed/passed_fullsample'
 alias check_assembly='vcf_assembly_checker -i $_fasta_test/passed_fullsample.vcf -f $_fasta_test/passed_fullsample.fa'
-
+alias check_assembly_cin='vcf_assembly_checker -f $_fasta_test/passed_fullsample.fa < $_fasta_test/passed_fullsample.vcf'
 # alias ssh_aws='ssh -i "$_ebi_loc/wrk/param-singh.pem" ubuntu@ec2-34-219-178-37.us-west-2.compute.amazonaws.com'
