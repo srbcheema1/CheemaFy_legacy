@@ -28,7 +28,7 @@ int main(){
     int _t=1;
     cin>>_t;
     int T=_t;
-     derr("hello world "<<_t);
+    //derr("hello world "<<_t);
     while(_t--){
         cout<<"Case #"<<T-_t<<": ";
         run_for_test();

@@ -121,7 +121,8 @@ function _vim(){
             extension="${filename##*.}"
             if [ "$extension" = "cpp" ]
             then
-                cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >> "$1"
+                # defined in cp_aliases
+                cat "$default_cp_file" >> "$1"
             fi
         fi
         vim -p $@ -c ":normal zR" -c ":loadview";
@@ -330,8 +331,8 @@ alias catj='cat ~/programs/CheemaFy/myPlugins/default_codes/default.java >>'
 alias catp='cat ~/programs/CheemaFy/myPlugins/default_codes/default.py >>'
 alias catb='cat ~/programs/CheemaFy/myPlugins/default_codes/default.sh >>'
 alias catr='cat ~/programs/CheemaFy/myPlugins/default_codes/default.c >>'
-alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >>'
+alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple.cpp >>'
 alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
-alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase >>'
+alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase.py >>'
 alias catcmake='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cmake >>'
 

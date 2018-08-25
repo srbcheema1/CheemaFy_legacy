@@ -90,6 +90,7 @@ if(__name__=="__main__"):
     if(argv[1]=="--clean" or argv[1]=='-c'):
         if(len(argv)==2):
             clean("0")
+            pass
         else:
             clean(argv[2])
         exit()
@@ -108,5 +109,5 @@ if(__name__=="__main__"):
             if(len(argv)>=6):
                 maxlim=argv[5]
 
-    clean(idd)
+    # clean(idd)
     code_tester(code1,code2,tester_script,idd,maxlim)

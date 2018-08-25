@@ -20,7 +20,7 @@ CMakeSettings.json
 
 
 # compiled files
-.out
+*.out
 
 =========================================================
 # my fav testing location
@@ -30,6 +30,7 @@ srb_test
 *.srb
 srb_*
 .srb_test
+gadhi*
 
 
 
