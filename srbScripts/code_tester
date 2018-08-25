@@ -34,7 +34,7 @@ def check_exception(file1,file2,tester_script):
 
 
 ret = -1
-def code_tester(code1,code2,tester_script,idd=0,maxlim=10000):
+def code_tester(code1,code2,tester_script,idd="0",maxlim=10000):
     #compile both
     if(not check_exception(code1,code1,tester_script)):
         exit()
@@ -84,15 +84,20 @@ if(__name__=="__main__"):
     code1 = "cheema.cpp"
     code2 = "other.cpp"
     tester_script = "testgen.py"
-    idd = 0
+    idd = "0"
     maxlim=10000
+
+    if(argv[1]=="--clean" or argv[1]=='-c'):
+        if(len(argv)==2):
+            clean("0")
+        else:
+            clean(argv[2])
+        exit()
 
     if(len(argv)<3):
         print(describe)
         exit()
 
-    if(argv[1]=="--clean" or argv[1]=='-c'):
-        clean(argv[2])
 
     code1=argv[1]
     code2=argv[2]
@@ -103,4 +108,5 @@ if(__name__=="__main__"):
             if(len(argv)>=6):
                 maxlim=argv[5]
 
+    clean(idd)
     code_tester(code1,code2,tester_script,idd,maxlim)
