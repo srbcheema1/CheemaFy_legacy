@@ -14,7 +14,7 @@ fi
 
 if [ "$_linux" = "" ]
 then
-    $_linux = "--ubuntu"
+    $_linux="--ubuntu"
 fi
 
 
@@ -66,7 +66,7 @@ then
     cp -r ../CheemaFy $prog
     cd $prog"/CheemaFy/"
     sh $prog"/CheemaFy/srbScripts/save_old_config.sh"
-    bash $prog"/CheemaFy/CheemaFy.sh"
+    bash $prog"/CheemaFy/CheemaFy"
     exit
 fi
 
