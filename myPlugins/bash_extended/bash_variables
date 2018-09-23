@@ -8,3 +8,13 @@ if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
     #export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
     export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
 fi
+
+export PATH=$PATH:"$HOME/programs/projects/CoolKit/CoolKit"
+
+# directory for my experiments
+if [ -d "$HOME/Desktop/test/path_place" ]; then
+    export PATH=$PATH:"$HOME/Desktop/test/path_place"
+fi
+
+# recommended not to change location of config files
+#export XDG_CONFIG_HOME=~/programs/CheemaFy/myPlugins/config

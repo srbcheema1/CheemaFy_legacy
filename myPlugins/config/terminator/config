@@ -1,0 +1,30 @@
+[global_config]
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      profile = default
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      profile = None
+      size = 1200, 600
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#300a24"
+    background_image = None
+    background_darkness = 0.98 #(or anything else between 0-1)
+    background_type = transparent
+
+    copy_on_selection = True
+    foreground_color = "#ffffff"
+    scrollback_lines = 1000000
+    scrollbar_position = hidden
+    visible_bell = True
+    use_system_font = False
+    font = Mono 12
+    cursor_shape = ibeam
+    cursor_color = "#ffffff"
