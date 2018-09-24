@@ -80,7 +80,7 @@ filetype plugin indent on           		"required
 
 "relative numbering in lines
     set nu
-    set relativenumber
+    "set relativenumber " removed on negative feedback from users
 
 
 "fold code
