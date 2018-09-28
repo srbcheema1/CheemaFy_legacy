@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+# PYTHON_ARGCOMPLETE_OK
+
+import os
+import sys
+import subprocess as sp
+
+try:
+    import click
+    from argparse import ArgumentParser
+    from argcomplete import autocomplete
+except:
+    err = """
+    You haven't installed the required dependencies.
+    """
+    print(err)
+    sys.exit(0)
+
+'''
+run it as:
+    vid-cutter inp.mp4 -s 0:30 -e 1:40
+    vid-cutter inp.mp4 -s 0:30 -e 1:40 -o output.mp4
+
+for audio, please specify output name using -o and extension should be mp3
+    vid-cutter inp.mp4 -s 0:30 -e 1:40 -o output.mp3
+'''
+
+
+
+def is_int(x):
+    try:
+        x = int(x)
+    except:
+        return False
+    return True
+
+
+def is_valid_file(parser, arg):
+    if not os.path.exists(arg):
+        parser.error("The file %s does not exist!" % arg)
+    else:
+        # return open(arg, 'r')  # return an open file handle
+        return arg
+
+def validate_args(parser):
+    return
+
+def get_time(st):
+    st = st.split(':')
+    if(len(st) == 1):
+        return None
+    if(len(st) == 2):
+        h='00'
+        m,s = st
+    if(len(st)==3):
+        h,m,s = st
+    if(len(st)>3):
+        return None
+
+    if(not is_int(h) or not is_int(m)):
+        return None
+    h = int(h)
+    m = int(m)
+    s = int(s)
+    if(m>59 or s>59):
+        return None
+    return str(h).zfill(2) + ':' + str(m).zfill(2) + ':' + str(s).zfill(2)
+
+def get_relative(st,et):
+    st = st.split(':')
+    sh,sm,ss = st
+
+    et = t.split(':')
+    eh,em,es = et
+
+    sh = int(sh)
+    sm = int(sm)
+    ss = int(ss)
+
+    eh = int(eh)
+    em = int(em)
+    es = int(es)
+
+    if(es < ss):
+        if(em == 0):
+            if(eh == 0): return None
+            eh -= 1
+            em += 60
+        em -= 1
+        es +=60
+    s = es - ss
+
+    if(em < sm):
+        if(eh == 0):return None
+        eh -= 1
+        em += 60
+    m = em - sm
+
+    if(eh < sh): return None
+    h = eh - sh
+
+    if(h == 0 and m == 0 and s == 0): return None
+    return str(h).zfill(2) + ':' + str(m).zfill(2) + ':' + str(s).zfill(2)
+
+
+def video_cutter(inp,st,t,out):
+    # sp.call()
+    os.system('ffmpeg -i ' + inp + ' -ss ' + st + ' -t ' + t + ' -c:v copy -c:a copy ' + out)
+
+def audio_cutter(inp,st,t,out):
+    # sp.call()
+    os.system('ffmpeg -i ' + inp + ' -ss ' + st + ' -t ' + t + ' -c:v copy ' + out)
+
+
+
+
+if(__name__=="__main__"):
+    parser = ArgumentParser()
+    parser.add_argument("inp",nargs='?',
+                        type=lambda x: is_valid_file(parser,x),
+                        help="input video file ex: input.mp4")
+    parser.add_argument("-s", "--start_time", help="start time for cuting in format hh:mm:ss or mm:ss")
+    parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
+
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-e", "--end_time", help="end time for cuting in format hh:mm:ss or mm:ss")
+    group.add_argument("-t", "--time", help="clip duration in format hh:mm:ss or mm:ss")
+
+
+    autocomplete(parser)
+    parser = parser.parse_args()
+
+    if(not parser.inp):
+        inp = input('Please enter input video file path : ')
+        if(not os.path.exists(inp)):
+            click.secho('File doesnot exist',fg='red')
+            sys.exit(0)
+    else:
+        inp = parser.inp
+
+    if(not parser.start_time):
+        st = input('Please enter start time in format hh:mm:ss or mm:ss : ')
+    else:
+        st = parser.start_time
+    st = get_time(st)
+    if(not st):
+        click.secho('Wrong format for start-time',fg='red')
+        sys.exit(0)
+
+    if(not parser.time and not parser.end_time):
+        t = input('Please enter time duration in format hh:mm:ss or mm:ss : ')
+    elif(not parser.time):
+        t = parser.end_time
+        t = get_time(t)
+        if(not t):
+            click.secho('Wrong format for end_time',fg='red')
+            sys.exit(0)
+        t = get_relative(st,t)
+        if(not t):
+            click.secho('end_time should be greater than start_time',fg='red')
+            sys.exit(0)
+    else:
+        t = parser.time
+
+    t = get_time(t)
+    if(not t):
+        click.secho('Wrong format for time duration',fg='red')
+        sys.exit(0)
+
+    if(not parser.output):
+        out = ''.join(inp.split('.')[:-1]) + '_output.' + inp.split('.')[-1]
+    else:
+        out = parser.output
+
+    if(os.path.exists(out)):
+        click.secho('[Warning] '+out+' file already exists',fg='Yellow')
+        res = input('Overwrite ? [y/N] ')
+        if(res.lower() != 'y'):
+            sys.exit(0)
+
+    # Game starts here
+    if(out.split('.')[-1] == 'mp3'):
+        audio_cutter(inp,st,t,out)
+    else:
+        video_cutter(inp,st,t,out)
