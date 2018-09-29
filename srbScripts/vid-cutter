@@ -19,11 +19,17 @@ except:
 
 '''
 run it as:
-    vid-cutter --trim inp.mp4 -s 0:30 -e 1:40
-    vid-cutter --trim inp.mp4 -s 0:30 -e 1:40 -o output.mp4
+    meditor inp.mp4 trim -s 0:30 -e 1:40
+
+    to trim
+        meditor inp.mp4 trim -s 0:30 -e 1:40 -o output.mp4
+    to crop
+        meditor inp.mp4 crop -w 50 -l 50 -x 50 -y 50 -o output.mp4
+    to change quality/size
+        meditor inp.mp4 qual -q 50 -o output.mp4
 
 for audio, please specify output name using -o and extension should be mp3
-    vid-cutter --crop inp.mp4 -s 0:30 -e 1:40 -o output.mp3
+    meditor inp.mp4 trim -s 0:30 -e 1:40 -o output.mp3
 '''
 
 
@@ -71,7 +77,7 @@ def get_relative(st,et):
     st = st.split(':')
     sh,sm,ss = st
 
-    et = t.split(':')
+    et = et.split(':')
     eh,em,es = et
 
     sh = int(sh)
@@ -135,11 +141,10 @@ def audio_cutter(inp,trimmer,out):
 
 def get_filters(parser):
     filters = " "
-    if(not parser.crop):
+    if(not parser.action == 'crop'):
         return filters
 
     crop_args = {}
-    crop_args['crop'] = parser.crop
     crop_args['width'] = str(parser.width/100)
     crop_args['height'] = str(parser.height/100)
     crop_args['x_point'] = str(parser.x_point/100)
@@ -177,7 +182,7 @@ def get_io(parser):
 
 def get_trimmer(parser):
     trimmer = ' '
-    if(not parser.trim):
+    if(not parser.action == 'trim'):
         return trimmer
 
     if(not parser.start_time):
@@ -215,27 +220,28 @@ def get_trimmer(parser):
 def get_parser():
     parser = ArgumentParser()
     parser.add_argument("inp",nargs='?',
-                        type=lambda x: is_valid_file(parser,x),
+                        type=lambda x: is_valid_file(trim_parser,x),
                         help="input video file ex: input.mp4")
     parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
+    subparsers = parser.add_subparsers(dest='action')
 
-    parser.add_argument("--trim",action="store_true",default=False,help="trim video lenght")
-    parser.add_argument("-s", "--start_time", help="start time for cuting in format hh:mm:ss or mm:ss")
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument("-e", "--end_time", help="end time for cuting in format hh:mm:ss or mm:ss")
-    group.add_argument("-t", "--time", help="clip duration in format hh:mm:ss or mm:ss")
+    trim_parser = subparsers.add_parser('trim')
+    trim_parser.add_argument("-s", "--start_time", help="start time for cuting in format hh:mm:ss or mm:ss")
+    time_group = trim_parser.add_mutually_exclusive_group()
+    time_group.add_argument("-e", "--end_time", help="end time for cuting in format hh:mm:ss or mm:ss")
+    time_group.add_argument("-t", "--time", help="clip duration in format hh:mm:ss or mm:ss")
 
-    parser.add_argument("--crop",action="store_true",default=False,help="crop video window")
-    parser.add_argument("-w", "--width",type=int,default=100,help="crop video window width (on scale of 100)")
-    parser.add_argument("-l", "--height",type=int,default=100,help="crop video window height (on scale of 100)")
-    parser.add_argument("-x", "--x_point",type=int,default=0,help="crop video window top-left points x (on scale of 100)")
-    parser.add_argument("-y", "--y_point",type=int,default=0,help="crop video window top-left points y (on scale of 100)")
+    crop_parser = subparsers.add_parser('crop')
+    crop_parser.add_argument("-w", "--width",type=int,default=100,help="crop video window width (on scale of 100)")
+    crop_parser.add_argument("-l", "--height",type=int,default=100,help="crop video window height (on scale of 100)")
+    crop_parser.add_argument("-x", "--x_point",type=int,default=0,help="crop video window top-left points x (on scale of 100)")
+    crop_parser.add_argument("-y", "--y_point",type=int,default=0,help="crop video window top-left points y (on scale of 100)")
 
     autocomplete(parser)
     parser = parser.parse_args()
     return parser
 
-def verify_dependencies()
+def verify_dependencies():
     try:
         sp.call(['ffmpeg','--help'],stdout=sp.PIPE,stderr=sp.STDOUT)
     except:
@@ -248,15 +254,26 @@ if(__name__=="__main__"):
     parser = get_parser()
 
     inp,out = get_io(parser)
-    trimmer = get_trimmer(parser)
-    filters = get_filters(parser)
 
-    # Game starts here
-    # print(getLength(inp))
+    # audio
     if(out.split('.')[-1] == 'mp3'):
-        audio_cutter(inp,trimmer,out)
+        if (parser.action in ['crop','qual']):
+            message = parser.action + ' not supported for mp3 output'
+            click.secho(message,fg='red')
+            sys.exit(0)
+        elif(parser.action == 'trim'):
+            trimmer = get_trimmer(parser)
+            audio_cutter(inp,trimmer,out)
+        else:
+            click.secho('unknow action')
+            sys.exit(0)
+
+    # video
+    if(parser.action == 'trim'):
+        trimmer = get_trimmer(parser)
+        video_trimmer(inp,trimmer,out)
+    elif(parser.action == 'crop'):
+        filters = get_filters(parser)
+        video_cropper(inp,filters,out)
     else:
-        if(parser.trim):
-            video_trimmer(inp,trimmer,out)
-        elif(parser.crop):
-            video_cropper(inp,filters,out)
+        click.secho('unknow action')
