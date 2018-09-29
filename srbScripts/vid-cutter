@@ -6,6 +6,7 @@ import sys
 import subprocess as sp
 
 try:
+    # import cv2 # sudo pip3 install python-opencv
     import click
     from argparse import ArgumentParser
     from argcomplete import autocomplete
@@ -18,11 +19,11 @@ except:
 
 '''
 run it as:
-    vid-cutter inp.mp4 -s 0:30 -e 1:40
-    vid-cutter inp.mp4 -s 0:30 -e 1:40 -o output.mp4
+    vid-cutter --trim inp.mp4 -s 0:30 -e 1:40
+    vid-cutter --trim inp.mp4 -s 0:30 -e 1:40 -o output.mp4
 
 for audio, please specify output name using -o and extension should be mp3
-    vid-cutter inp.mp4 -s 0:30 -e 1:40 -o output.mp3
+    vid-cutter --crop inp.mp4 -s 0:30 -e 1:40 -o output.mp3
 '''
 
 
@@ -42,7 +43,7 @@ def is_valid_file(parser, arg):
         # return open(arg, 'r')  # return an open file handle
         return arg
 
-def validate_args(parser):
+def validate_crop_args(parser):
     return
 
 def get_time(st):
@@ -102,34 +103,61 @@ def get_relative(st,et):
     if(h == 0 and m == 0 and s == 0): return None
     return str(h).zfill(2) + ':' + str(m).zfill(2) + ':' + str(s).zfill(2)
 
-
-def video_cutter(inp,st,t,out):
-    # sp.call()
-    os.system('ffmpeg -i ' + inp + ' -ss ' + st + ' -t ' + t + ' -c:v copy -c:a copy ' + out)
-
-def audio_cutter(inp,st,t,out):
-    # sp.call()
-    os.system('ffmpeg -i ' + inp + ' -ss ' + st + ' -t ' + t + ' -c:v copy ' + out)
-
-
+def getLength(filename):
+    result = sp.Popen(["ffprobe", filename],
+        stdout = sp.PIPE, stderr = sp.STDOUT)
+    arr = [x for x in result.stdout.readlines() if "Duration".encode('utf-8') in x]
+    x = arr[0].decode('utf-8')
+    x = x.split(' ')
+    dur = x.index('Duration:') + 1
+    return x[dur].split('.')[0]
 
 
-if(__name__=="__main__"):
-    parser = ArgumentParser()
-    parser.add_argument("inp",nargs='?',
-                        type=lambda x: is_valid_file(parser,x),
-                        help="input video file ex: input.mp4")
-    parser.add_argument("-s", "--start_time", help="start time for cuting in format hh:mm:ss or mm:ss")
-    parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
+def video_trimmer(inp,trimmer,out):
+    video_codec = " -c:v copy "
+    audio_codec =  " -c:a copy "
+    exec_command = 'ffmpeg -i ' + str(inp) + trimmer + video_codec + audio_codec + out
+    click.secho(exec_command,fg='green')
+    os.system(exec_command)
 
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument("-e", "--end_time", help="end time for cuting in format hh:mm:ss or mm:ss")
-    group.add_argument("-t", "--time", help="clip duration in format hh:mm:ss or mm:ss")
+def video_cropper(inp,trimmer,out):
+    video_codec = "" # senseless to say 'copy video and crop both at same time'
+    audio_codec =  " -c:a copy "
+    exec_command = 'ffmpeg -i ' + str(inp) + filters + video_codec + audio_codec + out
+    click.secho(exec_command,fg='green')
+    os.system(exec_command)
+
+def audio_cutter(inp,trimmer,out):
+    exec_command = 'ffmpeg -i ' + str(inp) + trimmer + codec + out
+    click.secho(exec_command,fg='green')
+    os.system(exec_command)
 
 
-    autocomplete(parser)
-    parser = parser.parse_args()
+def get_filters(parser):
+    filters = " "
+    if(not parser.crop):
+        return filters
 
+    crop_args = {}
+    crop_args['crop'] = parser.crop
+    crop_args['width'] = str(parser.width/100)
+    crop_args['height'] = str(parser.height/100)
+    crop_args['x_point'] = str(parser.x_point/100)
+    crop_args['y_point'] = str(parser.y_point/100)
+
+    validate_crop_args(crop_args)
+    # vid = cv2.VideoCapture(inp)
+    # success, frame = vid.read()
+    # cv2.imshow('frame',frame)
+
+    # command to crop lower right quatar
+    # ffmpeg -i in.mp4 -filter:v "crop=in_w/2:in_h/2:in_w/2:in_h/2" -c:a copy out.mp4
+    filters = ' -filter:v "crop=in_w*'+crop_args['width']+':in_h*'+crop_args['height']+ \
+        ':in_w*'+crop_args['x_point']+':in_h*'+crop_args['y_point']+'" '
+
+    return filters
+
+def get_io(parser):
     if(not parser.inp):
         inp = input('Please enter input video file path : ')
         if(not os.path.exists(inp)):
@@ -137,6 +165,20 @@ if(__name__=="__main__"):
             sys.exit(0)
     else:
         inp = parser.inp
+
+    if(not parser.output):
+        out = ''.join(inp.split('.')[:-1]) + '_output.' + inp.split('.')[-1]
+    else:
+        out = parser.output
+
+    if(os.path.exists(out)):
+        click.secho('[Warning] '+out+' file already exists',fg='yellow')
+    return inp,out
+
+def get_trimmer(parser):
+    trimmer = ' '
+    if(not parser.trim):
+        return trimmer
 
     if(not parser.start_time):
         st = input('Please enter start time in format hh:mm:ss or mm:ss : ')
@@ -167,19 +209,54 @@ if(__name__=="__main__"):
         click.secho('Wrong format for time duration',fg='red')
         sys.exit(0)
 
-    if(not parser.output):
-        out = ''.join(inp.split('.')[:-1]) + '_output.' + inp.split('.')[-1]
-    else:
-        out = parser.output
+    trimmer = " -ss " +str(st)+ " -t " +str(t)
+    return trimmer
 
-    if(os.path.exists(out)):
-        click.secho('[Warning] '+out+' file already exists',fg='Yellow')
-        res = input('Overwrite ? [y/N] ')
-        if(res.lower() != 'y'):
-            sys.exit(0)
+def get_parser():
+    parser = ArgumentParser()
+    parser.add_argument("inp",nargs='?',
+                        type=lambda x: is_valid_file(parser,x),
+                        help="input video file ex: input.mp4")
+    parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
+
+    parser.add_argument("--trim",action="store_true",default=False,help="trim video lenght")
+    parser.add_argument("-s", "--start_time", help="start time for cuting in format hh:mm:ss or mm:ss")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("-e", "--end_time", help="end time for cuting in format hh:mm:ss or mm:ss")
+    group.add_argument("-t", "--time", help="clip duration in format hh:mm:ss or mm:ss")
+
+    parser.add_argument("--crop",action="store_true",default=False,help="crop video window")
+    parser.add_argument("-w", "--width",type=int,default=100,help="crop video window width (on scale of 100)")
+    parser.add_argument("-l", "--height",type=int,default=100,help="crop video window height (on scale of 100)")
+    parser.add_argument("-x", "--x_point",type=int,default=0,help="crop video window top-left points x (on scale of 100)")
+    parser.add_argument("-y", "--y_point",type=int,default=0,help="crop video window top-left points y (on scale of 100)")
+
+    autocomplete(parser)
+    parser = parser.parse_args()
+    return parser
+
+def verify_dependencies()
+    try:
+        sp.call(['ffmpeg','--help'],stdout=sp.PIPE,stderr=sp.STDOUT)
+    except:
+        click.secho('Please install ffmpeg',fg='red')
+        sys.exit(0)
+
+if(__name__=="__main__"):
+    verify_dependencies()
+
+    parser = get_parser()
+
+    inp,out = get_io(parser)
+    trimmer = get_trimmer(parser)
+    filters = get_filters(parser)
 
     # Game starts here
+    # print(getLength(inp))
     if(out.split('.')[-1] == 'mp3'):
-        audio_cutter(inp,st,t,out)
+        audio_cutter(inp,trimmer,out)
     else:
-        video_cutter(inp,st,t,out)
+        if(parser.trim):
+            video_trimmer(inp,trimmer,out)
+        elif(parser.crop):
+            video_cropper(inp,filters,out)
