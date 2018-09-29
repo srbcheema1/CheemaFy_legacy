@@ -127,9 +127,16 @@ def video_trimmer(inp,trimmer,out):
     os.system(exec_command)
 
 def video_cropper(inp,trimmer,out):
-    video_codec = "" # senseless to say 'copy video and crop both at same time'
+    video_codec = "" # senseless to say 'crop video and copy video, both at same time'
     audio_codec =  " -c:a copy "
     exec_command = 'ffmpeg -i ' + str(inp) + filters + video_codec + audio_codec + out
+    click.secho(exec_command,fg='green')
+    os.system(exec_command)
+
+def video_resizer(inp,resizer,out):
+    video_codec = "" # senseless to say 'change quality video and copy video, both at same time'
+    audio_codec =  " -c:a copy "
+    exec_command = 'ffmpeg -i ' + str(inp) + resizer + video_codec + audio_codec + out
     click.secho(exec_command,fg='green')
     os.system(exec_command)
 
@@ -217,12 +224,33 @@ def get_trimmer(parser):
     trimmer = " -ss " +str(st)+ " -t " +str(t)
     return trimmer
 
+def get_resizer(parser):
+    resizer = ' '
+    if(not parser.action == 'resize'):
+        return resizer
+
+    if(parser.quality > 150):
+        click.secho('maximum value of quality is 150',fg='red')
+        sys.exit(0)
+
+    if(parser.quality < 0):
+        click.secho('quality cant be negative',fg='red')
+        sys.exit(0)
+
+    qual = parser.quality/100
+    qual = 51 - qual*33
+    '''
+    actual crf (libx264) scale is from 0 to 51. normally 0 - 18 increase size so they are useless
+    we will choose range from 18 to 51
+    '''
+    resizer = ' -crf ' + str(qual) + ' '
+    return resizer
+
 def get_parser():
     parser = ArgumentParser()
     parser.add_argument("inp",nargs='?',
                         type=lambda x: is_valid_file(trim_parser,x),
                         help="input video file ex: input.mp4")
-    parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
     subparsers = parser.add_subparsers(dest='action')
 
     trim_parser = subparsers.add_parser('trim')
@@ -230,12 +258,19 @@ def get_parser():
     time_group = trim_parser.add_mutually_exclusive_group()
     time_group.add_argument("-e", "--end_time", help="end time for cuting in format hh:mm:ss or mm:ss")
     time_group.add_argument("-t", "--time", help="clip duration in format hh:mm:ss or mm:ss")
+    trim_parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
 
     crop_parser = subparsers.add_parser('crop')
     crop_parser.add_argument("-w", "--width",type=int,default=100,help="crop video window width (on scale of 100)")
     crop_parser.add_argument("-l", "--height",type=int,default=100,help="crop video window height (on scale of 100)")
     crop_parser.add_argument("-x", "--x_point",type=int,default=0,help="crop video window top-left points x (on scale of 100)")
     crop_parser.add_argument("-y", "--y_point",type=int,default=0,help="crop video window top-left points y (on scale of 100)")
+    crop_parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
+
+    resize_parser = subparsers.add_parser('resize')
+    resize_parser.add_argument("-q", "--quality",type=int,default=100,help="output video quality (on scale of 100)")
+    resize_parser.add_argument("-o", "--output",help="output file name, ex: output.mp4")
+
 
     autocomplete(parser)
     parser = parser.parse_args()
@@ -257,7 +292,7 @@ if(__name__=="__main__"):
 
     # audio
     if(out.split('.')[-1] == 'mp3'):
-        if (parser.action in ['crop','qual']):
+        if (parser.action in ['crop','resize']):
             message = parser.action + ' not supported for mp3 output'
             click.secho(message,fg='red')
             sys.exit(0)
@@ -275,5 +310,8 @@ if(__name__=="__main__"):
     elif(parser.action == 'crop'):
         filters = get_filters(parser)
         video_cropper(inp,filters,out)
+    elif(parser.action == 'resize'):
+        resizer = get_resizer(parser)
+        video_resizer(inp,resizer,out)
     else:
         click.secho('unknow action')
