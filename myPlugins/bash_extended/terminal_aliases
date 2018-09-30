@@ -236,7 +236,7 @@ function _trash(){
     then
         my_trash $_trash_loc
 
-    elif [ "$1" = "-d" ]
+    elif [ "$1" = "-d" ] #delete something from trash
     then
         shift
         echo "do you want to delete permanently : $@ ";

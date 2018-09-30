@@ -14,7 +14,7 @@ fi
 
 if [ "$_linux" = "" ]
 then
-    $_linux="--ubuntu"
+    _linux="--ubuntu"
 fi
 
 

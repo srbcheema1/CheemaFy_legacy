@@ -4,10 +4,4 @@ alias catman='cat ~/programs/CheemaFy/myPlugins/default_codes/default.manual.cpp
 
 # this will be opened by vim as default
 default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/default.empty.txt
-default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/default.simple.cpp
-
-alias cvim='
-function __cvim(){
-    cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple >> $1
-    vim $1
-};__cvim'
+default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/default.cpp
