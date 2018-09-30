@@ -110,6 +110,11 @@ if [ -f ~/.CheemaFy/installed ]; then
     if [ -f ~/programs/CheemaFy/myPlugins/bash_extended/bash_extended ]; then
         . ~/programs/CheemaFy/myPlugins/bash_extended/setup_bash
     fi
+fi
+if [ -f ~/.CheemaFy/installed ]; then
+    if [ -f ~/.CheemaFy/temp_bashrc ]; then
+        . ~/.CheemaFy/temp_bashrc
+    fi
 fi"
 gitconfig_content="[include]
     path = ~/.CheemaFy/installed"
@@ -118,6 +123,7 @@ installed_content="[include]
     path = ~/programs/CheemaFy/myPlugins/git_extended/gitconfig"
 
 echo "$installed_content" >> ~/.CheemaFy/installed
+echo "" >> ~/.CheemaFy/temp_bashrc
 if [ $ans = "yes" ]
 then
     echo "$vimrc_content" >> ~/.vimrc

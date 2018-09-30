@@ -98,3 +98,8 @@ backtrace   - back trace
     up
     down
     frame <number>
+
+
+# sexy
+there is a gdbtui that helps us to visualize what is happeing in the code with gui in terminal.
+you can switch between gdb and gdbtui using `Ctrl + x Ctrl +a` strokes combination.

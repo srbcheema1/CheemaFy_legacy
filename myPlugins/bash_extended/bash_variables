@@ -1,15 +1,20 @@
 # scripts
+__free_ka_gyan="
+if you are to add path of an executable then add it usint PATH
+if you are to add path of some python module(that is to be imported) then use PYTHONPATH
+"
+
 if [ -d "$HOME/programs/CheemaFy/srbScripts" ]; then
+    # path is for commandline interpreter to look for executables
     export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts"
     #export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts"
 fi
 
 if [ -d "$HOME/programs/CheemaFy/srbScripts/srblib" ]; then
     #export PATH=$PATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
+    #pythonpath is for importing
     export PYTHONPATH=$PYTHONPATH:"$HOME/programs/CheemaFy/srbScripts/srblib"
 fi
-
-export PATH=$PATH:"$HOME/programs/projects/CoolKit/CoolKit"
 
 # directory for my experiments
 if [ -d "$HOME/Desktop/test/path_place" ]; then
