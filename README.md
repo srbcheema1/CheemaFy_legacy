@@ -42,7 +42,7 @@
    * Similary you can turn it on again by renaming that file back to installed
 
 
- * Steps to remove CheemaFy
+ * These steps will help You in Removing CheemaFy
 
    * Delete the folder ~/.CheemaFy
    * Remove the files of CheemaFy from .bashrc .gitconfig .vimrc
