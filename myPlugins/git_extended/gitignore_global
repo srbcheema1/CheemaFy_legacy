@@ -41,3 +41,7 @@ gadhi*
 
 # useless file made in mac
 .DS_Store
+
+
+# coolkit files
+.coolkit
