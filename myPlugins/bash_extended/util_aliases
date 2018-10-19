@@ -1,4 +1,4 @@
-#ove to particular locations
+#move to particular locations
 alias de='cd ~/Desktop'
 alias cf='cd ~/programs/CheemaFy/'
 
@@ -122,6 +122,7 @@ function _vim(){
             if [ "$extension" = "cpp" ]
             then
                 # defined in cp_aliases
+                cat "$default_template_file" >> "$1"
                 cat "$default_cp_file" >> "$1"
             fi
         fi
@@ -326,13 +327,25 @@ alias whatsapp='firefox https://web.whatsapp.com/🌐/en & '
 
 
 #default programs
-alias catc='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cpp >>'
 alias catj='cat ~/programs/CheemaFy/myPlugins/default_codes/default.java >>'
 alias catp='cat ~/programs/CheemaFy/myPlugins/default_codes/default.py >>'
 alias catb='cat ~/programs/CheemaFy/myPlugins/default_codes/default.sh >>'
-alias catr='cat ~/programs/CheemaFy/myPlugins/default_codes/default.c >>'
-alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/default.simple.cpp >>'
+alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/cpp/simple/simple.cpp >>'
 alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
 alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase.py >>'
 alias catcmake='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cmake >>'
+
+
+alias catman='
+function _catman(){
+    cat "$default_template_file" >> "$1"
+    cat "$default_manual_file" >> "$1"
+};_catman'
+
+alias catc='
+function _catc(){
+    cat "$default_template_file" >> "$1"
+    cat "$default_cp_file" >> "$1"
+};_catc'
+
 

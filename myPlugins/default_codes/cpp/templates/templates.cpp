@@ -16,9 +16,10 @@ int debug_test = 0; // test_case to be debugged ... 0 means all ... -1 means non
 int _t = 0;// test_case counter
 
 #define umap unordered_map
-#define pqueue priority_queue
+#define pqueue priority_queue // kept them macro coz we need to use <> also
 typedef unsigned long long ulli;// rarely will be used
 typedef pair<int,int> mp;
+typedef vector<int> vi;
 typedef vector<vector<int> > matrix; // matrix matt(n,vector<int>(m,0));
 
 template<class T>int sz(T &x){return (int)x.size();}
@@ -33,31 +34,7 @@ template<class T,class U>ostream &operator<<(ostream &o,pair<T,U> &x){return o<<
 template<class T>ostream &operator<<(ostream &os,vector<T> &x){dout<<"[";_p(x);dout<<"] ";return os;}
 template<class T>ostream &operator<<(ostream &os,set<T> &x){dout<<"{";_p(x);dout<< "} ";return os;}
 
-const int mod = 1e9+7, inf = LLONG_MAX;
+const int mod = 1e9+7, inf = LLONG_MAX, none = inf/2-9;
 int temp = -1,last = -1,hell=-1;
 struct Desc{bool operator()(int a,int b){return a>b;}}desc; // for descending sort
 
-// code begins here
-
-void solve(){
-    //dout << "Case #" << _t << ": " << endl;
-    int n;
-    cin>>n;
-    vector<int> vec(n);
-    for(int i=0;i<n;i++){
-        cin>>vec[i];
-    }
-    //show("vec:",vec,"done");
-}
-
-signed main(){
-    #ifdef ONLINE_JUDGE
-    ios_base::sync_with_stdio(0);cin.tie(0);
-    #else
-    //freopen("input","r",stdin);
-    #endif
-    int test=1;
-    //cin>>test;
-    for(int t = 1; t <= test; t++)_t = t,solve();
-}
-// a code by srbcheema1
