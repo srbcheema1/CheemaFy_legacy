@@ -1,7 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define dout if(debug and (debug_test == 0 or _t == debug_test) ) cout<<" "
+#define dout if(debug and (debug_test == 0 or _t == debug_test) ) cerr<<" "
+
 #define endl "\n"
 #define int long long
 #define substring(i,j) substr(i,(j-i+1)) // both i,j are included

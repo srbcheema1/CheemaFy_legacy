@@ -69,7 +69,6 @@ function _venv(){
 };_venv'
 
 
-#to set default screenshot saving location
 help_js_beautify="
 js-beautify <file1>           --- beautifies the given file
 js-beautify <file1> <file2>   --- beautifies the given file1 into file2

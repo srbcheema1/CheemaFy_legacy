@@ -1,17 +1,20 @@
 // code begins here
 
 void solve(){
-    //dout << "Case #" << _t << ": " << endl;
+    // never forget sorting input
     int n;
     cin>>n;
     vector<int> vec(n);
     for(int i=0;i<n;i++){
         cin>>vec[i];
     }
-    //show("vec:",vec,"done");
 }
 
-signed main(){
+void preprocess() {
+
+}
+
+signed main() {
     #ifdef ONLINE_JUDGE
     ios_base::sync_with_stdio(0);cin.tie(0);
     #else
@@ -19,7 +22,7 @@ signed main(){
     #endif
     std::cout << std::fixed; std::cout.precision(7);
     int test=1;
-    //cin>>test;
+    cin>>test;
+    preprocess();
     for(int t = 1; t <= test; t++)_t = t,solve();
 }
-// a code by srbcheema1

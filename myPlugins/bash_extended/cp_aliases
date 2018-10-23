@@ -5,3 +5,8 @@ default_template_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/templates/
 default_manual_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/manual.cpp
 default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/programming.cpp
 
+
+# for codechef
+#default_template_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/templates/chef_templates.cpp
+#default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/chef_programming.cpp
+
