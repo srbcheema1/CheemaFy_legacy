@@ -2,11 +2,14 @@ alias algo='cd ~/programs/algo'
 
 # this will be opened by vim as default
 default_template_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/templates/templates.cpp
+# for manual
 default_manual_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/manual.cpp
-default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/programming.cpp
 
 
+
+# for codeforces
+default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/main/cf_programming.cpp
 # for codechef
-#default_template_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/templates/chef_templates.cpp
-#default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/chef_programming.cpp
-
+#default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/main/chef_programming.cpp
+# for codejam
+#default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/main/cj_programming.cpp

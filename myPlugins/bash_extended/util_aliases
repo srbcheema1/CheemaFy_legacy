@@ -130,6 +130,28 @@ function _vim(){
     fi
 };_vim'
 
+alias code='
+function _code(){
+    if [ -d "$1" ]
+    then
+       code "$1";
+    else
+        if [ "$#" -eq 1 ] && ! [ -f "$1" ]
+        then
+            filename=$(basename -- "$1")
+            extension="${filename##*.}"
+            if [ "$extension" = "cpp" ]
+            then
+                # defined in cp_aliases
+                cat "$default_template_file" >> "$1"
+                cat "$default_cp_file" >> "$1"
+            fi
+        fi
+        code $@
+    fi
+};_code'
+
+
 
 #set proxy
 function proxy(){
@@ -330,7 +352,7 @@ alias whatsapp='firefox https://web.whatsapp.com/🌐/en & '
 alias catj='cat ~/programs/CheemaFy/myPlugins/default_codes/default.java >>'
 alias catp='cat ~/programs/CheemaFy/myPlugins/default_codes/default.py >>'
 alias catb='cat ~/programs/CheemaFy/myPlugins/default_codes/default.sh >>'
-alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/cpp/simple/simple.cpp >>'
+alias cats='cat ~/programs/CheemaFy/myPlugins/default_codes/cpp/full/simple.cpp >>'
 alias cath='cat ~/programs/CheemaFy/myPlugins/default_codes/default.html >>'
 alias cattest='cat ~/programs/CheemaFy/myPlugins/default_codes/default.testcase.py >>'
 alias catcmake='cat ~/programs/CheemaFy/myPlugins/default_codes/default.cmake >>'
