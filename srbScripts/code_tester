@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import os
+import sys
 from sys import argv,exit
+from srbColour import Colour
+from terminaltables import AsciiTable
 
 describe='''
 script to check codes of cheema and other are identical or not
@@ -20,63 +23,151 @@ also you can clean the testing files by
 code_tester --clean <idd>
 '''
 
-def check_exception(file1,file2,tester_script):
-    if(not os.path.exists(file1)):
-        print('no file of name '+file1)
-        return False
-    if(not os.path.exists(file2)):
-        print('no file of name '+file2)
-        return False
-    if(not os.path.exists(tester_script)):
-        print('no file of name '+tester_script)
-        return False
-    return True
+class Code_tester:
+    def __init__(self,code1,code2,tester_script,idd="0",maxlim = 10000,timeout = "10"):
+        self.idd = '_' + str(idd)
+
+        self.code1 = code1
+        self.code2 = code2
+        self.base1 = code1.split('.')[0]
+        self.base2 = code2.split('.')[0]
+        self.out1 = self.base1+self.idd+'_tester'
+        self.out2 = self.base2+self.idd+'_tester'
+
+        self.tester_script = tester_script
+        self.maxlim = int(maxlim)
+        if not Code_tester.check_exception(code1,code2,tester_script):
+            sys.exit(0)
+        self.exec1 = Code_tester.compile_code(self.code1)
+        self.exec2 = Code_tester.compile_code(self.code2)
+        self.exec3 = Code_tester.compile_code(self.tester_script)
+        self.timeout = 'timeout ' + str(timeout) + 's '
+
+    def check_exception(file1,file2,tester_script):
+        if(not os.path.exists(file1)):
+            print('no file of name '+file1)
+            return False
+        if(not os.path.exists(file2)):
+            print('no file of name '+file2)
+            return False
+        if(not os.path.exists(tester_script)):
+            print('no file of name '+tester_script)
+            return False
+        return True
 
 
-ret = -1
-def code_tester(code1,code2,tester_script,idd="0",maxlim=10000):
-    #compile both
-    if(not check_exception(code1,code1,tester_script)):
-        exit()
+    def test(self):
+        times = 0
+        while(True):
+            if(times%5==0):
+                Colour.print("tested "+str(times),Colour.GREEN)
 
-    os.system("g++ -std=c++11 "+code1+" -o c"+idd+".tester")
-    os.system("g++ -std=c++11 "+code2+" -o o"+idd+".tester")
+            status = os.system(self.timeout + self.exec3 + ' > test' + self.idd) # tester_exec
+            if status == 31744:
+                Colour.print('test_gen timed out',Colour.RED)
+                sys.exit(1)
+            if status != 0:
+                Colour.print('test_gen runtime_error',Colour.RED)
+                sys.exit(1)
 
-    global ret
-    ret = -1
-    times = 0
-    maxlim = int(maxlim)
-    while(ret == -1):
-        if(not check_exception("c"+idd+".tester","o"+idd+".tester",tester_script)):
-            exit()
+            status = os.system(self.timeout + self.exec1 + ' < test' + self.idd + ' > ' + self.out1)
+            if status == 31744:
+                Colour.print(self.code1 + ' timed out',Colour.RED)
+                sys.exit(1)
+            if status != 0:
+                Colour.print(self.code1 + ' runtime_error',Colour.RED)
+                sys.exit(1)
 
-        if(times%5==0):
-            print("test",times)
-        #os.system("pwd")
-        os.system("python3 "+tester_script+" > test"+idd)
+            status = os.system(self.timeout + self.exec2 + ' < test' + self.idd + ' > ' + self.out2)
+            if status == 31744:
+                Colour.print(self.code2 + ' timed out',Colour.RED)
+                sys.exit(1)
+            if status != 0:
+                Colour.print(self.code2 + ' runtime_error',Colour.RED)
+                sys.exit(1)
 
-        os.system("./c"+idd+".tester < test"+idd+" > outc"+idd)
-        os.system("./o"+idd+".tester < test"+idd+" > outo"+idd)
+            output1 = Code_tester.get_ouput(self.out1)
+            output2 = Code_tester.get_ouput(self.out2)
+            failed_test = Code_tester.get_ouput('test'+self.idd)
 
-        from comp_files import comp_files as comparer
-        ret = comparer('outc'+idd,'outo'+idd)
-        if(ret!=-1):
-            print("diff in line",ret)
+            if output1 != output2:
+                if(len(failed_test.split('\n')) < 30):
+                    Colour.print('---------Failed Test Case----------',Colour.YELLOW)
+                    print(failed_test)
+                    Colour.print('')
+                    Colour.print('---------End of Test Case----------',Colour.YELLOW)
 
-        times += 1
-        if(maxlim > 0 and times>maxlim):
-            print("passed "+str(maxlim)+" testcases ")
-            break
+                if(len(output1.split('\n')) < 30 and len(output2.split('\n')) < 30):
+                    table_data = [[self.code1, self.code2],[output1,output2]]
+                    print(AsciiTable(table_data).table)
+
+                from comp_files import comp_files as comparer
+                ret = comparer(self.out1,self.out2)
+                if(ret!=-1):
+                    Colour.print("diff in line "+str(ret),Colour.YELLOW)
+
+                # git diff
+
+                sys.exit(0)
+
+            times += 1
+            if(self.maxlim > 0 and times>self.maxlim):
+                print("passed "+str(maxlim)+" testcases ")
+                break
+
+    @staticmethod
+    def clean(idd):
+        idd = '_'+str(idd)
+        os.system("rm test"+idd) # testcase
+        os.system('rm *.tester') # executables
+        os.system('rm *_tester') # outputs
+        sys.exit(0)
+
+    @staticmethod
+    def get_ouput(file_path):
+        with open(file_path) as out_handler:
+            output = out_handler.read().strip().split('\n')
+            output = '\n'.join(
+                [line.strip() for line in output])
+            return output
 
 
-def clean(idd):
-    idd = str(idd)
-    os.system("rm test"+idd)
-    os.system("rm outc"+idd)
-    os.system("rm outo"+idd)
-    os.system("rm c"+idd+".tester")
-    os.system("rm o"+idd+".tester")
-    exit()
+    @staticmethod
+    def compile_code(code):
+        base,ext = code.split('.')
+
+        if not ext in ['c', 'cpp', 'java', 'py', 'rb', 'out']:
+            Colour.print('Supports only C, C++, Python, Java, Ruby and cpp-binary as of now.',Colour.RED)
+            sys.exit(1)
+
+        compiler = {
+            'py': None,
+            'rb': None,
+            'out': None,
+            'c': 'gcc -static -DONLINE_JUDGE -g -fno-asm -lm -s -O2 -o ' + base + '.tester',
+            'cpp': 'g++ -static -DONLINE_JUDGE -g -lm -s -x c++ -O2 -std=c++14 -o ' + base + '.tester',
+            'java': 'javac -d .'
+        }[ext]
+
+        # COMPILE
+        if not compiler is None:
+            compile_status = os.system(compiler + ' \'' + code + '\'') #spaces in path
+            if compile_status != 0:
+                Colour.print('Compilation error.', Colour.RED)
+                os.system(self.compiler + ' \'' + self.input_file + '\'') #spaces in path
+                sys.exit(1)
+
+        execute_command = {
+            'py': 'python3 \'' + code + '\'',
+            'rb': 'ruby \'' + code + '\'',
+            'out': './' + base + '.out',
+            'c': './' + base + '.tester',
+            'cpp': './' + base + '.tester',
+            'java': 'java -DONLINE_JUDGE=true -Duser.language=en -Duser.region=US -Duser.variant=US ' + base
+        }[ext]
+
+        return execute_command
+
 
 
 if(__name__=="__main__"):
@@ -89,10 +180,10 @@ if(__name__=="__main__"):
 
     if(argv[1]=="--clean" or argv[1]=='-c'):
         if(len(argv)==2):
-            clean("0")
+            Code_tester.clean("0")
             pass
         else:
-            clean(argv[2])
+            Code_tester.clean(argv[2])
         exit()
 
     if(len(argv)<3):
@@ -109,5 +200,6 @@ if(__name__=="__main__"):
             if(len(argv)>=6):
                 maxlim=argv[5]
 
-    # clean(idd)
-    code_tester(code1,code2,tester_script,idd,maxlim)
+    # Code_tester.clean(idd)
+    code_tester = Code_tester(code1,code2,tester_script,idd,maxlim)
+    code_tester.test()

@@ -18,6 +18,9 @@ __*
 .vs
 CMakeSettings.json
 
+# vs code
+.vscode
+
 
 # compiled files
 *.out
