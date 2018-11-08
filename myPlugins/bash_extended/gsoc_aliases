@@ -24,7 +24,7 @@ build_it_doc(){
 
 
 # it is non docker build
-function build_it(){
+function build_it() {
     start_=`date +%s`
     if [ "$1" = "vcf" ]
     then
@@ -38,9 +38,9 @@ function build_it(){
             done
         fi
 
-        mkdir -p $_vcf_loc/srb_test/build
-        cd $_vcf_loc/srb_test/build
-        cmake $@ ../../
+        mkdir -p $_vcf_loc/srb_test
+        cd $_vcf_loc/srb_test
+        cmake $@ ../
         time make -j3
         cd -
         mkdir -p $_vcf_loc/test/input_files/v4.3/srb_test

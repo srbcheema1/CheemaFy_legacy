@@ -36,6 +36,5 @@ template<class T>ostream &operator<<(ostream &os,vector<T> &x){dout<<"[";_p(x);d
 template<class T>ostream &operator<<(ostream &os,set<T> &x){dout<<"{";_p(x);dout<< "} ";return os;}
 
 const int mod = 1e9+7, inf = LLONG_MAX, none = inf/2-9;
-int temp = -1,last = -1,hell=-1;
 struct Desc{bool operator()(int a,int b){return a>b;}}desc; // for descending sort
 

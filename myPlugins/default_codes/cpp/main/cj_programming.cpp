@@ -19,7 +19,7 @@ signed main(){
     #ifdef ONLINE_JUDGE
     ios_base::sync_with_stdio(0);cin.tie(0);
     #else
-    //freopen("input.txt","r",stdin);
+    //freopen("Input.txt","r",stdin);
     #endif
     std::cout << std::fixed; std::cout.precision(7);
     preprocess();

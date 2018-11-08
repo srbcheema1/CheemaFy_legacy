@@ -3,7 +3,7 @@ alias algo='cd ~/programs/algo'
 # this will be opened by vim as default
 default_template_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/templates/templates.cpp
 # for manual
-default_manual_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/manual.cpp
+default_manual_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/main/manual.cpp
 
 
 
