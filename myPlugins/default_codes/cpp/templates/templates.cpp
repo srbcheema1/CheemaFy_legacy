@@ -1,6 +1,7 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
+// clang-format off
 #define dout if(debug and (debug_test == 0 or _t == debug_test) ) cerr<<" "
 #define endl "\n"
 #define int long long
@@ -37,4 +38,5 @@ template<class T>ostream &operator<<(ostream &os,set<T> &x){dout<<"{";_p(x);dout
 
 const int mod = 1e9+7, inf = LLONG_MAX, none = inf/2-9;
 struct Desc{bool operator()(int a,int b){return a>b;}}desc; // for descending sort
+// clang-format off
 

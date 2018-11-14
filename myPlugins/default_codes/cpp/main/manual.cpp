@@ -1,6 +1,7 @@
 // manual.begin
 
-signed main(){
+signed main()
+{
 
 }
 //manual.end

@@ -1,0 +1,91 @@
+---
+# http://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# copy this file into your directory or any parent directory say home as .clang-format
+# works good with clang-format-6.0
+# each version has own rules. I prefer 6.0
+Language:        Cpp
+Standard:        Cpp11 # standard
+
+# Headers
+SortIncludes:    true
+IncludeBlocks: Preserve # group include blocks
+SortUsingDeclarations: false
+
+# Basics
+IndentWidth:     4  # indent width
+TabWidth:        4 # tab width 4
+UseTab:          Never # dont use tabs
+ColumnLimit:     120 # limit of 120 words per column
+MaxEmptyLinesToKeep: 1
+
+# Indentation
+BreakBeforeBraces: Custom # use BraceWrapping
+BraceWrapping:
+  AfterClass:      false
+  AfterControlStatement: false
+  AfterFunction:   true
+  AfterNamespace:  true
+  AfterStruct:     true
+  BeforeCatch:     false
+  BeforeElse:      false
+  IndentBraces:    false # disturbs the code design should be false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
+FixNamespaceComments: true # add commend at end
+NamespaceIndentation: All #intend content of namespace
+AccessModifierOffset: -2   # for public: private: shift them -2 back from normal intend
+
+# Short things in one line
+AllowShortBlocksOnASingleLine: true # single line conditions
+AllowShortCaseLabelsOnASingleLine: true # for case 1: x=1; break;
+AllowShortFunctionsOnASingleLine: Empty # only empty functions in single line
+AllowShortIfStatementsOnASingleLine: true # single line if conditions
+AllowShortLoopsOnASingleLine: true # short loops
+
+# Parameters
+BinPackArguments: false # either single line or one line one argument
+BinPackParameters: false
+
+# Coding rules
+PointerAlignment: Right # int* a vs int *a
+Cpp11BracedListStyle: true   # vector<int> x{1, 2, 3, 4};   vs.   vector<int> x{ 1, 2, 3, 4 };
+SpaceAfterCStyleCast: false # (int)i vs (int) i
+SpaceAfterTemplateKeyword: false # template<int> vs template <int>
+SpaceBeforeAssignmentOperators: true # int a=5; vs int a = 5;
+SpaceBeforeParens: ControlStatements  # if() vs if ()
+SpaceInEmptyParentheses: false # foo() vs foo(  )
+SpacesBeforeTrailingComments: 1 # how many spaces between code and comment
+SpacesInAngles:  false # std::function< void(int) > fct;        std::function<void(int)> fct;
+SpacesInContainerLiterals: true # var arr = [ 1, 2, 3 ];   vs.   var arr = [1, 2, 3];
+SpacesInCStyleCastParentheses: false # x = ( int32 )y    vs.   x = (int32)y
+SpacesInParentheses: false # t f( Deleted & ) & = delete;   vs.   t f(Deleted &) & = delete;
+SpacesInSquareBrackets: false # int a[ 5 ];    vs.     int a[5];
+
+# Misc
+BreakBeforeTernaryOperators: true # long_long_condition ? a : b
+BreakConstructorInitializers: AfterColon
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+IndentCaseLabels: true
+KeepEmptyLinesAtTheStartOfBlocks: false # false means no empty line at begining of block
+ReflowComments:  false
+
+AlignAfterOpenBracket: Align # align parameters after brackets in new line or not
+AlignEscapedNewlines: Left # \ escape line on right side or left side
+AlignOperands:   true # used commonly in long string concatinations
+AlignTrailingComments: false # align comments or not, false is better
+
+AlwaysBreakAfterReturnType: None # dont use return type in seperate line above
+AlwaysBreakBeforeMultilineStrings: false # fine dont break, empty `=` sign looks weird
+AlwaysBreakTemplateDeclarations: false # ok keep it as it is
+
+# Penalities, Can be ignored
+#PenaltyBreakAssignment: 2
+#PenaltyBreakBeforeFirstCallParameter: 19
+#PenaltyBreakComment: 300
+#PenaltyBreakFirstLessLess: 120
+#PenaltyBreakString: 1000
+#PenaltyExcessCharacter: 1000000
+#PenaltyReturnTypeOnItsOwnLine: 60
+...
+

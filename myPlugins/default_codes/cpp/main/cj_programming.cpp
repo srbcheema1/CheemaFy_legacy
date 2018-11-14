@@ -1,6 +1,7 @@
 // code begins here
 
-void solve(){
+void solve()
+{
     int n;
     cin>>n;
     vector<int> vec(n);
@@ -11,11 +12,13 @@ void solve(){
     cout << "Case #" << _t << ": ";
 }
 
-void preprocess(){
+void preprocess()
+{
 
 }
 
-signed main(){
+signed main()
+{
     #ifdef ONLINE_JUDGE
     ios_base::sync_with_stdio(0);cin.tie(0);
     #else
