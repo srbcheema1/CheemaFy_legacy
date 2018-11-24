@@ -30,7 +30,7 @@ printf "Do you want to configure home_files y/n : "
 read ans
 
 bashrc_content="# CheemaFy bash
-    . ~/programs/CheemaFy/myPlugins/bash_extended/win_bash/setup_bash
+    . ~/programs/CheemaFy/myPlugins/.bash_extended/win_bash/setup_bash
 "
 gitconfig_content="[include]
     path = ~/.CheemaFy/installed_win"
