@@ -116,14 +116,17 @@ if [ -f ~/.CheemaFy/installed ]; then
         . ~/.CheemaFy/temp_bashrc
     fi
 fi"
+
 gitconfig_content="[include]
     path = ~/.CheemaFy/installed"
 vimrc_content=":so ~/programs/CheemaFy/srbScripts/vim_scripts/setup.vim"
 installed_content="[include]
     path = ~/programs/CheemaFy/myPlugins/git_extended/gitconfig"
+temp_bashrc_content="export PATH=\$PATH:~/Desktop/test/path_place
+default_cp_file=~/programs/CheemaFy/myPlugins/default_codes/cpp/main/cf_programming.cpp"
 
 echo "$installed_content" >> ~/.CheemaFy/installed
-echo "" >> ~/.CheemaFy/temp_bashrc
+echo "$temp_bashrc_content" >> ~/.CheemaFy/temp_bashrc
 if [ $ans = "yes" ]
 then
     echo "$vimrc_content" >> ~/.vimrc

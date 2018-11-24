@@ -119,7 +119,7 @@ function _vim(){
         then
             filename=$(basename -- "$1")
             extension="${filename##*.}"
-            if [ "$extension" = "cpp" ]
+            if [ "$extension" = "cpp" ] && [ "$USER" = "srb" ]
             then
                 # defined in cp_aliases
                 cat "$default_template_file" >> "$1"

@@ -284,11 +284,11 @@ alias git_diff='
 function _git_diff(){
     mkdir -p ~/.CheemaFy/.gitdiff
 
-    if ! [ -z "$(ls -A $HOME/.CheemaFy/srb_clip_board/)" ]
+    if ! [ -z "$(ls -A $HOME/.CheemaFy/.gitdiff/)" ]
     then
         cd ~/.CheemaFy/.gitdiff
         ls -A | xargs -d"\n" rm -r
-        cd - &> /dev/null
+        cd -
     fi
 
     cp "$1" ~/.CheemaFy/.gitdiff/
@@ -296,14 +296,14 @@ function _git_diff(){
     git init &> /dev/null
     git add . &> /dev/null
     git commit -m "initial commit" &> /dev/null
-    cd - $> /dev/null
+    cd -
     cp "$2" ~/.CheemaFy/.gitdiff/
     cd ~/.CheemaFy/.gitdiff/
     file1=$(basename -- "$1")
     file2=$(basename -- "$2")
     mv $file2 $file1
     git diff
-    cd - $> /dev/null
+    cd -
 };_git_diff'
 
 # check how many files have tag of recent blame by different users in repo
