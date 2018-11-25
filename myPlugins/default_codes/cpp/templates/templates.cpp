@@ -22,11 +22,12 @@ int _t = 0;// test_case counter
 typedef unsigned long long ulli;// rarely will be used
 typedef pair<int,int> mp;
 typedef vector<int> vi;
-typedef vector<vector<int> > matrix; // matrix matt(n,vector<int>(m,0));
+typedef set<int> si;
+typedef vector<vector<int>> matrix; // matrix matt(n,vector<int>(m,0));
 
 template<class T>int sz(T &x){return (int)x.size();}
 template<class T>void show(T first){dout<<first<<"\n";}
-template<class T>bool sort_fun(T a,T b){return a>b;} // for descending sort // templated
+template<class T>bool sort_fun(T a,T b){return a>b;} // for descending sort // normally sory is ascending, use <() fxn
 template<class T,class U>bool found(T t,U u){if(t.find(u)==t.end())return false;return true;}
 
 // helping templates ignore them
@@ -37,6 +38,6 @@ template<class T>ostream &operator<<(ostream &os,vector<T> &x){dout<<"[";_p(x);d
 template<class T>ostream &operator<<(ostream &os,set<T> &x){dout<<"{";_p(x);dout<< "} ";return os;}
 
 const int mod = 1e9+7, inf = LLONG_MAX, none = inf/2-9;
-struct Desc{bool operator()(int a,int b){return a>b;}}desc; // for descending sort
+struct Desc{bool operator()(int a,int b){return a>b;}}desc; // for descending sort, PQ does descending sort by default
 // clang-format off
 
