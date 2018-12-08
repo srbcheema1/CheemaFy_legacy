@@ -3,17 +3,17 @@
     path = /Users/srb/programs/CheemaFy/myPlugins/git_extended/srbconfig
 
 [alias]
-	showdown = log --decorate --oneline --graph -8
-	history = log --decorate --oneline --all --graph
-	wrk = log --decorate --oneline --all --graph -14
+    showdown = log --decorate --oneline --graph -8
+    history = log --decorate --oneline --all --graph
+    wrk = log --decorate --oneline --all --graph -14
     work = log --decorate --pretty=format:\"%C(yellow)%h %Cgreen%d %Creset %s , %Cblue%cn , %Cred %ad\" --graph --all --date=short
 
     # unstage the file if added
-	unstage = reset HEAD --
+    unstage = reset HEAD --
     # untrach a file
     untrack = rm --cached -r --
     # undo the changes to a file
-	undo = checkout --
+    undo = checkout --
 
     # verify before commiting
     verify = diff --cached
@@ -40,6 +40,9 @@
     changes = diff --stat
     changesv = diff --name-status
 
+    # changed file names in commit
+    changedf = diff-index --diff-filter=AM --name-only
+
     # ignore a tracked file. for example cmakelists
     ignorelocally = update-index --assume-unchanged
     ignoreremove = update-index --no-assume-unchanged
@@ -47,6 +50,10 @@
     # git wont ask password again for this repo
     savepassword = config credential.helper store
 
+    # to find nearest common ancestor
+    # git diverges <branch1> <branch2>
+    # diverges = !sh -c 'git rev-list --boundary $1...$2 | grep "^-" | cut -c2-'
+    # parent = "!git show-branch -a | grep '*' | grep -v \"$(git rev-parse --abbrev-ref HEAD)\" | head -n1 | sed 's/.*\\[\\(.*\\)\\].*/\\1/' | sed 's/[\\^~].*//' #"
 
 [commit]
     signoff = true
@@ -62,7 +69,7 @@
     match = bold red
     linenumber = green
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 
 # we cannot create alias of original command
 # signing every commit is useless - torvalds
