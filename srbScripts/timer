@@ -2,18 +2,22 @@
 import time
 import os
 
-sec = 0
-mins = 0
-hour = 0
+os.system("resize -s 10 40 >/dev/null 2>&1") # resize terminal
 
-os.system("resize -s 10 40")
-while(True):
-    time.sleep(1)
-    print("\r%s %s %s" %(hour,mins,sec),end='\r')
-    sec +=1;
-    if(sec==60):
-        sec = 0
-        mins += 1
-    if(mins == 60):
-        mins = 0
-        hour += 1
+try:
+    sec = 0
+    mins = 0
+    hour = 0
+    while(True):
+        time.sleep(1)
+        print("\r%s %s %s" %(hour,mins,sec),end='\r')
+        sec +=1;
+        if(sec==60):
+            sec = 0
+            mins += 1
+        if(mins == 60):
+            mins = 0
+            hour += 1
+except:
+    print("\r%s %s %s" %(hour,mins,sec))
+    pass
