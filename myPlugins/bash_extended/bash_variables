@@ -23,3 +23,5 @@ fi
 
 # recommended not to change location of config files
 #export XDG_CONFIG_HOME=~/programs/CheemaFy/myPlugins/config
+
+export CPATH=$CPATH:"$HOME/programs/CheemaFy/myPlugins/default_codes/cpp/templates"

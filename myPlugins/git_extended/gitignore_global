@@ -33,7 +33,8 @@ srb_test
 *.srb
 srb_*
 .srb_test
-gadhi*
+*gadhi*
+*.tester
 
 
 

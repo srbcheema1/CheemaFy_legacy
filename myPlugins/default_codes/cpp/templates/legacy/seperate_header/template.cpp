@@ -1,25 +1,15 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
 // clang-format off
 #define int long long
 signed _t = 0;// test_case counter
-#ifdef ONLINE_JUDGE
-#define debug false
-#else // change this one
-#define debug true
+#ifdef SRB
+#include <srbdebug.hpp>
+#define dout if(true and debug and (_t) ) cerr<<" " // condition can be added here ex: _t == 5
+#else
+template<class T,class...A>void show(T&&f,A&&...a){f;show(a...);}template<class T>void show(T&&f){f;}
 #endif
-
-#define TP template
-#define TN typename
-#define dout if(debug and (_t) ) cerr<<" " // condition can be added here ex: _t == 5
-TP<TN T>void show(const T &first){if(!debug)return;dout<<first<<"\n";}
-TP<TN T,TN... Args>void show(const T &first,const Args&... args){if(!debug)return;dout<<first;show(args...);}
-TP<TN T>void _p(const T &x){signed i=0;for(auto a: x){dout<<a<<",";if(i++ > 20)break;}}
-TP<TN T>ostream &operator<<(ostream &os,const vector<T> &x){dout<<"[";_p(x);dout<<"] ";return os;}
-TP<TN T,TN U>ostream &operator<<(ostream &os,const set<T,U> &x){dout<<"{";_p(x);dout<< "} ";return os;}
-TP<TN T,TN U>ostream &operator<<(ostream &os,const map<T,U> &x){dout<<"[";_p(x);dout<< "] ";return os;}
-TP<TN T,TN U>ostream &operator<<(ostream &o,const pair<T,U> &x){return o<<"("<<x.first<<","<<x.second<<")";}
 
 typedef pair<int,int> pii; typedef vector<int> vi; typedef set<int> si;
 template<class A,class B> using pqueue = priority_queue<A,vector<A>,B>;
@@ -36,4 +26,3 @@ int add(int x,int y){int res=(x+y)%mod;return res<0?res+mod:res;}
 int mul(int x,int y){int res=(x*1LL*y)%mod;return res<0?res+mod:res;}
 int dx[] = {0,1,0,-1,1,1,-1,-1},dy[] = {1,0,-1,0,1,-1,-1,1};// use 0-3 for 4dir 0-7 for 8dir
 // clang-format off
-

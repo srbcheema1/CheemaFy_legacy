@@ -339,7 +339,7 @@ function _mdreader(){
 
 
 #commands for compiler versions
-alias g++11='g++ -std=c++11 -g'
+alias g++11='g++ -std=c++11 -g -DSRB'
 
 #to run octave interactively
 alias octavei='octave --no-gui'
